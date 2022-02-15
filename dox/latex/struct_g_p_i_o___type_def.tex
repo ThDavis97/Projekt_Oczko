@@ -1,0 +1,105 @@
+\doxysection{GPIO\+\_\+\+Type\+Def Struct Reference}
+\label{struct_g_p_i_o___type_def}\index{GPIO\_TypeDef@{GPIO\_TypeDef}}
+
+
+General Purpose I/O.  
+
+
+
+
+{\ttfamily \#include $<$stm32f411xe.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ MODER}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ OTYPER}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ OSPEEDR}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ PUPDR}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ IDR}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ ODR}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ BSRR}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ LCKR}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ AFR} [2]
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+General Purpose I/O. 
+
+\doxysubsection{Field Documentation}
+\mbox{\label{struct_g_p_i_o___type_def_ab67c1158c04450d19ad483dcd2192e43}} 
+\index{GPIO\_TypeDef@{GPIO\_TypeDef}!AFR@{AFR}}
+\index{AFR@{AFR}!GPIO\_TypeDef@{GPIO\_TypeDef}}
+\doxysubsubsection{AFR}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t AFR[2]}
+
+GPIO alternate function registers, Address offset\+: 0x20-\/0x24 \mbox{\label{struct_g_p_i_o___type_def_ac25dd6b9e3d55e17589195b461c5ec80}} 
+\index{GPIO\_TypeDef@{GPIO\_TypeDef}!BSRR@{BSRR}}
+\index{BSRR@{BSRR}!GPIO\_TypeDef@{GPIO\_TypeDef}}
+\doxysubsubsection{BSRR}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t BSRR}
+
+GPIO port bit set/reset register, Address offset\+: 0x18 ~\newline
+ \mbox{\label{struct_g_p_i_o___type_def_a328d2fe9ef1d513c3a97d30f98f0047c}} 
+\index{GPIO\_TypeDef@{GPIO\_TypeDef}!IDR@{IDR}}
+\index{IDR@{IDR}!GPIO\_TypeDef@{GPIO\_TypeDef}}
+\doxysubsubsection{IDR}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t IDR}
+
+GPIO port input data register, Address offset\+: 0x10 ~\newline
+ \mbox{\label{struct_g_p_i_o___type_def_a2612a0f4b3fbdbb6293f6dc70105e190}} 
+\index{GPIO\_TypeDef@{GPIO\_TypeDef}!LCKR@{LCKR}}
+\index{LCKR@{LCKR}!GPIO\_TypeDef@{GPIO\_TypeDef}}
+\doxysubsubsection{LCKR}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t LCKR}
+
+GPIO port configuration lock register, Address offset\+: 0x1C ~\newline
+ \mbox{\label{struct_g_p_i_o___type_def_a2b671a94c63a612f81e0e9de8152d01c}} 
+\index{GPIO\_TypeDef@{GPIO\_TypeDef}!MODER@{MODER}}
+\index{MODER@{MODER}!GPIO\_TypeDef@{GPIO\_TypeDef}}
+\doxysubsubsection{MODER}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t MODER}
+
+GPIO port mode register, Address offset\+: 0x00 ~\newline
+ \mbox{\label{struct_g_p_i_o___type_def_abff7fffd2b5a718715a130006590c75c}} 
+\index{GPIO\_TypeDef@{GPIO\_TypeDef}!ODR@{ODR}}
+\index{ODR@{ODR}!GPIO\_TypeDef@{GPIO\_TypeDef}}
+\doxysubsubsection{ODR}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t ODR}
+
+GPIO port output data register, Address offset\+: 0x14 ~\newline
+ \mbox{\label{struct_g_p_i_o___type_def_a328d16cc6213783ede54e4059ffd50a3}} 
+\index{GPIO\_TypeDef@{GPIO\_TypeDef}!OSPEEDR@{OSPEEDR}}
+\index{OSPEEDR@{OSPEEDR}!GPIO\_TypeDef@{GPIO\_TypeDef}}
+\doxysubsubsection{OSPEEDR}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t OSPEEDR}
+
+GPIO port output speed register, Address offset\+: 0x08 ~\newline
+ \mbox{\label{struct_g_p_i_o___type_def_a9543592bda60cb5261075594bdeedac9}} 
+\index{GPIO\_TypeDef@{GPIO\_TypeDef}!OTYPER@{OTYPER}}
+\index{OTYPER@{OTYPER}!GPIO\_TypeDef@{GPIO\_TypeDef}}
+\doxysubsubsection{OTYPER}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t OTYPER}
+
+GPIO port output type register, Address offset\+: 0x04 ~\newline
+ \mbox{\label{struct_g_p_i_o___type_def_abeed38529bd7b8de082e490e5d4f1727}} 
+\index{GPIO\_TypeDef@{GPIO\_TypeDef}!PUPDR@{PUPDR}}
+\index{PUPDR@{PUPDR}!GPIO\_TypeDef@{GPIO\_TypeDef}}
+\doxysubsubsection{PUPDR}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t PUPDR}
+
+GPIO port pull-\/up/pull-\/down register, Address offset\+: 0x0C ~\newline
+ 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Drivers/\+CMSIS/\+Device/\+ST/\+STM32\+F4xx/\+Include/\textbf{ stm32f411xe.\+h}\end{DoxyCompactItemize}

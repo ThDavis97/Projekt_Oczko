@@ -1,0 +1,29 @@
+\doxysection{TIM Extended Private Macros}
+\label{group___t_i_m_ex___private___macros}\index{TIM Extended Private Macros@{TIM Extended Private Macros}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ IS\+\_\+\+TIM\+\_\+\+REMAP}(INSTANCE,  TIM\+\_\+\+REMAP)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___t_i_m_ex___private___macros_gaeedfcda4bf88568f27112e5378ad9183}} 
+\index{TIM Extended Private Macros@{TIM Extended Private Macros}!IS\_TIM\_REMAP@{IS\_TIM\_REMAP}}
+\index{IS\_TIM\_REMAP@{IS\_TIM\_REMAP}!TIM Extended Private Macros@{TIM Extended Private Macros}}
+\doxysubsubsection{IS\_TIM\_REMAP}
+{\footnotesize\ttfamily \#define IS\+\_\+\+TIM\+\_\+\+REMAP(\begin{DoxyParamCaption}\item[{}]{INSTANCE,  }\item[{}]{TIM\+\_\+\+REMAP }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  ((((INSTANCE) == TIM5)  \&\& (((TIM\_REMAP) == TIM\_TIM5\_GPIO)           || \(\backslash\)}
+\DoxyCodeLine{                              ((TIM\_REMAP) == TIM\_TIM5\_LSI)            || \(\backslash\)}
+\DoxyCodeLine{                              ((TIM\_REMAP) == TIM\_TIM5\_LSE)            || \(\backslash\)}
+\DoxyCodeLine{                              ((TIM\_REMAP) == TIM\_TIM5\_RTC)))          || \(\backslash\)}
+\DoxyCodeLine{   (((INSTANCE) == TIM11) \&\& (((TIM\_REMAP) == TIM\_TIM11\_GPIO)          || \(\backslash\)}
+\DoxyCodeLine{                              ((TIM\_REMAP) == TIM\_TIM11\_HSE))))}
+
+\end{DoxyCode}

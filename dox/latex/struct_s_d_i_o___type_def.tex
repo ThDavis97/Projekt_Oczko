@@ -1,0 +1,187 @@
+\doxysection{SDIO\+\_\+\+Type\+Def Struct Reference}
+\label{struct_s_d_i_o___type_def}\index{SDIO\_TypeDef@{SDIO\_TypeDef}}
+
+
+SD host Interface.  
+
+
+
+
+{\ttfamily \#include $<$stm32f411xe.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ POWER}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ CLKCR}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ ARG}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ CMD}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t \textbf{ RESPCMD}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t \textbf{ RESP1}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t \textbf{ RESP2}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t \textbf{ RESP3}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t \textbf{ RESP4}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ DTIMER}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ DLEN}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ DCTRL}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t \textbf{ DCOUNT}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t \textbf{ STA}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ ICR}
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ MASK}
+\item 
+uint32\+\_\+t \textbf{ RESERVED0} [2]
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t \textbf{ FIFOCNT}
+\item 
+uint32\+\_\+t \textbf{ RESERVED1} [13]
+\item 
+\textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t \textbf{ FIFO}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+SD host Interface. 
+
+\doxysubsection{Field Documentation}
+\mbox{\label{struct_s_d_i_o___type_def_a07d4e63efcbde252c667e64a8d818aa9}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!ARG@{ARG}}
+\index{ARG@{ARG}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{ARG}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t ARG}
+
+SDIO argument register, Address offset\+: 0x08 \mbox{\label{struct_s_d_i_o___type_def_aa94197378e20fc739d269be49d9c5d40}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!CLKCR@{CLKCR}}
+\index{CLKCR@{CLKCR}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{CLKCR}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t CLKCR}
+
+SDI clock control register, Address offset\+: 0x04 \mbox{\label{struct_s_d_i_o___type_def_adcf812cbe5147d300507d59d4a55935d}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!CMD@{CMD}}
+\index{CMD@{CMD}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{CMD}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t CMD}
+
+SDIO command register, Address offset\+: 0x0C \mbox{\label{struct_s_d_i_o___type_def_a1c267db01a753d0b8a77afcaff6f9e13}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!DCOUNT@{DCOUNT}}
+\index{DCOUNT@{DCOUNT}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{DCOUNT}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t DCOUNT}
+
+SDIO data counter register, Address offset\+: 0x30 \mbox{\label{struct_s_d_i_o___type_def_a96a3d1a050982fccc23c2e6dbe0de068}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!DCTRL@{DCTRL}}
+\index{DCTRL@{DCTRL}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{DCTRL}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t DCTRL}
+
+SDIO data control register, Address offset\+: 0x2C \mbox{\label{struct_s_d_i_o___type_def_a612edc78d2fa6288392f8ea32c36f7fb}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!DLEN@{DLEN}}
+\index{DLEN@{DLEN}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{DLEN}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t DLEN}
+
+SDIO data length register, Address offset\+: 0x28 \mbox{\label{struct_s_d_i_o___type_def_a1dd219eaeee8d9def822da843028bd02}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!DTIMER@{DTIMER}}
+\index{DTIMER@{DTIMER}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{DTIMER}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t DTIMER}
+
+SDIO data timer register, Address offset\+: 0x24 \mbox{\label{struct_s_d_i_o___type_def_a68bef1da5fd164cf0f884b4209670dc8}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!FIFO@{FIFO}}
+\index{FIFO@{FIFO}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{FIFO}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t FIFO}
+
+SDIO data FIFO register, Address offset\+: 0x80 \mbox{\label{struct_s_d_i_o___type_def_a003c4c00f70bd77298fc66a449822651}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!FIFOCNT@{FIFOCNT}}
+\index{FIFOCNT@{FIFOCNT}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{FIFOCNT}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t FIFOCNT}
+
+SDIO FIFO counter register, Address offset\+: 0x48 \mbox{\label{struct_s_d_i_o___type_def_a0a8c8230846fd8ff154b9fde8dfa0399}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!ICR@{ICR}}
+\index{ICR@{ICR}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{ICR}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t ICR}
+
+SDIO interrupt clear register, Address offset\+: 0x38 \mbox{\label{struct_s_d_i_o___type_def_a5c955643593b4aedbe9f84f054d26522}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!MASK@{MASK}}
+\index{MASK@{MASK}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{MASK}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t MASK}
+
+SDIO mask register, Address offset\+: 0x3C \mbox{\label{struct_s_d_i_o___type_def_a65bff76f3af24c37708a1006d54720c7}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!POWER@{POWER}}
+\index{POWER@{POWER}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{POWER}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} uint32\+\_\+t POWER}
+
+SDIO power control register, Address offset\+: 0x00 \mbox{\label{struct_s_d_i_o___type_def_a8be676577db129a84a9a2689519a8502}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!RESERVED0@{RESERVED0}}
+\index{RESERVED0@{RESERVED0}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{RESERVED0}
+{\footnotesize\ttfamily uint32\+\_\+t RESERVED0[2]}
+
+Reserved, 0x40-\/0x44 ~\newline
+ \mbox{\label{struct_s_d_i_o___type_def_a2d531df35272b1f3d787e5726ed5c52c}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!RESERVED1@{RESERVED1}}
+\index{RESERVED1@{RESERVED1}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{RESERVED1}
+{\footnotesize\ttfamily uint32\+\_\+t RESERVED1[13]}
+
+Reserved, 0x4\+C-\/0x7C ~\newline
+ \mbox{\label{struct_s_d_i_o___type_def_a7da778413f6db1f83ae25caed03382d4}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!RESP1@{RESP1}}
+\index{RESP1@{RESP1}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{RESP1}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t RESP1}
+
+SDIO response 1 register, Address offset\+: 0x14 \mbox{\label{struct_s_d_i_o___type_def_a44614d7422faffd14af83884e76b2d3e}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!RESP2@{RESP2}}
+\index{RESP2@{RESP2}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{RESP2}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t RESP2}
+
+SDIO response 2 register, Address offset\+: 0x18 \mbox{\label{struct_s_d_i_o___type_def_a270ee3c6e9f87e5851422ae0ef255fd4}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!RESP3@{RESP3}}
+\index{RESP3@{RESP3}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{RESP3}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t RESP3}
+
+SDIO response 3 register, Address offset\+: 0x1C \mbox{\label{struct_s_d_i_o___type_def_aa74faef460a0c655439bcf20caac1653}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!RESP4@{RESP4}}
+\index{RESP4@{RESP4}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{RESP4}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t RESP4}
+
+SDIO response 4 register, Address offset\+: 0x20 \mbox{\label{struct_s_d_i_o___type_def_a195d1a8a6ae4f6072f4e4b62298051fe}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!RESPCMD@{RESPCMD}}
+\index{RESPCMD@{RESPCMD}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{RESPCMD}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t RESPCMD}
+
+SDIO command response register, Address offset\+: 0x10 \mbox{\label{struct_s_d_i_o___type_def_a0633c88accff51e7cc9d1e9c3db950d9}} 
+\index{SDIO\_TypeDef@{SDIO\_TypeDef}!STA@{STA}}
+\index{STA@{STA}!SDIO\_TypeDef@{SDIO\_TypeDef}}
+\doxysubsubsection{STA}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+IO} const uint32\+\_\+t STA}
+
+SDIO status register, Address offset\+: 0x34 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Drivers/\+CMSIS/\+Device/\+ST/\+STM32\+F4xx/\+Include/\textbf{ stm32f411xe.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,3 @@
+gameCodeDefinitions.c:11:10:Command_show_default_screen	4	static
+gameCodeDefinitions.c:17:10:Command_number_of_wins_USER	16	static
+gameCodeDefinitions.c:25:10:Command_number_of_wins_CPU	16	static

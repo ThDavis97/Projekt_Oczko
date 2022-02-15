@@ -1,0 +1,288 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Drivers/\+CMSIS/\+Include/cmsis\+\_\+gcc.h File Reference}
+\label{cmsis__gcc_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/CMSIS/Include/cmsis\_gcc.h@{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/CMSIS/Include/cmsis\_gcc.h}}
+
+
+CMSIS compiler GCC header file.  
+
+
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ \+\_\+\+\_\+has\+\_\+builtin}(x)~(0)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+ASM}~\+\_\+\+\_\+asm
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+INLINE}~inline
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE}~static inline
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE}~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((always\+\_\+inline)) static inline
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+NO\+\_\+\+RETURN}~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((\+\_\+\+\_\+noreturn\+\_\+\+\_\+))
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+USED}~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((used))
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+WEAK}~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((weak))
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+PACKED}~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((packed, aligned(1)))
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT}~struct \textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((packed, aligned(1)))
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+UNION}~union \textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((packed, aligned(1)))
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT32}(x)~(((struct T\+\_\+\+UINT32 $\ast$)(x))-\/$>$v)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT16\+\_\+\+WRITE}(addr,  val)~(void)((((struct \textbf{ T\+\_\+\+UINT16\+\_\+\+WRITE} $\ast$)(void $\ast$)(addr))-\/$>$v) = (val))
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT16\+\_\+\+READ}(addr)~(((const struct \textbf{ T\+\_\+\+UINT16\+\_\+\+READ} $\ast$)(const void $\ast$)(addr))-\/$>$v)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT32\+\_\+\+WRITE}(addr,  val)~(void)((((struct \textbf{ T\+\_\+\+UINT32\+\_\+\+WRITE} $\ast$)(void $\ast$)(addr))-\/$>$v) = (val))
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT32\+\_\+\+READ}(addr)~(((const struct \textbf{ T\+\_\+\+UINT32\+\_\+\+READ} $\ast$)(const void $\ast$)(addr))-\/$>$v)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+ALIGNED}(x)~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((aligned(x)))
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+RESTRICT}~\+\_\+\+\_\+restrict
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+CMSIS\+\_\+\+GCC\+\_\+\+OUT\+\_\+\+REG}(r)~\char`\"{}=r\char`\"{} (r)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+CMSIS\+\_\+\+GCC\+\_\+\+RW\+\_\+\+REG}(r)~\char`\"{}+r\char`\"{} (r)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+CMSIS\+\_\+\+GCC\+\_\+\+USE\+\_\+\+REG}(r)~\char`\"{}r\char`\"{} (r)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+NOP}()~\textbf{ \+\_\+\+\_\+\+ASM} volatile (\char`\"{}nop\char`\"{})
+\begin{DoxyCompactList}\small\item\em No Operation. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+WFI}()~\textbf{ \+\_\+\+\_\+\+ASM} volatile (\char`\"{}wfi\char`\"{})
+\begin{DoxyCompactList}\small\item\em Wait For Interrupt. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+WFE}()~\textbf{ \+\_\+\+\_\+\+ASM} volatile (\char`\"{}wfe\char`\"{})
+\begin{DoxyCompactList}\small\item\em Wait For Event. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+SEV}()~\textbf{ \+\_\+\+\_\+\+ASM} volatile (\char`\"{}sev\char`\"{})
+\begin{DoxyCompactList}\small\item\em Send Event. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+BKPT}(value)~\textbf{ \+\_\+\+\_\+\+ASM} volatile (\char`\"{}bkpt \char`\"{}\#value)
+\begin{DoxyCompactList}\small\item\em Breakpoint. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+CLZ}~(uint8\+\_\+t)\+\_\+\+\_\+builtin\+\_\+clz
+\begin{DoxyCompactList}\small\item\em Count leading zeros. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+} ((packed)) T\+\_\+\+UINT32
+\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} void \textbf{ \+\_\+\+\_\+enable\+\_\+irq} (void)
+\begin{DoxyCompactList}\small\item\em Enable IRQ Interrupts. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} void \textbf{ \+\_\+\+\_\+disable\+\_\+irq} (void)
+\begin{DoxyCompactList}\small\item\em Disable IRQ Interrupts. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+get\+\_\+\+CONTROL} (void)
+\begin{DoxyCompactList}\small\item\em Enable IRQ Interrupts. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} void \textbf{ \+\_\+\+\_\+set\+\_\+\+CONTROL} (uint32\+\_\+t control)
+\begin{DoxyCompactList}\small\item\em Set Control Register. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+get\+\_\+\+IPSR} (void)
+\begin{DoxyCompactList}\small\item\em Get IPSR Register. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+get\+\_\+\+APSR} (void)
+\begin{DoxyCompactList}\small\item\em Get APSR Register. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+get\+\_\+x\+PSR} (void)
+\begin{DoxyCompactList}\small\item\em Get x\+PSR Register. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+get\+\_\+\+PSP} (void)
+\begin{DoxyCompactList}\small\item\em Get Process Stack Pointer. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} void \textbf{ \+\_\+\+\_\+set\+\_\+\+PSP} (uint32\+\_\+t top\+Of\+Proc\+Stack)
+\begin{DoxyCompactList}\small\item\em Set Process Stack Pointer. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+get\+\_\+\+MSP} (void)
+\begin{DoxyCompactList}\small\item\em Get Main Stack Pointer. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} void \textbf{ \+\_\+\+\_\+set\+\_\+\+MSP} (uint32\+\_\+t top\+Of\+Main\+Stack)
+\begin{DoxyCompactList}\small\item\em Set Main Stack Pointer. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+get\+\_\+\+PRIMASK} (void)
+\begin{DoxyCompactList}\small\item\em Get Priority Mask. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} void \textbf{ \+\_\+\+\_\+set\+\_\+\+PRIMASK} (uint32\+\_\+t pri\+Mask)
+\begin{DoxyCompactList}\small\item\em Set Priority Mask. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+get\+\_\+\+FPSCR} (void)
+\begin{DoxyCompactList}\small\item\em Get FPSCR. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE} void \textbf{ \+\_\+\+\_\+set\+\_\+\+FPSCR} (uint32\+\_\+t fpscr)
+\begin{DoxyCompactList}\small\item\em Set FPSCR. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} void \textbf{ \+\_\+\+\_\+\+ISB} (void)
+\begin{DoxyCompactList}\small\item\em Instruction Synchronization Barrier. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} void \textbf{ \+\_\+\+\_\+\+DSB} (void)
+\begin{DoxyCompactList}\small\item\em Data Synchronization Barrier. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} void \textbf{ \+\_\+\+\_\+\+DMB} (void)
+\begin{DoxyCompactList}\small\item\em Data Memory Barrier. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+\+REV} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Reverse byte order (32 bit) \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+\+REV16} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Reverse byte order (16 bit) \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} int16\+\_\+t \textbf{ \+\_\+\+\_\+\+REVSH} (int16\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Reverse byte order (16 bit) \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+\+ROR} (uint32\+\_\+t op1, uint32\+\_\+t op2)
+\begin{DoxyCompactList}\small\item\em Rotate Right in unsigned value (32 bit) \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+\+RBIT} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Reverse bit order of value. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} int32\+\_\+t \textbf{ \+\_\+\+\_\+\+SSAT} (int32\+\_\+t val, uint32\+\_\+t \textbf{ sat})
+\begin{DoxyCompactList}\small\item\em Signed Saturate. \end{DoxyCompactList}\item 
+\textbf{ \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE} uint32\+\_\+t \textbf{ \+\_\+\+\_\+\+USAT} (int32\+\_\+t val, uint32\+\_\+t \textbf{ sat})
+\begin{DoxyCompactList}\small\item\em Unsigned Saturate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT} \textbf{ T\+\_\+\+UINT16\+\_\+\+WRITE} \{ uint16\+\_\+t v
+\item 
+\textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT} \textbf{ T\+\_\+\+UINT16\+\_\+\+READ} \{ uint16\+\_\+t v
+\item 
+\textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT} \textbf{ T\+\_\+\+UINT32\+\_\+\+WRITE} \{ uint32\+\_\+t v
+\item 
+\textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT} \textbf{ T\+\_\+\+UINT32\+\_\+\+READ} \{ uint32\+\_\+t v
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+CMSIS compiler GCC header file. 
+
+\begin{DoxyVersion}{Version}
+V5.\+0.\+4 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+09. April 2018 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{cmsis__gcc_8h_aa65ef8f7a5e8b7a6ea6c1d48b4c78e55}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_ALIGNED@{\_\_ALIGNED}}
+\index{\_\_ALIGNED@{\_\_ALIGNED}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_ALIGNED}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+ALIGNED(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((aligned(x)))}
+
+\mbox{\label{cmsis__gcc_8h_a1378040bcf22428955c6e3ce9c2053cd}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_ASM@{\_\_ASM}}
+\index{\_\_ASM@{\_\_ASM}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_ASM}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+ASM~\+\_\+\+\_\+asm}
+
+\mbox{\label{cmsis__gcc_8h_a447121dcab4275b7839a56082b7a1ab8}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_has\_builtin@{\_\_has\_builtin}}
+\index{\_\_has\_builtin@{\_\_has\_builtin}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_has\_builtin}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+has\+\_\+builtin(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(0)}
+
+\mbox{\label{cmsis__gcc_8h_ade2d8d7118f8ff49547f60aa0c3382bb}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_INLINE@{\_\_INLINE}}
+\index{\_\_INLINE@{\_\_INLINE}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_INLINE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+INLINE~inline}
+
+\mbox{\label{cmsis__gcc_8h_a153a4a31b276a9758959580538720a51}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_NO\_RETURN@{\_\_NO\_RETURN}}
+\index{\_\_NO\_RETURN@{\_\_NO\_RETURN}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_NO\_RETURN}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+NO\+\_\+\+RETURN~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((\+\_\+\+\_\+noreturn\+\_\+\+\_\+))}
+
+\mbox{\label{cmsis__gcc_8h_abe8996d3d985ee1529475443cc635bf1}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_PACKED@{\_\_PACKED}}
+\index{\_\_PACKED@{\_\_PACKED}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_PACKED}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+PACKED~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((packed, aligned(1)))}
+
+\mbox{\label{cmsis__gcc_8h_a4dbb70fab85207c27b581ecb6532b314}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_PACKED\_STRUCT@{\_\_PACKED\_STRUCT}}
+\index{\_\_PACKED\_STRUCT@{\_\_PACKED\_STRUCT}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_PACKED\_STRUCT}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT~struct \textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((packed, aligned(1)))}
+
+\mbox{\label{cmsis__gcc_8h_a6fba34d08b0a526830b4231d2ea0b89a}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_PACKED\_UNION@{\_\_PACKED\_UNION}}
+\index{\_\_PACKED\_UNION@{\_\_PACKED\_UNION}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_PACKED\_UNION}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+PACKED\+\_\+\+UNION~union \textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((packed, aligned(1)))}
+
+\mbox{\label{cmsis__gcc_8h_a378ac21329d33f561f90265eef89f564}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_RESTRICT@{\_\_RESTRICT}}
+\index{\_\_RESTRICT@{\_\_RESTRICT}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_RESTRICT}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+RESTRICT~\+\_\+\+\_\+restrict}
+
+\mbox{\label{cmsis__gcc_8h_ab904513442afdf77d4f8c74f23cbb040}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_STATIC\_FORCEINLINE@{\_\_STATIC\_FORCEINLINE}}
+\index{\_\_STATIC\_FORCEINLINE@{\_\_STATIC\_FORCEINLINE}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_STATIC\_FORCEINLINE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((always\+\_\+inline)) static inline}
+
+\mbox{\label{cmsis__gcc_8h_aba87361bfad2ae52cfe2f40c1a1dbf9c}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_STATIC\_INLINE@{\_\_STATIC\_INLINE}}
+\index{\_\_STATIC\_INLINE@{\_\_STATIC\_INLINE}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_STATIC\_INLINE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+STATIC\+\_\+\+INLINE~static inline}
+
+\mbox{\label{cmsis__gcc_8h_ab71b66e5ce403158d3dee62a59f9175f}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_UNALIGNED\_UINT16\_READ@{\_\_UNALIGNED\_UINT16\_READ}}
+\index{\_\_UNALIGNED\_UINT16\_READ@{\_\_UNALIGNED\_UINT16\_READ}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_UNALIGNED\_UINT16\_READ}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT16\+\_\+\+READ(\begin{DoxyParamCaption}\item[{}]{addr }\end{DoxyParamCaption})~(((const struct \textbf{ T\+\_\+\+UINT16\+\_\+\+READ} $\ast$)(const void $\ast$)(addr))-\/$>$v)}
+
+\mbox{\label{cmsis__gcc_8h_a5103fb373cae9837cc4a384be55dc87f}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_UNALIGNED\_UINT16\_WRITE@{\_\_UNALIGNED\_UINT16\_WRITE}}
+\index{\_\_UNALIGNED\_UINT16\_WRITE@{\_\_UNALIGNED\_UINT16\_WRITE}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_UNALIGNED\_UINT16\_WRITE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT16\+\_\+\+WRITE(\begin{DoxyParamCaption}\item[{}]{addr,  }\item[{}]{val }\end{DoxyParamCaption})~(void)((((struct \textbf{ T\+\_\+\+UINT16\+\_\+\+WRITE} $\ast$)(void $\ast$)(addr))-\/$>$v) = (val))}
+
+\mbox{\label{cmsis__gcc_8h_ac8a13aacd0453758fdfd01a57a2a6a3d}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_UNALIGNED\_UINT32@{\_\_UNALIGNED\_UINT32}}
+\index{\_\_UNALIGNED\_UINT32@{\_\_UNALIGNED\_UINT32}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_UNALIGNED\_UINT32}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT32(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(((struct T\+\_\+\+UINT32 $\ast$)(x))-\/$>$v)}
+
+\mbox{\label{cmsis__gcc_8h_a3b931f0b051b8c1a6377a3dcc7559b5e}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_UNALIGNED\_UINT32\_READ@{\_\_UNALIGNED\_UINT32\_READ}}
+\index{\_\_UNALIGNED\_UINT32\_READ@{\_\_UNALIGNED\_UINT32\_READ}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_UNALIGNED\_UINT32\_READ}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT32\+\_\+\+READ(\begin{DoxyParamCaption}\item[{}]{addr }\end{DoxyParamCaption})~(((const struct \textbf{ T\+\_\+\+UINT32\+\_\+\+READ} $\ast$)(const void $\ast$)(addr))-\/$>$v)}
+
+\mbox{\label{cmsis__gcc_8h_a203f593d140ed88b81bc189edc861110}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_UNALIGNED\_UINT32\_WRITE@{\_\_UNALIGNED\_UINT32\_WRITE}}
+\index{\_\_UNALIGNED\_UINT32\_WRITE@{\_\_UNALIGNED\_UINT32\_WRITE}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_UNALIGNED\_UINT32\_WRITE}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+UNALIGNED\+\_\+\+UINT32\+\_\+\+WRITE(\begin{DoxyParamCaption}\item[{}]{addr,  }\item[{}]{val }\end{DoxyParamCaption})~(void)((((struct \textbf{ T\+\_\+\+UINT32\+\_\+\+WRITE} $\ast$)(void $\ast$)(addr))-\/$>$v) = (val))}
+
+\mbox{\label{cmsis__gcc_8h_a3e40e4c553fc11588f7a4c2a19e789e0}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_USED@{\_\_USED}}
+\index{\_\_USED@{\_\_USED}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_USED}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+USED~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((used))}
+
+\mbox{\label{cmsis__gcc_8h_ac607bf387b29162be6a9b77fc7999539}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_WEAK@{\_\_WEAK}}
+\index{\_\_WEAK@{\_\_WEAK}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_WEAK}
+{\footnotesize\ttfamily \#define \+\_\+\+\_\+\+WEAK~\textbf{ \+\_\+\+\_\+attribute\+\_\+\+\_\+}((weak))}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{cmsis__gcc_8h_ade51b179ed6f69a6bacfab38b7b359b1}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!\_\_attribute\_\_@{\_\_attribute\_\_}}
+\index{\_\_attribute\_\_@{\_\_attribute\_\_}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{\_\_attribute\_\_()}
+{\footnotesize\ttfamily struct \+\_\+\+\_\+attribute\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{(packed)}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{cmsis__gcc_8h_a86899dc41c5b3b9ce6b8014ee0e852b9}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!T\_UINT16\_READ@{T\_UINT16\_READ}}
+\index{T\_UINT16\_READ@{T\_UINT16\_READ}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{T\_UINT16\_READ}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT} T\+\_\+\+UINT16\+\_\+\+READ \{ uint16\+\_\+t v}
+
+\mbox{\label{cmsis__gcc_8h_ac962a9aa89cef6e5cde0fe6b067f7de3}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!T\_UINT16\_WRITE@{T\_UINT16\_WRITE}}
+\index{T\_UINT16\_WRITE@{T\_UINT16\_WRITE}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{T\_UINT16\_WRITE}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT} T\+\_\+\+UINT16\+\_\+\+WRITE \{ uint16\+\_\+t v}
+
+\mbox{\label{cmsis__gcc_8h_a9653a1cbf01ec418e8e940ee3996b8ca}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!T\_UINT32\_READ@{T\_UINT32\_READ}}
+\index{T\_UINT32\_READ@{T\_UINT32\_READ}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{T\_UINT32\_READ}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT} T\+\_\+\+UINT32\+\_\+\+READ \{ uint32\+\_\+t v}
+
+\mbox{\label{cmsis__gcc_8h_abbd193dec7cb45f1fbd05ff7e366ffe2}} 
+\index{cmsis\_gcc.h@{cmsis\_gcc.h}!T\_UINT32\_WRITE@{T\_UINT32\_WRITE}}
+\index{T\_UINT32\_WRITE@{T\_UINT32\_WRITE}!cmsis\_gcc.h@{cmsis\_gcc.h}}
+\doxysubsubsection{T\_UINT32\_WRITE}
+{\footnotesize\ttfamily \textbf{ \+\_\+\+\_\+\+PACKED\+\_\+\+STRUCT} T\+\_\+\+UINT32\+\_\+\+WRITE \{ uint32\+\_\+t v}
+

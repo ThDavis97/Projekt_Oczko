@@ -1,0 +1,51 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/list.c File Reference}
+\label{list_8c}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/list.c@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/list.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Free\+RTOS.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}list.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ v\+List\+Initialise} (\textbf{ List\+\_\+t} $\ast$const px\+List)
+\item 
+void \textbf{ v\+List\+Initialise\+Item} (\textbf{ List\+Item\+\_\+t} $\ast$const px\+Item)
+\item 
+void \textbf{ v\+List\+Insert\+End} (\textbf{ List\+\_\+t} $\ast$const px\+List, \textbf{ List\+Item\+\_\+t} $\ast$const px\+New\+List\+Item)
+\item 
+void \textbf{ v\+List\+Insert} (\textbf{ List\+\_\+t} $\ast$const px\+List, \textbf{ List\+Item\+\_\+t} $\ast$const px\+New\+List\+Item)
+\item 
+\textbf{ UBase\+Type\+\_\+t} \textbf{ ux\+List\+Remove} (\textbf{ List\+Item\+\_\+t} $\ast$const px\+Item\+To\+Remove)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{list_8c_a274fdced76bbdd9d8a4c4840ded2920c}} 
+\index{list.c@{list.c}!uxListRemove@{uxListRemove}}
+\index{uxListRemove@{uxListRemove}!list.c@{list.c}}
+\doxysubsubsection{uxListRemove()}
+{\footnotesize\ttfamily \textbf{ UBase\+Type\+\_\+t} ux\+List\+Remove (\begin{DoxyParamCaption}\item[{\textbf{ List\+Item\+\_\+t} $\ast$const}]{px\+Item\+To\+Remove }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8c_aa0831d347bba16bfbe524f4faa790b9d}} 
+\index{list.c@{list.c}!vListInitialise@{vListInitialise}}
+\index{vListInitialise@{vListInitialise}!list.c@{list.c}}
+\doxysubsubsection{vListInitialise()}
+{\footnotesize\ttfamily void v\+List\+Initialise (\begin{DoxyParamCaption}\item[{\textbf{ List\+\_\+t} $\ast$const}]{px\+List }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8c_a43e37223a86f5d0688ac4470d3106e87}} 
+\index{list.c@{list.c}!vListInitialiseItem@{vListInitialiseItem}}
+\index{vListInitialiseItem@{vListInitialiseItem}!list.c@{list.c}}
+\doxysubsubsection{vListInitialiseItem()}
+{\footnotesize\ttfamily void v\+List\+Initialise\+Item (\begin{DoxyParamCaption}\item[{\textbf{ List\+Item\+\_\+t} $\ast$const}]{px\+Item }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8c_a28faa70d3ec4b4f39e53b0fc52d62ecf}} 
+\index{list.c@{list.c}!vListInsert@{vListInsert}}
+\index{vListInsert@{vListInsert}!list.c@{list.c}}
+\doxysubsubsection{vListInsert()}
+{\footnotesize\ttfamily void v\+List\+Insert (\begin{DoxyParamCaption}\item[{\textbf{ List\+\_\+t} $\ast$const}]{px\+List,  }\item[{\textbf{ List\+Item\+\_\+t} $\ast$const}]{px\+New\+List\+Item }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8c_a3240bc0f43fcf755be02bfc6de7dc6ef}} 
+\index{list.c@{list.c}!vListInsertEnd@{vListInsertEnd}}
+\index{vListInsertEnd@{vListInsertEnd}!list.c@{list.c}}
+\doxysubsubsection{vListInsertEnd()}
+{\footnotesize\ttfamily void v\+List\+Insert\+End (\begin{DoxyParamCaption}\item[{\textbf{ List\+\_\+t} $\ast$const}]{px\+List,  }\item[{\textbf{ List\+Item\+\_\+t} $\ast$const}]{px\+New\+List\+Item }\end{DoxyParamCaption})}
+

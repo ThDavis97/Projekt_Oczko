@@ -1,0 +1,83 @@
+\doxysection{os\+\_\+thread\+\_\+def Struct Reference}
+\label{structos__thread__def}\index{os\_thread\_def@{os\_thread\_def}}
+
+
+{\ttfamily \#include $<$cmsis\+\_\+os.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \textbf{ name}
+\begin{DoxyCompactList}\small\item\em Thread name. \end{DoxyCompactList}\item 
+\textbf{ os\+\_\+pthread} \textbf{ pthread}
+\begin{DoxyCompactList}\small\item\em start address of thread function \end{DoxyCompactList}\item 
+\textbf{ os\+Priority} \textbf{ tpriority}
+\begin{DoxyCompactList}\small\item\em initial thread priority \end{DoxyCompactList}\item 
+uint32\+\_\+t \textbf{ instances}
+\begin{DoxyCompactList}\small\item\em maximum number of instances of that thread function \end{DoxyCompactList}\item 
+uint32\+\_\+t \textbf{ stacksize}
+\begin{DoxyCompactList}\small\item\em stack size requirements in bytes; 0 is default stack size \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Thread Definition structure contains startup information of a thread. \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+thread\+\_\+def}{p.}{structos__thread__def}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+
+
+\doxysubsection{Field Documentation}
+\mbox{\label{structos__thread__def_aa4c4115851a098c0b87358ab6c025603}} 
+\index{os\_thread\_def@{os\_thread\_def}!instances@{instances}}
+\index{instances@{instances}!os\_thread\_def@{os\_thread\_def}}
+\doxysubsubsection{instances}
+{\footnotesize\ttfamily uint32\+\_\+t instances}
+
+
+
+maximum number of instances of that thread function 
+
+\mbox{\label{structos__thread__def_a5ac083a645d964373f022d03df4849c8}} 
+\index{os\_thread\_def@{os\_thread\_def}!name@{name}}
+\index{name@{name}!os\_thread\_def@{os\_thread\_def}}
+\doxysubsubsection{name}
+{\footnotesize\ttfamily char$\ast$ name}
+
+
+
+Thread name. 
+
+\mbox{\label{structos__thread__def_ad3c9624ee214329fb34e71f544a6933e}} 
+\index{os\_thread\_def@{os\_thread\_def}!pthread@{pthread}}
+\index{pthread@{pthread}!os\_thread\_def@{os\_thread\_def}}
+\doxysubsubsection{pthread}
+{\footnotesize\ttfamily \textbf{ os\+\_\+pthread} pthread}
+
+
+
+start address of thread function 
+
+\mbox{\label{structos__thread__def_a950b7f81ad4711959517296e63bc79d1}} 
+\index{os\_thread\_def@{os\_thread\_def}!stacksize@{stacksize}}
+\index{stacksize@{stacksize}!os\_thread\_def@{os\_thread\_def}}
+\doxysubsubsection{stacksize}
+{\footnotesize\ttfamily uint32\+\_\+t stacksize}
+
+
+
+stack size requirements in bytes; 0 is default stack size 
+
+\mbox{\label{structos__thread__def_a15da8f23c6fe684b70a73646ada685e7}} 
+\index{os\_thread\_def@{os\_thread\_def}!tpriority@{tpriority}}
+\index{tpriority@{tpriority}!os\_thread\_def@{os\_thread\_def}}
+\doxysubsubsection{tpriority}
+{\footnotesize\ttfamily \textbf{ os\+Priority} tpriority}
+
+
+
+initial thread priority 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/\+CMSIS\+\_\+\+RTOS/\textbf{ cmsis\+\_\+os.\+h}\end{DoxyCompactItemize}

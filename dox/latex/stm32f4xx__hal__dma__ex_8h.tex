@@ -1,0 +1,39 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Drivers/\+STM32\+F4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32f4xx\+\_\+hal\+\_\+dma\+\_\+ex.h File Reference}
+\label{stm32f4xx__hal__dma__ex_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_dma\_ex.h@{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_dma\_ex.h}}
+
+
+Header file of DMA HAL extension module.  
+
+
+{\ttfamily \#include \char`\"{}stm32f4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ HAL\+\_\+\+DMA\+\_\+\+Memory\+Type\+Def} \{ \textbf{ MEMORY0} = 0x00U
+, \textbf{ MEMORY1} = 0x01U
+ \}
+\begin{DoxyCompactList}\small\item\em HAL DMA Memory definition ~\newline
+ \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+DMAEx\+\_\+\+Multi\+Buffer\+Start} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma, uint32\+\_\+t Src\+Address, uint32\+\_\+t Dst\+Address, uint32\+\_\+t Second\+Mem\+Address, uint32\+\_\+t Data\+Length)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+DMAEx\+\_\+\+Multi\+Buffer\+Start\+\_\+\+IT} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma, uint32\+\_\+t Src\+Address, uint32\+\_\+t Dst\+Address, uint32\+\_\+t Second\+Mem\+Address, uint32\+\_\+t Data\+Length)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+DMAEx\+\_\+\+Change\+Memory} (\textbf{ DMA\+\_\+\+Handle\+Type\+Def} $\ast$hdma, uint32\+\_\+t Address, \textbf{ HAL\+\_\+\+DMA\+\_\+\+Memory\+Type\+Def} memory)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of DMA HAL extension module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+\doxysubsubsection*{\begin{center}\copyright{} Copyright (c) 2017 STMicroelectronics. All rights reserved.\end{center} }
+
+This software component is licensed by ST under BSD 3-\/Clause license, the \char`\"{}\+License\char`\"{}; You may not use this file except in compliance with the License. You may obtain a copy of the License at\+: opensource.\+org/licenses/\+BSD-\/3-\/\+Clause 

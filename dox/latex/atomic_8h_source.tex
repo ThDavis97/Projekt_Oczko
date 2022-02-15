@@ -1,0 +1,280 @@
+\doxysection{atomic.\+h}
+\label{atomic_8h_source}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/atomic.h@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/atomic.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * FreeRTOS Kernel V10.3.1}}
+\DoxyCodeLine{3 \textcolor{comment}{ * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.}}
+\DoxyCodeLine{4 \textcolor{comment}{ *}}
+\DoxyCodeLine{5 \textcolor{comment}{ * Permission is hereby granted, free of charge, to any person obtaining a copy of}}
+\DoxyCodeLine{6 \textcolor{comment}{ * this software and associated documentation files (the "{}Software"{}), to deal in}}
+\DoxyCodeLine{7 \textcolor{comment}{ * the Software without restriction, including without limitation the rights to}}
+\DoxyCodeLine{8 \textcolor{comment}{ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of}}
+\DoxyCodeLine{9 \textcolor{comment}{ * the Software, and to permit persons to whom the Software is furnished to do so,}}
+\DoxyCodeLine{10 \textcolor{comment}{ * subject to the following conditions:}}
+\DoxyCodeLine{11 \textcolor{comment}{ *}}
+\DoxyCodeLine{12 \textcolor{comment}{ * The above copyright notice and this permission notice shall be included in all}}
+\DoxyCodeLine{13 \textcolor{comment}{ * copies or substantial portions of the Software.}}
+\DoxyCodeLine{14 \textcolor{comment}{ *}}
+\DoxyCodeLine{15 \textcolor{comment}{ * THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{16 \textcolor{comment}{ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS}}
+\DoxyCodeLine{17 \textcolor{comment}{ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR}}
+\DoxyCodeLine{18 \textcolor{comment}{ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER}}
+\DoxyCodeLine{19 \textcolor{comment}{ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN}}
+\DoxyCodeLine{20 \textcolor{comment}{ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}}
+\DoxyCodeLine{21 \textcolor{comment}{ *}}
+\DoxyCodeLine{22 \textcolor{comment}{ * http://www.FreeRTOS.org}}
+\DoxyCodeLine{23 \textcolor{comment}{ * http://aws.amazon.com/freertos}}
+\DoxyCodeLine{24 \textcolor{comment}{ *}}
+\DoxyCodeLine{25 \textcolor{comment}{ * 1 tab == 4 spaces!}}
+\DoxyCodeLine{26 \textcolor{comment}{ */}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#ifndef ATOMIC\_H}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define ATOMIC\_H}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#ifndef INC\_FREERTOS\_H}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{    \#error "{}include FreeRTOS.h must appear in source files before include atomic.h"{}}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{comment}{/* Standard includes. */}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{48 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{49 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{comment}{/*}}
+\DoxyCodeLine{52 \textcolor{comment}{ * Port specific definitions -\/-\/ entering/exiting critical section.}}
+\DoxyCodeLine{53 \textcolor{comment}{ * Refer template -\/-\/ ./lib/FreeRTOS/portable/Compiler/Arch/portmacro.h}}
+\DoxyCodeLine{54 \textcolor{comment}{ *}}
+\DoxyCodeLine{55 \textcolor{comment}{ * Every call to ATOMIC\_EXIT\_CRITICAL() must be closely paired with}}
+\DoxyCodeLine{56 \textcolor{comment}{ * ATOMIC\_ENTER\_CRITICAL().}}
+\DoxyCodeLine{57 \textcolor{comment}{ *}}
+\DoxyCodeLine{58 \textcolor{comment}{ */}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#if defined( portSET\_INTERRUPT\_MASK\_FROM\_ISR )}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{comment}{/* Nested interrupt scheme is supported in this port. */}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{    \#define ATOMIC\_ENTER\_CRITICAL()  \(\backslash\)}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{        UBaseType\_t uxCriticalSectionType = portSET\_INTERRUPT\_MASK\_FROM\_ISR()}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 \textcolor{preprocessor}{    \#define ATOMIC\_EXIT\_CRITICAL()    \(\backslash\)}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{        portCLEAR\_INTERRUPT\_MASK\_FROM\_ISR( uxCriticalSectionType )}}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{comment}{/* Nested interrupt scheme is NOT supported in this port. */}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{    \#define ATOMIC\_ENTER\_CRITICAL()  portENTER\_CRITICAL()}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{    \#define ATOMIC\_EXIT\_CRITICAL()    portEXIT\_CRITICAL()}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* portSET\_INTERRUPT\_MASK\_FROM\_ISR() */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{comment}{/*}}
+\DoxyCodeLine{77 \textcolor{comment}{ * Port specific definition -\/-\/ "{}always inline"{}.}}
+\DoxyCodeLine{78 \textcolor{comment}{ * Inline is compiler specific, and may not always get inlined depending on your}}
+\DoxyCodeLine{79 \textcolor{comment}{ * optimization level.  Also, inline is considered as performance optimization}}
+\DoxyCodeLine{80 \textcolor{comment}{ * for atomic.  Thus, if portFORCE\_INLINE is not provided by portmacro.h,}}
+\DoxyCodeLine{81 \textcolor{comment}{ * instead of resulting error, simply define it away.}}
+\DoxyCodeLine{82 \textcolor{comment}{ */}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#ifndef portFORCE\_INLINE}}
+\DoxyCodeLine{84 \textcolor{preprocessor}{    \#define portFORCE\_INLINE}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define ATOMIC\_COMPARE\_AND\_SWAP\_SUCCESS  0x1U       }}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#define ATOMIC\_COMPARE\_AND\_SWAP\_FAILURE  0x0U       }}
+\DoxyCodeLine{90 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Swap \&\& CAS -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{107 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_CompareAndSwap\_u32( uint32\_t \textcolor{keyword}{volatile} * pulDestination,}
+\DoxyCodeLine{108                                                             uint32\_t ulExchange,}
+\DoxyCodeLine{109                                                             uint32\_t ulComparand )}
+\DoxyCodeLine{110 \{}
+\DoxyCodeLine{111 uint32\_t ulReturnValue;}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{114     \{}
+\DoxyCodeLine{115         \textcolor{keywordflow}{if}( *pulDestination == ulComparand )}
+\DoxyCodeLine{116         \{}
+\DoxyCodeLine{117             *pulDestination = ulExchange;}
+\DoxyCodeLine{118             ulReturnValue = ATOMIC\_COMPARE\_AND\_SWAP\_SUCCESS;}
+\DoxyCodeLine{119         \}}
+\DoxyCodeLine{120         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{121         \{}
+\DoxyCodeLine{122             ulReturnValue = ATOMIC\_COMPARE\_AND\_SWAP\_FAILURE;}
+\DoxyCodeLine{123         \}}
+\DoxyCodeLine{124     \}}
+\DoxyCodeLine{125     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127     \textcolor{keywordflow}{return} ulReturnValue;}
+\DoxyCodeLine{128 \}}
+\DoxyCodeLine{129 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{143 \textcolor{keyword}{static} portFORCE\_INLINE \textcolor{keywordtype}{void} * Atomic\_SwapPointers\_p32( \textcolor{keywordtype}{void} * \textcolor{keyword}{volatile} * ppvDestination,}
+\DoxyCodeLine{144                                                         \textcolor{keywordtype}{void} * pvExchange )}
+\DoxyCodeLine{145 \{}
+\DoxyCodeLine{146 \textcolor{keywordtype}{void} * pReturnValue;}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{149     \{}
+\DoxyCodeLine{150         pReturnValue = *ppvDestination;}
+\DoxyCodeLine{151         *ppvDestination = pvExchange;}
+\DoxyCodeLine{152     \}}
+\DoxyCodeLine{153     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     \textcolor{keywordflow}{return} pReturnValue;}
+\DoxyCodeLine{156 \}}
+\DoxyCodeLine{157 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{175 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_CompareAndSwapPointers\_p32( \textcolor{keywordtype}{void} * \textcolor{keyword}{volatile} * ppvDestination,}
+\DoxyCodeLine{176                                                                     \textcolor{keywordtype}{void} * pvExchange,}
+\DoxyCodeLine{177                                                                     \textcolor{keywordtype}{void} * pvComparand )}
+\DoxyCodeLine{178 \{}
+\DoxyCodeLine{179 uint32\_t ulReturnValue = ATOMIC\_COMPARE\_AND\_SWAP\_FAILURE;}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{182     \{}
+\DoxyCodeLine{183         \textcolor{keywordflow}{if}( *ppvDestination == pvComparand )}
+\DoxyCodeLine{184         \{}
+\DoxyCodeLine{185             *ppvDestination = pvExchange;}
+\DoxyCodeLine{186             ulReturnValue = ATOMIC\_COMPARE\_AND\_SWAP\_SUCCESS;}
+\DoxyCodeLine{187         \}}
+\DoxyCodeLine{188     \}}
+\DoxyCodeLine{189     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191     \textcolor{keywordflow}{return} ulReturnValue;}
+\DoxyCodeLine{192 \}}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Arithmetic -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{196 }
+\DoxyCodeLine{208 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_Add\_u32( uint32\_t \textcolor{keyword}{volatile} * pulAddend,}
+\DoxyCodeLine{209                                                  uint32\_t ulCount )}
+\DoxyCodeLine{210 \{}
+\DoxyCodeLine{211     uint32\_t ulCurrent;}
+\DoxyCodeLine{212 }
+\DoxyCodeLine{213     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{214     \{}
+\DoxyCodeLine{215         ulCurrent = *pulAddend;}
+\DoxyCodeLine{216         *pulAddend += ulCount;}
+\DoxyCodeLine{217     \}}
+\DoxyCodeLine{218     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{219 }
+\DoxyCodeLine{220     \textcolor{keywordflow}{return} ulCurrent;}
+\DoxyCodeLine{221 \}}
+\DoxyCodeLine{222 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{223 }
+\DoxyCodeLine{236 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_Subtract\_u32( uint32\_t \textcolor{keyword}{volatile} * pulAddend,}
+\DoxyCodeLine{237                                                       uint32\_t ulCount )}
+\DoxyCodeLine{238 \{}
+\DoxyCodeLine{239     uint32\_t ulCurrent;}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{242     \{}
+\DoxyCodeLine{243         ulCurrent = *pulAddend;}
+\DoxyCodeLine{244         *pulAddend -\/= ulCount;}
+\DoxyCodeLine{245     \}}
+\DoxyCodeLine{246     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248     \textcolor{keywordflow}{return} ulCurrent;}
+\DoxyCodeLine{249 \}}
+\DoxyCodeLine{250 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{251 }
+\DoxyCodeLine{262 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_Increment\_u32( uint32\_t \textcolor{keyword}{volatile} * pulAddend )}
+\DoxyCodeLine{263 \{}
+\DoxyCodeLine{264 uint32\_t ulCurrent;}
+\DoxyCodeLine{265 }
+\DoxyCodeLine{266     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{267     \{}
+\DoxyCodeLine{268         ulCurrent = *pulAddend;}
+\DoxyCodeLine{269         *pulAddend += 1;}
+\DoxyCodeLine{270     \}}
+\DoxyCodeLine{271     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{272 }
+\DoxyCodeLine{273     \textcolor{keywordflow}{return} ulCurrent;}
+\DoxyCodeLine{274 \}}
+\DoxyCodeLine{275 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{287 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_Decrement\_u32( uint32\_t \textcolor{keyword}{volatile} * pulAddend )}
+\DoxyCodeLine{288 \{}
+\DoxyCodeLine{289 uint32\_t ulCurrent;}
+\DoxyCodeLine{290 }
+\DoxyCodeLine{291     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{292     \{}
+\DoxyCodeLine{293         ulCurrent = *pulAddend;}
+\DoxyCodeLine{294         *pulAddend -\/= 1;}
+\DoxyCodeLine{295     \}}
+\DoxyCodeLine{296     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298     \textcolor{keywordflow}{return} ulCurrent;}
+\DoxyCodeLine{299 \}}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/ Bitwise Logical -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{302 }
+\DoxyCodeLine{314 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_OR\_u32( uint32\_t \textcolor{keyword}{volatile} * pulDestination,}
+\DoxyCodeLine{315                                                 uint32\_t ulValue )}
+\DoxyCodeLine{316 \{}
+\DoxyCodeLine{317 uint32\_t ulCurrent;}
+\DoxyCodeLine{318 }
+\DoxyCodeLine{319     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{320     \{}
+\DoxyCodeLine{321         ulCurrent = *pulDestination;}
+\DoxyCodeLine{322         *pulDestination |= ulValue;}
+\DoxyCodeLine{323     \}}
+\DoxyCodeLine{324     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{325 }
+\DoxyCodeLine{326     \textcolor{keywordflow}{return} ulCurrent;}
+\DoxyCodeLine{327 \}}
+\DoxyCodeLine{328 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{341 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_AND\_u32( uint32\_t \textcolor{keyword}{volatile} * pulDestination,}
+\DoxyCodeLine{342                                                  uint32\_t ulValue )}
+\DoxyCodeLine{343 \{}
+\DoxyCodeLine{344 uint32\_t ulCurrent;}
+\DoxyCodeLine{345 }
+\DoxyCodeLine{346     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{347     \{}
+\DoxyCodeLine{348         ulCurrent = *pulDestination;}
+\DoxyCodeLine{349         *pulDestination \&= ulValue;}
+\DoxyCodeLine{350     \}}
+\DoxyCodeLine{351     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{352 }
+\DoxyCodeLine{353     \textcolor{keywordflow}{return} ulCurrent;}
+\DoxyCodeLine{354 \}}
+\DoxyCodeLine{355 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{356 }
+\DoxyCodeLine{368 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_NAND\_u32( uint32\_t \textcolor{keyword}{volatile} * pulDestination,}
+\DoxyCodeLine{369                                                   uint32\_t ulValue )}
+\DoxyCodeLine{370 \{}
+\DoxyCodeLine{371 uint32\_t ulCurrent;}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{374     \{}
+\DoxyCodeLine{375         ulCurrent = *pulDestination;}
+\DoxyCodeLine{376         *pulDestination = \string~( ulCurrent \& ulValue );}
+\DoxyCodeLine{377     \}}
+\DoxyCodeLine{378     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{379 }
+\DoxyCodeLine{380     \textcolor{keywordflow}{return} ulCurrent;}
+\DoxyCodeLine{381 \}}
+\DoxyCodeLine{382 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{383 }
+\DoxyCodeLine{395 \textcolor{keyword}{static} portFORCE\_INLINE uint32\_t Atomic\_XOR\_u32( uint32\_t \textcolor{keyword}{volatile} * pulDestination,}
+\DoxyCodeLine{396                                                  uint32\_t ulValue )}
+\DoxyCodeLine{397 \{}
+\DoxyCodeLine{398 uint32\_t ulCurrent;}
+\DoxyCodeLine{399 }
+\DoxyCodeLine{400     ATOMIC\_ENTER\_CRITICAL();}
+\DoxyCodeLine{401     \{}
+\DoxyCodeLine{402         ulCurrent = *pulDestination;}
+\DoxyCodeLine{403         *pulDestination \string^= ulValue;}
+\DoxyCodeLine{404     \}}
+\DoxyCodeLine{405     ATOMIC\_EXIT\_CRITICAL();}
+\DoxyCodeLine{406 }
+\DoxyCodeLine{407     \textcolor{keywordflow}{return} ulCurrent;}
+\DoxyCodeLine{408 \}}
+\DoxyCodeLine{409 }
+\DoxyCodeLine{410 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{411 \}}
+\DoxyCodeLine{412 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{413 }
+\DoxyCodeLine{414 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ATOMIC\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

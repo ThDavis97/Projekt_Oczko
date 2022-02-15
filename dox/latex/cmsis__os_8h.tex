@@ -1,0 +1,2644 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/\+CMSIS\+\_\+\+RTOS/cmsis\+\_\+os.h File Reference}
+\label{cmsis__os_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/CMSIS\_RTOS/cmsis\_os.h@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/CMSIS\_RTOS/cmsis\_os.h}}
+{\ttfamily \#include \char`\"{}Free\+RTOS.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}task.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}timers.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}queue.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}semphr.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}event\+\_\+groups.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ os\+\_\+thread\+\_\+def}
+\item 
+struct \textbf{ os\+\_\+timer\+\_\+def}
+\item 
+struct \textbf{ os\+\_\+mutex\+\_\+def}
+\item 
+struct \textbf{ os\+\_\+semaphore\+\_\+def}
+\item 
+struct \textbf{ os\+\_\+pool\+\_\+def}
+\item 
+struct \textbf{ os\+\_\+message\+Q\+\_\+def}
+\item 
+struct \textbf{ os\+\_\+mail\+Q\+\_\+def}
+\item 
+struct \textbf{ os\+Event}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ os\+CMSIS}~0x10002
+\begin{DoxyCompactList}\small\item\em API version (main [31\+:16] .sub [15\+:0]) \end{DoxyCompactList}\item 
+\#define \textbf{ os\+CMSIS\+\_\+\+KERNEL}~0x10000
+\begin{DoxyCompactList}\small\item\em RTOS identification and version (main [31\+:16] .sub [15\+:0]) \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Kernel\+System\+Id}~\char`\"{}KERNEL V1.\+00\char`\"{}
+\begin{DoxyCompactList}\small\item\em RTOS identification string. \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Feature\+\_\+\+Main\+Thread}~1
+\begin{DoxyCompactList}\small\item\em main thread 1=main can be thread, 0=not available \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Feature\+\_\+\+Pool}~1
+\begin{DoxyCompactList}\small\item\em Memory Pools\+: 1=available, 0=not available. \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Feature\+\_\+\+MailQ}~1
+\begin{DoxyCompactList}\small\item\em Mail Queues\+: 1=available, 0=not available. \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Feature\+\_\+\+MessageQ}~1
+\begin{DoxyCompactList}\small\item\em Message Queues\+: 1=available, 0=not available. \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Feature\+\_\+\+Signals}~8
+\begin{DoxyCompactList}\small\item\em maximum number of Signal Flags available per thread \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Feature\+\_\+\+Semaphore}~1
+\begin{DoxyCompactList}\small\item\em os\+Feature\+\_\+\+Semaphore function\+: 1=available, 0=not available \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Feature\+\_\+\+Wait}~0
+\begin{DoxyCompactList}\small\item\em os\+Wait function\+: 1=available, 0=not available \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Feature\+\_\+\+Sys\+Tick}~1
+\begin{DoxyCompactList}\small\item\em os\+Kernel\+Sys\+Tick functions\+: 1=available, 0=not available \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Wait\+Forever}~0x\+FFFFFFFF
+\begin{DoxyCompactList}\small\item\em wait forever timeout value \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Kernel\+Sys\+Tick\+Frequency}~(\textbf{ config\+TICK\+\_\+\+RATE\+\_\+\+HZ})
+\item 
+\#define \textbf{ os\+Kernel\+Sys\+Tick\+Micro\+Sec}(microsec)~(((uint64\+\_\+t)microsec $\ast$ (\textbf{ os\+Kernel\+Sys\+Tick\+Frequency})) / 1000000)
+\item 
+\#define \textbf{ os\+Thread\+Def}(name,  thread,  priority,  instances,  stacksz)
+\item 
+\#define \textbf{ os\+Thread}(name)~\&os\+\_\+thread\+\_\+def\+\_\+\#\#name
+\item 
+\#define \textbf{ os\+Timer\+Def}(name,  function)
+\item 
+\#define \textbf{ os\+Timer}(name)~\&os\+\_\+timer\+\_\+def\+\_\+\#\#name
+\item 
+\#define \textbf{ os\+Mutex\+Def}(name)~const \textbf{ os\+Mutex\+Def\+\_\+t} os\+\_\+mutex\+\_\+def\+\_\+\#\#name = \{ 0 \}
+\item 
+\#define \textbf{ os\+Mutex}(name)~\&os\+\_\+mutex\+\_\+def\+\_\+\#\#name
+\item 
+\#define \textbf{ os\+Semaphore\+Def}(name)~const \textbf{ os\+Semaphore\+Def\+\_\+t} os\+\_\+semaphore\+\_\+def\+\_\+\#\#name = \{ 0 \}
+\item 
+\#define \textbf{ os\+Semaphore}(name)~\&os\+\_\+semaphore\+\_\+def\+\_\+\#\#name
+\item 
+\#define \textbf{ os\+Pool\+Def}(name,  no,  type)
+\begin{DoxyCompactList}\small\item\em Define a Memory Pool. \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Pool}(name)~\&os\+\_\+pool\+\_\+def\+\_\+\#\#name
+\begin{DoxyCompactList}\small\item\em Access a Memory Pool definition. \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Message\+QDef}(name,  queue\+\_\+sz,  type)
+\begin{DoxyCompactList}\small\item\em Create a Message Queue Definition. \end{DoxyCompactList}\item 
+\#define \textbf{ os\+MessageQ}(name)~\&os\+\_\+message\+Q\+\_\+def\+\_\+\#\#name
+\begin{DoxyCompactList}\small\item\em Access a Message Queue Definition. \end{DoxyCompactList}\item 
+\#define \textbf{ os\+Mail\+QDef}(name,  queue\+\_\+sz,  type)
+\begin{DoxyCompactList}\small\item\em Create a Mail Queue Definition. \end{DoxyCompactList}\item 
+\#define \textbf{ os\+MailQ}(name)~\&os\+\_\+mail\+Q\+\_\+def\+\_\+\#\#name
+\begin{DoxyCompactList}\small\item\em Access a Mail Queue Definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void($\ast$ \textbf{ os\+\_\+pthread}) (void const $\ast$argument)
+\item 
+typedef void($\ast$ \textbf{ os\+\_\+ptimer}) (void const $\ast$argument)
+\item 
+typedef \textbf{ Task\+Handle\+\_\+t} \textbf{ os\+Thread\+Id}
+\item 
+typedef \textbf{ Timer\+Handle\+\_\+t} \textbf{ os\+Timer\+Id}
+\item 
+typedef \textbf{ Semaphore\+Handle\+\_\+t} \textbf{ os\+Mutex\+Id}
+\item 
+typedef \textbf{ Semaphore\+Handle\+\_\+t} \textbf{ os\+Semaphore\+Id}
+\item 
+typedef struct \textbf{ os\+\_\+pool\+\_\+cb} $\ast$ \textbf{ os\+Pool\+Id}
+\item 
+typedef \textbf{ Queue\+Handle\+\_\+t} \textbf{ os\+Message\+QId}
+\item 
+typedef struct \textbf{ os\+\_\+mail\+Q\+\_\+cb} $\ast$ \textbf{ os\+Mail\+QId}
+\item 
+typedef struct \textbf{ os\+\_\+thread\+\_\+def} \textbf{ os\+Thread\+Def\+\_\+t}
+\item 
+typedef struct \textbf{ os\+\_\+timer\+\_\+def} \textbf{ os\+Timer\+Def\+\_\+t}
+\item 
+typedef struct \textbf{ os\+\_\+mutex\+\_\+def} \textbf{ os\+Mutex\+Def\+\_\+t}
+\item 
+typedef struct \textbf{ os\+\_\+semaphore\+\_\+def} \textbf{ os\+Semaphore\+Def\+\_\+t}
+\item 
+typedef struct \textbf{ os\+\_\+pool\+\_\+def} \textbf{ os\+Pool\+Def\+\_\+t}
+\item 
+typedef struct \textbf{ os\+\_\+message\+Q\+\_\+def} \textbf{ os\+Message\+QDef\+\_\+t}
+\item 
+typedef struct \textbf{ os\+\_\+mail\+Q\+\_\+def} \textbf{ os\+Mail\+QDef\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ os\+Priority} \{ \newline
+\textbf{ os\+Priority\+Idle} = -\/3
+, \textbf{ os\+Priority\+Low} = -\/2
+, \textbf{ os\+Priority\+Below\+Normal} = -\/1
+, \textbf{ os\+Priority\+Normal} = 0
+, \newline
+\textbf{ os\+Priority\+Above\+Normal} = +1
+, \textbf{ os\+Priority\+High} = +2
+, \textbf{ os\+Priority\+Realtime} = +3
+, \textbf{ os\+Priority\+Error} = 0x84
+ \}
+\item 
+enum \textbf{ os\+Status} \{ \newline
+\textbf{ os\+OK} = 0
+, \textbf{ os\+Event\+Signal} = 0x08
+, \textbf{ os\+Event\+Message} = 0x10
+, \textbf{ os\+Event\+Mail} = 0x20
+, \newline
+\textbf{ os\+Event\+Timeout} = 0x40
+, \textbf{ os\+Error\+Parameter} = 0x80
+, \textbf{ os\+Error\+Resource} = 0x81
+, \textbf{ os\+Error\+Timeout\+Resource} = 0x\+C1
+, \newline
+\textbf{ os\+Error\+ISR} = 0x82
+, \textbf{ os\+Error\+ISRRecursive} = 0x83
+, \textbf{ os\+Error\+Priority} = 0x84
+, \textbf{ os\+Error\+No\+Memory} = 0x85
+, \newline
+\textbf{ os\+Error\+Value} = 0x86
+, \textbf{ os\+Error\+OS} = 0x\+FF
+, \textbf{ os\+\_\+status\+\_\+reserved} = 0x7\+FFFFFFF
+ \}
+\item 
+enum \textbf{ os\+\_\+timer\+\_\+type} \{ \textbf{ os\+Timer\+Once} = 0
+, \textbf{ os\+Timer\+Periodic} = 1
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ os\+Status} \textbf{ os\+Kernel\+Initialize} (void)
+\item 
+\textbf{ os\+Status} \textbf{ os\+Kernel\+Start} (void)
+\begin{DoxyCompactList}\small\item\em Start the RTOS Kernel with executing the specified thread. \end{DoxyCompactList}\item 
+int32\+\_\+t \textbf{ os\+Kernel\+Running} (void)
+\begin{DoxyCompactList}\small\item\em Check if the RTOS kernel is already started. \end{DoxyCompactList}\item 
+uint32\+\_\+t \textbf{ os\+Kernel\+Sys\+Tick} (void)
+\begin{DoxyCompactList}\small\item\em Get the value of the Kernel Sys\+Tick timer. \end{DoxyCompactList}\item 
+\textbf{ os\+Thread\+Id} \textbf{ os\+Thread\+Create} (const \textbf{ os\+Thread\+Def\+\_\+t} $\ast$thread\+\_\+def, void $\ast$argument)
+\begin{DoxyCompactList}\small\item\em Create a thread and add it to Active Threads and set it to state READY. \end{DoxyCompactList}\item 
+\textbf{ os\+Thread\+Id} \textbf{ os\+Thread\+Get\+Id} (void)
+\begin{DoxyCompactList}\small\item\em Return the thread ID of the current running thread. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Thread\+Terminate} (\textbf{ os\+Thread\+Id} thread\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Terminate execution of a thread and remove it from Active Threads. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Thread\+Yield} (void)
+\begin{DoxyCompactList}\small\item\em Pass control to next thread that is in state {\bfseries{READY}}. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Thread\+Set\+Priority} (\textbf{ os\+Thread\+Id} thread\+\_\+id, \textbf{ os\+Priority} priority)
+\begin{DoxyCompactList}\small\item\em Change priority of an active thread. \end{DoxyCompactList}\item 
+\textbf{ os\+Priority} \textbf{ os\+Thread\+Get\+Priority} (\textbf{ os\+Thread\+Id} thread\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Get current priority of an active thread. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Delay} (uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Wait for Timeout (Time Delay) \end{DoxyCompactList}\item 
+\textbf{ os\+Timer\+Id} \textbf{ os\+Timer\+Create} (const \textbf{ os\+Timer\+Def\+\_\+t} $\ast$timer\+\_\+def, \textbf{ os\+\_\+timer\+\_\+type} type, void $\ast$argument)
+\begin{DoxyCompactList}\small\item\em Create a timer. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Timer\+Start} (\textbf{ os\+Timer\+Id} timer\+\_\+id, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Start or restart a timer. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Timer\+Stop} (\textbf{ os\+Timer\+Id} timer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Stop a timer. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Timer\+Delete} (\textbf{ os\+Timer\+Id} timer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Delete a timer. \end{DoxyCompactList}\item 
+int32\+\_\+t \textbf{ os\+Signal\+Set} (\textbf{ os\+Thread\+Id} thread\+\_\+id, int32\+\_\+t signals)
+\begin{DoxyCompactList}\small\item\em Set the specified Signal Flags of an active thread. \end{DoxyCompactList}\item 
+int32\+\_\+t \textbf{ os\+Signal\+Clear} (\textbf{ os\+Thread\+Id} thread\+\_\+id, int32\+\_\+t signals)
+\item 
+\textbf{ os\+Event} \textbf{ os\+Signal\+Wait} (int32\+\_\+t signals, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Wait for one or more Signal Flags to become signaled for the current {\bfseries{RUNNING}} thread. \end{DoxyCompactList}\item 
+\textbf{ os\+Mutex\+Id} \textbf{ os\+Mutex\+Create} (const \textbf{ os\+Mutex\+Def\+\_\+t} $\ast$mutex\+\_\+def)
+\begin{DoxyCompactList}\small\item\em Create and Initialize a Mutex object. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Mutex\+Wait} (\textbf{ os\+Mutex\+Id} mutex\+\_\+id, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Wait until a Mutex becomes available. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Mutex\+Release} (\textbf{ os\+Mutex\+Id} mutex\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Release a Mutex that was obtained by \doxyref{os\+Mutex\+Wait}{p.}{cmsis__os_8h_a5e1752b73f573ee015dbd9ef1edaba13}. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Mutex\+Delete} (\textbf{ os\+Mutex\+Id} mutex\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Delete a Mutex. \end{DoxyCompactList}\item 
+\textbf{ os\+Semaphore\+Id} \textbf{ os\+Semaphore\+Create} (const \textbf{ os\+Semaphore\+Def\+\_\+t} $\ast$semaphore\+\_\+def, int32\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Create and Initialize a Semaphore object used for managing resources. \end{DoxyCompactList}\item 
+int32\+\_\+t \textbf{ os\+Semaphore\+Wait} (\textbf{ os\+Semaphore\+Id} semaphore\+\_\+id, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Wait until a Semaphore token becomes available. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Semaphore\+Release} (\textbf{ os\+Semaphore\+Id} semaphore\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Release a Semaphore token. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Semaphore\+Delete} (\textbf{ os\+Semaphore\+Id} semaphore\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Delete a Semaphore. \end{DoxyCompactList}\item 
+\textbf{ os\+Pool\+Id} \textbf{ os\+Pool\+Create} (const \textbf{ os\+Pool\+Def\+\_\+t} $\ast$pool\+\_\+def)
+\begin{DoxyCompactList}\small\item\em Create and Initialize a memory pool. \end{DoxyCompactList}\item 
+void $\ast$ \textbf{ os\+Pool\+Alloc} (\textbf{ os\+Pool\+Id} pool\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Allocate a memory block from a memory pool. \end{DoxyCompactList}\item 
+void $\ast$ \textbf{ os\+Pool\+CAlloc} (\textbf{ os\+Pool\+Id} pool\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Allocate a memory block from a memory pool and set memory block to zero. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Pool\+Free} (\textbf{ os\+Pool\+Id} pool\+\_\+id, void $\ast$block)
+\begin{DoxyCompactList}\small\item\em Return an allocated memory block back to a specific memory pool. \end{DoxyCompactList}\item 
+\textbf{ os\+Message\+QId} \textbf{ os\+Message\+Create} (const \textbf{ os\+Message\+QDef\+\_\+t} $\ast$queue\+\_\+def, \textbf{ os\+Thread\+Id} thread\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Create and Initialize a Message Queue. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Message\+Put} (\textbf{ os\+Message\+QId} queue\+\_\+id, uint32\+\_\+t info, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Put a Message to a Queue. \end{DoxyCompactList}\item 
+\textbf{ os\+Event} \textbf{ os\+Message\+Get} (\textbf{ os\+Message\+QId} queue\+\_\+id, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Get a Message or Wait for a Message from a Queue. \end{DoxyCompactList}\item 
+\textbf{ os\+Mail\+QId} \textbf{ os\+Mail\+Create} (const \textbf{ os\+Mail\+QDef\+\_\+t} $\ast$queue\+\_\+def, \textbf{ os\+Thread\+Id} thread\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Create and Initialize mail queue. \end{DoxyCompactList}\item 
+void $\ast$ \textbf{ os\+Mail\+Alloc} (\textbf{ os\+Mail\+QId} queue\+\_\+id, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Allocate a memory block from a mail. \end{DoxyCompactList}\item 
+void $\ast$ \textbf{ os\+Mail\+CAlloc} (\textbf{ os\+Mail\+QId} queue\+\_\+id, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Allocate a memory block from a mail and set memory block to zero. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Mail\+Put} (\textbf{ os\+Mail\+QId} queue\+\_\+id, void $\ast$mail)
+\begin{DoxyCompactList}\small\item\em Put a mail to a queue. \end{DoxyCompactList}\item 
+\textbf{ os\+Event} \textbf{ os\+Mail\+Get} (\textbf{ os\+Mail\+QId} queue\+\_\+id, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Get a mail from a queue. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Mail\+Free} (\textbf{ os\+Mail\+QId} queue\+\_\+id, void $\ast$mail)
+\begin{DoxyCompactList}\small\item\em Free a memory block from a mail. \end{DoxyCompactList}\item 
+void \textbf{ os\+Systick\+Handler} (void)
+\begin{DoxyCompactList}\small\item\em Handles the tick increment. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Thread\+Suspend} (\textbf{ os\+Thread\+Id} thread\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Suspend execution of a thread. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Thread\+Resume} (\textbf{ os\+Thread\+Id} thread\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Resume execution of a suspended thread. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Thread\+Suspend\+All} (void)
+\begin{DoxyCompactList}\small\item\em Suspend execution of a all active threads. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Thread\+Resume\+All} (void)
+\begin{DoxyCompactList}\small\item\em Resume execution of a all suspended threads. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Delay\+Until} (uint32\+\_\+t $\ast$Previous\+Wake\+Time, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Delay a task until a specified time. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Abort\+Delay} (\textbf{ os\+Thread\+Id} thread\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Abort the delay for a specific thread. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Thread\+List} (uint8\+\_\+t $\ast$buffer)
+\begin{DoxyCompactList}\small\item\em Lists all the current threads, along with their current state and stack usage high water mark. \end{DoxyCompactList}\item 
+\textbf{ os\+Event} \textbf{ os\+Message\+Peek} (\textbf{ os\+Message\+QId} queue\+\_\+id, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Receive an item from a queue without removing the item from the queue. \end{DoxyCompactList}\item 
+uint32\+\_\+t \textbf{ os\+Message\+Waiting} (\textbf{ os\+Message\+QId} queue\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Get the number of messaged stored in a queue. \end{DoxyCompactList}\item 
+uint32\+\_\+t \textbf{ os\+Message\+Available\+Space} (\textbf{ os\+Message\+QId} queue\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Get the available space in a message queue. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Message\+Delete} (\textbf{ os\+Message\+QId} queue\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Delete a Message Queue. \end{DoxyCompactList}\item 
+\textbf{ os\+Mutex\+Id} \textbf{ os\+Recursive\+Mutex\+Create} (const \textbf{ os\+Mutex\+Def\+\_\+t} $\ast$mutex\+\_\+def)
+\begin{DoxyCompactList}\small\item\em Create and Initialize a Recursive Mutex. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Recursive\+Mutex\+Release} (\textbf{ os\+Mutex\+Id} mutex\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Release a Recursive Mutex. \end{DoxyCompactList}\item 
+\textbf{ os\+Status} \textbf{ os\+Recursive\+Mutex\+Wait} (\textbf{ os\+Mutex\+Id} mutex\+\_\+id, uint32\+\_\+t millisec)
+\begin{DoxyCompactList}\small\item\em Release a Recursive Mutex. \end{DoxyCompactList}\item 
+uint32\+\_\+t \textbf{ os\+Semaphore\+Get\+Count} (\textbf{ os\+Semaphore\+Id} semaphore\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Returns the current count value of a counting semaphore. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{cmsis__os_8h_a702196bacccbb978620c736b209387f1}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osCMSIS@{osCMSIS}}
+\index{osCMSIS@{osCMSIS}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osCMSIS}
+{\footnotesize\ttfamily \#define os\+CMSIS~0x10002}
+
+
+
+API version (main [31\+:16] .sub [15\+:0]) 
+
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+CMSIS}} identifies the CMSIS-\/\+RTOS API version. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ab78dce646fabec479c5f34bc5175b7de}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osCMSIS\_KERNEL@{osCMSIS\_KERNEL}}
+\index{osCMSIS\_KERNEL@{osCMSIS\_KERNEL}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osCMSIS\_KERNEL}
+{\footnotesize\ttfamily \#define os\+CMSIS\+\_\+\+KERNEL~0x10000}
+
+
+
+RTOS identification and version (main [31\+:16] .sub [15\+:0]) 
+
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{os\+CMSIS\+\_\+\+KERNEL}} identifies the underlying RTOS kernel and version number. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_aceb2e0071ce160d153047f2eac1aca8e}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osFeature\_MailQ@{osFeature\_MailQ}}
+\index{osFeature\_MailQ@{osFeature\_MailQ}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osFeature\_MailQ}
+{\footnotesize\ttfamily \#define os\+Feature\+\_\+\+MailQ~1}
+
+
+
+Mail Queues\+: 1=available, 0=not available. 
+
+\mbox{\label{cmsis__os_8h_a22f7d235bc9f783933bd5a981fd79696}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osFeature\_MainThread@{osFeature\_MainThread}}
+\index{osFeature\_MainThread@{osFeature\_MainThread}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osFeature\_MainThread}
+{\footnotesize\ttfamily \#define os\+Feature\+\_\+\+Main\+Thread~1}
+
+
+
+main thread 1=main can be thread, 0=not available 
+
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Feature\+\_\+xxx}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a479a6561f859e3d4818e25708593d203}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osFeature\_MessageQ@{osFeature\_MessageQ}}
+\index{osFeature\_MessageQ@{osFeature\_MessageQ}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osFeature\_MessageQ}
+{\footnotesize\ttfamily \#define os\+Feature\+\_\+\+MessageQ~1}
+
+
+
+Message Queues\+: 1=available, 0=not available. 
+
+\mbox{\label{cmsis__os_8h_add84b683001de327894851b428587caa}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osFeature\_Pool@{osFeature\_Pool}}
+\index{osFeature\_Pool@{osFeature\_Pool}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osFeature\_Pool}
+{\footnotesize\ttfamily \#define os\+Feature\+\_\+\+Pool~1}
+
+
+
+Memory Pools\+: 1=available, 0=not available. 
+
+\mbox{\label{cmsis__os_8h_a7da4c7bfb340779c9fc7b321f5ab3e3a}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osFeature\_Semaphore@{osFeature\_Semaphore}}
+\index{osFeature\_Semaphore@{osFeature\_Semaphore}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osFeature\_Semaphore}
+{\footnotesize\ttfamily \#define os\+Feature\+\_\+\+Semaphore~1}
+
+
+
+os\+Feature\+\_\+\+Semaphore function\+: 1=available, 0=not available 
+
+\mbox{\label{cmsis__os_8h_a01edde265710d883b6e237d34a6ef4a6}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osFeature\_Signals@{osFeature\_Signals}}
+\index{osFeature\_Signals@{osFeature\_Signals}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osFeature\_Signals}
+{\footnotesize\ttfamily \#define os\+Feature\+\_\+\+Signals~8}
+
+
+
+maximum number of Signal Flags available per thread 
+
+\mbox{\label{cmsis__os_8h_ae554ec16c23c5b7d65affade2a351891}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osFeature\_SysTick@{osFeature\_SysTick}}
+\index{osFeature\_SysTick@{osFeature\_SysTick}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osFeature\_SysTick}
+{\footnotesize\ttfamily \#define os\+Feature\+\_\+\+Sys\+Tick~1}
+
+
+
+os\+Kernel\+Sys\+Tick functions\+: 1=available, 0=not available 
+
+\mbox{\label{cmsis__os_8h_a6c97d38879ae86491628f6e647639bad}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osFeature\_Wait@{osFeature\_Wait}}
+\index{osFeature\_Wait@{osFeature\_Wait}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osFeature\_Wait}
+{\footnotesize\ttfamily \#define os\+Feature\+\_\+\+Wait~0}
+
+
+
+os\+Wait function\+: 1=available, 0=not available 
+
+\mbox{\label{cmsis__os_8h_a47cf03658f01cdffca688e9096b58289}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osKernelSystemId@{osKernelSystemId}}
+\index{osKernelSystemId@{osKernelSystemId}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osKernelSystemId}
+{\footnotesize\ttfamily \#define os\+Kernel\+System\+Id~\char`\"{}KERNEL V1.\+00\char`\"{}}
+
+
+
+RTOS identification string. 
+
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Kernel\+System\+Id}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a9e0954d52722673e2031233a2ab99960}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osKernelSysTickFrequency@{osKernelSysTickFrequency}}
+\index{osKernelSysTickFrequency@{osKernelSysTickFrequency}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osKernelSysTickFrequency}
+{\footnotesize\ttfamily \#define os\+Kernel\+Sys\+Tick\+Frequency~(\textbf{ config\+TICK\+\_\+\+RATE\+\_\+\+HZ})}
+
+The RTOS kernel system timer frequency in Hz \begin{DoxyNote}{Note}
+Reflects the system timer setting and is typically defined in a configuration file. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ae12c190af42d7310d8006d64f4ed5a88}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osKernelSysTickMicroSec@{osKernelSysTickMicroSec}}
+\index{osKernelSysTickMicroSec@{osKernelSysTickMicroSec}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osKernelSysTickMicroSec}
+{\footnotesize\ttfamily \#define os\+Kernel\+Sys\+Tick\+Micro\+Sec(\begin{DoxyParamCaption}\item[{}]{microsec }\end{DoxyParamCaption})~(((uint64\+\_\+t)microsec $\ast$ (\textbf{ os\+Kernel\+Sys\+Tick\+Frequency})) / 1000000)}
+
+Convert a microseconds value to a RTOS kernel system timer value. 
+\begin{DoxyParams}{Parameters}
+{\em microsec} & time value in microseconds. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+time value normalized to the \doxyref{os\+Kernel\+Sys\+Tick\+Frequency}{p.}{cmsis__os_8h_a9e0954d52722673e2031233a2ab99960} 
+\end{DoxyReturn}
+\mbox{\label{cmsis__os_8h_ad2deeb66d51ade54e63d8f87ff2ec9d2}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailQ@{osMailQ}}
+\index{osMailQ@{osMailQ}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailQ}
+{\footnotesize\ttfamily \#define os\+MailQ(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\&os\+\_\+mail\+Q\+\_\+def\+\_\+\#\#name}
+
+
+
+Access a Mail Queue Definition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the queue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+MailQ}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a58d712b16c0c6668059f509386d1e55b}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailQDef@{osMailQDef}}
+\index{osMailQDef@{osMailQDef}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailQDef}
+{\footnotesize\ttfamily \#define os\+Mail\+QDef(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{queue\+\_\+sz,  }\item[{}]{type }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{struct }os\_mailQ\_cb *os\_mailQ\_cb\_\#\#name; \(\backslash\)}
+\DoxyCodeLine{const osMailQDef\_t os\_mailQ\_def\_\#\#name =  \(\backslash\)}
+\DoxyCodeLine{\{ (queue\_sz), \textcolor{keyword}{sizeof} (type), (\&os\_mailQ\_cb\_\#\#name) \}}
+
+\end{DoxyCode}
+
+
+Create a Mail Queue Definition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the queue \\
+\hline
+{\em queue\+\_\+sz} & maximum number of messages in queue \\
+\hline
+{\em type} & data type of a single message element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Mail\+QDef}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a2d446a0b4bb90bf05d6f92eedeaabc97}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessageQ@{osMessageQ}}
+\index{osMessageQ@{osMessageQ}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessageQ}
+{\footnotesize\ttfamily \#define os\+MessageQ(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\&os\+\_\+message\+Q\+\_\+def\+\_\+\#\#name}
+
+
+
+Access a Message Queue Definition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the queue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+MessageQ}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ac9a6a6276c12609793e7701afcc82326}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessageQDef@{osMessageQDef}}
+\index{osMessageQDef@{osMessageQDef}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessageQDef}
+{\footnotesize\ttfamily \#define os\+Message\+QDef(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{queue\+\_\+sz,  }\item[{}]{type }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} osMessageQDef\_t os\_messageQ\_def\_\#\#name = \(\backslash\)}
+\DoxyCodeLine{\{ (queue\_sz), \textcolor{keyword}{sizeof} (type) \}}
+
+\end{DoxyCode}
+
+
+Create a Message Queue Definition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the queue. \\
+\hline
+{\em queue\+\_\+sz} & maximum number of messages in the queue. \\
+\hline
+{\em type} & data type of a single message element (for debugger). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Message\+QDef}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a1122a86faa64b4a0880c76cf68d0c934}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMutex@{osMutex}}
+\index{osMutex@{osMutex}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMutex}
+{\footnotesize\ttfamily \#define os\+Mutex(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\&os\+\_\+mutex\+\_\+def\+\_\+\#\#name}
+
+Access a Mutex definition. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the mutex object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Mutex}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a9b522438489d7c402c95332b58bc94f3}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMutexDef@{osMutexDef}}
+\index{osMutexDef@{osMutexDef}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMutexDef}
+{\footnotesize\ttfamily \#define os\+Mutex\+Def(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~const \textbf{ os\+Mutex\+Def\+\_\+t} os\+\_\+mutex\+\_\+def\+\_\+\#\#name = \{ 0 \}}
+
+Define a Mutex. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the mutex object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Mutex\+Def}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a5f0b204a82327533d420210125c90697}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osPool@{osPool}}
+\index{osPool@{osPool}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osPool}
+{\footnotesize\ttfamily \#define os\+Pool(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\&os\+\_\+pool\+\_\+def\+\_\+\#\#name}
+
+
+
+Access a Memory Pool definition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the memory pool \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Pool}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a87b471d4fe2d5dbd0040708edd52771b}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osPoolDef@{osPoolDef}}
+\index{osPoolDef@{osPoolDef}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osPoolDef}
+{\footnotesize\ttfamily \#define os\+Pool\+Def(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{no,  }\item[{}]{type }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} osPoolDef\_t os\_pool\_def\_\#\#name = \(\backslash\)}
+\DoxyCodeLine{\{ (no), \textcolor{keyword}{sizeof}(type), NULL \}}
+
+\end{DoxyCode}
+
+
+Define a Memory Pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the memory pool. \\
+\hline
+{\em no} & maximum number of blocks (objects) in the memory pool. \\
+\hline
+{\em type} & data type of a single block (object). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Pool\+Def}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a03761ee8d2c3cd4544e18364ab301dac}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSemaphore@{osSemaphore}}
+\index{osSemaphore@{osSemaphore}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSemaphore}
+{\footnotesize\ttfamily \#define os\+Semaphore(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\&os\+\_\+semaphore\+\_\+def\+\_\+\#\#name}
+
+Access a Semaphore definition. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the semaphore object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Semaphore}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a9e66fe361749071e5ab87826c43c2f1b}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSemaphoreDef@{osSemaphoreDef}}
+\index{osSemaphoreDef@{osSemaphoreDef}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSemaphoreDef}
+{\footnotesize\ttfamily \#define os\+Semaphore\+Def(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~const \textbf{ os\+Semaphore\+Def\+\_\+t} os\+\_\+semaphore\+\_\+def\+\_\+\#\#name = \{ 0 \}}
+
+Define a Semaphore object. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the semaphore object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Semaphore\+Def}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_af0c7c6b5e09f8be198312144b5c9e453}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThread@{osThread}}
+\index{osThread@{osThread}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThread}
+{\footnotesize\ttfamily \#define os\+Thread(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\&os\+\_\+thread\+\_\+def\+\_\+\#\#name}
+
+Access a Thread definition. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the thread definition object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Thread}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a1537e80813785bebbc3cbab3226eb04f}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadDef@{osThreadDef}}
+\index{osThreadDef@{osThreadDef}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadDef}
+{\footnotesize\ttfamily \#define os\+Thread\+Def(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{thread,  }\item[{}]{priority,  }\item[{}]{instances,  }\item[{}]{stacksz }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} osThreadDef\_t os\_thread\_def\_\#\#name = \(\backslash\)}
+\DoxyCodeLine{\{ \#name, (thread), (priority), (instances), (stacksz)\}}
+
+\end{DoxyCode}
+Create a Thread Definition with function, priority, and stack requirements. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the thread function. \\
+\hline
+{\em priority} & initial priority of the thread function. \\
+\hline
+{\em instances} & number of possible thread instances. \\
+\hline
+{\em stacksz} & stack size (in bytes) requirements for the thread function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameters to {\bfseries{os\+Thread\+Def}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a1b8d670eaf964b2910fa06885e650678}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osTimer@{osTimer}}
+\index{osTimer@{osTimer}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osTimer}
+{\footnotesize\ttfamily \#define os\+Timer(\begin{DoxyParamCaption}\item[{}]{name }\end{DoxyParamCaption})~\&os\+\_\+timer\+\_\+def\+\_\+\#\#name}
+
+Access a Timer definition. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the timer object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Timer}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a1c720627e08d1cc1afcad44e799ed492}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osTimerDef@{osTimerDef}}
+\index{osTimerDef@{osTimerDef}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osTimerDef}
+{\footnotesize\ttfamily \#define os\+Timer\+Def(\begin{DoxyParamCaption}\item[{}]{name,  }\item[{}]{function }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const} osTimerDef\_t os\_timer\_def\_\#\#name = \(\backslash\)}
+\DoxyCodeLine{\{ (function) \}}
+
+\end{DoxyCode}
+Define a Timer object. 
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the timer object. \\
+\hline
+{\em function} & name of the timer call back function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+CAN BE CHANGED\+: The parameter to {\bfseries{os\+Timer\+Def}} shall be consistent but the macro body is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a9eb9a7a797a42e4b55eb171ecc609ddb}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osWaitForever@{osWaitForever}}
+\index{osWaitForever@{osWaitForever}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osWaitForever}
+{\footnotesize\ttfamily \#define os\+Wait\+Forever~0x\+FFFFFFFF}
+
+
+
+wait forever timeout value 
+
+Timeout value. \begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Wait\+Forever}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{cmsis__os_8h_a3a96994ab8318050b476d72d890ce765}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!os\_pthread@{os\_pthread}}
+\index{os\_pthread@{os\_pthread}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{os\_pthread}
+{\footnotesize\ttfamily typedef void($\ast$ os\+\_\+pthread) (void const $\ast$argument)}
+
+Entry point of a thread. \begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+\_\+pthread}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a7904cad2180c6b3a0ac112fe8ff273e7}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!os\_ptimer@{os\_ptimer}}
+\index{os\_ptimer@{os\_ptimer}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{os\_ptimer}
+{\footnotesize\ttfamily typedef void($\ast$ os\+\_\+ptimer) (void const $\ast$argument)}
+
+Entry point of a timer call back function. \begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+\_\+ptimer}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ab6d3ddc7d8cea9901544118bed1a3d1c}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailQDef\_t@{osMailQDef\_t}}
+\index{osMailQDef\_t@{osMailQDef\_t}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailQDef\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ os\+\_\+mail\+Q\+\_\+def} \textbf{ os\+Mail\+QDef\+\_\+t}}
+
+Definition structure for mail queue. \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+mail\+Q\+\_\+def}{p.}{structos__mail_q__def}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a1dac049fb7725a8af8b26c71cbb373b5}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailQId@{osMailQId}}
+\index{osMailQId@{osMailQId}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailQId}
+{\footnotesize\ttfamily typedef struct \textbf{ os\+\_\+mail\+Q\+\_\+cb}$\ast$ \textbf{ os\+Mail\+QId}}
+
+Mail ID identifies the mail queue (pointer to a mail queue control block). \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+mail\+Q\+\_\+cb}{p.}{structos__mail_q__cb}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a552ffc97e37e403acff6a59793ad26eb}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessageQDef\_t@{osMessageQDef\_t}}
+\index{osMessageQDef\_t@{osMessageQDef\_t}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessageQDef\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ os\+\_\+message\+Q\+\_\+def} \textbf{ os\+Message\+QDef\+\_\+t}}
+
+Definition structure for message queue. \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+message\+Q\+\_\+def}{p.}{structos__message_q__def}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a8c191fd2b1369c8942873496a186a022}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessageQId@{osMessageQId}}
+\index{osMessageQId@{osMessageQId}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessageQId}
+{\footnotesize\ttfamily typedef \textbf{ Queue\+Handle\+\_\+t} \textbf{ os\+Message\+QId}}
+
+Message ID identifies the message queue (pointer to a message queue control block). \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{os\+\_\+message\+Q\+\_\+cb}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ac2907bdcc057de650ea61777a0e92d11}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMutexDef\_t@{osMutexDef\_t}}
+\index{osMutexDef\_t@{osMutexDef\_t}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMutexDef\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ os\+\_\+mutex\+\_\+def} \textbf{ os\+Mutex\+Def\+\_\+t}}
+
+Mutex Definition structure contains setup information for a mutex. \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+mutex\+\_\+def}{p.}{structos__mutex__def}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_abba580e11219b5ec867b5b26ac0b87f4}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMutexId@{osMutexId}}
+\index{osMutexId@{osMutexId}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMutexId}
+{\footnotesize\ttfamily typedef \textbf{ Semaphore\+Handle\+\_\+t} \textbf{ os\+Mutex\+Id}}
+
+Mutex ID identifies the mutex (pointer to a mutex control block). \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{os\+\_\+mutex\+\_\+cb}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ac47b811c41974c0bb74521a50c7983b7}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osPoolDef\_t@{osPoolDef\_t}}
+\index{osPoolDef\_t@{osPoolDef\_t}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osPoolDef\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ os\+\_\+pool\+\_\+def} \textbf{ os\+Pool\+Def\+\_\+t}}
+
+Definition structure for memory block allocation. \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+pool\+\_\+def}{p.}{structos__pool__def}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a08d2e20fd9bbd96220fe068d420f3686}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osPoolId@{osPoolId}}
+\index{osPoolId@{osPoolId}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osPoolId}
+{\footnotesize\ttfamily typedef struct \textbf{ os\+\_\+pool\+\_\+cb}$\ast$ \textbf{ os\+Pool\+Id}}
+
+Pool ID identifies the memory pool (pointer to a memory pool control block). \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+pool\+\_\+cb}{p.}{structos__pool__cb}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_acf4486afa668a4499003e1a750eb8ab1}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSemaphoreDef\_t@{osSemaphoreDef\_t}}
+\index{osSemaphoreDef\_t@{osSemaphoreDef\_t}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSemaphoreDef\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ os\+\_\+semaphore\+\_\+def} \textbf{ os\+Semaphore\+Def\+\_\+t}}
+
+Semaphore Definition structure contains setup information for a semaphore. \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+semaphore\+\_\+def}{p.}{structos__semaphore__def}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a954e9c06583b05ae736d07e4e40097d5}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSemaphoreId@{osSemaphoreId}}
+\index{osSemaphoreId@{osSemaphoreId}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSemaphoreId}
+{\footnotesize\ttfamily typedef \textbf{ Semaphore\+Handle\+\_\+t} \textbf{ os\+Semaphore\+Id}}
+
+Semaphore ID identifies the semaphore (pointer to a semaphore control block). \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{os\+\_\+semaphore\+\_\+cb}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a92f46bd508dcc685135882e2cf37ac8c}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadDef\_t@{osThreadDef\_t}}
+\index{osThreadDef\_t@{osThreadDef\_t}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadDef\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ os\+\_\+thread\+\_\+def} \textbf{ os\+Thread\+Def\+\_\+t}}
+
+Thread Definition structure contains startup information of a thread. \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+thread\+\_\+def}{p.}{structos__thread__def}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a217fdd2811440d39a6e8c868a0b8ec82}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadId@{osThreadId}}
+\index{osThreadId@{osThreadId}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadId}
+{\footnotesize\ttfamily typedef \textbf{ Task\+Handle\+\_\+t} \textbf{ os\+Thread\+Id}}
+
+Thread ID identifies the thread (pointer to a thread control block). \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{os\+\_\+thread\+\_\+cb}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a2144eb7d94a485f516bf0b09078f883a}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osTimerDef\_t@{osTimerDef\_t}}
+\index{osTimerDef\_t@{osTimerDef\_t}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osTimerDef\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ os\+\_\+timer\+\_\+def} \textbf{ os\+Timer\+Def\+\_\+t}}
+
+Timer Definition structure contains timer parameters. \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{\doxyref{os\+\_\+timer\+\_\+def}{p.}{structos__timer__def}}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a6416f2f47941043a63be8453cecce5be}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osTimerId@{osTimerId}}
+\index{osTimerId@{osTimerId}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osTimerId}
+{\footnotesize\ttfamily typedef \textbf{ Timer\+Handle\+\_\+t} \textbf{ os\+Timer\+Id}}
+
+Timer ID identifies the timer (pointer to a timer control block). \begin{DoxyNote}{Note}
+CAN BE CHANGED\+: {\bfseries{os\+\_\+timer\+\_\+cb}} is implementation specific in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\label{cmsis__os_8h_adac860eb9e1b4b0619271e6595ed83d9}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!os\_timer\_type@{os\_timer\_type}}
+\index{os\_timer\_type@{os\_timer\_type}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{os\_timer\_type}
+{\footnotesize\ttfamily enum \textbf{ os\+\_\+timer\+\_\+type}}
+
+Timer type value for the timer definition. \begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+\_\+timer\+\_\+type}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osTimerOnce@{osTimerOnce}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osTimerOnce@{osTimerOnce}}}\mbox{\label{cmsis__os_8h_adac860eb9e1b4b0619271e6595ed83d9ad21712f8df5f97069c82dc9eec37b951}} 
+os\+Timer\+Once&one-\/shot timer \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osTimerPeriodic@{osTimerPeriodic}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osTimerPeriodic@{osTimerPeriodic}}}\mbox{\label{cmsis__os_8h_adac860eb9e1b4b0619271e6595ed83d9ab9c91f9699162edb09bb7c90c11c8788}} 
+os\+Timer\+Periodic&repeating timer \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\label{cmsis__os_8h_a7f2b42f1983b9107775ec2a1c69a849a}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osPriority@{osPriority}}
+\index{osPriority@{osPriority}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osPriority}
+{\footnotesize\ttfamily enum \textbf{ os\+Priority}}
+
+Priority used for thread control. \begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Priority}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osPriorityIdle@{osPriorityIdle}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osPriorityIdle@{osPriorityIdle}}}\mbox{\label{cmsis__os_8h_a7f2b42f1983b9107775ec2a1c69a849aa549e79a43ff4f8b2b31afb613f5caa81}} 
+os\+Priority\+Idle&priority\+: idle (lowest) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osPriorityLow@{osPriorityLow}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osPriorityLow@{osPriorityLow}}}\mbox{\label{cmsis__os_8h_a7f2b42f1983b9107775ec2a1c69a849aa61cb822239ac8f66dfbdc7291598a3d4}} 
+os\+Priority\+Low&priority\+: low \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osPriorityBelowNormal@{osPriorityBelowNormal}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osPriorityBelowNormal@{osPriorityBelowNormal}}}\mbox{\label{cmsis__os_8h_a7f2b42f1983b9107775ec2a1c69a849aa193b650117c209b4a203954542bcc3e6}} 
+os\+Priority\+Below\+Normal&priority\+: below normal \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osPriorityNormal@{osPriorityNormal}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osPriorityNormal@{osPriorityNormal}}}\mbox{\label{cmsis__os_8h_a7f2b42f1983b9107775ec2a1c69a849aa45a2895ad30c79fb97de18cac7cc19f1}} 
+os\+Priority\+Normal&priority\+: normal (default) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osPriorityAboveNormal@{osPriorityAboveNormal}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osPriorityAboveNormal@{osPriorityAboveNormal}}}\mbox{\label{cmsis__os_8h_a7f2b42f1983b9107775ec2a1c69a849aa17b36cd9cd38652c2bc6d4803990674b}} 
+os\+Priority\+Above\+Normal&priority\+: above normal \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osPriorityHigh@{osPriorityHigh}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osPriorityHigh@{osPriorityHigh}}}\mbox{\label{cmsis__os_8h_a7f2b42f1983b9107775ec2a1c69a849aa914433934143a9ba767e59577c56e6c2}} 
+os\+Priority\+High&priority\+: high \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osPriorityRealtime@{osPriorityRealtime}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osPriorityRealtime@{osPriorityRealtime}}}\mbox{\label{cmsis__os_8h_a7f2b42f1983b9107775ec2a1c69a849aa1485dec3702434a1ec3cb74c7a17a4af}} 
+os\+Priority\+Realtime&priority\+: realtime (highest) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osPriorityError@{osPriorityError}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osPriorityError@{osPriorityError}}}\mbox{\label{cmsis__os_8h_a7f2b42f1983b9107775ec2a1c69a849aae35f5e2f9c64ad346822521b643bdea4}} 
+os\+Priority\+Error&system cannot determine priority or thread has illegal priority \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99e}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osStatus@{osStatus}}
+\index{osStatus@{osStatus}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osStatus}
+{\footnotesize\ttfamily enum \textbf{ os\+Status}}
+
+Status code values returned by CMSIS-\/\+RTOS functions. \begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Status}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osOK@{osOK}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osOK@{osOK}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ea9e1c9e2550bb4de8969a935acffc968f}} 
+os\+OK&function completed; no error or event occurred. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osEventSignal@{osEventSignal}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osEventSignal@{osEventSignal}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ea5df7e9643aa8a2f5f3a6f6ec59758518}} 
+os\+Event\+Signal&function completed; signal event occurred. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osEventMessage@{osEventMessage}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osEventMessage@{osEventMessage}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ead604f3673359dd4ac643b16dc5a2c342}} 
+os\+Event\+Message&function completed; message event occurred. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osEventMail@{osEventMail}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osEventMail@{osEventMail}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ea15b12e42b42b53f35fb8a2724ad02926}} 
+os\+Event\+Mail&function completed; mail event occurred. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osEventTimeout@{osEventTimeout}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osEventTimeout@{osEventTimeout}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ea78f477732375c0e1fca814e369618177}} 
+os\+Event\+Timeout&function completed; timeout occurred. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osErrorParameter@{osErrorParameter}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osErrorParameter@{osErrorParameter}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99eac24adca6a5d072c9f01c32178ba0d109}} 
+os\+Error\+Parameter&parameter error\+: a mandatory parameter was missing or specified an incorrect object. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osErrorResource@{osErrorResource}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osErrorResource@{osErrorResource}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ea8fc5801e8b0482bdf22ad63a77f0155d}} 
+os\+Error\+Resource&resource not available\+: a specified resource was not available. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osErrorTimeoutResource@{osErrorTimeoutResource}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osErrorTimeoutResource@{osErrorTimeoutResource}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ea314d24a49003f09459035db0dd7c9467}} 
+os\+Error\+Timeout\+Resource&resource not available within given time\+: a specified resource was not available within the timeout period. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osErrorISR@{osErrorISR}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osErrorISR@{osErrorISR}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ea21635bdc492d3094fe83027fa4a30e2f}} 
+os\+Error\+ISR&not allowed in ISR context\+: the function cannot be called from interrupt service routines. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osErrorISRRecursive@{osErrorISRRecursive}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osErrorISRRecursive@{osErrorISRRecursive}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99eaf6552310a817452aedfcd453f2805d65}} 
+os\+Error\+ISRRecursive&function called multiple times from ISR with same object. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osErrorPriority@{osErrorPriority}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osErrorPriority@{osErrorPriority}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99eab7dda0ef504817659334cbfd650ae56f}} 
+os\+Error\+Priority&system cannot determine priority or thread has illegal priority. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osErrorNoMemory@{osErrorNoMemory}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osErrorNoMemory@{osErrorNoMemory}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99eaf1fac0240218e51eb30a13da2f8aae81}} 
+os\+Error\+No\+Memory&system is out of memory\+: it was impossible to allocate or reserve memory for the operation. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osErrorValue@{osErrorValue}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osErrorValue@{osErrorValue}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ea4672c8a0c0f6bb1d7981da4602e8e9ee}} 
+os\+Error\+Value&value of a parameter is out of range. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{osErrorOS@{osErrorOS}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!osErrorOS@{osErrorOS}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99ea5fde24ff588ec5ab9cb8314bade26fbc}} 
+os\+Error\+OS&unspecified RTOS error\+: run-\/time error but no other error message fits. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{os\_status\_reserved@{os\_status\_reserved}!cmsis\_os.h@{cmsis\_os.h}}\index{cmsis\_os.h@{cmsis\_os.h}!os\_status\_reserved@{os\_status\_reserved}}}\mbox{\label{cmsis__os_8h_ae2e091fefc4c767117727bd5aba4d99eac7a77f5fe18a15a357790c36a4aca1b1}} 
+os\+\_\+status\+\_\+reserved&prevent from enum down-\/size compiler optimization. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{cmsis__os_8h_a0c9e0cca7aca466bb8887fb56e4b4cc8}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osAbortDelay@{osAbortDelay}}
+\index{osAbortDelay@{osAbortDelay}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osAbortDelay()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Abort\+Delay (\begin{DoxyParamCaption}\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Abort the delay for a specific thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7} ~\newline
+ \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a02e19d5e723bfb06ba9324d625162255}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osDelay@{osDelay}}
+\index{osDelay@{osDelay}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osDelay()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Delay (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Wait for Timeout (Time Delay) 
+
+Wait for Timeout (Time Delay). 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em millisec} & time delay value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em millisec} & time delay value \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_afc406147a5d66dda6ff62d338a7c99cd}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osDelayUntil@{osDelayUntil}}
+\index{osDelayUntil@{osDelayUntil}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osDelayUntil()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Delay\+Until (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{Previous\+Wake\+Time,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Delay a task until a specified time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Previous\+Wake\+Time} & Pointer to a variable that holds the time at which the task was last unblocked. Previous\+Wake\+Time must be initialised with the current time prior to its first use (Previous\+Wake\+Time = \doxyref{os\+Kernel\+Sys\+Tick()}{p.}{cmsis__os_8h_ad0262e4688e95d1e9038afd9bcc16001} ) \\
+\hline
+{\em millisec} & time delay value \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a53d078a801022e202e8115c083ece68e}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osKernelInitialize@{osKernelInitialize}}
+\index{osKernelInitialize@{osKernelInitialize}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osKernelInitialize()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Kernel\+Initialize (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Initialize the RTOS Kernel for creating objects. \begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Kernel\+Initialize}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a3b571de44cd3094c643247a7397f86b5}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osKernelRunning@{osKernelRunning}}
+\index{osKernelRunning@{osKernelRunning}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osKernelRunning()}
+{\footnotesize\ttfamily int32\+\_\+t os\+Kernel\+Running (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Check if the RTOS kernel is already started. 
+
+Check if the RTOS kernel is already started. \begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Kernel\+Running}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+0 RTOS is not started, 1 RTOS is started.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em (0)} & RTOS is not started (1) RTOS is started (-\/1) if this feature is disabled in \doxyref{Free\+RTOSConfig.\+h}{p.}{_free_r_t_o_s_config_8h} \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Kernel\+Running}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_aab668ffd2ea76bb0a77ab0ab385eaef2}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osKernelStart@{osKernelStart}}
+\index{osKernelStart@{osKernelStart}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osKernelStart()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Kernel\+Start (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Start the RTOS Kernel with executing the specified thread. 
+
+Start the RTOS Kernel. \begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Kernel\+Start}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+\_\+def} & thread definition referenced with \doxyref{os\+Thread}{p.}{cmsis__os_8h_af0c7c6b5e09f8be198312144b5c9e453}. \\
+\hline
+{\em argument} & pointer that is passed to the thread function as start argument. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Kernel\+Start}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ad0262e4688e95d1e9038afd9bcc16001}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osKernelSysTick@{osKernelSysTick}}
+\index{osKernelSysTick@{osKernelSysTick}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osKernelSysTick()}
+{\footnotesize\ttfamily uint32\+\_\+t os\+Kernel\+Sys\+Tick (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Get the value of the Kernel Sys\+Tick timer. 
+
+Get the RTOS kernel system timer counter \begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Kernel\+Sys\+Tick}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+RTOS kernel system timer as 32-\/bit value ~\newline
+
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Kernel\+Sys\+Tick}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_adf5ce811bd6a56e617e902a1db6c2194}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailAlloc@{osMailAlloc}}
+\index{osMailAlloc@{osMailAlloc}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailAlloc()}
+{\footnotesize\ttfamily void $\ast$ os\+Mail\+Alloc (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mail\+QId}}]{queue\+\_\+id,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Allocate a memory block from a mail. 
+
+Allocate a memory block from a mail. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em millisec} & timeout value or 0 in case of no time-\/out \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to memory block that can be filled with mail or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Alloc}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em pointer} & to memory block that can be filled with mail or NULL in case error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Alloc}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a8fde74f6fe5b9e88f75cc5eb8f2124fd}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailCAlloc@{osMailCAlloc}}
+\index{osMailCAlloc@{osMailCAlloc}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailCAlloc()}
+{\footnotesize\ttfamily void $\ast$ os\+Mail\+CAlloc (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mail\+QId}}]{queue\+\_\+id,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Allocate a memory block from a mail and set memory block to zero. 
+
+Allocate a memory block from a mail and set memory block to zero. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em millisec} & timeout value or 0 in case of no time-\/out \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to memory block that can be filled with mail or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+CAlloc}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em pointer} & to memory block that can be filled with mail or NULL in case error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+CAlloc}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailCreate@{osMailCreate}}
+\index{osMailCreate@{osMailCreate}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailCreate()}
+{\footnotesize\ttfamily \textbf{ os\+Mail\+QId} os\+Mail\+Create (\begin{DoxyParamCaption}\item[{const \textbf{ os\+Mail\+QDef\+\_\+t} $\ast$}]{queue\+\_\+def,  }\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Create and Initialize mail queue. 
+
+Create and Initialize mail queue. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em queue\+\_\+def} & reference to the mail queue definition obtain with \doxyref{os\+MailQ}{p.}{cmsis__os_8h_ad2deeb66d51ade54e63d8f87ff2ec9d2} \\
+\hline
+\mbox{\texttt{ in}}  & {\em thread\+\_\+id} & thread ID (obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}) or NULL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mail queue ID for reference by other functions or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Create}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+def} & reference to the mail queue definition obtain with \doxyref{os\+MailQ}{p.}{cmsis__os_8h_ad2deeb66d51ade54e63d8f87ff2ec9d2} \\
+\hline
+{\em thread\+\_\+id} & thread ID (obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}) or NULL. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em mail} & queue ID for reference by other functions or NULL in case of error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Create}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a27c1060cf21393f96b4fd1ed1c0167cc}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailFree@{osMailFree}}
+\index{osMailFree@{osMailFree}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailFree()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Mail\+Free (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mail\+QId}}]{queue\+\_\+id,  }\item[{void $\ast$}]{mail }\end{DoxyParamCaption})}
+
+
+
+Free a memory block from a mail. 
+
+Free a memory block from a mail. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em mail} & pointer to the memory block that was obtained with \doxyref{os\+Mail\+Get}{p.}{cmsis__os_8h_ac6ad7e6e7d6c4a80e60da22c57a42ccd}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Free}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+{\em mail} & pointer to the memory block that was obtained with \doxyref{os\+Mail\+Get}{p.}{cmsis__os_8h_ac6ad7e6e7d6c4a80e60da22c57a42ccd}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Free}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ac6ad7e6e7d6c4a80e60da22c57a42ccd}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailGet@{osMailGet}}
+\index{osMailGet@{osMailGet}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailGet()}
+{\footnotesize\ttfamily \textbf{ os\+Event} os\+Mail\+Get (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mail\+QId}}]{queue\+\_\+id,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Get a mail from a queue. 
+
+Get a mail from a queue. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em millisec} & timeout value or 0 in case of no time-\/out \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+event that contains mail information or error code. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Get}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em event} & that contains mail information or error code. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Get}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a485ef6f81854ebda8ffbce4832181e02}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMailPut@{osMailPut}}
+\index{osMailPut@{osMailPut}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMailPut()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Mail\+Put (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mail\+QId}}]{queue\+\_\+id,  }\item[{void $\ast$}]{mail }\end{DoxyParamCaption})}
+
+
+
+Put a mail to a queue. 
+
+Put a mail to a queue. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em mail} & memory block previously allocated with \doxyref{os\+Mail\+Alloc}{p.}{cmsis__os_8h_adf5ce811bd6a56e617e902a1db6c2194} or \doxyref{os\+Mail\+CAlloc}{p.}{cmsis__os_8h_a8fde74f6fe5b9e88f75cc5eb8f2124fd}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Put}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & mail queue ID obtained with \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174}. \\
+\hline
+{\em mail} & memory block previously allocated with \doxyref{os\+Mail\+Alloc}{p.}{cmsis__os_8h_adf5ce811bd6a56e617e902a1db6c2194} or \doxyref{os\+Mail\+CAlloc}{p.}{cmsis__os_8h_a8fde74f6fe5b9e88f75cc5eb8f2124fd}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mail\+Put}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a4f80ea3dd0140a782dc3e79fc7d1cba6}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessageAvailableSpace@{osMessageAvailableSpace}}
+\index{osMessageAvailableSpace@{osMessageAvailableSpace}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessageAvailableSpace()}
+{\footnotesize\ttfamily uint32\+\_\+t os\+Message\+Available\+Space (\begin{DoxyParamCaption}\item[{\textbf{ os\+Message\+QId}}]{queue\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Get the available space in a message queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & message queue ID obtained with \doxyref{os\+Message\+Create}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em available} & space in a message queue. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessageCreate@{osMessageCreate}}
+\index{osMessageCreate@{osMessageCreate}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessageCreate()}
+{\footnotesize\ttfamily \textbf{ os\+Message\+QId} os\+Message\+Create (\begin{DoxyParamCaption}\item[{const \textbf{ os\+Message\+QDef\+\_\+t} $\ast$}]{queue\+\_\+def,  }\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Create and Initialize a Message Queue. 
+
+Create and Initialize a Message Queue. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em queue\+\_\+def} & queue definition referenced with \doxyref{os\+MessageQ}{p.}{cmsis__os_8h_a2d446a0b4bb90bf05d6f92eedeaabc97}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em thread\+\_\+id} & thread ID (obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}) or NULL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+message queue ID for reference by other functions or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Message\+Create}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+def} & queue definition referenced with \doxyref{os\+MessageQ}{p.}{cmsis__os_8h_a2d446a0b4bb90bf05d6f92eedeaabc97}. \\
+\hline
+{\em thread\+\_\+id} & thread ID (obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}) or NULL. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em message} & queue ID for reference by other functions or NULL in case of error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Message\+Create}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_aa6eff4b4ee9e73ab881840eaf329c469}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessageDelete@{osMessageDelete}}
+\index{osMessageDelete@{osMessageDelete}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessageDelete()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Message\+Delete (\begin{DoxyParamCaption}\item[{\textbf{ os\+Message\+QId}}]{queue\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Delete a Message Queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & message queue ID obtained with \doxyref{os\+Message\+Create}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a6c6892b8f2296cca6becd57ca2d7e1ae}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessageGet@{osMessageGet}}
+\index{osMessageGet@{osMessageGet}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessageGet()}
+{\footnotesize\ttfamily \textbf{ os\+Event} os\+Message\+Get (\begin{DoxyParamCaption}\item[{\textbf{ os\+Message\+QId}}]{queue\+\_\+id,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Get a Message or Wait for a Message from a Queue. 
+
+Get a Message or Wait for a Message from a Queue. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em queue\+\_\+id} & message queue ID obtained with \doxyref{os\+Message\+Create}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+event information that includes status code. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Message\+Get}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & message queue ID obtained with \doxyref{os\+Message\+Create}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78}. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em event} & information that includes status code. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Message\+Get}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_aee1081c573fe04809315378a37c0ce23}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessagePeek@{osMessagePeek}}
+\index{osMessagePeek@{osMessagePeek}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessagePeek()}
+{\footnotesize\ttfamily \textbf{ os\+Event} os\+Message\+Peek (\begin{DoxyParamCaption}\item[{\textbf{ os\+Message\+QId}}]{queue\+\_\+id,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Receive an item from a queue without removing the item from the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & message queue ID obtained with \doxyref{os\+Message\+Create}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78}. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em event} & information that includes status code. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_ac0dcf462fc92de8ffaba6cc004514a6d}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessagePut@{osMessagePut}}
+\index{osMessagePut@{osMessagePut}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessagePut()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Message\+Put (\begin{DoxyParamCaption}\item[{\textbf{ os\+Message\+QId}}]{queue\+\_\+id,  }\item[{uint32\+\_\+t}]{info,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Put a Message to a Queue. 
+
+Put a Message to a Queue. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em queue\+\_\+id} & message queue ID obtained with \doxyref{os\+Message\+Create}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em info} & message information. \\
+\hline
+\mbox{\texttt{ in}}  & {\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Message\+Put}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & message queue ID obtained with \doxyref{os\+Message\+Create}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78}. \\
+\hline
+{\em info} & message information. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Message\+Put}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a272501325655aa8bbf36ecd36e38bc56}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMessageWaiting@{osMessageWaiting}}
+\index{osMessageWaiting@{osMessageWaiting}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMessageWaiting()}
+{\footnotesize\ttfamily uint32\+\_\+t os\+Message\+Waiting (\begin{DoxyParamCaption}\item[{\textbf{ os\+Message\+QId}}]{queue\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Get the number of messaged stored in a queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em queue\+\_\+id} & message queue ID obtained with \doxyref{os\+Message\+Create}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em number} & of messages stored in a queue. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a5c9de56e717016e39e788064e9a291cc}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMutexCreate@{osMutexCreate}}
+\index{osMutexCreate@{osMutexCreate}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMutexCreate()}
+{\footnotesize\ttfamily \textbf{ os\+Mutex\+Id} os\+Mutex\+Create (\begin{DoxyParamCaption}\item[{const \textbf{ os\+Mutex\+Def\+\_\+t} $\ast$}]{mutex\+\_\+def }\end{DoxyParamCaption})}
+
+
+
+Create and Initialize a Mutex object. 
+
+Create and Initialize a Mutex object. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em mutex\+\_\+def} & mutex definition referenced with \doxyref{os\+Mutex}{p.}{cmsis__os_8h_a1122a86faa64b4a0880c76cf68d0c934}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mutex ID for reference by other functions or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mutex\+Create}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+def} & mutex definition referenced with \doxyref{os\+Mutex}{p.}{cmsis__os_8h_a1122a86faa64b4a0880c76cf68d0c934}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em mutex} & ID for reference by other functions or NULL in case of error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mutex\+Create}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ac27e24135185d51d18f3dabc20910219}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMutexDelete@{osMutexDelete}}
+\index{osMutexDelete@{osMutexDelete}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMutexDelete()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Mutex\+Delete (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mutex\+Id}}]{mutex\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Delete a Mutex. 
+
+Delete a Mutex that was created by \doxyref{os\+Mutex\+Create}{p.}{cmsis__os_8h_a5c9de56e717016e39e788064e9a291cc}. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em mutex\+\_\+id} & mutex ID obtained by \doxyref{os\+Mutex\+Create}{p.}{cmsis__os_8h_a5c9de56e717016e39e788064e9a291cc}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mutex\+Delete}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+id} & mutex ID obtained by \doxyref{os\+Mutex\+Create}{p.}{cmsis__os_8h_a5c9de56e717016e39e788064e9a291cc}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mutex\+Delete}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a006e4744d741e8e132c3d5bbc295afe1}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMutexRelease@{osMutexRelease}}
+\index{osMutexRelease@{osMutexRelease}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMutexRelease()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Mutex\+Release (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mutex\+Id}}]{mutex\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Release a Mutex that was obtained by \doxyref{os\+Mutex\+Wait}{p.}{cmsis__os_8h_a5e1752b73f573ee015dbd9ef1edaba13}. 
+
+Release a Mutex that was obtained by \doxyref{os\+Mutex\+Wait}{p.}{cmsis__os_8h_a5e1752b73f573ee015dbd9ef1edaba13}. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em mutex\+\_\+id} & mutex ID obtained by \doxyref{os\+Mutex\+Create}{p.}{cmsis__os_8h_a5c9de56e717016e39e788064e9a291cc}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mutex\+Release}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+id} & mutex ID obtained by \doxyref{os\+Mutex\+Create}{p.}{cmsis__os_8h_a5c9de56e717016e39e788064e9a291cc}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mutex\+Release}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a5e1752b73f573ee015dbd9ef1edaba13}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osMutexWait@{osMutexWait}}
+\index{osMutexWait@{osMutexWait}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osMutexWait()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Mutex\+Wait (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mutex\+Id}}]{mutex\+\_\+id,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Wait until a Mutex becomes available. 
+
+Wait until a Mutex becomes available. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em mutex\+\_\+id} & mutex ID obtained by \doxyref{os\+Mutex\+Create}{p.}{cmsis__os_8h_a5c9de56e717016e39e788064e9a291cc}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mutex\+Wait}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+id} & mutex ID obtained by \doxyref{os\+Mutex\+Create}{p.}{cmsis__os_8h_a5c9de56e717016e39e788064e9a291cc}. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Mutex\+Wait}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_aa0b2994f1a866c19e0d11e6e0d44f543}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osPoolAlloc@{osPoolAlloc}}
+\index{osPoolAlloc@{osPoolAlloc}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osPoolAlloc()}
+{\footnotesize\ttfamily void $\ast$ os\+Pool\+Alloc (\begin{DoxyParamCaption}\item[{\textbf{ os\+Pool\+Id}}]{pool\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Allocate a memory block from a memory pool. 
+
+Allocate a memory block from a memory pool. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em pool\+\_\+id} & memory pool ID obtain referenced with \doxyref{os\+Pool\+Create}{p.}{cmsis__os_8h_a34af5c4f4ab38f4138ea7f1f9ece3a1a}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+address of the allocated memory block or NULL in case of no memory available. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Pool\+Alloc}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em pool\+\_\+id} & memory pool ID obtain referenced with \doxyref{os\+Pool\+Create}{p.}{cmsis__os_8h_a34af5c4f4ab38f4138ea7f1f9ece3a1a}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em address} & of the allocated memory block or NULL in case of no memory available. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Pool\+Alloc}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a9f129fcad4730fbd1048ad4fa262f36a}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osPoolCAlloc@{osPoolCAlloc}}
+\index{osPoolCAlloc@{osPoolCAlloc}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osPoolCAlloc()}
+{\footnotesize\ttfamily void $\ast$ os\+Pool\+CAlloc (\begin{DoxyParamCaption}\item[{\textbf{ os\+Pool\+Id}}]{pool\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Allocate a memory block from a memory pool and set memory block to zero. 
+
+Allocate a memory block from a memory pool and set memory block to zero. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em pool\+\_\+id} & memory pool ID obtain referenced with \doxyref{os\+Pool\+Create}{p.}{cmsis__os_8h_a34af5c4f4ab38f4138ea7f1f9ece3a1a}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+address of the allocated memory block or NULL in case of no memory available. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Pool\+CAlloc}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em pool\+\_\+id} & memory pool ID obtain referenced with \doxyref{os\+Pool\+Create}{p.}{cmsis__os_8h_a34af5c4f4ab38f4138ea7f1f9ece3a1a}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em address} & of the allocated memory block or NULL in case of no memory available. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Pool\+CAlloc}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a34af5c4f4ab38f4138ea7f1f9ece3a1a}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osPoolCreate@{osPoolCreate}}
+\index{osPoolCreate@{osPoolCreate}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osPoolCreate()}
+{\footnotesize\ttfamily \textbf{ os\+Pool\+Id} os\+Pool\+Create (\begin{DoxyParamCaption}\item[{const \textbf{ os\+Pool\+Def\+\_\+t} $\ast$}]{pool\+\_\+def }\end{DoxyParamCaption})}
+
+
+
+Create and Initialize a memory pool. 
+
+Create and Initialize a memory pool. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em pool\+\_\+def} & memory pool definition referenced with \doxyref{os\+Pool}{p.}{cmsis__os_8h_a5f0b204a82327533d420210125c90697}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+memory pool ID for reference by other functions or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Pool\+Create}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em pool\+\_\+def} & memory pool definition referenced with \doxyref{os\+Pool}{p.}{cmsis__os_8h_a5f0b204a82327533d420210125c90697}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em memory} & pool ID for reference by other functions or NULL in case of error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Pool\+Create}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a4a861e9c469c9d0daf5721bf174f8e54}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osPoolFree@{osPoolFree}}
+\index{osPoolFree@{osPoolFree}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osPoolFree()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Pool\+Free (\begin{DoxyParamCaption}\item[{\textbf{ os\+Pool\+Id}}]{pool\+\_\+id,  }\item[{void $\ast$}]{block }\end{DoxyParamCaption})}
+
+
+
+Return an allocated memory block back to a specific memory pool. 
+
+Return an allocated memory block back to a specific memory pool. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em pool\+\_\+id} & memory pool ID obtain referenced with \doxyref{os\+Pool\+Create}{p.}{cmsis__os_8h_a34af5c4f4ab38f4138ea7f1f9ece3a1a}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em block} & address of the allocated memory block that is returned to the memory pool. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Pool\+Free}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em pool\+\_\+id} & memory pool ID obtain referenced with \doxyref{os\+Pool\+Create}{p.}{cmsis__os_8h_a34af5c4f4ab38f4138ea7f1f9ece3a1a}. \\
+\hline
+{\em block} & address of the allocated memory block that is returned to the memory pool. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Pool\+Free}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a09a8e658872a88d284f8143bcb62cff6}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osRecursiveMutexCreate@{osRecursiveMutexCreate}}
+\index{osRecursiveMutexCreate@{osRecursiveMutexCreate}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osRecursiveMutexCreate()}
+{\footnotesize\ttfamily \textbf{ os\+Mutex\+Id} os\+Recursive\+Mutex\+Create (\begin{DoxyParamCaption}\item[{const \textbf{ os\+Mutex\+Def\+\_\+t} $\ast$}]{mutex\+\_\+def }\end{DoxyParamCaption})}
+
+
+
+Create and Initialize a Recursive Mutex. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+def} & mutex definition referenced with \doxyref{os\+Mutex}{p.}{cmsis__os_8h_a1122a86faa64b4a0880c76cf68d0c934}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em mutex} & ID for reference by other functions or NULL in case of error.. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a14c641c81a487a21851555cab5c04531}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osRecursiveMutexRelease@{osRecursiveMutexRelease}}
+\index{osRecursiveMutexRelease@{osRecursiveMutexRelease}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osRecursiveMutexRelease()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Recursive\+Mutex\+Release (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mutex\+Id}}]{mutex\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Release a Recursive Mutex. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+id} & mutex ID obtained by \doxyref{os\+Recursive\+Mutex\+Create}{p.}{cmsis__os_8h_a09a8e658872a88d284f8143bcb62cff6}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a479c5c0d01b4f43854761026d2054b30}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osRecursiveMutexWait@{osRecursiveMutexWait}}
+\index{osRecursiveMutexWait@{osRecursiveMutexWait}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osRecursiveMutexWait()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Recursive\+Mutex\+Wait (\begin{DoxyParamCaption}\item[{\textbf{ os\+Mutex\+Id}}]{mutex\+\_\+id,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Release a Recursive Mutex. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mutex\+\_\+id} & mutex ID obtained by \doxyref{os\+Recursive\+Mutex\+Create}{p.}{cmsis__os_8h_a09a8e658872a88d284f8143bcb62cff6}. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a97381e8e55cd47cec390bf57c96d6edb}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSemaphoreCreate@{osSemaphoreCreate}}
+\index{osSemaphoreCreate@{osSemaphoreCreate}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSemaphoreCreate()}
+{\footnotesize\ttfamily \textbf{ os\+Semaphore\+Id} os\+Semaphore\+Create (\begin{DoxyParamCaption}\item[{const \textbf{ os\+Semaphore\+Def\+\_\+t} $\ast$}]{semaphore\+\_\+def,  }\item[{int32\+\_\+t}]{count }\end{DoxyParamCaption})}
+
+
+
+Create and Initialize a Semaphore object used for managing resources. 
+
+Create and Initialize a Semaphore object used for managing resources. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em semaphore\+\_\+def} & semaphore definition referenced with \doxyref{os\+Semaphore}{p.}{cmsis__os_8h_a03761ee8d2c3cd4544e18364ab301dac}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em count} & number of available resources. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+semaphore ID for reference by other functions or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Semaphore\+Create}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em semaphore\+\_\+def} & semaphore definition referenced with \doxyref{os\+Semaphore}{p.}{cmsis__os_8h_a03761ee8d2c3cd4544e18364ab301dac}. \\
+\hline
+{\em count} & number of available resources. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em semaphore} & ID for reference by other functions or NULL in case of error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Semaphore\+Create}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_abae2801ac2c096f6e8c69a264908f595}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSemaphoreDelete@{osSemaphoreDelete}}
+\index{osSemaphoreDelete@{osSemaphoreDelete}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSemaphoreDelete()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Semaphore\+Delete (\begin{DoxyParamCaption}\item[{\textbf{ os\+Semaphore\+Id}}]{semaphore\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Delete a Semaphore. 
+
+Delete a Semaphore that was created by \doxyref{os\+Semaphore\+Create}{p.}{cmsis__os_8h_a97381e8e55cd47cec390bf57c96d6edb}. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em semaphore\+\_\+id} & semaphore object referenced with \doxyref{os\+Semaphore\+Create}{p.}{cmsis__os_8h_a97381e8e55cd47cec390bf57c96d6edb}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Semaphore\+Delete}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em semaphore\+\_\+id} & semaphore object referenced with \doxyref{os\+Semaphore}{p.}{cmsis__os_8h_a03761ee8d2c3cd4544e18364ab301dac}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Semaphore\+Delete}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a5aaec061a877326be39a4998f7690567}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSemaphoreGetCount@{osSemaphoreGetCount}}
+\index{osSemaphoreGetCount@{osSemaphoreGetCount}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSemaphoreGetCount()}
+{\footnotesize\ttfamily uint32\+\_\+t os\+Semaphore\+Get\+Count (\begin{DoxyParamCaption}\item[{\textbf{ os\+Semaphore\+Id}}]{semaphore\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Returns the current count value of a counting semaphore. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em semaphore\+\_\+id} & semaphore\+\_\+id ID obtained by \doxyref{os\+Semaphore\+Create}{p.}{cmsis__os_8h_a97381e8e55cd47cec390bf57c96d6edb}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em count} & value \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_ab108914997c49e14d8ff1ae0d1988ca0}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSemaphoreRelease@{osSemaphoreRelease}}
+\index{osSemaphoreRelease@{osSemaphoreRelease}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSemaphoreRelease()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Semaphore\+Release (\begin{DoxyParamCaption}\item[{\textbf{ os\+Semaphore\+Id}}]{semaphore\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Release a Semaphore token. 
+
+Release a Semaphore token. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em semaphore\+\_\+id} & semaphore object referenced with \doxyref{os\+Semaphore\+Create}{p.}{cmsis__os_8h_a97381e8e55cd47cec390bf57c96d6edb}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Semaphore\+Release}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em semaphore\+\_\+id} & semaphore object referenced with \doxyref{os\+Semaphore}{p.}{cmsis__os_8h_a03761ee8d2c3cd4544e18364ab301dac}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Semaphore\+Release}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_acc15b0fc8ce1167fe43da33042e62098}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSemaphoreWait@{osSemaphoreWait}}
+\index{osSemaphoreWait@{osSemaphoreWait}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSemaphoreWait()}
+{\footnotesize\ttfamily int32\+\_\+t os\+Semaphore\+Wait (\begin{DoxyParamCaption}\item[{\textbf{ os\+Semaphore\+Id}}]{semaphore\+\_\+id,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Wait until a Semaphore token becomes available. 
+
+Wait until a Semaphore token becomes available. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em semaphore\+\_\+id} & semaphore object referenced with \doxyref{os\+Semaphore\+Create}{p.}{cmsis__os_8h_a97381e8e55cd47cec390bf57c96d6edb}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of available tokens, or -\/1 in case of incorrect parameters. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Semaphore\+Wait}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em semaphore\+\_\+id} & semaphore object referenced with \doxyref{os\+Semaphore}{p.}{cmsis__os_8h_a03761ee8d2c3cd4544e18364ab301dac}. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em number} & of available tokens, or -\/1 in case of incorrect parameters. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Semaphore\+Wait}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a87283a6ebc31ce9ed42baf3ea7e4eab6}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSignalClear@{osSignalClear}}
+\index{osSignalClear@{osSignalClear}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSignalClear()}
+{\footnotesize\ttfamily int32\+\_\+t os\+Signal\+Clear (\begin{DoxyParamCaption}\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id,  }\item[{int32\+\_\+t}]{signals }\end{DoxyParamCaption})}
+
+Clear the specified Signal Flags of an active thread. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em signals} & specifies the signal flags of the thread that shall be cleared. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+previous signal flags of the specified thread or 0x80000000 in case of incorrect parameters. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Signal\+Clear}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a3de2730654589d6c3559c4b9e2825553}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSignalSet@{osSignalSet}}
+\index{osSignalSet@{osSignalSet}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSignalSet()}
+{\footnotesize\ttfamily int32\+\_\+t os\+Signal\+Set (\begin{DoxyParamCaption}\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id,  }\item[{int32\+\_\+t}]{signal }\end{DoxyParamCaption})}
+
+
+
+Set the specified Signal Flags of an active thread. 
+
+Set the specified Signal Flags of an active thread. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em signals} & specifies the signal flags of the thread that should be set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+os\+OK if successful, os\+Error\+OS if failed. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Signal\+Set}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+{\em signals} & specifies the signal flags of the thread that should be set. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em previous} & signal flags of the specified thread or 0x80000000 in case of incorrect parameters. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Signal\+Set}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a38860acda96df47da6923348d96fc4c9}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSignalWait@{osSignalWait}}
+\index{osSignalWait@{osSignalWait}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSignalWait()}
+{\footnotesize\ttfamily \textbf{ os\+Event} os\+Signal\+Wait (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{signals,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Wait for one or more Signal Flags to become signaled for the current {\bfseries{RUNNING}} thread. 
+
+Wait for one or more Signal Flags to become signaled for the current {\bfseries{RUNNING}} thread. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em signals} & wait until all specified signal flags set or 0 for any single signal flag. \\
+\hline
+\mbox{\texttt{ in}}  & {\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+event flag information or error code. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Signal\+Wait}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em signals} & wait until all specified signal flags set or 0 for any single signal flag. \\
+\hline
+{\em millisec} & timeout value or 0 in case of no time-\/out. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em event} & flag information or error code. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Signal\+Wait}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ab169d629ebefc57e030b324d4cce9eea}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osSystickHandler@{osSystickHandler}}
+\index{osSystickHandler@{osSystickHandler}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osSystickHandler()}
+{\footnotesize\ttfamily void os\+Systick\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Handles the tick increment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none.} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em none.} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadCreate@{osThreadCreate}}
+\index{osThreadCreate@{osThreadCreate}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadCreate()}
+{\footnotesize\ttfamily \textbf{ os\+Thread\+Id} os\+Thread\+Create (\begin{DoxyParamCaption}\item[{const \textbf{ os\+Thread\+Def\+\_\+t} $\ast$}]{thread\+\_\+def,  }\item[{void $\ast$}]{argument }\end{DoxyParamCaption})}
+
+
+
+Create a thread and add it to Active Threads and set it to state READY. 
+
+Create a thread and add it to Active Threads and set it to state READY. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em thread\+\_\+def} & thread definition referenced with \doxyref{os\+Thread}{p.}{cmsis__os_8h_af0c7c6b5e09f8be198312144b5c9e453}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em argument} & pointer that is passed to the thread function as start argument. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+thread ID for reference by other functions or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Create}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+\_\+def} & thread definition referenced with \doxyref{os\+Thread}{p.}{cmsis__os_8h_af0c7c6b5e09f8be198312144b5c9e453}. \\
+\hline
+{\em argument} & pointer that is passed to the thread function as start argument. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em thread} & ID for reference by other functions or NULL in case of error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Create}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadGetId@{osThreadGetId}}
+\index{osThreadGetId@{osThreadGetId}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadGetId()}
+{\footnotesize\ttfamily \textbf{ os\+Thread\+Id} os\+Thread\+Get\+Id (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Return the thread ID of the current running thread. 
+
+Return the thread ID of the current running thread. \begin{DoxyReturn}{Returns}
+thread ID for reference by other functions or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Get\+Id}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyRetVals}{Return values}
+{\em thread} & ID for reference by other functions or NULL in case of error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Get\+Id}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a4299d838978bc2aae5e4350754e6a4e9}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadGetPriority@{osThreadGetPriority}}
+\index{osThreadGetPriority@{osThreadGetPriority}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadGetPriority()}
+{\footnotesize\ttfamily \textbf{ os\+Priority} os\+Thread\+Get\+Priority (\begin{DoxyParamCaption}\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Get current priority of an active thread. 
+
+Get current priority of an active thread. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+current priority value of the thread function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Get\+Priority}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em current} & priority value of the thread function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Get\+Priority}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a72dea6af29c3caa97b583da895237697}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadList@{osThreadList}}
+\index{osThreadList@{osThreadList}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadList()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Thread\+List (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{buffer }\end{DoxyParamCaption})}
+
+
+
+Lists all the current threads, along with their current state and stack usage high water mark. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & A buffer into which the above mentioned details will be written \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a98905f234a096669566e7b93272b2653}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadResume@{osThreadResume}}
+\index{osThreadResume@{osThreadResume}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadResume()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Thread\+Resume (\begin{DoxyParamCaption}\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Resume execution of a suspended thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a909a8098efc243cec5729ac51fdb3bdc}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadResumeAll@{osThreadResumeAll}}
+\index{osThreadResumeAll@{osThreadResumeAll}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadResumeAll()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Thread\+Resume\+All (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Resume execution of a all suspended threads. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a0dfb90ccf1f6e4b54b9251b12d1cbc8b}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadSetPriority@{osThreadSetPriority}}
+\index{osThreadSetPriority@{osThreadSetPriority}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadSetPriority()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Thread\+Set\+Priority (\begin{DoxyParamCaption}\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id,  }\item[{\textbf{ os\+Priority}}]{priority }\end{DoxyParamCaption})}
+
+
+
+Change priority of an active thread. 
+
+Change priority of an active thread. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em priority} & new priority value for the thread function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Set\+Priority}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+{\em priority} & new priority value for the thread function. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Set\+Priority}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a204bf99a22ca8fe85b1f8028f0268278}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadSuspend@{osThreadSuspend}}
+\index{osThreadSuspend@{osThreadSuspend}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadSuspend()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Thread\+Suspend (\begin{DoxyParamCaption}\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Suspend execution of a thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_a56a2ad8a2fb63a7fdad28d2e9411c3a1}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadSuspendAll@{osThreadSuspendAll}}
+\index{osThreadSuspendAll@{osThreadSuspendAll}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadSuspendAll()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Thread\+Suspend\+All (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Suspend execution of a all active threads. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{cmsis__os_8h_aea135bb90eb853eff39e0800b91bbeab}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadTerminate@{osThreadTerminate}}
+\index{osThreadTerminate@{osThreadTerminate}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadTerminate()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Thread\+Terminate (\begin{DoxyParamCaption}\item[{\textbf{ os\+Thread\+Id}}]{thread\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Terminate execution of a thread and remove it from Active Threads. 
+
+Terminate execution of a thread and remove it from Active Threads. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Terminate}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+\_\+id} & thread ID obtained by \doxyref{os\+Thread\+Create}{p.}{cmsis__os_8h_ac59b5713cb083702dce759c73fd90dff} or \doxyref{os\+Thread\+Get\+Id}{p.}{cmsis__os_8h_ab1df2a28925862ef8f9cf4e1c995c5a7}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Terminate}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_af13a667493c5d629a90c13e113b99233}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osThreadYield@{osThreadYield}}
+\index{osThreadYield@{osThreadYield}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osThreadYield()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Thread\+Yield (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Pass control to next thread that is in state {\bfseries{READY}}. 
+
+Pass control to next thread that is in state {\bfseries{READY}}. \begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Yield}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Thread\+Yield}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_aedd312bfdca04e0b8162b666e09a1ae6}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osTimerCreate@{osTimerCreate}}
+\index{osTimerCreate@{osTimerCreate}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osTimerCreate()}
+{\footnotesize\ttfamily \textbf{ os\+Timer\+Id} os\+Timer\+Create (\begin{DoxyParamCaption}\item[{const \textbf{ os\+Timer\+Def\+\_\+t} $\ast$}]{timer\+\_\+def,  }\item[{\textbf{ os\+\_\+timer\+\_\+type}}]{type,  }\item[{void $\ast$}]{argument }\end{DoxyParamCaption})}
+
+
+
+Create a timer. 
+
+Create a timer. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em timer\+\_\+def} & timer object referenced with \doxyref{os\+Timer}{p.}{cmsis__os_8h_a1b8d670eaf964b2910fa06885e650678}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em type} & os\+Timer\+Once for one-\/shot or os\+Timer\+Periodic for periodic behavior. \\
+\hline
+\mbox{\texttt{ in}}  & {\em argument} & argument to the timer call back function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+timer ID for reference by other functions or NULL in case of error. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Timer\+Create}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em timer\+\_\+def} & timer object referenced with \doxyref{os\+Timer}{p.}{cmsis__os_8h_a1b8d670eaf964b2910fa06885e650678}. \\
+\hline
+{\em type} & os\+Timer\+Once for one-\/shot or os\+Timer\+Periodic for periodic behavior. \\
+\hline
+{\em argument} & argument to the timer call back function. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em timer} & ID for reference by other functions or NULL in case of error. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Timer\+Create}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a746b8043d906849bd65e3900fcb483cf}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osTimerDelete@{osTimerDelete}}
+\index{osTimerDelete@{osTimerDelete}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osTimerDelete()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Timer\+Delete (\begin{DoxyParamCaption}\item[{\textbf{ os\+Timer\+Id}}]{timer\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Delete a timer. 
+
+Delete a timer that was created by \doxyref{os\+Timer\+Create}{p.}{cmsis__os_8h_aedd312bfdca04e0b8162b666e09a1ae6}. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em timer\+\_\+id} & timer ID obtained by \doxyref{os\+Timer\+Create}{p.}{cmsis__os_8h_aedd312bfdca04e0b8162b666e09a1ae6}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Timer\+Delete}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em timer\+\_\+id} & timer ID obtained by \doxyref{os\+Timer\+Create}{p.}{cmsis__os_8h_aedd312bfdca04e0b8162b666e09a1ae6} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Timer\+Delete}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a27a797a401b068e2644d1125f22a07ca}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osTimerStart@{osTimerStart}}
+\index{osTimerStart@{osTimerStart}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osTimerStart()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Timer\+Start (\begin{DoxyParamCaption}\item[{\textbf{ os\+Timer\+Id}}]{timer\+\_\+id,  }\item[{uint32\+\_\+t}]{millisec }\end{DoxyParamCaption})}
+
+
+
+Start or restart a timer. 
+
+Start or restart a timer. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em timer\+\_\+id} & timer ID obtained by \doxyref{os\+Timer\+Create}{p.}{cmsis__os_8h_aedd312bfdca04e0b8162b666e09a1ae6}. \\
+\hline
+\mbox{\texttt{ in}}  & {\em millisec} & time delay value of the timer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Timer\+Start}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em timer\+\_\+id} & timer ID obtained by \doxyref{os\+Timer\+Create}{p.}{cmsis__os_8h_aedd312bfdca04e0b8162b666e09a1ae6}. \\
+\hline
+{\em millisec} & time delay value of the timer. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Timer\+Start}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}
+\mbox{\label{cmsis__os_8h_a58f36b121a812936435cacc6e1e0e091}} 
+\index{cmsis\_os.h@{cmsis\_os.h}!osTimerStop@{osTimerStop}}
+\index{osTimerStop@{osTimerStop}!cmsis\_os.h@{cmsis\_os.h}}
+\doxysubsubsection{osTimerStop()}
+{\footnotesize\ttfamily \textbf{ os\+Status} os\+Timer\+Stop (\begin{DoxyParamCaption}\item[{\textbf{ os\+Timer\+Id}}]{timer\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+Stop a timer. 
+
+Stop the timer. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em timer\+\_\+id} & timer ID obtained by \doxyref{os\+Timer\+Create}{p.}{cmsis__os_8h_aedd312bfdca04e0b8162b666e09a1ae6}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+status code that indicates the execution status of the function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Timer\+Stop}} shall be consistent in every CMSIS-\/\+RTOS.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em timer\+\_\+id} & timer ID obtained by \doxyref{os\+Timer\+Create}{p.}{cmsis__os_8h_aedd312bfdca04e0b8162b666e09a1ae6} \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em status} & code that indicates the execution status of the function. \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+Timer\+Stop}} shall be consistent in every CMSIS-\/\+RTOS. 
+\end{DoxyNote}

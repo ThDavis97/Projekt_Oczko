@@ -1,0 +1,332 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/stream\+\_\+buffer.c File Reference}
+\label{stream__buffer_8c}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/stream\_buffer.c@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/stream\_buffer.c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Free\+RTOS.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}task.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stream\+\_\+buffer.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Stream\+Buffer\+Def\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+\item 
+\#define \textbf{ sb\+RECEIVE\+\_\+\+COMPLETED}(px\+Stream\+Buffer)
+\item 
+\#define \textbf{ sb\+RECEIVE\+\_\+\+COMPLETED\+\_\+\+FROM\+\_\+\+ISR}(px\+Stream\+Buffer,  px\+Higher\+Priority\+Task\+Woken)
+\item 
+\#define \textbf{ sb\+SEND\+\_\+\+COMPLETED}(px\+Stream\+Buffer)
+\item 
+\#define \textbf{ sb\+SEND\+\_\+\+COMPLETE\+\_\+\+FROM\+\_\+\+ISR}(px\+Stream\+Buffer,  px\+Higher\+Priority\+Task\+Woken)
+\item 
+\#define \textbf{ sb\+BYTES\+\_\+\+TO\+\_\+\+STORE\+\_\+\+MESSAGE\+\_\+\+LENGTH}~( sizeof( \textbf{ config\+MESSAGE\+\_\+\+BUFFER\+\_\+\+LENGTH\+\_\+\+TYPE} ) )
+\item 
+\#define \textbf{ sb\+FLAGS\+\_\+\+IS\+\_\+\+MESSAGE\+\_\+\+BUFFER}~( ( uint8\+\_\+t ) 1 ) /$\ast$ Set if the stream buffer was created as a message buffer, in which case it holds discrete messages rather than a stream. $\ast$/
+\item 
+\#define \textbf{ sb\+FLAGS\+\_\+\+IS\+\_\+\+STATICALLY\+\_\+\+ALLOCATED}~( ( uint8\+\_\+t ) 2 ) /$\ast$ Set if the stream buffer was created using statically allocated memory. $\ast$/
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \textbf{ Stream\+Buffer\+Def\+\_\+t} \textbf{ Stream\+Buffer\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static size\+\_\+t \textbf{ prv\+Bytes\+In\+Buffer} (const \textbf{ Stream\+Buffer\+\_\+t} $\ast$const px\+Stream\+Buffer) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+static size\+\_\+t \textbf{ prv\+Write\+Bytes\+To\+Buffer} (\textbf{ Stream\+Buffer\+\_\+t} $\ast$const px\+Stream\+Buffer, const uint8\+\_\+t $\ast$puc\+Data, size\+\_\+t x\+Count) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+static size\+\_\+t \textbf{ prv\+Read\+Message\+From\+Buffer} (\textbf{ Stream\+Buffer\+\_\+t} $\ast$px\+Stream\+Buffer, void $\ast$pv\+Rx\+Data, size\+\_\+t x\+Buffer\+Length\+Bytes, size\+\_\+t x\+Bytes\+Available, size\+\_\+t x\+Bytes\+To\+Store\+Message\+Length) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+static size\+\_\+t \textbf{ prv\+Write\+Message\+To\+Buffer} (\textbf{ Stream\+Buffer\+\_\+t} $\ast$const px\+Stream\+Buffer, const void $\ast$pv\+Tx\+Data, size\+\_\+t x\+Data\+Length\+Bytes, size\+\_\+t x\+Space, size\+\_\+t x\+Required\+Space) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+static size\+\_\+t \textbf{ prv\+Read\+Bytes\+From\+Buffer} (\textbf{ Stream\+Buffer\+\_\+t} $\ast$px\+Stream\+Buffer, uint8\+\_\+t $\ast$puc\+Data, size\+\_\+t x\+Max\+Count, size\+\_\+t x\+Bytes\+Available) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+static void \textbf{ prv\+Initialise\+New\+Stream\+Buffer} (\textbf{ Stream\+Buffer\+\_\+t} $\ast$const px\+Stream\+Buffer, uint8\+\_\+t $\ast$const puc\+Buffer, size\+\_\+t x\+Buffer\+Size\+Bytes, size\+\_\+t x\+Trigger\+Level\+Bytes, uint8\+\_\+t uc\+Flags) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+void \textbf{ v\+Stream\+Buffer\+Delete} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer)
+\item 
+\textbf{ Base\+Type\+\_\+t} \textbf{ x\+Stream\+Buffer\+Reset} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer)
+\item 
+\textbf{ Base\+Type\+\_\+t} \textbf{ x\+Stream\+Buffer\+Set\+Trigger\+Level} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer, size\+\_\+t x\+Trigger\+Level)
+\item 
+size\+\_\+t \textbf{ x\+Stream\+Buffer\+Spaces\+Available} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer)
+\item 
+size\+\_\+t \textbf{ x\+Stream\+Buffer\+Bytes\+Available} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer)
+\item 
+size\+\_\+t \textbf{ x\+Stream\+Buffer\+Send} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer, const void $\ast$pv\+Tx\+Data, size\+\_\+t x\+Data\+Length\+Bytes, \textbf{ Tick\+Type\+\_\+t} x\+Ticks\+To\+Wait)
+\item 
+size\+\_\+t \textbf{ x\+Stream\+Buffer\+Send\+From\+ISR} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer, const void $\ast$pv\+Tx\+Data, size\+\_\+t x\+Data\+Length\+Bytes, \textbf{ Base\+Type\+\_\+t} $\ast$const px\+Higher\+Priority\+Task\+Woken)
+\item 
+size\+\_\+t \textbf{ x\+Stream\+Buffer\+Receive} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer, void $\ast$pv\+Rx\+Data, size\+\_\+t x\+Buffer\+Length\+Bytes, \textbf{ Tick\+Type\+\_\+t} x\+Ticks\+To\+Wait)
+\item 
+size\+\_\+t \textbf{ x\+Stream\+Buffer\+Next\+Message\+Length\+Bytes} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer)
+\item 
+size\+\_\+t \textbf{ x\+Stream\+Buffer\+Receive\+From\+ISR} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer, void $\ast$pv\+Rx\+Data, size\+\_\+t x\+Buffer\+Length\+Bytes, \textbf{ Base\+Type\+\_\+t} $\ast$const px\+Higher\+Priority\+Task\+Woken)
+\item 
+\textbf{ Base\+Type\+\_\+t} \textbf{ x\+Stream\+Buffer\+Is\+Empty} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer)
+\item 
+\textbf{ Base\+Type\+\_\+t} \textbf{ x\+Stream\+Buffer\+Is\+Full} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer)
+\item 
+\textbf{ Base\+Type\+\_\+t} \textbf{ x\+Stream\+Buffer\+Send\+Completed\+From\+ISR} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer, \textbf{ Base\+Type\+\_\+t} $\ast$px\+Higher\+Priority\+Task\+Woken)
+\item 
+\textbf{ Base\+Type\+\_\+t} \textbf{ x\+Stream\+Buffer\+Receive\+Completed\+From\+ISR} (\textbf{ Stream\+Buffer\+Handle\+\_\+t} x\+Stream\+Buffer, \textbf{ Base\+Type\+\_\+t} $\ast$px\+Higher\+Priority\+Task\+Woken)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{stream__buffer_8c_ab622d8c674f2a417a666a7ed89109e79}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\index{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}
+{\footnotesize\ttfamily \#define MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+
+\mbox{\label{stream__buffer_8c_aaa21967227eb06d02cdd038047b836f6}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!sbBYTES\_TO\_STORE\_MESSAGE\_LENGTH@{sbBYTES\_TO\_STORE\_MESSAGE\_LENGTH}}
+\index{sbBYTES\_TO\_STORE\_MESSAGE\_LENGTH@{sbBYTES\_TO\_STORE\_MESSAGE\_LENGTH}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{sbBYTES\_TO\_STORE\_MESSAGE\_LENGTH}
+{\footnotesize\ttfamily \#define sb\+BYTES\+\_\+\+TO\+\_\+\+STORE\+\_\+\+MESSAGE\+\_\+\+LENGTH~( sizeof( \textbf{ config\+MESSAGE\+\_\+\+BUFFER\+\_\+\+LENGTH\+\_\+\+TYPE} ) )}
+
+\mbox{\label{stream__buffer_8c_a4954c04e3f9f6b0d4a98b9441b35d896}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!sbFLAGS\_IS\_MESSAGE\_BUFFER@{sbFLAGS\_IS\_MESSAGE\_BUFFER}}
+\index{sbFLAGS\_IS\_MESSAGE\_BUFFER@{sbFLAGS\_IS\_MESSAGE\_BUFFER}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{sbFLAGS\_IS\_MESSAGE\_BUFFER}
+{\footnotesize\ttfamily \#define sb\+FLAGS\+\_\+\+IS\+\_\+\+MESSAGE\+\_\+\+BUFFER~( ( uint8\+\_\+t ) 1 ) /$\ast$ Set if the stream buffer was created as a message buffer, in which case it holds discrete messages rather than a stream. $\ast$/}
+
+\mbox{\label{stream__buffer_8c_a80943e49aae8a493f02d78527b3fc01e}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!sbFLAGS\_IS\_STATICALLY\_ALLOCATED@{sbFLAGS\_IS\_STATICALLY\_ALLOCATED}}
+\index{sbFLAGS\_IS\_STATICALLY\_ALLOCATED@{sbFLAGS\_IS\_STATICALLY\_ALLOCATED}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{sbFLAGS\_IS\_STATICALLY\_ALLOCATED}
+{\footnotesize\ttfamily \#define sb\+FLAGS\+\_\+\+IS\+\_\+\+STATICALLY\+\_\+\+ALLOCATED~( ( uint8\+\_\+t ) 2 ) /$\ast$ Set if the stream buffer was created using statically allocated memory. $\ast$/}
+
+\mbox{\label{stream__buffer_8c_a4d6a29d283acfa2d4ef576476eedc789}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!sbRECEIVE\_COMPLETED@{sbRECEIVE\_COMPLETED}}
+\index{sbRECEIVE\_COMPLETED@{sbRECEIVE\_COMPLETED}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{sbRECEIVE\_COMPLETED}
+{\footnotesize\ttfamily \#define sb\+RECEIVE\+\_\+\+COMPLETED(\begin{DoxyParamCaption}\item[{}]{px\+Stream\+Buffer }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        vTaskSuspendAll();                                                               \(\backslash\)}
+\DoxyCodeLine{        \{                                                                               \(\backslash\)}
+\DoxyCodeLine{            if( ( pxStreamBuffer )-\/>xTaskWaitingToSend != NULL )                        \(\backslash\)}
+\DoxyCodeLine{            \{                                                                           \(\backslash\)}
+\DoxyCodeLine{                ( void ) xTaskNotify( ( pxStreamBuffer )-\/>xTaskWaitingToSend,            \(\backslash\)}
+\DoxyCodeLine{                                      ( uint32\_t ) 0,                                   \(\backslash\)}
+\DoxyCodeLine{                                      eNoAction );                                     \(\backslash\)}
+\DoxyCodeLine{                ( pxStreamBuffer )-\/>xTaskWaitingToSend = NULL;                          \(\backslash\)}
+\DoxyCodeLine{            \}                                                                           \(\backslash\)}
+\DoxyCodeLine{        \}                                                                               \(\backslash\)}
+\DoxyCodeLine{        ( void ) xTaskResumeAll();}
+
+\end{DoxyCode}
+\mbox{\label{stream__buffer_8c_ab72c363566113705c021596f90c6eb5a}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!sbRECEIVE\_COMPLETED\_FROM\_ISR@{sbRECEIVE\_COMPLETED\_FROM\_ISR}}
+\index{sbRECEIVE\_COMPLETED\_FROM\_ISR@{sbRECEIVE\_COMPLETED\_FROM\_ISR}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{sbRECEIVE\_COMPLETED\_FROM\_ISR}
+{\footnotesize\ttfamily \#define sb\+RECEIVE\+\_\+\+COMPLETED\+\_\+\+FROM\+\_\+\+ISR(\begin{DoxyParamCaption}\item[{}]{px\+Stream\+Buffer,  }\item[{}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{                                                                                   \(\backslash\)}
+\DoxyCodeLine{    UBaseType\_t uxSavedInterruptStatus;                                                 \(\backslash\)}
+\DoxyCodeLine{                                                                                        \(\backslash\)}
+\DoxyCodeLine{        uxSavedInterruptStatus = ( UBaseType\_t ) portSET\_INTERRUPT\_MASK\_FROM\_ISR();       \(\backslash\)}
+\DoxyCodeLine{        \{                                                                               \(\backslash\)}
+\DoxyCodeLine{            if( ( pxStreamBuffer )-\/>xTaskWaitingToSend != NULL )                        \(\backslash\)}
+\DoxyCodeLine{            \{                                                                           \(\backslash\)}
+\DoxyCodeLine{                ( void ) xTaskNotifyFromISR( ( pxStreamBuffer )-\/>xTaskWaitingToSend,  \(\backslash\)}
+\DoxyCodeLine{                                             ( uint32\_t ) 0,                            \(\backslash\)}
+\DoxyCodeLine{                                             eNoAction,                                    \(\backslash\)}
+\DoxyCodeLine{                                             pxHigherPriorityTaskWoken );               \(\backslash\)}
+\DoxyCodeLine{                ( pxStreamBuffer )-\/>xTaskWaitingToSend = NULL;                          \(\backslash\)}
+\DoxyCodeLine{            \}                                                                           \(\backslash\)}
+\DoxyCodeLine{        \}                                                                               \(\backslash\)}
+\DoxyCodeLine{        portCLEAR\_INTERRUPT\_MASK\_FROM\_ISR( uxSavedInterruptStatus );                    \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\label{stream__buffer_8c_aadd3cf567c5086402552c463c55dda7c}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!sbSEND\_COMPLETE\_FROM\_ISR@{sbSEND\_COMPLETE\_FROM\_ISR}}
+\index{sbSEND\_COMPLETE\_FROM\_ISR@{sbSEND\_COMPLETE\_FROM\_ISR}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{sbSEND\_COMPLETE\_FROM\_ISR}
+{\footnotesize\ttfamily \#define sb\+SEND\+\_\+\+COMPLETE\+\_\+\+FROM\+\_\+\+ISR(\begin{DoxyParamCaption}\item[{}]{px\+Stream\+Buffer,  }\item[{}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{                                                                                   \(\backslash\)}
+\DoxyCodeLine{    UBaseType\_t uxSavedInterruptStatus;                                                 \(\backslash\)}
+\DoxyCodeLine{                                                                                        \(\backslash\)}
+\DoxyCodeLine{        uxSavedInterruptStatus = ( UBaseType\_t ) portSET\_INTERRUPT\_MASK\_FROM\_ISR();       \(\backslash\)}
+\DoxyCodeLine{        \{                                                                               \(\backslash\)}
+\DoxyCodeLine{            if( ( pxStreamBuffer )-\/>xTaskWaitingToReceive != NULL )                     \(\backslash\)}
+\DoxyCodeLine{            \{                                                                           \(\backslash\)}
+\DoxyCodeLine{                ( void ) xTaskNotifyFromISR( ( pxStreamBuffer )-\/>xTaskWaitingToReceive,   \(\backslash\)}
+\DoxyCodeLine{                                             ( uint32\_t ) 0,                            \(\backslash\)}
+\DoxyCodeLine{                                             eNoAction,                                    \(\backslash\)}
+\DoxyCodeLine{                                             pxHigherPriorityTaskWoken );               \(\backslash\)}
+\DoxyCodeLine{                ( pxStreamBuffer )-\/>xTaskWaitingToReceive = NULL;                       \(\backslash\)}
+\DoxyCodeLine{            \}                                                                           \(\backslash\)}
+\DoxyCodeLine{        \}                                                                               \(\backslash\)}
+\DoxyCodeLine{        portCLEAR\_INTERRUPT\_MASK\_FROM\_ISR( uxSavedInterruptStatus );                    \(\backslash\)}
+\DoxyCodeLine{    \}}
+
+\end{DoxyCode}
+\mbox{\label{stream__buffer_8c_aa75273dfbcd92710254df0165ae1da5d}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!sbSEND\_COMPLETED@{sbSEND\_COMPLETED}}
+\index{sbSEND\_COMPLETED@{sbSEND\_COMPLETED}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{sbSEND\_COMPLETED}
+{\footnotesize\ttfamily \#define sb\+SEND\+\_\+\+COMPLETED(\begin{DoxyParamCaption}\item[{}]{px\+Stream\+Buffer }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        vTaskSuspendAll();                                                               \(\backslash\)}
+\DoxyCodeLine{        \{                                                                               \(\backslash\)}
+\DoxyCodeLine{            if( ( pxStreamBuffer )-\/>xTaskWaitingToReceive != NULL )                     \(\backslash\)}
+\DoxyCodeLine{            \{                                                                           \(\backslash\)}
+\DoxyCodeLine{                ( void ) xTaskNotify( ( pxStreamBuffer )-\/>xTaskWaitingToReceive,     \(\backslash\)}
+\DoxyCodeLine{                                      ( uint32\_t ) 0,                                   \(\backslash\)}
+\DoxyCodeLine{                                      eNoAction );                                     \(\backslash\)}
+\DoxyCodeLine{                ( pxStreamBuffer )-\/>xTaskWaitingToReceive = NULL;                       \(\backslash\)}
+\DoxyCodeLine{            \}                                                                           \(\backslash\)}
+\DoxyCodeLine{        \}                                                                               \(\backslash\)}
+\DoxyCodeLine{        ( void ) xTaskResumeAll();}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{stream__buffer_8c_ac30372f81bb381115f91d7daa384db2d}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!StreamBuffer\_t@{StreamBuffer\_t}}
+\index{StreamBuffer\_t@{StreamBuffer\_t}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{StreamBuffer\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ Stream\+Buffer\+Def\+\_\+t} \textbf{ Stream\+Buffer\+\_\+t}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{stream__buffer_8c_ac4183c0af266bc5ffbd4f3eb4a4d07c2}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!prvBytesInBuffer@{prvBytesInBuffer}}
+\index{prvBytesInBuffer@{prvBytesInBuffer}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{prvBytesInBuffer()}
+{\footnotesize\ttfamily static size\+\_\+t prv\+Bytes\+In\+Buffer (\begin{DoxyParamCaption}\item[{const \textbf{ Stream\+Buffer\+\_\+t} $\ast$const}]{px\+Stream\+Buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{stream__buffer_8c_a7f655ff13acb1a5614dbc7e7f43ecbb2}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!prvInitialiseNewStreamBuffer@{prvInitialiseNewStreamBuffer}}
+\index{prvInitialiseNewStreamBuffer@{prvInitialiseNewStreamBuffer}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{prvInitialiseNewStreamBuffer()}
+{\footnotesize\ttfamily static void prv\+Initialise\+New\+Stream\+Buffer (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+\_\+t} $\ast$const}]{px\+Stream\+Buffer,  }\item[{uint8\+\_\+t $\ast$const}]{puc\+Buffer,  }\item[{size\+\_\+t}]{x\+Buffer\+Size\+Bytes,  }\item[{size\+\_\+t}]{x\+Trigger\+Level\+Bytes,  }\item[{uint8\+\_\+t}]{uc\+Flags }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{stream__buffer_8c_a8ec163e54dc25c091dbff11c1b8f7a2c}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!prvReadBytesFromBuffer@{prvReadBytesFromBuffer}}
+\index{prvReadBytesFromBuffer@{prvReadBytesFromBuffer}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{prvReadBytesFromBuffer()}
+{\footnotesize\ttfamily static size\+\_\+t prv\+Read\+Bytes\+From\+Buffer (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+\_\+t} $\ast$}]{px\+Stream\+Buffer,  }\item[{uint8\+\_\+t $\ast$}]{puc\+Data,  }\item[{size\+\_\+t}]{x\+Max\+Count,  }\item[{size\+\_\+t}]{x\+Bytes\+Available }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{stream__buffer_8c_aea486f3983538e061b22cce98612d8bc}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!prvReadMessageFromBuffer@{prvReadMessageFromBuffer}}
+\index{prvReadMessageFromBuffer@{prvReadMessageFromBuffer}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{prvReadMessageFromBuffer()}
+{\footnotesize\ttfamily static size\+\_\+t prv\+Read\+Message\+From\+Buffer (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+\_\+t} $\ast$}]{px\+Stream\+Buffer,  }\item[{void $\ast$}]{pv\+Rx\+Data,  }\item[{size\+\_\+t}]{x\+Buffer\+Length\+Bytes,  }\item[{size\+\_\+t}]{x\+Bytes\+Available,  }\item[{size\+\_\+t}]{x\+Bytes\+To\+Store\+Message\+Length }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{stream__buffer_8c_ab05b79124292dd7bed33fca7a92473c0}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!prvWriteBytesToBuffer@{prvWriteBytesToBuffer}}
+\index{prvWriteBytesToBuffer@{prvWriteBytesToBuffer}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{prvWriteBytesToBuffer()}
+{\footnotesize\ttfamily static size\+\_\+t prv\+Write\+Bytes\+To\+Buffer (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+\_\+t} $\ast$const}]{px\+Stream\+Buffer,  }\item[{const uint8\+\_\+t $\ast$}]{puc\+Data,  }\item[{size\+\_\+t}]{x\+Count }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{stream__buffer_8c_a1415b7e265e106aab476023f9a6cce6c}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!prvWriteMessageToBuffer@{prvWriteMessageToBuffer}}
+\index{prvWriteMessageToBuffer@{prvWriteMessageToBuffer}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{prvWriteMessageToBuffer()}
+{\footnotesize\ttfamily static size\+\_\+t prv\+Write\+Message\+To\+Buffer (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+\_\+t} $\ast$const}]{px\+Stream\+Buffer,  }\item[{const void $\ast$}]{pv\+Tx\+Data,  }\item[{size\+\_\+t}]{x\+Data\+Length\+Bytes,  }\item[{size\+\_\+t}]{x\+Space,  }\item[{size\+\_\+t}]{x\+Required\+Space }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{stream__buffer_8c_a7e66db41c3fd13acf3b9f814d650f77d}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!vStreamBufferDelete@{vStreamBufferDelete}}
+\index{vStreamBufferDelete@{vStreamBufferDelete}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{vStreamBufferDelete()}
+{\footnotesize\ttfamily void v\+Stream\+Buffer\+Delete (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_a5c473cb971d8a20b0528a1abc890833c}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferBytesAvailable@{xStreamBufferBytesAvailable}}
+\index{xStreamBufferBytesAvailable@{xStreamBufferBytesAvailable}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferBytesAvailable()}
+{\footnotesize\ttfamily size\+\_\+t x\+Stream\+Buffer\+Bytes\+Available (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_a95465cd3702e3eae08afb8e69e1c6525}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferIsEmpty@{xStreamBufferIsEmpty}}
+\index{xStreamBufferIsEmpty@{xStreamBufferIsEmpty}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferIsEmpty()}
+{\footnotesize\ttfamily \textbf{ Base\+Type\+\_\+t} x\+Stream\+Buffer\+Is\+Empty (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_a77c2ae33c45c948e7af4d61fdd6cf1f1}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferIsFull@{xStreamBufferIsFull}}
+\index{xStreamBufferIsFull@{xStreamBufferIsFull}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferIsFull()}
+{\footnotesize\ttfamily \textbf{ Base\+Type\+\_\+t} x\+Stream\+Buffer\+Is\+Full (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_afe4f32e931b684bc32189f086e5ec41c}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferNextMessageLengthBytes@{xStreamBufferNextMessageLengthBytes}}
+\index{xStreamBufferNextMessageLengthBytes@{xStreamBufferNextMessageLengthBytes}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferNextMessageLengthBytes()}
+{\footnotesize\ttfamily size\+\_\+t x\+Stream\+Buffer\+Next\+Message\+Length\+Bytes (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_afcfcf6f4bc80ec5e31e5e1f8093cacac}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferReceive@{xStreamBufferReceive}}
+\index{xStreamBufferReceive@{xStreamBufferReceive}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferReceive()}
+{\footnotesize\ttfamily size\+\_\+t x\+Stream\+Buffer\+Receive (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer,  }\item[{void $\ast$}]{pv\+Rx\+Data,  }\item[{size\+\_\+t}]{x\+Buffer\+Length\+Bytes,  }\item[{\textbf{ Tick\+Type\+\_\+t}}]{x\+Ticks\+To\+Wait }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_adbcf08da91cb0b9c179d012e0c99237d}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferReceiveCompletedFromISR@{xStreamBufferReceiveCompletedFromISR}}
+\index{xStreamBufferReceiveCompletedFromISR@{xStreamBufferReceiveCompletedFromISR}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferReceiveCompletedFromISR()}
+{\footnotesize\ttfamily \textbf{ Base\+Type\+\_\+t} x\+Stream\+Buffer\+Receive\+Completed\+From\+ISR (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer,  }\item[{\textbf{ Base\+Type\+\_\+t} $\ast$}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_a06c67a59495190f8359322184fe0462b}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferReceiveFromISR@{xStreamBufferReceiveFromISR}}
+\index{xStreamBufferReceiveFromISR@{xStreamBufferReceiveFromISR}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferReceiveFromISR()}
+{\footnotesize\ttfamily size\+\_\+t x\+Stream\+Buffer\+Receive\+From\+ISR (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer,  }\item[{void $\ast$}]{pv\+Rx\+Data,  }\item[{size\+\_\+t}]{x\+Buffer\+Length\+Bytes,  }\item[{\textbf{ Base\+Type\+\_\+t} $\ast$const}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_a05ed4d42963aa4aaf50e49700d44659c}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferReset@{xStreamBufferReset}}
+\index{xStreamBufferReset@{xStreamBufferReset}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferReset()}
+{\footnotesize\ttfamily \textbf{ Base\+Type\+\_\+t} x\+Stream\+Buffer\+Reset (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_adf807ecf262fcd5df2584d5d3e6ed6c5}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferSend@{xStreamBufferSend}}
+\index{xStreamBufferSend@{xStreamBufferSend}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferSend()}
+{\footnotesize\ttfamily size\+\_\+t x\+Stream\+Buffer\+Send (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer,  }\item[{const void $\ast$}]{pv\+Tx\+Data,  }\item[{size\+\_\+t}]{x\+Data\+Length\+Bytes,  }\item[{\textbf{ Tick\+Type\+\_\+t}}]{x\+Ticks\+To\+Wait }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_a734bf1bcef16810abb6d53781b8f1f07}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferSendCompletedFromISR@{xStreamBufferSendCompletedFromISR}}
+\index{xStreamBufferSendCompletedFromISR@{xStreamBufferSendCompletedFromISR}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferSendCompletedFromISR()}
+{\footnotesize\ttfamily \textbf{ Base\+Type\+\_\+t} x\+Stream\+Buffer\+Send\+Completed\+From\+ISR (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer,  }\item[{\textbf{ Base\+Type\+\_\+t} $\ast$}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_a3072d8c5cedf79a72550da051a0866b4}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferSendFromISR@{xStreamBufferSendFromISR}}
+\index{xStreamBufferSendFromISR@{xStreamBufferSendFromISR}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferSendFromISR()}
+{\footnotesize\ttfamily size\+\_\+t x\+Stream\+Buffer\+Send\+From\+ISR (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer,  }\item[{const void $\ast$}]{pv\+Tx\+Data,  }\item[{size\+\_\+t}]{x\+Data\+Length\+Bytes,  }\item[{\textbf{ Base\+Type\+\_\+t} $\ast$const}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_a375b92e87b73351a6a30c8a2ba7d2ce0}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferSetTriggerLevel@{xStreamBufferSetTriggerLevel}}
+\index{xStreamBufferSetTriggerLevel@{xStreamBufferSetTriggerLevel}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferSetTriggerLevel()}
+{\footnotesize\ttfamily \textbf{ Base\+Type\+\_\+t} x\+Stream\+Buffer\+Set\+Trigger\+Level (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer,  }\item[{size\+\_\+t}]{x\+Trigger\+Level }\end{DoxyParamCaption})}
+
+\mbox{\label{stream__buffer_8c_a8fb90892c74eb94fb063b2a018a10509}} 
+\index{stream\_buffer.c@{stream\_buffer.c}!xStreamBufferSpacesAvailable@{xStreamBufferSpacesAvailable}}
+\index{xStreamBufferSpacesAvailable@{xStreamBufferSpacesAvailable}!stream\_buffer.c@{stream\_buffer.c}}
+\doxysubsubsection{xStreamBufferSpacesAvailable()}
+{\footnotesize\ttfamily size\+\_\+t x\+Stream\+Buffer\+Spaces\+Available (\begin{DoxyParamCaption}\item[{\textbf{ Stream\+Buffer\+Handle\+\_\+t}}]{x\+Stream\+Buffer }\end{DoxyParamCaption})}
+

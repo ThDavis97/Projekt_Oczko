@@ -1,0 +1,147 @@
+\doxysection{stm32f4xx\+\_\+hal\+\_\+gpio.\+h}
+\label{stm32f4xx__hal__gpio_8h_source}\index{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_gpio.h@{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_gpio.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{20 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#ifndef \_\_STM32F4xx\_HAL\_GPIO\_H}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define \_\_STM32F4xx\_HAL\_GPIO\_H}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{25  \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include "{}stm32f4xx\_hal\_def.h"{}}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{39 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{47 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{48 \{}
+\DoxyCodeLine{49   uint32\_t Pin;       }
+\DoxyCodeLine{52   uint32\_t Mode;      }
+\DoxyCodeLine{55   uint32\_t Pull;      }
+\DoxyCodeLine{58   uint32\_t Speed;     }
+\DoxyCodeLine{61   uint32\_t Alternate;  }
+\DoxyCodeLine{63 \}GPIO\_InitTypeDef;}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{68 \textcolor{keyword}{typedef} \textcolor{keyword}{enum}}
+\DoxyCodeLine{69 \{}
+\DoxyCodeLine{70   GPIO\_PIN\_RESET = 0,}
+\DoxyCodeLine{71   GPIO\_PIN\_SET}
+\DoxyCodeLine{72 \}GPIO\_PinState;}
+\DoxyCodeLine{77 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define GPIO\_PIN\_0                 ((uint16\_t)0x0001)  }\textcolor{comment}{/* Pin 0 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define GPIO\_PIN\_1                 ((uint16\_t)0x0002)  }\textcolor{comment}{/* Pin 1 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#define GPIO\_PIN\_2                 ((uint16\_t)0x0004)  }\textcolor{comment}{/* Pin 2 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{89 \textcolor{preprocessor}{\#define GPIO\_PIN\_3                 ((uint16\_t)0x0008)  }\textcolor{comment}{/* Pin 3 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{90 \textcolor{preprocessor}{\#define GPIO\_PIN\_4                 ((uint16\_t)0x0010)  }\textcolor{comment}{/* Pin 4 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#define GPIO\_PIN\_5                 ((uint16\_t)0x0020)  }\textcolor{comment}{/* Pin 5 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define GPIO\_PIN\_6                 ((uint16\_t)0x0040)  }\textcolor{comment}{/* Pin 6 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define GPIO\_PIN\_7                 ((uint16\_t)0x0080)  }\textcolor{comment}{/* Pin 7 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define GPIO\_PIN\_8                 ((uint16\_t)0x0100)  }\textcolor{comment}{/* Pin 8 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define GPIO\_PIN\_9                 ((uint16\_t)0x0200)  }\textcolor{comment}{/* Pin 9 selected    */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define GPIO\_PIN\_10                ((uint16\_t)0x0400)  }\textcolor{comment}{/* Pin 10 selected   */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define GPIO\_PIN\_11                ((uint16\_t)0x0800)  }\textcolor{comment}{/* Pin 11 selected   */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define GPIO\_PIN\_12                ((uint16\_t)0x1000)  }\textcolor{comment}{/* Pin 12 selected   */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define GPIO\_PIN\_13                ((uint16\_t)0x2000)  }\textcolor{comment}{/* Pin 13 selected   */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#define GPIO\_PIN\_14                ((uint16\_t)0x4000)  }\textcolor{comment}{/* Pin 14 selected   */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define GPIO\_PIN\_15                ((uint16\_t)0x8000)  }\textcolor{comment}{/* Pin 15 selected   */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#define GPIO\_PIN\_All               ((uint16\_t)0xFFFF)  }\textcolor{comment}{/* All pins selected */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#define GPIO\_PIN\_MASK              0x0000FFFFU }\textcolor{comment}{/* PIN mask for assert test */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#define  GPIO\_MODE\_INPUT                        MODE\_INPUT                                                  }}
+\DoxyCodeLine{119 \textcolor{preprocessor}{\#define  GPIO\_MODE\_OUTPUT\_PP                    (MODE\_OUTPUT | OUTPUT\_PP)                                   }}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#define  GPIO\_MODE\_OUTPUT\_OD                    (MODE\_OUTPUT | OUTPUT\_OD)                                   }}
+\DoxyCodeLine{121 \textcolor{preprocessor}{\#define  GPIO\_MODE\_AF\_PP                        (MODE\_AF | OUTPUT\_PP)                                       }}
+\DoxyCodeLine{122 \textcolor{preprocessor}{\#define  GPIO\_MODE\_AF\_OD                        (MODE\_AF | OUTPUT\_OD)                                       }}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#define  GPIO\_MODE\_ANALOG                       MODE\_ANALOG                                                 }}
+\DoxyCodeLine{126 \textcolor{preprocessor}{\#define  GPIO\_MODE\_IT\_RISING                    (MODE\_INPUT | EXTI\_IT | TRIGGER\_RISING)                     }}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#define  GPIO\_MODE\_IT\_FALLING                   (MODE\_INPUT | EXTI\_IT | TRIGGER\_FALLING)                    }}
+\DoxyCodeLine{128 \textcolor{preprocessor}{\#define  GPIO\_MODE\_IT\_RISING\_FALLING            (MODE\_INPUT | EXTI\_IT | TRIGGER\_RISING | TRIGGER\_FALLING)   }}
+\DoxyCodeLine{130 \textcolor{preprocessor}{\#define  GPIO\_MODE\_EVT\_RISING                   (MODE\_INPUT | EXTI\_EVT | TRIGGER\_RISING)                     }}
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#define  GPIO\_MODE\_EVT\_FALLING                  (MODE\_INPUT | EXTI\_EVT | TRIGGER\_FALLING)                    }}
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#define  GPIO\_MODE\_EVT\_RISING\_FALLING           (MODE\_INPUT | EXTI\_EVT | TRIGGER\_RISING | TRIGGER\_FALLING)   }}
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#define  GPIO\_SPEED\_FREQ\_LOW         0x00000000U  }}
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#define  GPIO\_SPEED\_FREQ\_MEDIUM      0x00000001U  }}
+\DoxyCodeLine{144 \textcolor{preprocessor}{\#define  GPIO\_SPEED\_FREQ\_HIGH        0x00000002U  }}
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#define  GPIO\_SPEED\_FREQ\_VERY\_HIGH   0x00000003U  }}
+\DoxyCodeLine{154 \textcolor{preprocessor}{\#define  GPIO\_NOPULL        0x00000000U   }}
+\DoxyCodeLine{155 \textcolor{preprocessor}{\#define  GPIO\_PULLUP        0x00000001U   }}
+\DoxyCodeLine{156 \textcolor{preprocessor}{\#define  GPIO\_PULLDOWN      0x00000002U   }}
+\DoxyCodeLine{165 \textcolor{comment}{/* Exported macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{176 \textcolor{preprocessor}{\#define \_\_HAL\_GPIO\_EXTI\_GET\_FLAG(\_\_EXTI\_LINE\_\_) (EXTI-\/>PR \& (\_\_EXTI\_LINE\_\_))}}
+\DoxyCodeLine{177 }
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#define \_\_HAL\_GPIO\_EXTI\_CLEAR\_FLAG(\_\_EXTI\_LINE\_\_) (EXTI-\/>PR = (\_\_EXTI\_LINE\_\_))}}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{192 \textcolor{preprocessor}{\#define \_\_HAL\_GPIO\_EXTI\_GET\_IT(\_\_EXTI\_LINE\_\_) (EXTI-\/>PR \& (\_\_EXTI\_LINE\_\_))}}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{200 \textcolor{preprocessor}{\#define \_\_HAL\_GPIO\_EXTI\_CLEAR\_IT(\_\_EXTI\_LINE\_\_) (EXTI-\/>PR = (\_\_EXTI\_LINE\_\_))}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{208 \textcolor{preprocessor}{\#define \_\_HAL\_GPIO\_EXTI\_GENERATE\_SWIT(\_\_EXTI\_LINE\_\_) (EXTI-\/>SWIER |= (\_\_EXTI\_LINE\_\_))}}
+\DoxyCodeLine{213 \textcolor{comment}{/* Include GPIO HAL Extension module */}}
+\DoxyCodeLine{214 \textcolor{preprocessor}{\#include "{}stm32f4xx\_hal\_gpio\_ex.h"{}}}
+\DoxyCodeLine{215 }
+\DoxyCodeLine{216 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{224 \textcolor{comment}{/* Initialization and de-\/initialization functions *****************************/}}
+\DoxyCodeLine{225 \textcolor{keywordtype}{void}  HAL\_GPIO\_Init(GPIO\_TypeDef  *GPIOx, GPIO\_InitTypeDef *GPIO\_Init);}
+\DoxyCodeLine{226 \textcolor{keywordtype}{void}  HAL\_GPIO\_DeInit(GPIO\_TypeDef  *GPIOx, uint32\_t GPIO\_Pin);}
+\DoxyCodeLine{234 \textcolor{comment}{/* IO operation functions *****************************************************/}}
+\DoxyCodeLine{235 GPIO\_PinState HAL\_GPIO\_ReadPin(GPIO\_TypeDef* GPIOx, uint16\_t GPIO\_Pin);}
+\DoxyCodeLine{236 \textcolor{keywordtype}{void} HAL\_GPIO\_WritePin(GPIO\_TypeDef* GPIOx, uint16\_t GPIO\_Pin, GPIO\_PinState PinState);}
+\DoxyCodeLine{237 \textcolor{keywordtype}{void} HAL\_GPIO\_TogglePin(GPIO\_TypeDef* GPIOx, uint16\_t GPIO\_Pin);}
+\DoxyCodeLine{238 HAL\_StatusTypeDef HAL\_GPIO\_LockPin(GPIO\_TypeDef* GPIOx, uint16\_t GPIO\_Pin);}
+\DoxyCodeLine{239 \textcolor{keywordtype}{void} HAL\_GPIO\_EXTI\_IRQHandler(uint16\_t GPIO\_Pin);}
+\DoxyCodeLine{240 \textcolor{keywordtype}{void} HAL\_GPIO\_EXTI\_Callback(uint16\_t GPIO\_Pin);}
+\DoxyCodeLine{241 }
+\DoxyCodeLine{249 \textcolor{comment}{/* Private types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{250 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{251 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{255 \textcolor{preprocessor}{\#define GPIO\_MODE\_Pos                           0U}}
+\DoxyCodeLine{256 \textcolor{preprocessor}{\#define GPIO\_MODE                               (0x3UL << GPIO\_MODE\_Pos)}}
+\DoxyCodeLine{257 \textcolor{preprocessor}{\#define MODE\_INPUT                              (0x0UL << GPIO\_MODE\_Pos)}}
+\DoxyCodeLine{258 \textcolor{preprocessor}{\#define MODE\_OUTPUT                             (0x1UL << GPIO\_MODE\_Pos)}}
+\DoxyCodeLine{259 \textcolor{preprocessor}{\#define MODE\_AF                                 (0x2UL << GPIO\_MODE\_Pos)}}
+\DoxyCodeLine{260 \textcolor{preprocessor}{\#define MODE\_ANALOG                             (0x3UL << GPIO\_MODE\_Pos)}}
+\DoxyCodeLine{261 \textcolor{preprocessor}{\#define OUTPUT\_TYPE\_Pos                         4U}}
+\DoxyCodeLine{262 \textcolor{preprocessor}{\#define OUTPUT\_TYPE                             (0x1UL << OUTPUT\_TYPE\_Pos)}}
+\DoxyCodeLine{263 \textcolor{preprocessor}{\#define OUTPUT\_PP                               (0x0UL << OUTPUT\_TYPE\_Pos)}}
+\DoxyCodeLine{264 \textcolor{preprocessor}{\#define OUTPUT\_OD                               (0x1UL << OUTPUT\_TYPE\_Pos)}}
+\DoxyCodeLine{265 \textcolor{preprocessor}{\#define EXTI\_MODE\_Pos                           16U}}
+\DoxyCodeLine{266 \textcolor{preprocessor}{\#define EXTI\_MODE                               (0x3UL << EXTI\_MODE\_Pos)}}
+\DoxyCodeLine{267 \textcolor{preprocessor}{\#define EXTI\_IT                                 (0x1UL << EXTI\_MODE\_Pos)}}
+\DoxyCodeLine{268 \textcolor{preprocessor}{\#define EXTI\_EVT                                (0x2UL << EXTI\_MODE\_Pos)}}
+\DoxyCodeLine{269 \textcolor{preprocessor}{\#define TRIGGER\_MODE\_Pos                         20U}}
+\DoxyCodeLine{270 \textcolor{preprocessor}{\#define TRIGGER\_MODE                            (0x7UL << TRIGGER\_MODE\_Pos)}}
+\DoxyCodeLine{271 \textcolor{preprocessor}{\#define TRIGGER\_RISING                          (0x1UL << TRIGGER\_MODE\_Pos)}}
+\DoxyCodeLine{272 \textcolor{preprocessor}{\#define TRIGGER\_FALLING                         (0x2UL << TRIGGER\_MODE\_Pos)}}
+\DoxyCodeLine{273 }
+\DoxyCodeLine{278 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{282 \textcolor{preprocessor}{\#define IS\_GPIO\_PIN\_ACTION(ACTION) (((ACTION) == GPIO\_PIN\_RESET) || ((ACTION) == GPIO\_PIN\_SET))}}
+\DoxyCodeLine{283 \textcolor{preprocessor}{\#define IS\_GPIO\_PIN(PIN)           (((((uint32\_t)PIN) \& GPIO\_PIN\_MASK ) != 0x00U) \&\& ((((uint32\_t)PIN) \& \string~GPIO\_PIN\_MASK) == 0x00U))}}
+\DoxyCodeLine{284 \textcolor{preprocessor}{\#define IS\_GPIO\_MODE(MODE) (((MODE) == GPIO\_MODE\_INPUT)              ||\(\backslash\)}}
+\DoxyCodeLine{285 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_OUTPUT\_PP)          ||\(\backslash\)}}
+\DoxyCodeLine{286 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_OUTPUT\_OD)          ||\(\backslash\)}}
+\DoxyCodeLine{287 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_AF\_PP)              ||\(\backslash\)}}
+\DoxyCodeLine{288 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_AF\_OD)              ||\(\backslash\)}}
+\DoxyCodeLine{289 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_IT\_RISING)          ||\(\backslash\)}}
+\DoxyCodeLine{290 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_IT\_FALLING)         ||\(\backslash\)}}
+\DoxyCodeLine{291 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_IT\_RISING\_FALLING)  ||\(\backslash\)}}
+\DoxyCodeLine{292 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_EVT\_RISING)         ||\(\backslash\)}}
+\DoxyCodeLine{293 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_EVT\_FALLING)        ||\(\backslash\)}}
+\DoxyCodeLine{294 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_EVT\_RISING\_FALLING) ||\(\backslash\)}}
+\DoxyCodeLine{295 \textcolor{preprocessor}{                            ((MODE) == GPIO\_MODE\_ANALOG))}}
+\DoxyCodeLine{296 \textcolor{preprocessor}{\#define IS\_GPIO\_SPEED(SPEED) (((SPEED) == GPIO\_SPEED\_FREQ\_LOW)  || ((SPEED) == GPIO\_SPEED\_FREQ\_MEDIUM) || \(\backslash\)}}
+\DoxyCodeLine{297 \textcolor{preprocessor}{                              ((SPEED) == GPIO\_SPEED\_FREQ\_HIGH) || ((SPEED) == GPIO\_SPEED\_FREQ\_VERY\_HIGH))}}
+\DoxyCodeLine{298 \textcolor{preprocessor}{\#define IS\_GPIO\_PULL(PULL) (((PULL) == GPIO\_NOPULL) || ((PULL) == GPIO\_PULLUP) || \(\backslash\)}}
+\DoxyCodeLine{299 \textcolor{preprocessor}{                            ((PULL) == GPIO\_PULLDOWN))}}
+\DoxyCodeLine{304 \textcolor{comment}{/* Private functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{321 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{322 \}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{324 }
+\DoxyCodeLine{325 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_STM32F4xx\_HAL\_GPIO\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{326 }
+\DoxyCodeLine{327 \textcolor{comment}{/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/}}
+
+\end{DoxyCode}

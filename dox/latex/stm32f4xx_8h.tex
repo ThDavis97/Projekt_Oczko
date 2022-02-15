@@ -1,0 +1,95 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Drivers/\+CMSIS/\+Device/\+ST/\+STM32\+F4xx/\+Include/stm32f4xx.h File Reference}
+\label{stm32f4xx_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h@{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h}}
+
+
+CMSIS STM32\+F4xx Device Peripheral Access Layer Header File.  
+
+
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ STM32\+F4}
+\begin{DoxyCompactList}\small\item\em STM32 Family. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+F4xx\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+MAIN}~(0x02U)
+\begin{DoxyCompactList}\small\item\em Comment the line below if you will not use the peripherals drivers. In this case, these drivers will not be included and the application code will be based on direct access to peripherals registers. \end{DoxyCompactList}\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+F4xx\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+SUB1}~(0x06U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+F4xx\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+SUB2}~(0x07U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+F4xx\+\_\+\+CMSIS\+\_\+\+VERSION\+\_\+\+RC}~(0x00U)
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+STM32\+F4xx\+\_\+\+CMSIS\+\_\+\+VERSION}
+\item 
+\#define \textbf{ IS\+\_\+\+FUNCTIONAL\+\_\+\+STATE}(STATE)~(((STATE) == \textbf{ DISABLE}) $\vert$$\vert$ ((STATE) == \textbf{ ENABLE}))
+\item 
+\#define \textbf{ SET\+\_\+\+BIT}(REG,  BIT)~((REG) $\vert$= (BIT))
+\item 
+\#define \textbf{ CLEAR\+\_\+\+BIT}(REG,  BIT)~((REG) \&= $\sim$(BIT))
+\item 
+\#define \textbf{ READ\+\_\+\+BIT}(REG,  BIT)~((REG) \& (BIT))
+\item 
+\#define \textbf{ CLEAR\+\_\+\+REG}(REG)~((REG) = (0x0))
+\item 
+\#define \textbf{ WRITE\+\_\+\+REG}(REG,  VAL)~((REG) = (VAL))
+\item 
+\#define \textbf{ READ\+\_\+\+REG}(REG)~((REG))
+\item 
+\#define \textbf{ MODIFY\+\_\+\+REG}(REG,  CLEARMASK,  SETMASK)~\textbf{ WRITE\+\_\+\+REG}((REG), (((\textbf{ READ\+\_\+\+REG}(REG)) \& ($\sim$(CLEARMASK))) $\vert$ (SETMASK)))
+\item 
+\#define \textbf{ POSITION\+\_\+\+VAL}(VAL)~(\textbf{ \+\_\+\+\_\+\+CLZ}(\textbf{ \+\_\+\+\_\+\+RBIT}(VAL)))
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+SET\+\_\+\+BIT}(REG,  BIT)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+CLEAR\+\_\+\+BIT}(REG,  BIT)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+MODIFY\+\_\+\+REG}(REG,  CLEARMSK,  SETMASK)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+SETH\+\_\+\+BIT}(REG,  BIT)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+CLEARH\+\_\+\+BIT}(REG,  BIT)
+\item 
+\#define \textbf{ ATOMIC\+\_\+\+MODIFYH\+\_\+\+REG}(REG,  CLEARMSK,  SETMASK)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum \textbf{ Flag\+Status} \textbf{ ITStatus}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ Flag\+Status} \{ \textbf{ RESET} = 0U
+, \textbf{ SET} = !\+RESET
+ \}
+\item 
+enum \textbf{ Functional\+State} \{ \textbf{ DISABLE} = 0U
+, \textbf{ ENABLE} = !\+DISABLE
+ \}
+\item 
+enum \textbf{ Error\+Status} \{ \textbf{ SUCCESS} = 0U
+, \textbf{ ERROR} = !\+SUCCESS
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+CMSIS STM32\+F4xx Device Peripheral Access Layer Header File. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team \begin{DoxyVerb}     The file is the unique include file that the application programmer
+     is using in the C source code, usually in main.c. This file contains:
+      - Configuration section that allows to select:
+         - The STM32F4xx device used in the target application
+         - To use or not the peripheral’s drivers in application code(i.e. 
+           code will be based on direct access to peripheral’s registers 
+           rather than drivers API), this option is controlled by 
+           "#define USE_HAL_DRIVER"
+\end{DoxyVerb}
+
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+\doxysubsubsection*{\begin{center}\copyright{} Copyright (c) 2017 STMicroelectronics. All rights reserved.\end{center} }
+
+This software component is licensed by ST under BSD 3-\/Clause license, the \char`\"{}\+License\char`\"{}; You may not use this file except in compliance with the License. You may obtain a copy of the License at\+: opensource.\+org/licenses/\+BSD-\/3-\/\+Clause 

@@ -1,0 +1,111 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Core/\+Src/lcd.c File Reference}
+\label{lcd_8c}\index{C:/ALL/STM32/Projekty/OczkoGierka/Core/Src/lcd.c@{C:/ALL/STM32/Projekty/OczkoGierka/Core/Src/lcd.c}}
+{\ttfamily \#include \char`\"{}lcd.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \textbf{ lcd\+\_\+write\+\_\+data} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, uint8\+\_\+t data)
+\item 
+static void \textbf{ lcd\+\_\+write\+\_\+command} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, uint8\+\_\+t command)
+\item 
+static void \textbf{ lcd\+\_\+write} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, uint8\+\_\+t data, uint8\+\_\+t len)
+\item 
+\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} \textbf{ Lcd\+\_\+create} (\textbf{ Lcd\+\_\+\+Port\+Type} port[$\,$], \textbf{ Lcd\+\_\+\+Pin\+Type} pin[$\,$], \textbf{ Lcd\+\_\+\+Port\+Type} rs\+\_\+port, \textbf{ Lcd\+\_\+\+Pin\+Type} rs\+\_\+pin, \textbf{ Lcd\+\_\+\+Port\+Type} en\+\_\+port, \textbf{ Lcd\+\_\+\+Pin\+Type} en\+\_\+pin, \textbf{ Lcd\+\_\+\+Mode\+Type\+Def} mode)
+\item 
+void \textbf{ Lcd\+\_\+init} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd)
+\item 
+void \textbf{ Lcd\+\_\+int} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, int number)
+\item 
+void \textbf{ Lcd\+\_\+string} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, char $\ast$string)
+\item 
+void \textbf{ Lcd\+\_\+cursor} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, uint8\+\_\+t row, uint8\+\_\+t col)
+\item 
+void \textbf{ Lcd\+\_\+clear} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd)
+\item 
+void \textbf{ Lcd\+\_\+define\+\_\+char} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, uint8\+\_\+t code, uint8\+\_\+t bitmap[$\,$])
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint8\+\_\+t \textbf{ ROW\+\_\+16} [$\,$] = \{0x00, 0x40, 0x10, 0x50\}
+\item 
+const uint8\+\_\+t \textbf{ ROW\+\_\+20} [$\,$] = \{0x00, 0x40, 0x14, 0x54\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{lcd_8c_ad2be8694070f64fe09c1e35469a568b6}} 
+\index{lcd.c@{lcd.c}!Lcd\_clear@{Lcd\_clear}}
+\index{Lcd\_clear@{Lcd\_clear}!lcd.c@{lcd.c}}
+\doxysubsubsection{Lcd\_clear()}
+{\footnotesize\ttfamily void Lcd\+\_\+clear (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd }\end{DoxyParamCaption})}
+
+Clear the screen \mbox{\label{lcd_8c_a555f8cc26de31bbf138597e8a658d43f}} 
+\index{lcd.c@{lcd.c}!Lcd\_create@{Lcd\_create}}
+\index{Lcd\_create@{Lcd\_create}!lcd.c@{lcd.c}}
+\doxysubsubsection{Lcd\_create()}
+{\footnotesize\ttfamily \textbf{ Lcd\+\_\+\+Handle\+Type\+Def} Lcd\+\_\+create (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Port\+Type}}]{port[$\,$],  }\item[{\textbf{ Lcd\+\_\+\+Pin\+Type}}]{pin[$\,$],  }\item[{\textbf{ Lcd\+\_\+\+Port\+Type}}]{rs\+\_\+port,  }\item[{\textbf{ Lcd\+\_\+\+Pin\+Type}}]{rs\+\_\+pin,  }\item[{\textbf{ Lcd\+\_\+\+Port\+Type}}]{en\+\_\+port,  }\item[{\textbf{ Lcd\+\_\+\+Pin\+Type}}]{en\+\_\+pin,  }\item[{\textbf{ Lcd\+\_\+\+Mode\+Type\+Def}}]{mode }\end{DoxyParamCaption})}
+
+Create new \doxyref{Lcd\+\_\+\+Handle\+Type\+Def}{p.}{struct_lcd___handle_type_def} and initialize the Lcd \mbox{\label{lcd_8c_ae31b55ceec6ac19f04e4f8afe641d304}} 
+\index{lcd.c@{lcd.c}!Lcd\_cursor@{Lcd\_cursor}}
+\index{Lcd\_cursor@{Lcd\_cursor}!lcd.c@{lcd.c}}
+\doxysubsubsection{Lcd\_cursor()}
+{\footnotesize\ttfamily void Lcd\+\_\+cursor (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{uint8\+\_\+t}]{row,  }\item[{uint8\+\_\+t}]{col }\end{DoxyParamCaption})}
+
+Set the cursor position \mbox{\label{lcd_8c_aad2da0b28baec7977d14487555a6d7f0}} 
+\index{lcd.c@{lcd.c}!Lcd\_define\_char@{Lcd\_define\_char}}
+\index{Lcd\_define\_char@{Lcd\_define\_char}!lcd.c@{lcd.c}}
+\doxysubsubsection{Lcd\_define\_char()}
+{\footnotesize\ttfamily void Lcd\+\_\+define\+\_\+char (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{uint8\+\_\+t}]{code,  }\item[{uint8\+\_\+t}]{bitmap[$\,$] }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8c_a812f628ceebeae7c8acdd608d13467b5}} 
+\index{lcd.c@{lcd.c}!Lcd\_init@{Lcd\_init}}
+\index{Lcd\_init@{Lcd\_init}!lcd.c@{lcd.c}}
+\doxysubsubsection{Lcd\_init()}
+{\footnotesize\ttfamily void Lcd\+\_\+init (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd }\end{DoxyParamCaption})}
+
+Initialize 16x2-\/lcd without cursor \mbox{\label{lcd_8c_aeb7d8cf010d0431082793c35d2f3986a}} 
+\index{lcd.c@{lcd.c}!Lcd\_int@{Lcd\_int}}
+\index{Lcd\_int@{Lcd\_int}!lcd.c@{lcd.c}}
+\doxysubsubsection{Lcd\_int()}
+{\footnotesize\ttfamily void Lcd\+\_\+int (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{int}]{number }\end{DoxyParamCaption})}
+
+Write a number on the current position \mbox{\label{lcd_8c_a41b19f1767241abaad51ba81820a1f8b}} 
+\index{lcd.c@{lcd.c}!Lcd\_string@{Lcd\_string}}
+\index{Lcd\_string@{Lcd\_string}!lcd.c@{lcd.c}}
+\doxysubsubsection{Lcd\_string()}
+{\footnotesize\ttfamily void Lcd\+\_\+string (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+Write a string on the current position \mbox{\label{lcd_8c_a77bd47a237b9da0890fa7be3397e9e87}} 
+\index{lcd.c@{lcd.c}!lcd\_write@{lcd\_write}}
+\index{lcd\_write@{lcd\_write}!lcd.c@{lcd.c}}
+\doxysubsubsection{lcd\_write()}
+{\footnotesize\ttfamily void lcd\+\_\+write (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{uint8\+\_\+t}]{data,  }\item[{uint8\+\_\+t}]{len }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Set len bits on the bus and toggle the enable line \mbox{\label{lcd_8c_ad73d6681e8b90842a4fa526164b7e60c}} 
+\index{lcd.c@{lcd.c}!lcd\_write\_command@{lcd\_write\_command}}
+\index{lcd\_write\_command@{lcd\_write\_command}!lcd.c@{lcd.c}}
+\doxysubsubsection{lcd\_write\_command()}
+{\footnotesize\ttfamily void lcd\+\_\+write\+\_\+command (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{uint8\+\_\+t}]{command }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Write a byte to the command register \mbox{\label{lcd_8c_ad9a8e8bd47d542777aa1cfc9fa59ee6a}} 
+\index{lcd.c@{lcd.c}!lcd\_write\_data@{lcd\_write\_data}}
+\index{lcd\_write\_data@{lcd\_write\_data}!lcd.c@{lcd.c}}
+\doxysubsubsection{lcd\_write\_data()}
+{\footnotesize\ttfamily void lcd\+\_\+write\+\_\+data (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Write a byte to the data register 
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{lcd_8c_a4be6f3b251ac82300f2047124369e92d}} 
+\index{lcd.c@{lcd.c}!ROW\_16@{ROW\_16}}
+\index{ROW\_16@{ROW\_16}!lcd.c@{lcd.c}}
+\doxysubsubsection{ROW\_16}
+{\footnotesize\ttfamily const uint8\+\_\+t ROW\+\_\+16[$\,$] = \{0x00, 0x40, 0x10, 0x50\}}
+
+\mbox{\label{lcd_8c_a8ce7cee6a792ba94fce40e64a8a593bd}} 
+\index{lcd.c@{lcd.c}!ROW\_20@{ROW\_20}}
+\index{ROW\_20@{ROW\_20}!lcd.c@{lcd.c}}
+\doxysubsubsection{ROW\_20}
+{\footnotesize\ttfamily const uint8\+\_\+t ROW\+\_\+20[$\,$] = \{0x00, 0x40, 0x14, 0x54\}}
+

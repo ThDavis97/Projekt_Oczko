@@ -1,0 +1,57 @@
+\doxysection{cr\+START}
+\label{group__cr_s_t_a_r_t}\index{crSTART@{crSTART}}
+croutine. h 
+\begin{DoxyPre}
+\doxyref{crSTART( CoRoutineHandle\_t xHandle )}{p.}{croutine_8h_a19a57a201a325e8af1207ed68c4aedde};\end{DoxyPre}
+
+
+This macro MUST always be called at the start of a co-\/routine function.
+
+Example usage\+: 
+\begin{DoxyPre}
+// Co-\/routine to be created.
+void vACoRoutine( CoRoutineHandle\_t xHandle, UBaseType\_t uxIndex )
+\{
+// Variables in co-\/routines must be declared static if they must maintain value across a blocking call.
+static int32\_t ulAVariable;
+
+    // Must start every co-\/routine with a call to \doxyref{crSTART()}{p.}{croutine_8h_a19a57a201a325e8af1207ed68c4aedde};
+    \doxyref{crSTART( xHandle )}{p.}{croutine_8h_a19a57a201a325e8af1207ed68c4aedde};
+
+    for( ;; )
+    \{
+         // Co-\/routine functionality goes here.
+    \}
+
+    // Must end every co-\/routine with a call to \doxyref{crEND()}{p.}{croutine_8h_ae6038cc976689b50000475ebfc4e2f23};
+    \doxyref{crEND()}{p.}{croutine_8h_ae6038cc976689b50000475ebfc4e2f23};
+\}\end{DoxyPre}
+
+
+croutine. h 
+\begin{DoxyPre}
+\doxyref{crEND()}{p.}{croutine_8h_ae6038cc976689b50000475ebfc4e2f23};\end{DoxyPre}
+
+
+This macro MUST always be called at the end of a co-\/routine function.
+
+Example usage\+: 
+\begin{DoxyPre}
+// Co-\/routine to be created.
+void vACoRoutine( CoRoutineHandle\_t xHandle, UBaseType\_t uxIndex )
+\{
+// Variables in co-\/routines must be declared static if they must maintain value across a blocking call.
+static int32\_t ulAVariable;
+
+    // Must start every co-\/routine with a call to \doxyref{crSTART()}{p.}{croutine_8h_a19a57a201a325e8af1207ed68c4aedde};
+    \doxyref{crSTART( xHandle )}{p.}{croutine_8h_a19a57a201a325e8af1207ed68c4aedde};
+
+    for( ;; )
+    \{
+         // Co-\/routine functionality goes here.
+    \}
+
+    // Must end every co-\/routine with a call to \doxyref{crEND()}{p.}{croutine_8h_ae6038cc976689b50000475ebfc4e2f23};
+    \doxyref{crEND()}{p.}{croutine_8h_ae6038cc976689b50000475ebfc4e2f23};
+\}\end{DoxyPre}
+ 

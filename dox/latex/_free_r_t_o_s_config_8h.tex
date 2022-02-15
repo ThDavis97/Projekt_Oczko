@@ -1,0 +1,352 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Core/\+Inc/\+Free\+RTOSConfig.h File Reference}
+\label{_free_r_t_o_s_config_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Core/Inc/FreeRTOSConfig.h@{C:/ALL/STM32/Projekty/OczkoGierka/Core/Inc/FreeRTOSConfig.h}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ config\+ENABLE\+\_\+\+FPU}~0
+\item 
+\#define \textbf{ config\+ENABLE\+\_\+\+MPU}~0
+\item 
+\#define \textbf{ config\+USE\+\_\+\+PREEMPTION}~1
+\item 
+\#define \textbf{ config\+SUPPORT\+\_\+\+STATIC\+\_\+\+ALLOCATION}~1
+\item 
+\#define \textbf{ config\+SUPPORT\+\_\+\+DYNAMIC\+\_\+\+ALLOCATION}~1
+\item 
+\#define \textbf{ config\+USE\+\_\+\+IDLE\+\_\+\+HOOK}~0
+\item 
+\#define \textbf{ config\+USE\+\_\+\+TICK\+\_\+\+HOOK}~0
+\item 
+\#define \textbf{ config\+CPU\+\_\+\+CLOCK\+\_\+\+HZ}~( \textbf{ System\+Core\+Clock} )
+\item 
+\#define \textbf{ config\+TICK\+\_\+\+RATE\+\_\+\+HZ}~((\textbf{ Tick\+Type\+\_\+t})1000)
+\item 
+\#define \textbf{ config\+MAX\+\_\+\+PRIORITIES}~( 7 )
+\item 
+\#define \textbf{ config\+MINIMAL\+\_\+\+STACK\+\_\+\+SIZE}~((uint16\+\_\+t)128)
+\item 
+\#define \textbf{ config\+TOTAL\+\_\+\+HEAP\+\_\+\+SIZE}~((size\+\_\+t)15360)
+\item 
+\#define \textbf{ config\+MAX\+\_\+\+TASK\+\_\+\+NAME\+\_\+\+LEN}~( 16 )
+\item 
+\#define \textbf{ config\+USE\+\_\+16\+\_\+\+BIT\+\_\+\+TICKS}~0
+\item 
+\#define \textbf{ config\+USE\+\_\+\+MUTEXES}~1
+\item 
+\#define \textbf{ config\+QUEUE\+\_\+\+REGISTRY\+\_\+\+SIZE}~8
+\item 
+\#define \textbf{ config\+USE\+\_\+\+COUNTING\+\_\+\+SEMAPHORES}~1
+\item 
+\#define \textbf{ config\+USE\+\_\+\+PORT\+\_\+\+OPTIMISED\+\_\+\+TASK\+\_\+\+SELECTION}~1
+\item 
+\#define \textbf{ config\+MESSAGE\+\_\+\+BUFFER\+\_\+\+LENGTH\+\_\+\+TYPE}~size\+\_\+t
+\item 
+\#define \textbf{ config\+USE\+\_\+\+CO\+\_\+\+ROUTINES}~0
+\item 
+\#define \textbf{ config\+MAX\+\_\+\+CO\+\_\+\+ROUTINE\+\_\+\+PRIORITIES}~( 2 )
+\item 
+\#define \textbf{ config\+USE\+\_\+\+TIMERS}~1
+\item 
+\#define \textbf{ config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY}~( 2 )
+\item 
+\#define \textbf{ config\+TIMER\+\_\+\+QUEUE\+\_\+\+LENGTH}~10
+\item 
+\#define \textbf{ config\+TIMER\+\_\+\+TASK\+\_\+\+STACK\+\_\+\+DEPTH}~256
+\item 
+\#define \textbf{ config\+USE\+\_\+\+NEWLIB\+\_\+\+REENTRANT}~1
+\item 
+\#define \textbf{ INCLUDE\+\_\+v\+Task\+Priority\+Set}~1
+\item 
+\#define \textbf{ INCLUDE\+\_\+ux\+Task\+Priority\+Get}~1
+\item 
+\#define \textbf{ INCLUDE\+\_\+v\+Task\+Delete}~1
+\item 
+\#define \textbf{ INCLUDE\+\_\+v\+Task\+Clean\+Up\+Resources}~0
+\item 
+\#define \textbf{ INCLUDE\+\_\+v\+Task\+Suspend}~1
+\item 
+\#define \textbf{ INCLUDE\+\_\+v\+Task\+Delay\+Until}~1
+\item 
+\#define \textbf{ INCLUDE\+\_\+v\+Task\+Delay}~1
+\item 
+\#define \textbf{ INCLUDE\+\_\+x\+Task\+Get\+Scheduler\+State}~1
+\item 
+\#define \textbf{ config\+PRIO\+\_\+\+BITS}~4
+\item 
+\#define \textbf{ config\+LIBRARY\+\_\+\+LOWEST\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}~15
+\item 
+\#define \textbf{ config\+LIBRARY\+\_\+\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}~5
+\item 
+\#define \textbf{ config\+KERNEL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}~( \textbf{ config\+LIBRARY\+\_\+\+LOWEST\+\_\+\+INTERRUPT\+\_\+\+PRIORITY} $<$$<$ (8 -\/ \textbf{ config\+PRIO\+\_\+\+BITS}) )
+\item 
+\#define \textbf{ config\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY}~( \textbf{ config\+LIBRARY\+\_\+\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY} $<$$<$ (8 -\/ \textbf{ config\+PRIO\+\_\+\+BITS}) )
+\item 
+\#define \textbf{ config\+ASSERT}(x)~if ((x) == 0) \{\textbf{ task\+DISABLE\+\_\+\+INTERRUPTS}(); for( ;; );\}
+\item 
+\#define \textbf{ v\+Port\+SVCHandler}~SVC\+\_\+\+Handler
+\item 
+\#define \textbf{ x\+Port\+Pend\+SVHandler}~Pend\+SV\+\_\+\+Handler
+\item 
+\#define \textbf{ x\+Port\+Sys\+Tick\+Handler}~Sys\+Tick\+\_\+\+Handler
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{_free_r_t_o_s_config_8h_a228c70cd48927d6ab730ed1a6dfbe35f}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configASSERT@{configASSERT}}
+\index{configASSERT@{configASSERT}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configASSERT}
+{\footnotesize\ttfamily \#define config\+ASSERT(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~if ((x) == 0) \{\textbf{ task\+DISABLE\+\_\+\+INTERRUPTS}(); for( ;; );\}}
+
+\mbox{\label{_free_r_t_o_s_config_8h_aa68082df879e6fc96bcb9b26513639e7}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configCPU\_CLOCK\_HZ@{configCPU\_CLOCK\_HZ}}
+\index{configCPU\_CLOCK\_HZ@{configCPU\_CLOCK\_HZ}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configCPU\_CLOCK\_HZ}
+{\footnotesize\ttfamily \#define config\+CPU\+\_\+\+CLOCK\+\_\+\+HZ~( \textbf{ System\+Core\+Clock} )}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a8c0327c63db06fda2294df6965508791}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configENABLE\_FPU@{configENABLE\_FPU}}
+\index{configENABLE\_FPU@{configENABLE\_FPU}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configENABLE\_FPU}
+{\footnotesize\ttfamily \#define config\+ENABLE\+\_\+\+FPU~0}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a60e94635ea7d211347de3bf09aa1a292}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configENABLE\_MPU@{configENABLE\_MPU}}
+\index{configENABLE\_MPU@{configENABLE\_MPU}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configENABLE\_MPU}
+{\footnotesize\ttfamily \#define config\+ENABLE\+\_\+\+MPU~0}
+
+\mbox{\label{_free_r_t_o_s_config_8h_ac42cff506ad61d4174fa23e952e3225e}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configKERNEL\_INTERRUPT\_PRIORITY@{configKERNEL\_INTERRUPT\_PRIORITY}}
+\index{configKERNEL\_INTERRUPT\_PRIORITY@{configKERNEL\_INTERRUPT\_PRIORITY}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configKERNEL\_INTERRUPT\_PRIORITY}
+{\footnotesize\ttfamily \#define config\+KERNEL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY~( \textbf{ config\+LIBRARY\+\_\+\+LOWEST\+\_\+\+INTERRUPT\+\_\+\+PRIORITY} $<$$<$ (8 -\/ \textbf{ config\+PRIO\+\_\+\+BITS}) )}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a10da20f180ec9bd131b0052a802dbc39}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configLIBRARY\_LOWEST\_INTERRUPT\_PRIORITY@{configLIBRARY\_LOWEST\_INTERRUPT\_PRIORITY}}
+\index{configLIBRARY\_LOWEST\_INTERRUPT\_PRIORITY@{configLIBRARY\_LOWEST\_INTERRUPT\_PRIORITY}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configLIBRARY\_LOWEST\_INTERRUPT\_PRIORITY}
+{\footnotesize\ttfamily \#define config\+LIBRARY\+\_\+\+LOWEST\+\_\+\+INTERRUPT\+\_\+\+PRIORITY~15}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a2254bd235d882be3061bcad0b1e8be98}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configLIBRARY\_MAX\_SYSCALL\_INTERRUPT\_PRIORITY@{configLIBRARY\_MAX\_SYSCALL\_INTERRUPT\_PRIORITY}}
+\index{configLIBRARY\_MAX\_SYSCALL\_INTERRUPT\_PRIORITY@{configLIBRARY\_MAX\_SYSCALL\_INTERRUPT\_PRIORITY}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configLIBRARY\_MAX\_SYSCALL\_INTERRUPT\_PRIORITY}
+{\footnotesize\ttfamily \#define config\+LIBRARY\+\_\+\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY~5}
+
+\mbox{\label{_free_r_t_o_s_config_8h_ae8f3fd645e6e78dfeb8a6e874af6195a}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configMAX\_CO\_ROUTINE\_PRIORITIES@{configMAX\_CO\_ROUTINE\_PRIORITIES}}
+\index{configMAX\_CO\_ROUTINE\_PRIORITIES@{configMAX\_CO\_ROUTINE\_PRIORITIES}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configMAX\_CO\_ROUTINE\_PRIORITIES}
+{\footnotesize\ttfamily \#define config\+MAX\+\_\+\+CO\+\_\+\+ROUTINE\+\_\+\+PRIORITIES~( 2 )}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a9a78f5ac61e6cb172dadf2a51f11db38}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configMAX\_PRIORITIES@{configMAX\_PRIORITIES}}
+\index{configMAX\_PRIORITIES@{configMAX\_PRIORITIES}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configMAX\_PRIORITIES}
+{\footnotesize\ttfamily \#define config\+MAX\+\_\+\+PRIORITIES~( 7 )}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a54bfc31c410ee452577a25a4552c3704}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configMAX\_SYSCALL\_INTERRUPT\_PRIORITY@{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}}
+\index{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY@{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configMAX\_SYSCALL\_INTERRUPT\_PRIORITY}
+{\footnotesize\ttfamily \#define config\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY~( \textbf{ config\+LIBRARY\+\_\+\+MAX\+\_\+\+SYSCALL\+\_\+\+INTERRUPT\+\_\+\+PRIORITY} $<$$<$ (8 -\/ \textbf{ config\+PRIO\+\_\+\+BITS}) )}
+
+\mbox{\label{_free_r_t_o_s_config_8h_ac388dc4041aab6997348828eb27fc1a8}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configMAX\_TASK\_NAME\_LEN@{configMAX\_TASK\_NAME\_LEN}}
+\index{configMAX\_TASK\_NAME\_LEN@{configMAX\_TASK\_NAME\_LEN}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configMAX\_TASK\_NAME\_LEN}
+{\footnotesize\ttfamily \#define config\+MAX\+\_\+\+TASK\+\_\+\+NAME\+\_\+\+LEN~( 16 )}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a019c8bfcdd8eca676c7b9993bda95967}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configMESSAGE\_BUFFER\_LENGTH\_TYPE@{configMESSAGE\_BUFFER\_LENGTH\_TYPE}}
+\index{configMESSAGE\_BUFFER\_LENGTH\_TYPE@{configMESSAGE\_BUFFER\_LENGTH\_TYPE}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configMESSAGE\_BUFFER\_LENGTH\_TYPE}
+{\footnotesize\ttfamily \#define config\+MESSAGE\+\_\+\+BUFFER\+\_\+\+LENGTH\+\_\+\+TYPE~size\+\_\+t}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a6c534a6cf8a00528fe0be42083484f9a}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configMINIMAL\_STACK\_SIZE@{configMINIMAL\_STACK\_SIZE}}
+\index{configMINIMAL\_STACK\_SIZE@{configMINIMAL\_STACK\_SIZE}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configMINIMAL\_STACK\_SIZE}
+{\footnotesize\ttfamily \#define config\+MINIMAL\+\_\+\+STACK\+\_\+\+SIZE~((uint16\+\_\+t)128)}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a5796db11ec6f9aa38d017d2ac393c5ba}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configPRIO\_BITS@{configPRIO\_BITS}}
+\index{configPRIO\_BITS@{configPRIO\_BITS}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configPRIO\_BITS}
+{\footnotesize\ttfamily \#define config\+PRIO\+\_\+\+BITS~4}
+
+\mbox{\label{_free_r_t_o_s_config_8h_aa4b5138c4e42a180f0abd4f2455f90fb}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configQUEUE\_REGISTRY\_SIZE@{configQUEUE\_REGISTRY\_SIZE}}
+\index{configQUEUE\_REGISTRY\_SIZE@{configQUEUE\_REGISTRY\_SIZE}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configQUEUE\_REGISTRY\_SIZE}
+{\footnotesize\ttfamily \#define config\+QUEUE\+\_\+\+REGISTRY\+\_\+\+SIZE~8}
+
+\mbox{\label{_free_r_t_o_s_config_8h_afa3f8d6510699d972c9af08fa41f66dc}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configSUPPORT\_DYNAMIC\_ALLOCATION@{configSUPPORT\_DYNAMIC\_ALLOCATION}}
+\index{configSUPPORT\_DYNAMIC\_ALLOCATION@{configSUPPORT\_DYNAMIC\_ALLOCATION}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configSUPPORT\_DYNAMIC\_ALLOCATION}
+{\footnotesize\ttfamily \#define config\+SUPPORT\+\_\+\+DYNAMIC\+\_\+\+ALLOCATION~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a1d6797a53b62d501b095f964036a7ac4}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configSUPPORT\_STATIC\_ALLOCATION@{configSUPPORT\_STATIC\_ALLOCATION}}
+\index{configSUPPORT\_STATIC\_ALLOCATION@{configSUPPORT\_STATIC\_ALLOCATION}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configSUPPORT\_STATIC\_ALLOCATION}
+{\footnotesize\ttfamily \#define config\+SUPPORT\+\_\+\+STATIC\+\_\+\+ALLOCATION~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a2f0258dd1e3b877e5bc013be54c2db6a}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configTICK\_RATE\_HZ@{configTICK\_RATE\_HZ}}
+\index{configTICK\_RATE\_HZ@{configTICK\_RATE\_HZ}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configTICK\_RATE\_HZ}
+{\footnotesize\ttfamily \#define config\+TICK\+\_\+\+RATE\+\_\+\+HZ~((\textbf{ Tick\+Type\+\_\+t})1000)}
+
+\mbox{\label{_free_r_t_o_s_config_8h_abb9aa0f31c1f3b14a15083a3c6120918}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configTIMER\_QUEUE\_LENGTH@{configTIMER\_QUEUE\_LENGTH}}
+\index{configTIMER\_QUEUE\_LENGTH@{configTIMER\_QUEUE\_LENGTH}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configTIMER\_QUEUE\_LENGTH}
+{\footnotesize\ttfamily \#define config\+TIMER\+\_\+\+QUEUE\+\_\+\+LENGTH~10}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a05c75ff9029ba3f0ab5bde9196f1e873}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configTIMER\_TASK\_PRIORITY@{configTIMER\_TASK\_PRIORITY}}
+\index{configTIMER\_TASK\_PRIORITY@{configTIMER\_TASK\_PRIORITY}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configTIMER\_TASK\_PRIORITY}
+{\footnotesize\ttfamily \#define config\+TIMER\+\_\+\+TASK\+\_\+\+PRIORITY~( 2 )}
+
+\mbox{\label{_free_r_t_o_s_config_8h_aed7c7ebcdee603583a55e8ce04e55841}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configTIMER\_TASK\_STACK\_DEPTH@{configTIMER\_TASK\_STACK\_DEPTH}}
+\index{configTIMER\_TASK\_STACK\_DEPTH@{configTIMER\_TASK\_STACK\_DEPTH}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configTIMER\_TASK\_STACK\_DEPTH}
+{\footnotesize\ttfamily \#define config\+TIMER\+\_\+\+TASK\+\_\+\+STACK\+\_\+\+DEPTH~256}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a9f213227674effff0122a75d94d87938}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configTOTAL\_HEAP\_SIZE@{configTOTAL\_HEAP\_SIZE}}
+\index{configTOTAL\_HEAP\_SIZE@{configTOTAL\_HEAP\_SIZE}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configTOTAL\_HEAP\_SIZE}
+{\footnotesize\ttfamily \#define config\+TOTAL\+\_\+\+HEAP\+\_\+\+SIZE~((size\+\_\+t)15360)}
+
+\mbox{\label{_free_r_t_o_s_config_8h_aac311ed9b9e5ae4d2d9648b33a24acce}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_16\_BIT\_TICKS@{configUSE\_16\_BIT\_TICKS}}
+\index{configUSE\_16\_BIT\_TICKS@{configUSE\_16\_BIT\_TICKS}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_16\_BIT\_TICKS}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+16\+\_\+\+BIT\+\_\+\+TICKS~0}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a57990715eb06402474b8b47e1d562616}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_CO\_ROUTINES@{configUSE\_CO\_ROUTINES}}
+\index{configUSE\_CO\_ROUTINES@{configUSE\_CO\_ROUTINES}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_CO\_ROUTINES}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+\+CO\+\_\+\+ROUTINES~0}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a55778995203c57369d2fbfb10224943d}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_COUNTING\_SEMAPHORES@{configUSE\_COUNTING\_SEMAPHORES}}
+\index{configUSE\_COUNTING\_SEMAPHORES@{configUSE\_COUNTING\_SEMAPHORES}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_COUNTING\_SEMAPHORES}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+\+COUNTING\+\_\+\+SEMAPHORES~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_ac637ae45863c19fa2e919db0ed49301f}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_IDLE\_HOOK@{configUSE\_IDLE\_HOOK}}
+\index{configUSE\_IDLE\_HOOK@{configUSE\_IDLE\_HOOK}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_IDLE\_HOOK}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+\+IDLE\+\_\+\+HOOK~0}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a543bf3c79008974cc1d36bab51d94fbf}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_MUTEXES@{configUSE\_MUTEXES}}
+\index{configUSE\_MUTEXES@{configUSE\_MUTEXES}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_MUTEXES}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+\+MUTEXES~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_acf3616a8cbe15687f6000cefcca84bbd}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_NEWLIB\_REENTRANT@{configUSE\_NEWLIB\_REENTRANT}}
+\index{configUSE\_NEWLIB\_REENTRANT@{configUSE\_NEWLIB\_REENTRANT}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_NEWLIB\_REENTRANT}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+\+NEWLIB\+\_\+\+REENTRANT~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_aebb8c3a87d591f60f974772be0ee798d}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION@{configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION}}
+\index{configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION@{configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+\+PORT\+\_\+\+OPTIMISED\+\_\+\+TASK\+\_\+\+SELECTION~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_adde83486022745409c40605922b0bdd6}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_PREEMPTION@{configUSE\_PREEMPTION}}
+\index{configUSE\_PREEMPTION@{configUSE\_PREEMPTION}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_PREEMPTION}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+\+PREEMPTION~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a23c5922c077106fad3f70b54d9071466}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_TICK\_HOOK@{configUSE\_TICK\_HOOK}}
+\index{configUSE\_TICK\_HOOK@{configUSE\_TICK\_HOOK}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_TICK\_HOOK}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+\+TICK\+\_\+\+HOOK~0}
+
+\mbox{\label{_free_r_t_o_s_config_8h_ac342ae309b0c53828d2ecad3e6de355b}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!configUSE\_TIMERS@{configUSE\_TIMERS}}
+\index{configUSE\_TIMERS@{configUSE\_TIMERS}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{configUSE\_TIMERS}
+{\footnotesize\ttfamily \#define config\+USE\+\_\+\+TIMERS~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a1279eb797355460aeeec06aa524e91df}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!INCLUDE\_uxTaskPriorityGet@{INCLUDE\_uxTaskPriorityGet}}
+\index{INCLUDE\_uxTaskPriorityGet@{INCLUDE\_uxTaskPriorityGet}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{INCLUDE\_uxTaskPriorityGet}
+{\footnotesize\ttfamily \#define INCLUDE\+\_\+ux\+Task\+Priority\+Get~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a7ee138825e57f243c8ee5fd4207b9e26}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!INCLUDE\_vTaskCleanUpResources@{INCLUDE\_vTaskCleanUpResources}}
+\index{INCLUDE\_vTaskCleanUpResources@{INCLUDE\_vTaskCleanUpResources}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{INCLUDE\_vTaskCleanUpResources}
+{\footnotesize\ttfamily \#define INCLUDE\+\_\+v\+Task\+Clean\+Up\+Resources~0}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a24361a6eb816a965f1ee4e2e08e364f8}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!INCLUDE\_vTaskDelay@{INCLUDE\_vTaskDelay}}
+\index{INCLUDE\_vTaskDelay@{INCLUDE\_vTaskDelay}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{INCLUDE\_vTaskDelay}
+{\footnotesize\ttfamily \#define INCLUDE\+\_\+v\+Task\+Delay~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_ae8459bfd5b428319bb10de9f504a53aa}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!INCLUDE\_vTaskDelayUntil@{INCLUDE\_vTaskDelayUntil}}
+\index{INCLUDE\_vTaskDelayUntil@{INCLUDE\_vTaskDelayUntil}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{INCLUDE\_vTaskDelayUntil}
+{\footnotesize\ttfamily \#define INCLUDE\+\_\+v\+Task\+Delay\+Until~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a5ae1434fdf995108dc749ff9329f53bd}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!INCLUDE\_vTaskDelete@{INCLUDE\_vTaskDelete}}
+\index{INCLUDE\_vTaskDelete@{INCLUDE\_vTaskDelete}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{INCLUDE\_vTaskDelete}
+{\footnotesize\ttfamily \#define INCLUDE\+\_\+v\+Task\+Delete~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_ad6858ac8aaf726007fd19752956ef1bd}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!INCLUDE\_vTaskPrioritySet@{INCLUDE\_vTaskPrioritySet}}
+\index{INCLUDE\_vTaskPrioritySet@{INCLUDE\_vTaskPrioritySet}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{INCLUDE\_vTaskPrioritySet}
+{\footnotesize\ttfamily \#define INCLUDE\+\_\+v\+Task\+Priority\+Set~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_aef8fbb97819ad3d962f334ac298206d1}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!INCLUDE\_vTaskSuspend@{INCLUDE\_vTaskSuspend}}
+\index{INCLUDE\_vTaskSuspend@{INCLUDE\_vTaskSuspend}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{INCLUDE\_vTaskSuspend}
+{\footnotesize\ttfamily \#define INCLUDE\+\_\+v\+Task\+Suspend~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a9ed60ede556830584e6bfd4a3ab4f9de}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!INCLUDE\_xTaskGetSchedulerState@{INCLUDE\_xTaskGetSchedulerState}}
+\index{INCLUDE\_xTaskGetSchedulerState@{INCLUDE\_xTaskGetSchedulerState}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{INCLUDE\_xTaskGetSchedulerState}
+{\footnotesize\ttfamily \#define INCLUDE\+\_\+x\+Task\+Get\+Scheduler\+State~1}
+
+\mbox{\label{_free_r_t_o_s_config_8h_ad43047b3ea0a146673e30637488bf754}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!vPortSVCHandler@{vPortSVCHandler}}
+\index{vPortSVCHandler@{vPortSVCHandler}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{vPortSVCHandler}
+{\footnotesize\ttfamily \#define v\+Port\+SVCHandler(\begin{DoxyParamCaption}\item[{}]{void }\end{DoxyParamCaption})~SVC\+\_\+\+Handler}
+
+\mbox{\label{_free_r_t_o_s_config_8h_a6f30022da7d797dd31f1b8a11cae9a35}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!xPortPendSVHandler@{xPortPendSVHandler}}
+\index{xPortPendSVHandler@{xPortPendSVHandler}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{xPortPendSVHandler}
+{\footnotesize\ttfamily \#define x\+Port\+Pend\+SVHandler(\begin{DoxyParamCaption}\item[{}]{void }\end{DoxyParamCaption})~Pend\+SV\+\_\+\+Handler}
+
+\mbox{\label{_free_r_t_o_s_config_8h_ae42e6318b5d564e44f97f8c765859448}} 
+\index{FreeRTOSConfig.h@{FreeRTOSConfig.h}!xPortSysTickHandler@{xPortSysTickHandler}}
+\index{xPortSysTickHandler@{xPortSysTickHandler}!FreeRTOSConfig.h@{FreeRTOSConfig.h}}
+\doxysubsubsection{xPortSysTickHandler}
+{\footnotesize\ttfamily \#define x\+Port\+Sys\+Tick\+Handler(\begin{DoxyParamCaption}\item[{}]{void }\end{DoxyParamCaption})~Sys\+Tick\+\_\+\+Handler}
+

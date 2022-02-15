@@ -1,0 +1,150 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/include/portable.h File Reference}
+\label{portable_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/portable.h@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/portable.h}}
+{\ttfamily \#include \char`\"{}deprecated\+\_\+definitions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}portmacro.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mpu\+\_\+wrappers.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Heap\+Region}
+\item 
+struct \textbf{ x\+Heap\+Stats}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ port\+NUM\+\_\+\+CONFIGURABLE\+\_\+\+REGIONS}~1
+\item 
+\#define \textbf{ port\+HAS\+\_\+\+STACK\+\_\+\+OVERFLOW\+\_\+\+CHECKING}~0
+\item 
+\#define \textbf{ port\+ARCH\+\_\+\+NAME}~NULL
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \textbf{ Heap\+Region} \textbf{ Heap\+Region\+\_\+t}
+\item 
+typedef struct \textbf{ x\+Heap\+Stats} \textbf{ Heap\+Stats\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Stack\+Type\+\_\+t} $\ast$ \textbf{ px\+Port\+Initialise\+Stack} (\textbf{ Stack\+Type\+\_\+t} $\ast$px\+Top\+Of\+Stack, \textbf{ Task\+Function\+\_\+t} px\+Code, void $\ast$pv\+Parameters) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+void \textbf{ v\+Port\+Define\+Heap\+Regions} (const \textbf{ Heap\+Region\+\_\+t} $\ast$const px\+Heap\+Regions) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+void \textbf{ v\+Port\+Get\+Heap\+Stats} (\textbf{ Heap\+Stats\+\_\+t} $\ast$px\+Heap\+Stats)
+\item 
+void $\ast$ \textbf{ pv\+Port\+Malloc} (size\+\_\+t x\+Size) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+void \textbf{ v\+Port\+Free} (void $\ast$pv) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+void \textbf{ v\+Port\+Initialise\+Blocks} (void) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+size\+\_\+t \textbf{ x\+Port\+Get\+Free\+Heap\+Size} (void) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+size\+\_\+t \textbf{ x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size} (void) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+\textbf{ Base\+Type\+\_\+t} \textbf{ x\+Port\+Start\+Scheduler} (void) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+void \textbf{ v\+Port\+End\+Scheduler} (void) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{portable_8h_a2d5be0d247f2bf84b3d699be1378e8c4}} 
+\index{portable.h@{portable.h}!portARCH\_NAME@{portARCH\_NAME}}
+\index{portARCH\_NAME@{portARCH\_NAME}!portable.h@{portable.h}}
+\doxysubsubsection{portARCH\_NAME}
+{\footnotesize\ttfamily \#define port\+ARCH\+\_\+\+NAME~NULL}
+
+\mbox{\label{portable_8h_a19b8150e9a84001333b8728be1882da0}} 
+\index{portable.h@{portable.h}!portHAS\_STACK\_OVERFLOW\_CHECKING@{portHAS\_STACK\_OVERFLOW\_CHECKING}}
+\index{portHAS\_STACK\_OVERFLOW\_CHECKING@{portHAS\_STACK\_OVERFLOW\_CHECKING}!portable.h@{portable.h}}
+\doxysubsubsection{portHAS\_STACK\_OVERFLOW\_CHECKING}
+{\footnotesize\ttfamily \#define port\+HAS\+\_\+\+STACK\+\_\+\+OVERFLOW\+\_\+\+CHECKING~0}
+
+\mbox{\label{portable_8h_aca7e1a8a568a38b74cc9db10c8efebda}} 
+\index{portable.h@{portable.h}!portNUM\_CONFIGURABLE\_REGIONS@{portNUM\_CONFIGURABLE\_REGIONS}}
+\index{portNUM\_CONFIGURABLE\_REGIONS@{portNUM\_CONFIGURABLE\_REGIONS}!portable.h@{portable.h}}
+\doxysubsubsection{portNUM\_CONFIGURABLE\_REGIONS}
+{\footnotesize\ttfamily \#define port\+NUM\+\_\+\+CONFIGURABLE\+\_\+\+REGIONS~1}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{portable_8h_acce46e1bf21496c11f2b1e49ded2882b}} 
+\index{portable.h@{portable.h}!HeapRegion\_t@{HeapRegion\_t}}
+\index{HeapRegion\_t@{HeapRegion\_t}!portable.h@{portable.h}}
+\doxysubsubsection{HeapRegion\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ Heap\+Region} \textbf{ Heap\+Region\+\_\+t}}
+
+\mbox{\label{portable_8h_aebfa6771f45f6a5ac026e91ee2fd57f4}} 
+\index{portable.h@{portable.h}!HeapStats\_t@{HeapStats\_t}}
+\index{HeapStats\_t@{HeapStats\_t}!portable.h@{portable.h}}
+\doxysubsubsection{HeapStats\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ x\+Heap\+Stats} \textbf{ Heap\+Stats\+\_\+t}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{portable_8h_a7aaf584d8f548d7f03d6a46280c9e877}} 
+\index{portable.h@{portable.h}!pvPortMalloc@{pvPortMalloc}}
+\index{pvPortMalloc@{pvPortMalloc}!portable.h@{portable.h}}
+\doxysubsubsection{pvPortMalloc()}
+{\footnotesize\ttfamily void $\ast$ pv\+Port\+Malloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{x\+Size }\end{DoxyParamCaption})}
+
+\mbox{\label{portable_8h_ac176989ae73455502063fd6cbe01a1ca}} 
+\index{portable.h@{portable.h}!pxPortInitialiseStack@{pxPortInitialiseStack}}
+\index{pxPortInitialiseStack@{pxPortInitialiseStack}!portable.h@{portable.h}}
+\doxysubsubsection{pxPortInitialiseStack()}
+{\footnotesize\ttfamily \textbf{ Stack\+Type\+\_\+t} $\ast$ px\+Port\+Initialise\+Stack (\begin{DoxyParamCaption}\item[{\textbf{ Stack\+Type\+\_\+t} $\ast$}]{px\+Top\+Of\+Stack,  }\item[{\textbf{ Task\+Function\+\_\+t}}]{px\+Code,  }\item[{void $\ast$}]{pv\+Parameters }\end{DoxyParamCaption})}
+
+\mbox{\label{portable_8h_a4f3a75726f448c4170d9d6565bdef636}} 
+\index{portable.h@{portable.h}!vPortDefineHeapRegions@{vPortDefineHeapRegions}}
+\index{vPortDefineHeapRegions@{vPortDefineHeapRegions}!portable.h@{portable.h}}
+\doxysubsubsection{vPortDefineHeapRegions()}
+{\footnotesize\ttfamily void v\+Port\+Define\+Heap\+Regions (\begin{DoxyParamCaption}\item[{const \textbf{ Heap\+Region\+\_\+t} $\ast$const}]{px\+Heap\+Regions }\end{DoxyParamCaption})}
+
+\mbox{\label{portable_8h_aa356b7baaa9089490321aa919542dd6c}} 
+\index{portable.h@{portable.h}!vPortEndScheduler@{vPortEndScheduler}}
+\index{vPortEndScheduler@{vPortEndScheduler}!portable.h@{portable.h}}
+\doxysubsubsection{vPortEndScheduler()}
+{\footnotesize\ttfamily void v\+Port\+End\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{portable_8h_a735cd3085bb7ba06ff8e47565bfd7016}} 
+\index{portable.h@{portable.h}!vPortFree@{vPortFree}}
+\index{vPortFree@{vPortFree}!portable.h@{portable.h}}
+\doxysubsubsection{vPortFree()}
+{\footnotesize\ttfamily void v\+Port\+Free (\begin{DoxyParamCaption}\item[{void $\ast$}]{pv }\end{DoxyParamCaption})}
+
+\mbox{\label{portable_8h_abbecc6cff952357f60cce5014ecbe470}} 
+\index{portable.h@{portable.h}!vPortGetHeapStats@{vPortGetHeapStats}}
+\index{vPortGetHeapStats@{vPortGetHeapStats}!portable.h@{portable.h}}
+\doxysubsubsection{vPortGetHeapStats()}
+{\footnotesize\ttfamily void v\+Port\+Get\+Heap\+Stats (\begin{DoxyParamCaption}\item[{\textbf{ Heap\+Stats\+\_\+t} $\ast$}]{px\+Heap\+Stats }\end{DoxyParamCaption})}
+
+\mbox{\label{portable_8h_a846b5ebdaf2b51fe707efb4a0974f676}} 
+\index{portable.h@{portable.h}!vPortInitialiseBlocks@{vPortInitialiseBlocks}}
+\index{vPortInitialiseBlocks@{vPortInitialiseBlocks}!portable.h@{portable.h}}
+\doxysubsubsection{vPortInitialiseBlocks()}
+{\footnotesize\ttfamily void v\+Port\+Initialise\+Blocks (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{portable_8h_a8f72fbee5c25c956bda528299ce6dd02}} 
+\index{portable.h@{portable.h}!xPortGetFreeHeapSize@{xPortGetFreeHeapSize}}
+\index{xPortGetFreeHeapSize@{xPortGetFreeHeapSize}!portable.h@{portable.h}}
+\doxysubsubsection{xPortGetFreeHeapSize()}
+{\footnotesize\ttfamily size\+\_\+t x\+Port\+Get\+Free\+Heap\+Size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{portable_8h_a6195704430323f2e97ea4deab7a4eece}} 
+\index{portable.h@{portable.h}!xPortGetMinimumEverFreeHeapSize@{xPortGetMinimumEverFreeHeapSize}}
+\index{xPortGetMinimumEverFreeHeapSize@{xPortGetMinimumEverFreeHeapSize}!portable.h@{portable.h}}
+\doxysubsubsection{xPortGetMinimumEverFreeHeapSize()}
+{\footnotesize\ttfamily size\+\_\+t x\+Port\+Get\+Minimum\+Ever\+Free\+Heap\+Size (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{portable_8h_a4f3b1bb7590996f2fa1e0456dda961ff}} 
+\index{portable.h@{portable.h}!xPortStartScheduler@{xPortStartScheduler}}
+\index{xPortStartScheduler@{xPortStartScheduler}!portable.h@{portable.h}}
+\doxysubsubsection{xPortStartScheduler()}
+{\footnotesize\ttfamily \textbf{ Base\+Type\+\_\+t} x\+Port\+Start\+Scheduler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+

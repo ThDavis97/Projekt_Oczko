@@ -1,0 +1,104 @@
+\doxysection{lcd.\+h}
+\label{lcd_8h_source}\index{C:/ALL/STM32/Projekty/OczkoGierka/Core/Inc/lcd.h@{C:/ALL/STM32/Projekty/OczkoGierka/Core/Inc/lcd.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/*}}
+\DoxyCodeLine{2 \textcolor{comment}{ * lcd.h}}
+\DoxyCodeLine{3 \textcolor{comment}{ *}}
+\DoxyCodeLine{4 \textcolor{comment}{ *  Created on: 10/06/2018}}
+\DoxyCodeLine{5 \textcolor{comment}{ *      Author: Olivier Van den Eede}}
+\DoxyCodeLine{6 \textcolor{comment}{ */}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#ifndef LCD\_H\_}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define LCD\_H\_}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}stm32f4xx\_hal.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}string.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}stdio.h"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}main.h"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{// \#define LCD20xN      // For 20xN LCDs}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#define LCD16xN         }\textcolor{comment}{// For 16xN LCDs}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{comment}{// For row start addresses}}
+\DoxyCodeLine{20 \textcolor{keyword}{extern} \textcolor{keyword}{const} uint8\_t ROW\_16[];}
+\DoxyCodeLine{21 \textcolor{keyword}{extern} \textcolor{keyword}{const} uint8\_t ROW\_20[];}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \textcolor{comment}{/************************************** Command register **************************************/}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define CLEAR\_DISPLAY 0x01}}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#define RETURN\_HOME 0x02}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#define ENTRY\_MODE\_SET 0x04}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#define OPT\_S   0x01                    }\textcolor{comment}{// Shift entire display to right}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#define OPT\_INC 0x02                    }\textcolor{comment}{// Cursor increment}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define DISPLAY\_ON\_OFF\_CONTROL 0x08}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#define OPT\_D   0x04                    }\textcolor{comment}{// Turn on display}}
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#define OPT\_C   0x02                    }\textcolor{comment}{// Turn on cursor}}
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#define OPT\_B   0x01                    }\textcolor{comment}{// Turn on cursor blink}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define CURSOR\_DISPLAY\_SHIFT 0x10       }\textcolor{comment}{// Move and shift cursor}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define OPT\_SC 0x08}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define OPT\_RL 0x04}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#define FUNCTION\_SET 0x20}}
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define OPT\_DL 0x10                     }\textcolor{comment}{// Set interface data length}}
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define OPT\_N 0x08                      }\textcolor{comment}{// Set number of display lines}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define OPT\_F 0x04                      }\textcolor{comment}{// Set alternate font}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#define SETCGRAM\_ADDR 0x040}}
+\DoxyCodeLine{46 \textcolor{preprocessor}{\#define SET\_DDRAM\_ADDR 0x80             }\textcolor{comment}{// Set DDRAM address}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{comment}{/************************************** Helper macros **************************************/}}
+\DoxyCodeLine{50 \textcolor{preprocessor}{\#define DELAY(X) HAL\_Delay(X)}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{comment}{/************************************** LCD defines **************************************/}}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#define LCD\_NIB 4}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define LCD\_BYTE 8}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define LCD\_DATA\_REG 1}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define LCD\_COMMAND\_REG 0}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60 \textcolor{comment}{/************************************** LCD typedefs **************************************/}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define Lcd\_PortType GPIO\_TypeDef*}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define Lcd\_PinType uint16\_t}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{keyword}{typedef} \textcolor{keyword}{enum} \{}
+\DoxyCodeLine{65     LCD\_4\_BIT\_MODE,}
+\DoxyCodeLine{66     LCD\_8\_BIT\_MODE}
+\DoxyCodeLine{67 \} Lcd\_ModeTypeDef;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\{}
+\DoxyCodeLine{71     Lcd\_PortType * data\_port;}
+\DoxyCodeLine{72     Lcd\_PinType * data\_pin;}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     Lcd\_PortType rs\_port;}
+\DoxyCodeLine{75     Lcd\_PinType rs\_pin;}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77     Lcd\_PortType en\_port;}
+\DoxyCodeLine{78     Lcd\_PinType en\_pin;}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     Lcd\_ModeTypeDef mode;}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \} Lcd\_HandleTypeDef;}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85 \textcolor{comment}{/************************************** Public functions **************************************/}}
+\DoxyCodeLine{86 \textcolor{keywordtype}{void} Lcd\_init(Lcd\_HandleTypeDef * lcd);}
+\DoxyCodeLine{87 \textcolor{keywordtype}{void} Lcd\_int(Lcd\_HandleTypeDef * lcd, \textcolor{keywordtype}{int} number);}
+\DoxyCodeLine{88 \textcolor{keywordtype}{void} Lcd\_char(Lcd\_HandleTypeDef * lcd, \textcolor{keywordtype}{char} * char\_);}
+\DoxyCodeLine{89 \textcolor{keywordtype}{void} Lcd\_string(Lcd\_HandleTypeDef * lcd, \textcolor{keywordtype}{char} * \textcolor{keywordtype}{string});}
+\DoxyCodeLine{90 \textcolor{keywordtype}{void} Lcd\_cursor(Lcd\_HandleTypeDef * lcd, uint8\_t row, uint8\_t col);}
+\DoxyCodeLine{91 Lcd\_HandleTypeDef Lcd\_create(}
+\DoxyCodeLine{92         Lcd\_PortType port[], Lcd\_PinType pin[],}
+\DoxyCodeLine{93         Lcd\_PortType rs\_port, Lcd\_PinType rs\_pin,}
+\DoxyCodeLine{94         Lcd\_PortType en\_port, Lcd\_PinType en\_pin, Lcd\_ModeTypeDef mode);}
+\DoxyCodeLine{95 \textcolor{keywordtype}{void} Lcd\_define\_char(Lcd\_HandleTypeDef * lcd, uint8\_t code, uint8\_t bitmap[]);}
+\DoxyCodeLine{96 \textcolor{keywordtype}{void} Lcd\_clear(Lcd\_HandleTypeDef * lcd);}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* LCD\_H\_ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

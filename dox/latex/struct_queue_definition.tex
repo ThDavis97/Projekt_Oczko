@@ -1,0 +1,111 @@
+\doxysection{Queue\+Definition Struct Reference}
+\label{struct_queue_definition}\index{QueueDefinition@{QueueDefinition}}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int8\+\_\+t $\ast$ \textbf{ pc\+Head}
+\item 
+int8\+\_\+t $\ast$ \textbf{ pc\+Write\+To}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\textbf{ QueuePointers\_t} \textbf{ xQueue}\\
+\>\textbf{ SemaphoreData\_t} \textbf{ xSemaphore}\\
+\} \textbf{ u}\\
+
+\end{tabbing}\item 
+\textbf{ List\+\_\+t} \textbf{ x\+Tasks\+Waiting\+To\+Send}
+\item 
+\textbf{ List\+\_\+t} \textbf{ x\+Tasks\+Waiting\+To\+Receive}
+\item 
+volatile \textbf{ UBase\+Type\+\_\+t} \textbf{ ux\+Messages\+Waiting}
+\item 
+\textbf{ UBase\+Type\+\_\+t} \textbf{ ux\+Length}
+\item 
+\textbf{ UBase\+Type\+\_\+t} \textbf{ ux\+Item\+Size}
+\item 
+volatile int8\+\_\+t \textbf{ c\+Rx\+Lock}
+\item 
+volatile int8\+\_\+t \textbf{ c\+Tx\+Lock}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Field Documentation}
+\mbox{\label{struct_queue_definition_a2017e9e2e81e1fd301fa88236614653e}} 
+\index{QueueDefinition@{QueueDefinition}!cRxLock@{cRxLock}}
+\index{cRxLock@{cRxLock}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{cRxLock}
+{\footnotesize\ttfamily volatile int8\+\_\+t c\+Rx\+Lock}
+
+\mbox{\label{struct_queue_definition_a77c52e94671f477fd2942db97e20838b}} 
+\index{QueueDefinition@{QueueDefinition}!cTxLock@{cTxLock}}
+\index{cTxLock@{cTxLock}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{cTxLock}
+{\footnotesize\ttfamily volatile int8\+\_\+t c\+Tx\+Lock}
+
+\mbox{\label{struct_queue_definition_adfa75f7bc22a3a58a907676c0164a1c1}} 
+\index{QueueDefinition@{QueueDefinition}!pcHead@{pcHead}}
+\index{pcHead@{pcHead}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{pcHead}
+{\footnotesize\ttfamily int8\+\_\+t$\ast$ pc\+Head}
+
+\mbox{\label{struct_queue_definition_aa018576801d60d3a78ffacab53dc8b79}} 
+\index{QueueDefinition@{QueueDefinition}!pcWriteTo@{pcWriteTo}}
+\index{pcWriteTo@{pcWriteTo}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{pcWriteTo}
+{\footnotesize\ttfamily int8\+\_\+t$\ast$ pc\+Write\+To}
+
+\mbox{\label{struct_queue_definition_a8848c797a4a2ac14eec7e474c21e6906}} 
+\index{QueueDefinition@{QueueDefinition}!u@{u}}
+\index{u@{u}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{}
+{\footnotesize\ttfamily union  \{ ... \}  u}
+
+\mbox{\label{struct_queue_definition_a216cc99516d7f82573f6cb19f5a9f626}} 
+\index{QueueDefinition@{QueueDefinition}!uxItemSize@{uxItemSize}}
+\index{uxItemSize@{uxItemSize}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{uxItemSize}
+{\footnotesize\ttfamily \textbf{ UBase\+Type\+\_\+t} ux\+Item\+Size}
+
+\mbox{\label{struct_queue_definition_a619169da78e43281a73fbdf13f9eddfb}} 
+\index{QueueDefinition@{QueueDefinition}!uxLength@{uxLength}}
+\index{uxLength@{uxLength}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{uxLength}
+{\footnotesize\ttfamily \textbf{ UBase\+Type\+\_\+t} ux\+Length}
+
+\mbox{\label{struct_queue_definition_afb61b3f2247402ed3b8b159311c408b7}} 
+\index{QueueDefinition@{QueueDefinition}!uxMessagesWaiting@{uxMessagesWaiting}}
+\index{uxMessagesWaiting@{uxMessagesWaiting}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{uxMessagesWaiting}
+{\footnotesize\ttfamily volatile \textbf{ UBase\+Type\+\_\+t} ux\+Messages\+Waiting}
+
+\mbox{\label{struct_queue_definition_a8524458af6a7e0aed9e736bd8596b7ca}} 
+\index{QueueDefinition@{QueueDefinition}!xQueue@{xQueue}}
+\index{xQueue@{xQueue}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{xQueue}
+{\footnotesize\ttfamily \textbf{ Queue\+Pointers\+\_\+t} x\+Queue}
+
+\mbox{\label{struct_queue_definition_a86b298a751a8295a991a263ada8e6b6c}} 
+\index{QueueDefinition@{QueueDefinition}!xSemaphore@{xSemaphore}}
+\index{xSemaphore@{xSemaphore}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{xSemaphore}
+{\footnotesize\ttfamily \textbf{ Semaphore\+Data\+\_\+t} x\+Semaphore}
+
+\mbox{\label{struct_queue_definition_a8ad185d9d83713c774e6a897580d8313}} 
+\index{QueueDefinition@{QueueDefinition}!xTasksWaitingToReceive@{xTasksWaitingToReceive}}
+\index{xTasksWaitingToReceive@{xTasksWaitingToReceive}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{xTasksWaitingToReceive}
+{\footnotesize\ttfamily \textbf{ List\+\_\+t} x\+Tasks\+Waiting\+To\+Receive}
+
+\mbox{\label{struct_queue_definition_a5cfd8ae6db5da134ed16405043a0d898}} 
+\index{QueueDefinition@{QueueDefinition}!xTasksWaitingToSend@{xTasksWaitingToSend}}
+\index{xTasksWaitingToSend@{xTasksWaitingToSend}!QueueDefinition@{QueueDefinition}}
+\doxysubsubsection{xTasksWaitingToSend}
+{\footnotesize\ttfamily \textbf{ List\+\_\+t} x\+Tasks\+Waiting\+To\+Send}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/\textbf{ queue.\+c}\end{DoxyCompactItemize}

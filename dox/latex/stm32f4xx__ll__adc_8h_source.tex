@@ -1,0 +1,1506 @@
+\doxysection{stm32f4xx\+\_\+ll\+\_\+adc.\+h}
+\label{stm32f4xx__ll__adc_8h_source}\index{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_ll\_adc.h@{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_ll\_adc.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{20 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#ifndef \_\_STM32F4xx\_LL\_ADC\_H}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define \_\_STM32F4xx\_LL\_ADC\_H}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{25 \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include "{}stm32f4xx.h"{}}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#if defined (ADC1) || defined (ADC2) || defined (ADC3)}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{41 \textcolor{comment}{/* Private types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{42 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{49 \textcolor{comment}{/* Internal mask for ADC group regular sequencer:                             */}}
+\DoxyCodeLine{50 \textcolor{comment}{/* To select into literal LL\_ADC\_REG\_RANK\_x the relevant bits for:            */}}
+\DoxyCodeLine{51 \textcolor{comment}{/* -\/ sequencer register offset                                                */}}
+\DoxyCodeLine{52 \textcolor{comment}{/* -\/ sequencer rank bits position into the selected register                  */}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{comment}{/* Internal register offset for ADC group regular sequencer configuration */}}
+\DoxyCodeLine{55 \textcolor{comment}{/* (offset placed into a spare area of literal definition) */}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define ADC\_SQR1\_REGOFFSET                 0x00000000UL}}
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define ADC\_SQR2\_REGOFFSET                 0x00000100UL}}
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define ADC\_SQR3\_REGOFFSET                 0x00000200UL}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define ADC\_SQR4\_REGOFFSET                 0x00000300UL}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define ADC\_REG\_SQRX\_REGOFFSET\_MASK        (ADC\_SQR1\_REGOFFSET | ADC\_SQR2\_REGOFFSET | ADC\_SQR3\_REGOFFSET | ADC\_SQR4\_REGOFFSET)}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_ID\_SQRX\_MASK          (ADC\_CHANNEL\_ID\_NUMBER\_MASK\_POSBIT0)}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 \textcolor{comment}{/* Definition of ADC group regular sequencer bits information to be inserted  */}}
+\DoxyCodeLine{65 \textcolor{comment}{/* into ADC group regular sequencer ranks literals definition.                */}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_1\_SQRX\_BITOFFSET\_POS  ( 0UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR3\_SQ1) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_2\_SQRX\_BITOFFSET\_POS  ( 5UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR3\_SQ2) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_3\_SQRX\_BITOFFSET\_POS  (10UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR3\_SQ3) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_4\_SQRX\_BITOFFSET\_POS  (15UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR3\_SQ4) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_5\_SQRX\_BITOFFSET\_POS  (20UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR3\_SQ5) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_6\_SQRX\_BITOFFSET\_POS  (25UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR3\_SQ6) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_7\_SQRX\_BITOFFSET\_POS  ( 0UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR2\_SQ7) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_8\_SQRX\_BITOFFSET\_POS  ( 5UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR2\_SQ8) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_9\_SQRX\_BITOFFSET\_POS  (10UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR2\_SQ9) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_10\_SQRX\_BITOFFSET\_POS (15UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR2\_SQ10) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{76 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_11\_SQRX\_BITOFFSET\_POS (20UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR2\_SQ11) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_12\_SQRX\_BITOFFSET\_POS (25UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR2\_SQ12) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{78 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_13\_SQRX\_BITOFFSET\_POS ( 0UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR1\_SQ13) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_14\_SQRX\_BITOFFSET\_POS ( 5UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR1\_SQ14) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{80 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_15\_SQRX\_BITOFFSET\_POS (10UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR1\_SQ15) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define ADC\_REG\_RANK\_16\_SQRX\_BITOFFSET\_POS (15UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_SQR1\_SQ16) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{comment}{/* Internal mask for ADC group injected sequencer:                            */}}
+\DoxyCodeLine{84 \textcolor{comment}{/* To select into literal LL\_ADC\_INJ\_RANK\_x the relevant bits for:            */}}
+\DoxyCodeLine{85 \textcolor{comment}{/* -\/ data register offset                                                     */}}
+\DoxyCodeLine{86 \textcolor{comment}{/* -\/ offset register offset                                                   */}}
+\DoxyCodeLine{87 \textcolor{comment}{/* -\/ sequencer rank bits position into the selected register                  */}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 \textcolor{comment}{/* Internal register offset for ADC group injected data register */}}
+\DoxyCodeLine{90 \textcolor{comment}{/* (offset placed into a spare area of literal definition) */}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#define ADC\_JDR1\_REGOFFSET                 0x00000000UL}}
+\DoxyCodeLine{92 \textcolor{preprocessor}{\#define ADC\_JDR2\_REGOFFSET                 0x00000100UL}}
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#define ADC\_JDR3\_REGOFFSET                 0x00000200UL}}
+\DoxyCodeLine{94 \textcolor{preprocessor}{\#define ADC\_JDR4\_REGOFFSET                 0x00000300UL}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96 \textcolor{comment}{/* Internal register offset for ADC group injected offset configuration */}}
+\DoxyCodeLine{97 \textcolor{comment}{/* (offset placed into a spare area of literal definition) */}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define ADC\_JOFR1\_REGOFFSET                0x00000000UL}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define ADC\_JOFR2\_REGOFFSET                0x00001000UL}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#define ADC\_JOFR3\_REGOFFSET                0x00002000UL}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define ADC\_JOFR4\_REGOFFSET                0x00003000UL}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{preprocessor}{\#define ADC\_INJ\_JDRX\_REGOFFSET\_MASK        (ADC\_JDR1\_REGOFFSET | ADC\_JDR2\_REGOFFSET | ADC\_JDR3\_REGOFFSET | ADC\_JDR4\_REGOFFSET)}}
+\DoxyCodeLine{104 \textcolor{preprocessor}{\#define ADC\_INJ\_JOFRX\_REGOFFSET\_MASK       (ADC\_JOFR1\_REGOFFSET | ADC\_JOFR2\_REGOFFSET | ADC\_JOFR3\_REGOFFSET | ADC\_JOFR4\_REGOFFSET)}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#define ADC\_INJ\_RANK\_ID\_JSQR\_MASK          (ADC\_CHANNEL\_ID\_NUMBER\_MASK\_POSBIT0)}}
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107 \textcolor{comment}{/* Internal mask for ADC group regular trigger:                               */}}
+\DoxyCodeLine{108 \textcolor{comment}{/* To select into literal LL\_ADC\_REG\_TRIG\_x the relevant bits for:            */}}
+\DoxyCodeLine{109 \textcolor{comment}{/* -\/ regular trigger source                                                   */}}
+\DoxyCodeLine{110 \textcolor{comment}{/* -\/ regular trigger edge                                                     */}}
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#define ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT       (ADC\_CR2\_EXTEN\_0) }\textcolor{comment}{/* Trigger edge set to rising edge (default setting for compatibility with some ADC on other STM32 families having this setting set by HW default value) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{comment}{/* Mask containing trigger source masks for each of possible                  */}}
+\DoxyCodeLine{114 \textcolor{comment}{/* trigger edge selection duplicated with shifts [0; 4; 8; 12]                */}}
+\DoxyCodeLine{115 \textcolor{comment}{/* corresponding to \{SW start; ext trigger; ext trigger; ext trigger\}.        */}}
+\DoxyCodeLine{116 \textcolor{preprocessor}{\#define ADC\_REG\_TRIG\_SOURCE\_MASK            (((LL\_ADC\_REG\_TRIG\_SOFTWARE \& ADC\_CR2\_EXTSEL) >> (4UL * 0UL)) | \(\backslash\)}}
+\DoxyCodeLine{117 \textcolor{preprocessor}{                                             ((ADC\_CR2\_EXTSEL)                            >> (4UL * 1UL)) | \(\backslash\)}}
+\DoxyCodeLine{118 \textcolor{preprocessor}{                                             ((ADC\_CR2\_EXTSEL)                            >> (4UL * 2UL)) | \(\backslash\)}}
+\DoxyCodeLine{119 \textcolor{preprocessor}{                                             ((ADC\_CR2\_EXTSEL)                            >> (4UL * 3UL)))}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121 \textcolor{comment}{/* Mask containing trigger edge masks for each of possible                    */}}
+\DoxyCodeLine{122 \textcolor{comment}{/* trigger edge selection duplicated with shifts [0; 4; 8; 12]                */}}
+\DoxyCodeLine{123 \textcolor{comment}{/* corresponding to \{SW start; ext trigger; ext trigger; ext trigger\}.        */}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#define ADC\_REG\_TRIG\_EDGE\_MASK              (((LL\_ADC\_REG\_TRIG\_SOFTWARE \& ADC\_CR2\_EXTEN) >> (4UL * 0UL)) | \(\backslash\)}}
+\DoxyCodeLine{125 \textcolor{preprocessor}{                                             ((ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)            >> (4UL * 1UL)) | \(\backslash\)}}
+\DoxyCodeLine{126 \textcolor{preprocessor}{                                             ((ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)            >> (4UL * 2UL)) | \(\backslash\)}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{                                             ((ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)            >> (4UL * 3UL)))}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{comment}{/* Definition of ADC group regular trigger bits information.                  */}}
+\DoxyCodeLine{130 \textcolor{preprocessor}{\#define ADC\_REG\_TRIG\_EXTSEL\_BITOFFSET\_POS  (24UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_CR2\_EXTSEL) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{131 \textcolor{preprocessor}{\#define ADC\_REG\_TRIG\_EXTEN\_BITOFFSET\_POS   (28UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_CR2\_EXTEN) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 \textcolor{comment}{/* Internal mask for ADC group injected trigger:                              */}}
+\DoxyCodeLine{136 \textcolor{comment}{/* To select into literal LL\_ADC\_INJ\_TRIG\_x the relevant bits for:            */}}
+\DoxyCodeLine{137 \textcolor{comment}{/* -\/ injected trigger source                                                  */}}
+\DoxyCodeLine{138 \textcolor{comment}{/* -\/ injected trigger edge                                                    */}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#define ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT      (ADC\_CR2\_JEXTEN\_0) }\textcolor{comment}{/* Trigger edge set to rising edge (default setting for compatibility with some ADC on other STM32 families having this setting set by HW default value) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{comment}{/* Mask containing trigger source masks for each of possible                  */}}
+\DoxyCodeLine{142 \textcolor{comment}{/* trigger edge selection duplicated with shifts [0; 4; 8; 12]                */}}
+\DoxyCodeLine{143 \textcolor{comment}{/* corresponding to \{SW start; ext trigger; ext trigger; ext trigger\}.        */}}
+\DoxyCodeLine{144 \textcolor{preprocessor}{\#define ADC\_INJ\_TRIG\_SOURCE\_MASK            (((LL\_ADC\_REG\_TRIG\_SOFTWARE \& ADC\_CR2\_JEXTSEL) >> (4UL * 0UL)) | \(\backslash\)}}
+\DoxyCodeLine{145 \textcolor{preprocessor}{                                             ((ADC\_CR2\_JEXTSEL)                            >> (4UL * 1UL)) | \(\backslash\)}}
+\DoxyCodeLine{146 \textcolor{preprocessor}{                                             ((ADC\_CR2\_JEXTSEL)                            >> (4UL * 2UL)) | \(\backslash\)}}
+\DoxyCodeLine{147 \textcolor{preprocessor}{                                             ((ADC\_CR2\_JEXTSEL)                            >> (4UL * 3UL)))}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \textcolor{comment}{/* Mask containing trigger edge masks for each of possible                    */}}
+\DoxyCodeLine{150 \textcolor{comment}{/* trigger edge selection duplicated with shifts [0; 4; 8; 12]                */}}
+\DoxyCodeLine{151 \textcolor{comment}{/* corresponding to \{SW start; ext trigger; ext trigger; ext trigger\}.        */}}
+\DoxyCodeLine{152 \textcolor{preprocessor}{\#define ADC\_INJ\_TRIG\_EDGE\_MASK              (((LL\_ADC\_INJ\_TRIG\_SOFTWARE \& ADC\_CR2\_JEXTEN) >> (4UL * 0UL)) | \(\backslash\)}}
+\DoxyCodeLine{153 \textcolor{preprocessor}{                                             ((ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)             >> (4UL * 1UL)) | \(\backslash\)}}
+\DoxyCodeLine{154 \textcolor{preprocessor}{                                             ((ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)             >> (4UL * 2UL)) | \(\backslash\)}}
+\DoxyCodeLine{155 \textcolor{preprocessor}{                                             ((ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)             >> (4UL * 3UL)))}}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \textcolor{comment}{/* Definition of ADC group injected trigger bits information.                 */}}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#define ADC\_INJ\_TRIG\_EXTSEL\_BITOFFSET\_POS  (16UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_CR2\_JEXTSEL) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{159 \textcolor{preprocessor}{\#define ADC\_INJ\_TRIG\_EXTEN\_BITOFFSET\_POS   (20UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_CR2\_JEXTEN) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{160 }
+\DoxyCodeLine{161 \textcolor{comment}{/* Internal mask for ADC channel:                                             */}}
+\DoxyCodeLine{162 \textcolor{comment}{/* To select into literal LL\_ADC\_CHANNEL\_x the relevant bits for:             */}}
+\DoxyCodeLine{163 \textcolor{comment}{/* -\/ channel identifier defined by number                                     */}}
+\DoxyCodeLine{164 \textcolor{comment}{/* -\/ channel differentiation between external channels (connected to          */}}
+\DoxyCodeLine{165 \textcolor{comment}{/*   GPIO pins) and internal channels (connected to internal paths)           */}}
+\DoxyCodeLine{166 \textcolor{comment}{/* -\/ channel sampling time defined by SMPRx register offset                   */}}
+\DoxyCodeLine{167 \textcolor{comment}{/*   and SMPx bits positions into SMPRx register                              */}}
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_ID\_NUMBER\_MASK         (ADC\_CR1\_AWDCH)}}
+\DoxyCodeLine{169 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_ID\_NUMBER\_BITOFFSET\_POS ( 0UL)}\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_CHANNEL\_ID\_NUMBER\_MASK) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{170 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_ID\_MASK                (ADC\_CHANNEL\_ID\_NUMBER\_MASK | ADC\_CHANNEL\_ID\_INTERNAL\_CH\_MASK)}}
+\DoxyCodeLine{171 \textcolor{comment}{/* Equivalent mask of ADC\_CHANNEL\_NUMBER\_MASK aligned on register LSB (bit 0) */}}
+\DoxyCodeLine{172 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_ID\_NUMBER\_MASK\_POSBIT0 0x0000001FU }\textcolor{comment}{/* Equivalent to shift: (ADC\_CHANNEL\_NUMBER\_MASK >> POSITION\_VAL(ADC\_CHANNEL\_NUMBER\_MASK)) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 \textcolor{comment}{/* Channel differentiation between external and internal channels */}}
+\DoxyCodeLine{175 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_ID\_INTERNAL\_CH         0x80000000UL   }\textcolor{comment}{/* Marker of internal channel */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{176 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_ID\_INTERNAL\_CH\_2       0x40000000UL   }\textcolor{comment}{/* Marker of internal channel for other ADC instances, in case of different ADC internal channels mapped on same channel number on different ADC instances */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{177 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_DIFFERENCIATION\_TEMPSENSOR\_VBAT 0x10000000U  }\textcolor{comment}{/* Dummy bit for driver internal usage, not used in ADC channel setting registers CR1 or SQRx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{178 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_ID\_INTERNAL\_CH\_MASK    (ADC\_CHANNEL\_ID\_INTERNAL\_CH | ADC\_CHANNEL\_ID\_INTERNAL\_CH\_2 | ADC\_CHANNEL\_DIFFERENCIATION\_TEMPSENSOR\_VBAT)}}
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180 \textcolor{comment}{/* Internal register offset for ADC channel sampling time configuration */}}
+\DoxyCodeLine{181 \textcolor{comment}{/* (offset placed into a spare area of literal definition) */}}
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#define ADC\_SMPR1\_REGOFFSET                0x00000000UL}}
+\DoxyCodeLine{183 \textcolor{preprocessor}{\#define ADC\_SMPR2\_REGOFFSET                0x02000000UL}}
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_SMPRX\_REGOFFSET\_MASK   (ADC\_SMPR1\_REGOFFSET | ADC\_SMPR2\_REGOFFSET)}}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_SMPx\_BITOFFSET\_MASK    0x01F00000UL}}
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS     (20UL)           }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_CHANNEL\_SMPx\_BITOFFSET\_MASK) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189 \textcolor{comment}{/* Definition of channels ID number information to be inserted into           */}}
+\DoxyCodeLine{190 \textcolor{comment}{/* channels literals definition.                                              */}}
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_0\_NUMBER               0x00000000UL}}
+\DoxyCodeLine{192 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_1\_NUMBER               (                                                                        ADC\_CR1\_AWDCH\_0)}}
+\DoxyCodeLine{193 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_2\_NUMBER               (                                                      ADC\_CR1\_AWDCH\_1                  )}}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_3\_NUMBER               (                                                      ADC\_CR1\_AWDCH\_1 | ADC\_CR1\_AWDCH\_0)}}
+\DoxyCodeLine{195 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_4\_NUMBER               (                                    ADC\_CR1\_AWDCH\_2                                    )}}
+\DoxyCodeLine{196 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_5\_NUMBER               (                                    ADC\_CR1\_AWDCH\_2                   | ADC\_CR1\_AWDCH\_0)}}
+\DoxyCodeLine{197 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_6\_NUMBER               (                                    ADC\_CR1\_AWDCH\_2 | ADC\_CR1\_AWDCH\_1                  )}}
+\DoxyCodeLine{198 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_7\_NUMBER               (                                    ADC\_CR1\_AWDCH\_2 | ADC\_CR1\_AWDCH\_1 | ADC\_CR1\_AWDCH\_0)}}
+\DoxyCodeLine{199 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_8\_NUMBER               (                  ADC\_CR1\_AWDCH\_3                                                      )}}
+\DoxyCodeLine{200 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_9\_NUMBER               (                  ADC\_CR1\_AWDCH\_3                                     | ADC\_CR1\_AWDCH\_0)}}
+\DoxyCodeLine{201 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_10\_NUMBER              (                  ADC\_CR1\_AWDCH\_3                   | ADC\_CR1\_AWDCH\_1                  )}}
+\DoxyCodeLine{202 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_11\_NUMBER              (                  ADC\_CR1\_AWDCH\_3                   | ADC\_CR1\_AWDCH\_1 | ADC\_CR1\_AWDCH\_0)}}
+\DoxyCodeLine{203 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_12\_NUMBER              (                  ADC\_CR1\_AWDCH\_3 | ADC\_CR1\_AWDCH\_2                                    )}}
+\DoxyCodeLine{204 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_13\_NUMBER              (                  ADC\_CR1\_AWDCH\_3 | ADC\_CR1\_AWDCH\_2                   | ADC\_CR1\_AWDCH\_0)}}
+\DoxyCodeLine{205 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_14\_NUMBER              (                  ADC\_CR1\_AWDCH\_3 | ADC\_CR1\_AWDCH\_2 | ADC\_CR1\_AWDCH\_1                  )}}
+\DoxyCodeLine{206 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_15\_NUMBER              (                  ADC\_CR1\_AWDCH\_3 | ADC\_CR1\_AWDCH\_2 | ADC\_CR1\_AWDCH\_1 | ADC\_CR1\_AWDCH\_0)}}
+\DoxyCodeLine{207 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_16\_NUMBER              (ADC\_CR1\_AWDCH\_4                                                                        )}}
+\DoxyCodeLine{208 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_17\_NUMBER              (ADC\_CR1\_AWDCH\_4                                                       | ADC\_CR1\_AWDCH\_0)}}
+\DoxyCodeLine{209 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_18\_NUMBER              (ADC\_CR1\_AWDCH\_4                                     | ADC\_CR1\_AWDCH\_1                  )}}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211 \textcolor{comment}{/* Definition of channels sampling time information to be inserted into       */}}
+\DoxyCodeLine{212 \textcolor{comment}{/* channels literals definition.                                              */}}
+\DoxyCodeLine{213 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_0\_SMP                  (ADC\_SMPR2\_REGOFFSET | (( 0UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP0) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{214 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_1\_SMP                  (ADC\_SMPR2\_REGOFFSET | (( 3UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP1) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{215 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_2\_SMP                  (ADC\_SMPR2\_REGOFFSET | (( 6UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP2) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{216 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_3\_SMP                  (ADC\_SMPR2\_REGOFFSET | (( 9UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP3) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{217 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_4\_SMP                  (ADC\_SMPR2\_REGOFFSET | ((12UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP4) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{218 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_5\_SMP                  (ADC\_SMPR2\_REGOFFSET | ((15UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP5) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{219 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_6\_SMP                  (ADC\_SMPR2\_REGOFFSET | ((18UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP6) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{220 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_7\_SMP                  (ADC\_SMPR2\_REGOFFSET | ((21UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP7) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{221 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_8\_SMP                  (ADC\_SMPR2\_REGOFFSET | ((24UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP8) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{222 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_9\_SMP                  (ADC\_SMPR2\_REGOFFSET | ((27UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR2\_SMP9) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{223 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_10\_SMP                 (ADC\_SMPR1\_REGOFFSET | (( 0UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR1\_SMP10) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{224 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_11\_SMP                 (ADC\_SMPR1\_REGOFFSET | (( 3UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR1\_SMP11) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{225 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_12\_SMP                 (ADC\_SMPR1\_REGOFFSET | (( 6UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR1\_SMP12) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{226 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_13\_SMP                 (ADC\_SMPR1\_REGOFFSET | (( 9UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR1\_SMP13) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{227 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_14\_SMP                 (ADC\_SMPR1\_REGOFFSET | ((12UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR1\_SMP14) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{228 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_15\_SMP                 (ADC\_SMPR1\_REGOFFSET | ((15UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR1\_SMP15) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{229 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_16\_SMP                 (ADC\_SMPR1\_REGOFFSET | ((18UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR1\_SMP16) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{230 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_17\_SMP                 (ADC\_SMPR1\_REGOFFSET | ((21UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR1\_SMP17) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{231 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_18\_SMP                 (ADC\_SMPR1\_REGOFFSET | ((24UL) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) }\textcolor{comment}{/* Value shifted is equivalent to POSITION\_VAL(ADC\_SMPR1\_SMP18) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{232 }
+\DoxyCodeLine{233 \textcolor{comment}{/* Internal mask for ADC analog watchdog:                                     */}}
+\DoxyCodeLine{234 \textcolor{comment}{/* To select into literals LL\_ADC\_AWD\_CHANNELx\_xxx the relevant bits for:     */}}
+\DoxyCodeLine{235 \textcolor{comment}{/* (concatenation of multiple bits used in different analog watchdogs,        */}}
+\DoxyCodeLine{236 \textcolor{comment}{/* (feature of several watchdogs not available on all STM32 families)).       */}}
+\DoxyCodeLine{237 \textcolor{comment}{/* -\/ analog watchdog 1: monitored channel defined by number,                  */}}
+\DoxyCodeLine{238 \textcolor{comment}{/*   selection of ADC group (ADC groups regular and-\/or injected).             */}}
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240 \textcolor{comment}{/* Internal register offset for ADC analog watchdog channel configuration */}}
+\DoxyCodeLine{241 \textcolor{preprocessor}{\#define ADC\_AWD\_CR1\_REGOFFSET              0x00000000UL}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 \textcolor{preprocessor}{\#define ADC\_AWD\_CRX\_REGOFFSET\_MASK         (ADC\_AWD\_CR1\_REGOFFSET)}}
+\DoxyCodeLine{244 }
+\DoxyCodeLine{245 \textcolor{preprocessor}{\#define ADC\_AWD\_CR1\_CHANNEL\_MASK           (ADC\_CR1\_AWDCH | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL)}}
+\DoxyCodeLine{246 \textcolor{preprocessor}{\#define ADC\_AWD\_CR\_ALL\_CHANNEL\_MASK        (ADC\_AWD\_CR1\_CHANNEL\_MASK)}}
+\DoxyCodeLine{247 }
+\DoxyCodeLine{248 \textcolor{comment}{/* Internal register offset for ADC analog watchdog threshold configuration */}}
+\DoxyCodeLine{249 \textcolor{preprocessor}{\#define ADC\_AWD\_TR1\_HIGH\_REGOFFSET         0x00000000UL}}
+\DoxyCodeLine{250 \textcolor{preprocessor}{\#define ADC\_AWD\_TR1\_LOW\_REGOFFSET          0x00000001UL}}
+\DoxyCodeLine{251 \textcolor{preprocessor}{\#define ADC\_AWD\_TRX\_REGOFFSET\_MASK         (ADC\_AWD\_TR1\_HIGH\_REGOFFSET | ADC\_AWD\_TR1\_LOW\_REGOFFSET)}}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253 \textcolor{comment}{/* ADC registers bits positions */}}
+\DoxyCodeLine{254 \textcolor{preprocessor}{\#define ADC\_CR1\_RES\_BITOFFSET\_POS          (24UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_CR1\_RES) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{255 \textcolor{preprocessor}{\#define ADC\_TR\_HT\_BITOFFSET\_POS            (16UL) }\textcolor{comment}{/* Value equivalent to POSITION\_VAL(ADC\_TR\_HT) */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{256 }
+\DoxyCodeLine{257 \textcolor{comment}{/* ADC internal channels related definitions */}}
+\DoxyCodeLine{258 \textcolor{comment}{/* Internal voltage reference VrefInt */}}
+\DoxyCodeLine{259 \textcolor{preprocessor}{\#define VREFINT\_CAL\_ADDR                   ((uint16\_t*) (0x1FFF7A2AU)) }\textcolor{comment}{/* Internal voltage reference, address of parameter VREFINT\_CAL: VrefInt ADC raw data acquired at temperature 30 DegC (tolerance: +-\/5 DegC), Vref+ = 3.3 V (tolerance: +-\/10 mV). */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{260 \textcolor{preprocessor}{\#define VREFINT\_CAL\_VREF                   ( 3300UL)                    }\textcolor{comment}{/* Analog voltage reference (Vref+) value with which temperature sensor has been calibrated in production (tolerance: +-\/10 mV) (unit: mV). */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{261 \textcolor{comment}{/* Temperature sensor */}}
+\DoxyCodeLine{262 \textcolor{preprocessor}{\#define TEMPSENSOR\_CAL1\_ADDR               ((uint16\_t*) (0x1FFF7A2CU)) }\textcolor{comment}{/* Internal temperature sensor, address of parameter TS\_CAL1: On STM32F4, temperature sensor ADC raw data acquired at temperature  30 DegC (tolerance: +-\/5 DegC), Vref+ = 3.3 V (tolerance: +-\/10 mV). */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{263 \textcolor{preprocessor}{\#define TEMPSENSOR\_CAL2\_ADDR               ((uint16\_t*) (0x1FFF7A2EU)) }\textcolor{comment}{/* Internal temperature sensor, address of parameter TS\_CAL2: On STM32F4, temperature sensor ADC raw data acquired at temperature 110 DegC (tolerance: +-\/5 DegC), Vref+ = 3.3 V (tolerance: +-\/10 mV). */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{264 \textcolor{preprocessor}{\#define TEMPSENSOR\_CAL1\_TEMP               (( int32\_t)   30)           }\textcolor{comment}{/* Internal temperature sensor, temperature at which temperature sensor has been calibrated in production for data into TEMPSENSOR\_CAL1\_ADDR (tolerance: +-\/5 DegC) (unit: DegC). */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{265 \textcolor{preprocessor}{\#define TEMPSENSOR\_CAL2\_TEMP               (( int32\_t)  110)           }\textcolor{comment}{/* Internal temperature sensor, temperature at which temperature sensor has been calibrated in production for data into TEMPSENSOR\_CAL2\_ADDR (tolerance: +-\/5 DegC) (unit: DegC). */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{266 \textcolor{preprocessor}{\#define TEMPSENSOR\_CAL\_VREFANALOG          ( 3300UL)                    }\textcolor{comment}{/* Analog voltage reference (Vref+) voltage with which temperature sensor has been calibrated in production (+-\/10 mV) (unit: mV). */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{273 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{286 \textcolor{preprocessor}{\#define \_\_ADC\_MASK\_SHIFT(\_\_BITS\_\_, \_\_MASK\_\_)                                   \(\backslash\)}}
+\DoxyCodeLine{287 \textcolor{preprocessor}{  (((\_\_BITS\_\_) \& (\_\_MASK\_\_)) >> POSITION\_VAL((\_\_MASK\_\_)))}}
+\DoxyCodeLine{288 }
+\DoxyCodeLine{297 \textcolor{preprocessor}{\#define \_\_ADC\_PTR\_REG\_OFFSET(\_\_REG\_\_, \_\_REG\_OFFFSET\_\_)                         \(\backslash\)}}
+\DoxyCodeLine{298 \textcolor{preprocessor}{ ((\_\_IO uint32\_t *)((uint32\_t) ((uint32\_t)(\&(\_\_REG\_\_)) + ((\_\_REG\_OFFFSET\_\_) << 2UL))))}}
+\DoxyCodeLine{299 }
+\DoxyCodeLine{305 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{306 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{321 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{322 \{}
+\DoxyCodeLine{323   uint32\_t CommonClock;                 }
+\DoxyCodeLine{328 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{329   uint32\_t Multimode;                   }
+\DoxyCodeLine{334   uint32\_t MultiDMATransfer;            }
+\DoxyCodeLine{339   uint32\_t MultiTwoSamplingDelay;       }
+\DoxyCodeLine{343 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{344 }
+\DoxyCodeLine{345 \} LL\_ADC\_CommonInitTypeDef;}
+\DoxyCodeLine{346 }
+\DoxyCodeLine{367 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{368 \{}
+\DoxyCodeLine{369   uint32\_t Resolution;                  }
+\DoxyCodeLine{374   uint32\_t DataAlignment;               }
+\DoxyCodeLine{379   uint32\_t SequencersScanMode;          }
+\DoxyCodeLine{384 \} LL\_ADC\_InitTypeDef;}
+\DoxyCodeLine{385 }
+\DoxyCodeLine{405 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{406 \{}
+\DoxyCodeLine{407   uint32\_t TriggerSource;               }
+\DoxyCodeLine{414   uint32\_t SequencerLength;             }
+\DoxyCodeLine{420   uint32\_t SequencerDiscont;            }
+\DoxyCodeLine{427   uint32\_t ContinuousMode;              }
+\DoxyCodeLine{433   uint32\_t DMATransfer;                 }
+\DoxyCodeLine{438 \} LL\_ADC\_REG\_InitTypeDef;}
+\DoxyCodeLine{439 }
+\DoxyCodeLine{459 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{460 \{}
+\DoxyCodeLine{461   uint32\_t TriggerSource;               }
+\DoxyCodeLine{468   uint32\_t SequencerLength;             }
+\DoxyCodeLine{474   uint32\_t SequencerDiscont;            }
+\DoxyCodeLine{481   uint32\_t TrigAuto;                    }
+\DoxyCodeLine{487 \} LL\_ADC\_INJ\_InitTypeDef;}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{492 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_FULL\_LL\_DRIVER */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{493 }
+\DoxyCodeLine{494 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{503 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_STRT                   ADC\_SR\_STRT        }}
+\DoxyCodeLine{504 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_EOCS                   ADC\_SR\_EOC         }}
+\DoxyCodeLine{505 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_OVR                    ADC\_SR\_OVR         }}
+\DoxyCodeLine{506 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_JSTRT                  ADC\_SR\_JSTRT       }}
+\DoxyCodeLine{507 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_JEOS                   ADC\_SR\_JEOC        }}
+\DoxyCodeLine{508 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_AWD1                   ADC\_SR\_AWD         }}
+\DoxyCodeLine{509 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{510 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_EOCS\_MST               ADC\_CSR\_EOC1       }}
+\DoxyCodeLine{511 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_EOCS\_SLV1              ADC\_CSR\_EOC2       }}
+\DoxyCodeLine{512 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_EOCS\_SLV2              ADC\_CSR\_EOC3       }}
+\DoxyCodeLine{513 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_OVR\_MST                ADC\_CSR\_OVR1    }}
+\DoxyCodeLine{514 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_OVR\_SLV1               ADC\_CSR\_OVR2   }}
+\DoxyCodeLine{515 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_OVR\_SLV2               ADC\_CSR\_OVR3   }}
+\DoxyCodeLine{516 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_JEOS\_MST               ADC\_CSR\_JEOC1     }}
+\DoxyCodeLine{517 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_JEOS\_SLV1              ADC\_CSR\_JEOC2  }}
+\DoxyCodeLine{518 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_JEOS\_SLV2              ADC\_CSR\_JEOC3  }}
+\DoxyCodeLine{519 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_AWD1\_MST               ADC\_CSR\_AWD1       }}
+\DoxyCodeLine{520 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_AWD1\_SLV1              ADC\_CSR\_AWD2       }}
+\DoxyCodeLine{521 \textcolor{preprocessor}{\#define LL\_ADC\_FLAG\_AWD1\_SLV2              ADC\_CSR\_AWD3       }}
+\DoxyCodeLine{522 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{531 \textcolor{preprocessor}{\#define LL\_ADC\_IT\_EOCS                     ADC\_CR1\_EOCIE      }}
+\DoxyCodeLine{532 \textcolor{preprocessor}{\#define LL\_ADC\_IT\_OVR                      ADC\_CR1\_OVRIE      }}
+\DoxyCodeLine{533 \textcolor{preprocessor}{\#define LL\_ADC\_IT\_JEOS                     ADC\_CR1\_JEOCIE     }}
+\DoxyCodeLine{534 \textcolor{preprocessor}{\#define LL\_ADC\_IT\_AWD1                     ADC\_CR1\_AWDIE      }}
+\DoxyCodeLine{542 \textcolor{comment}{/* List of ADC registers intended to be used (most commonly) with             */}}
+\DoxyCodeLine{543 \textcolor{comment}{/* DMA transfer.                                                              */}}
+\DoxyCodeLine{544 \textcolor{comment}{/* Refer to function @ref LL\_ADC\_DMA\_GetRegAddr().                            */}}
+\DoxyCodeLine{545 \textcolor{preprocessor}{\#define LL\_ADC\_DMA\_REG\_REGULAR\_DATA          0x00000000UL   }\textcolor{comment}{/* ADC group regular conversion data register (corresponding to register DR) to be used with ADC configured in independent mode. Without DMA transfer, register accessed by LL function @ref LL\_ADC\_REG\_ReadConversionData32() and other functions @ref LL\_ADC\_REG\_ReadConversionDatax() */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{546 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{547 \textcolor{preprocessor}{\#define LL\_ADC\_DMA\_REG\_REGULAR\_DATA\_MULTI    0x00000001UL   }\textcolor{comment}{/* ADC group regular conversion data register (corresponding to register CDR) to be used with ADC configured in multimode (available on STM32 devices with several ADC instances). Without DMA transfer, register accessed by LL function @ref LL\_ADC\_REG\_ReadMultiConversionData32() */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{548 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{556 \textcolor{preprocessor}{\#define LL\_ADC\_CLOCK\_SYNC\_PCLK\_DIV2        0x00000000UL                                           }}
+\DoxyCodeLine{557 \textcolor{preprocessor}{\#define LL\_ADC\_CLOCK\_SYNC\_PCLK\_DIV4        (                   ADC\_CCR\_ADCPRE\_0)                 }}
+\DoxyCodeLine{558 \textcolor{preprocessor}{\#define LL\_ADC\_CLOCK\_SYNC\_PCLK\_DIV6        (ADC\_CCR\_ADCPRE\_1                   )                 }}
+\DoxyCodeLine{559 \textcolor{preprocessor}{\#define LL\_ADC\_CLOCK\_SYNC\_PCLK\_DIV8        (ADC\_CCR\_ADCPRE\_1 | ADC\_CCR\_ADCPRE\_0)                 }}
+\DoxyCodeLine{567 \textcolor{comment}{/* Note: Other measurement paths to internal channels may be available        */}}
+\DoxyCodeLine{568 \textcolor{comment}{/*       (connections to other peripherals).                                  */}}
+\DoxyCodeLine{569 \textcolor{comment}{/*       If they are not listed below, they do not require any specific       */}}
+\DoxyCodeLine{570 \textcolor{comment}{/*       path enable. In this case, Access to measurement path is done        */}}
+\DoxyCodeLine{571 \textcolor{comment}{/*       only by selecting the corresponding ADC internal channel.            */}}
+\DoxyCodeLine{572 \textcolor{preprocessor}{\#define LL\_ADC\_PATH\_INTERNAL\_NONE          0x00000000UL            }}
+\DoxyCodeLine{573 \textcolor{preprocessor}{\#define LL\_ADC\_PATH\_INTERNAL\_VREFINT       (ADC\_CCR\_TSVREFE)      }}
+\DoxyCodeLine{574 \textcolor{preprocessor}{\#define LL\_ADC\_PATH\_INTERNAL\_TEMPSENSOR    (ADC\_CCR\_TSVREFE)      }}
+\DoxyCodeLine{575 \textcolor{preprocessor}{\#define LL\_ADC\_PATH\_INTERNAL\_VBAT          (ADC\_CCR\_VBATE)        }}
+\DoxyCodeLine{583 \textcolor{preprocessor}{\#define LL\_ADC\_RESOLUTION\_12B              0x00000000UL                         }}
+\DoxyCodeLine{584 \textcolor{preprocessor}{\#define LL\_ADC\_RESOLUTION\_10B              (                ADC\_CR1\_RES\_0)     }}
+\DoxyCodeLine{585 \textcolor{preprocessor}{\#define LL\_ADC\_RESOLUTION\_8B               (ADC\_CR1\_RES\_1                )     }}
+\DoxyCodeLine{586 \textcolor{preprocessor}{\#define LL\_ADC\_RESOLUTION\_6B               (ADC\_CR1\_RES\_1 | ADC\_CR1\_RES\_0)     }}
+\DoxyCodeLine{594 \textcolor{preprocessor}{\#define LL\_ADC\_DATA\_ALIGN\_RIGHT            0x00000000UL            }}
+\DoxyCodeLine{595 \textcolor{preprocessor}{\#define LL\_ADC\_DATA\_ALIGN\_LEFT             (ADC\_CR2\_ALIGN)        }}
+\DoxyCodeLine{603 \textcolor{preprocessor}{\#define LL\_ADC\_SEQ\_SCAN\_DISABLE            0x00000000UL    }}
+\DoxyCodeLine{604 \textcolor{preprocessor}{\#define LL\_ADC\_SEQ\_SCAN\_ENABLE             (ADC\_CR1\_SCAN) }}
+\DoxyCodeLine{612 \textcolor{preprocessor}{\#define LL\_ADC\_GROUP\_REGULAR               0x00000001UL   }}
+\DoxyCodeLine{613 \textcolor{preprocessor}{\#define LL\_ADC\_GROUP\_INJECTED              0x00000002UL   }}
+\DoxyCodeLine{614 \textcolor{preprocessor}{\#define LL\_ADC\_GROUP\_REGULAR\_INJECTED      0x00000003UL   }}
+\DoxyCodeLine{622 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_0                   (ADC\_CHANNEL\_0\_NUMBER  | ADC\_CHANNEL\_0\_SMP)  }}
+\DoxyCodeLine{623 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_1                   (ADC\_CHANNEL\_1\_NUMBER  | ADC\_CHANNEL\_1\_SMP)  }}
+\DoxyCodeLine{624 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_2                   (ADC\_CHANNEL\_2\_NUMBER  | ADC\_CHANNEL\_2\_SMP)  }}
+\DoxyCodeLine{625 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_3                   (ADC\_CHANNEL\_3\_NUMBER  | ADC\_CHANNEL\_3\_SMP)  }}
+\DoxyCodeLine{626 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_4                   (ADC\_CHANNEL\_4\_NUMBER  | ADC\_CHANNEL\_4\_SMP)  }}
+\DoxyCodeLine{627 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_5                   (ADC\_CHANNEL\_5\_NUMBER  | ADC\_CHANNEL\_5\_SMP)  }}
+\DoxyCodeLine{628 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_6                   (ADC\_CHANNEL\_6\_NUMBER  | ADC\_CHANNEL\_6\_SMP)  }}
+\DoxyCodeLine{629 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_7                   (ADC\_CHANNEL\_7\_NUMBER  | ADC\_CHANNEL\_7\_SMP)  }}
+\DoxyCodeLine{630 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_8                   (ADC\_CHANNEL\_8\_NUMBER  | ADC\_CHANNEL\_8\_SMP)  }}
+\DoxyCodeLine{631 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_9                   (ADC\_CHANNEL\_9\_NUMBER  | ADC\_CHANNEL\_9\_SMP)  }}
+\DoxyCodeLine{632 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_10                  (ADC\_CHANNEL\_10\_NUMBER | ADC\_CHANNEL\_10\_SMP) }}
+\DoxyCodeLine{633 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_11                  (ADC\_CHANNEL\_11\_NUMBER | ADC\_CHANNEL\_11\_SMP) }}
+\DoxyCodeLine{634 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_12                  (ADC\_CHANNEL\_12\_NUMBER | ADC\_CHANNEL\_12\_SMP) }}
+\DoxyCodeLine{635 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_13                  (ADC\_CHANNEL\_13\_NUMBER | ADC\_CHANNEL\_13\_SMP) }}
+\DoxyCodeLine{636 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_14                  (ADC\_CHANNEL\_14\_NUMBER | ADC\_CHANNEL\_14\_SMP) }}
+\DoxyCodeLine{637 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_15                  (ADC\_CHANNEL\_15\_NUMBER | ADC\_CHANNEL\_15\_SMP) }}
+\DoxyCodeLine{638 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_16                  (ADC\_CHANNEL\_16\_NUMBER | ADC\_CHANNEL\_16\_SMP) }}
+\DoxyCodeLine{639 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_17                  (ADC\_CHANNEL\_17\_NUMBER | ADC\_CHANNEL\_17\_SMP) }}
+\DoxyCodeLine{640 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_18                  (ADC\_CHANNEL\_18\_NUMBER | ADC\_CHANNEL\_18\_SMP) }}
+\DoxyCodeLine{641 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_VREFINT             (LL\_ADC\_CHANNEL\_17 | ADC\_CHANNEL\_ID\_INTERNAL\_CH) }}
+\DoxyCodeLine{642 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_VBAT                (LL\_ADC\_CHANNEL\_18 | ADC\_CHANNEL\_ID\_INTERNAL\_CH) }}
+\DoxyCodeLine{643 \textcolor{preprocessor}{\#if defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F405xx) || defined(STM32F407xx) || defined(STM32F410Tx) || defined(STM32F410Cx) || defined(STM32F410Rx) || defined(STM32F415xx) || defined(STM32F417xx)}}
+\DoxyCodeLine{644 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_TEMPSENSOR          (LL\_ADC\_CHANNEL\_16 | ADC\_CHANNEL\_ID\_INTERNAL\_CH) }}
+\DoxyCodeLine{645 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F401xC || STM32F401xE || STM32F410xx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{646 \textcolor{preprocessor}{\#if defined(STM32F411xE) || defined(STM32F412Cx) || defined(STM32F412Rx) || defined(STM32F412Vx) || defined(STM32F412Zx) || defined(STM32F413xx) || defined(STM32F423xx) || defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)}}
+\DoxyCodeLine{647 \textcolor{preprocessor}{\#define LL\_ADC\_CHANNEL\_TEMPSENSOR          (LL\_ADC\_CHANNEL\_18 | ADC\_CHANNEL\_ID\_INTERNAL\_CH | ADC\_CHANNEL\_DIFFERENCIATION\_TEMPSENSOR\_VBAT) }}
+\DoxyCodeLine{648 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F411xE || STM32F412Cx || STM32F412Rx || STM32F412Vx || STM32F412Zx || STM32F413xx || STM32F423xx || STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{656 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_SOFTWARE           0x00000000UL                                                                                                 }}
+\DoxyCodeLine{657 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH1       (ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                                                             }}
+\DoxyCodeLine{658 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH2       (ADC\_CR2\_EXTSEL\_0 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                                          }}
+\DoxyCodeLine{659 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM1\_CH3       (ADC\_CR2\_EXTSEL\_1 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                                          }}
+\DoxyCodeLine{660 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH2       (ADC\_CR2\_EXTSEL\_1 | ADC\_CR2\_EXTSEL\_0 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                       }}
+\DoxyCodeLine{661 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH3       (ADC\_CR2\_EXTSEL\_2 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                                          }}
+\DoxyCodeLine{662 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_CH4       (ADC\_CR2\_EXTSEL\_2 | ADC\_CR2\_EXTSEL\_0 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                       }}
+\DoxyCodeLine{663 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM2\_TRGO      (ADC\_CR2\_EXTSEL\_2 | ADC\_CR2\_EXTSEL\_1 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                       }}
+\DoxyCodeLine{664 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_CH1       (ADC\_CR2\_EXTSEL\_2 | ADC\_CR2\_EXTSEL\_1 | ADC\_CR2\_EXTSEL\_0 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                    }}
+\DoxyCodeLine{665 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM3\_TRGO      (ADC\_CR2\_EXTSEL\_3 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                                          }}
+\DoxyCodeLine{666 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM4\_CH4       (ADC\_CR2\_EXTSEL\_3 | ADC\_CR2\_EXTSEL\_0 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                       }}
+\DoxyCodeLine{667 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM5\_CH1       (ADC\_CR2\_EXTSEL\_3 | ADC\_CR2\_EXTSEL\_1 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                       }}
+\DoxyCodeLine{668 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM5\_CH2       (ADC\_CR2\_EXTSEL\_3 | ADC\_CR2\_EXTSEL\_1 | ADC\_CR2\_EXTSEL\_0 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                    }}
+\DoxyCodeLine{669 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM5\_CH3       (ADC\_CR2\_EXTSEL\_3 | ADC\_CR2\_EXTSEL\_2 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                                       }}
+\DoxyCodeLine{670 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_CH1       (ADC\_CR2\_EXTSEL\_3 | ADC\_CR2\_EXTSEL\_2 | ADC\_CR2\_EXTSEL\_0 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                    }}
+\DoxyCodeLine{671 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_TIM8\_TRGO      (ADC\_CR2\_EXTSEL\_3 | ADC\_CR2\_EXTSEL\_2 | ADC\_CR2\_EXTSEL\_1 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT)                    }}
+\DoxyCodeLine{672 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_EXTI\_LINE11    (ADC\_CR2\_EXTSEL\_3 | ADC\_CR2\_EXTSEL\_2 | ADC\_CR2\_EXTSEL\_1 | ADC\_CR2\_EXTSEL\_0 | ADC\_REG\_TRIG\_EXT\_EDGE\_DEFAULT) }}
+\DoxyCodeLine{680 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_RISING         (                  ADC\_CR2\_EXTEN\_0)     }}
+\DoxyCodeLine{681 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_FALLING        (ADC\_CR2\_EXTEN\_1                  )     }}
+\DoxyCodeLine{682 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_TRIG\_EXT\_RISINGFALLING  (ADC\_CR2\_EXTEN\_1 | ADC\_CR2\_EXTEN\_0)     }}
+\DoxyCodeLine{690 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_CONV\_SINGLE             0x00000000UL             }}
+\DoxyCodeLine{691 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_CONV\_CONTINUOUS         (ADC\_CR2\_CONT)          }}
+\DoxyCodeLine{699 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_DMA\_TRANSFER\_NONE       0x00000000UL              }}
+\DoxyCodeLine{700 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_DMA\_TRANSFER\_LIMITED    (              ADC\_CR2\_DMA)          }}
+\DoxyCodeLine{701 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_DMA\_TRANSFER\_UNLIMITED  (ADC\_CR2\_DDS | ADC\_CR2\_DMA)          }}
+\DoxyCodeLine{709 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_FLAG\_EOC\_SEQUENCE\_CONV       0x00000000UL    }}
+\DoxyCodeLine{710 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_FLAG\_EOC\_UNITARY\_CONV        (ADC\_CR2\_EOCS) }}
+\DoxyCodeLine{718 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_DISABLE        0x00000000UL                                                 }}
+\DoxyCodeLine{719 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_2RANKS  (                                             ADC\_SQR1\_L\_0) }}
+\DoxyCodeLine{720 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_3RANKS  (                              ADC\_SQR1\_L\_1               ) }}
+\DoxyCodeLine{721 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_4RANKS  (                              ADC\_SQR1\_L\_1 | ADC\_SQR1\_L\_0) }}
+\DoxyCodeLine{722 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_5RANKS  (               ADC\_SQR1\_L\_2                              ) }}
+\DoxyCodeLine{723 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_6RANKS  (               ADC\_SQR1\_L\_2                | ADC\_SQR1\_L\_0) }}
+\DoxyCodeLine{724 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_7RANKS  (               ADC\_SQR1\_L\_2 | ADC\_SQR1\_L\_1               ) }}
+\DoxyCodeLine{725 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_8RANKS  (               ADC\_SQR1\_L\_2 | ADC\_SQR1\_L\_1 | ADC\_SQR1\_L\_0) }}
+\DoxyCodeLine{726 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_9RANKS  (ADC\_SQR1\_L\_3                                             ) }}
+\DoxyCodeLine{727 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_10RANKS (ADC\_SQR1\_L\_3                               | ADC\_SQR1\_L\_0) }}
+\DoxyCodeLine{728 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_11RANKS (ADC\_SQR1\_L\_3                | ADC\_SQR1\_L\_1               ) }}
+\DoxyCodeLine{729 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_12RANKS (ADC\_SQR1\_L\_3                | ADC\_SQR1\_L\_1 | ADC\_SQR1\_L\_0) }}
+\DoxyCodeLine{730 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_13RANKS (ADC\_SQR1\_L\_3 | ADC\_SQR1\_L\_2                              ) }}
+\DoxyCodeLine{731 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_14RANKS (ADC\_SQR1\_L\_3 | ADC\_SQR1\_L\_2                | ADC\_SQR1\_L\_0) }}
+\DoxyCodeLine{732 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_15RANKS (ADC\_SQR1\_L\_3 | ADC\_SQR1\_L\_2 | ADC\_SQR1\_L\_1               ) }}
+\DoxyCodeLine{733 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_SCAN\_ENABLE\_16RANKS (ADC\_SQR1\_L\_3 | ADC\_SQR1\_L\_2 | ADC\_SQR1\_L\_1 | ADC\_SQR1\_L\_0) }}
+\DoxyCodeLine{741 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_DISCONT\_DISABLE     0x00000000UL                                                                  }}
+\DoxyCodeLine{742 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_DISCONT\_1RANK       (                                                            ADC\_CR1\_DISCEN) }}
+\DoxyCodeLine{743 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_DISCONT\_2RANKS      (                                        ADC\_CR1\_DISCNUM\_0 | ADC\_CR1\_DISCEN) }}
+\DoxyCodeLine{744 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_DISCONT\_3RANKS      (                    ADC\_CR1\_DISCNUM\_1                     | ADC\_CR1\_DISCEN) }}
+\DoxyCodeLine{745 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_DISCONT\_4RANKS      (                    ADC\_CR1\_DISCNUM\_1 | ADC\_CR1\_DISCNUM\_0 | ADC\_CR1\_DISCEN) }}
+\DoxyCodeLine{746 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_DISCONT\_5RANKS      (ADC\_CR1\_DISCNUM\_2                                         | ADC\_CR1\_DISCEN) }}
+\DoxyCodeLine{747 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_DISCONT\_6RANKS      (ADC\_CR1\_DISCNUM\_2                     | ADC\_CR1\_DISCNUM\_0 | ADC\_CR1\_DISCEN) }}
+\DoxyCodeLine{748 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_DISCONT\_7RANKS      (ADC\_CR1\_DISCNUM\_2 | ADC\_CR1\_DISCNUM\_1                     | ADC\_CR1\_DISCEN) }}
+\DoxyCodeLine{749 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_SEQ\_DISCONT\_8RANKS      (ADC\_CR1\_DISCNUM\_2 | ADC\_CR1\_DISCNUM\_1 | ADC\_CR1\_DISCNUM\_0 | ADC\_CR1\_DISCEN) }}
+\DoxyCodeLine{757 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_1                  (ADC\_SQR3\_REGOFFSET | ADC\_REG\_RANK\_1\_SQRX\_BITOFFSET\_POS)  }}
+\DoxyCodeLine{758 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_2                  (ADC\_SQR3\_REGOFFSET | ADC\_REG\_RANK\_2\_SQRX\_BITOFFSET\_POS)  }}
+\DoxyCodeLine{759 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_3                  (ADC\_SQR3\_REGOFFSET | ADC\_REG\_RANK\_3\_SQRX\_BITOFFSET\_POS)  }}
+\DoxyCodeLine{760 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_4                  (ADC\_SQR3\_REGOFFSET | ADC\_REG\_RANK\_4\_SQRX\_BITOFFSET\_POS)  }}
+\DoxyCodeLine{761 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_5                  (ADC\_SQR3\_REGOFFSET | ADC\_REG\_RANK\_5\_SQRX\_BITOFFSET\_POS)  }}
+\DoxyCodeLine{762 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_6                  (ADC\_SQR3\_REGOFFSET | ADC\_REG\_RANK\_6\_SQRX\_BITOFFSET\_POS)  }}
+\DoxyCodeLine{763 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_7                  (ADC\_SQR2\_REGOFFSET | ADC\_REG\_RANK\_7\_SQRX\_BITOFFSET\_POS)  }}
+\DoxyCodeLine{764 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_8                  (ADC\_SQR2\_REGOFFSET | ADC\_REG\_RANK\_8\_SQRX\_BITOFFSET\_POS)  }}
+\DoxyCodeLine{765 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_9                  (ADC\_SQR2\_REGOFFSET | ADC\_REG\_RANK\_9\_SQRX\_BITOFFSET\_POS)  }}
+\DoxyCodeLine{766 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_10                 (ADC\_SQR2\_REGOFFSET | ADC\_REG\_RANK\_10\_SQRX\_BITOFFSET\_POS) }}
+\DoxyCodeLine{767 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_11                 (ADC\_SQR2\_REGOFFSET | ADC\_REG\_RANK\_11\_SQRX\_BITOFFSET\_POS) }}
+\DoxyCodeLine{768 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_12                 (ADC\_SQR2\_REGOFFSET | ADC\_REG\_RANK\_12\_SQRX\_BITOFFSET\_POS) }}
+\DoxyCodeLine{769 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_13                 (ADC\_SQR1\_REGOFFSET | ADC\_REG\_RANK\_13\_SQRX\_BITOFFSET\_POS) }}
+\DoxyCodeLine{770 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_14                 (ADC\_SQR1\_REGOFFSET | ADC\_REG\_RANK\_14\_SQRX\_BITOFFSET\_POS) }}
+\DoxyCodeLine{771 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_15                 (ADC\_SQR1\_REGOFFSET | ADC\_REG\_RANK\_15\_SQRX\_BITOFFSET\_POS) }}
+\DoxyCodeLine{772 \textcolor{preprocessor}{\#define LL\_ADC\_REG\_RANK\_16                 (ADC\_SQR1\_REGOFFSET | ADC\_REG\_RANK\_16\_SQRX\_BITOFFSET\_POS) }}
+\DoxyCodeLine{780 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_SOFTWARE           0x00000000UL                                                                                                     }}
+\DoxyCodeLine{781 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_CH4       (ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                                                                 }}
+\DoxyCodeLine{782 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM1\_TRGO      (ADC\_CR2\_JEXTSEL\_0 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                                             }}
+\DoxyCodeLine{783 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_CH1       (ADC\_CR2\_JEXTSEL\_1 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                                             }}
+\DoxyCodeLine{784 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM2\_TRGO      (ADC\_CR2\_JEXTSEL\_1 | ADC\_CR2\_JEXTSEL\_0 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                         }}
+\DoxyCodeLine{785 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH2       (ADC\_CR2\_JEXTSEL\_2 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                                             }}
+\DoxyCodeLine{786 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM3\_CH4       (ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_0 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                         }}
+\DoxyCodeLine{787 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH1       (ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_1 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                         }}
+\DoxyCodeLine{788 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH2       (ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_1 | ADC\_CR2\_JEXTSEL\_0 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                     }}
+\DoxyCodeLine{789 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_CH3       (ADC\_CR2\_JEXTSEL\_3 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                                             }}
+\DoxyCodeLine{790 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM4\_TRGO      (ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_0 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                         }}
+\DoxyCodeLine{791 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM5\_CH4       (ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_1 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                         }}
+\DoxyCodeLine{792 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM5\_TRGO      (ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_1 | ADC\_CR2\_JEXTSEL\_0 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                     }}
+\DoxyCodeLine{793 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH2       (ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_2 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                                         }}
+\DoxyCodeLine{794 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH3       (ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_0 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                     }}
+\DoxyCodeLine{795 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_TIM8\_CH4       (ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_1 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT)                     }}
+\DoxyCodeLine{796 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_EXTI\_LINE15    (ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_1 | ADC\_CR2\_JEXTSEL\_0 | ADC\_INJ\_TRIG\_EXT\_EDGE\_DEFAULT) }}
+\DoxyCodeLine{804 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_RISING         (                   ADC\_CR2\_JEXTEN\_0)   }}
+\DoxyCodeLine{805 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_FALLING        (ADC\_CR2\_JEXTEN\_1                   )   }}
+\DoxyCodeLine{806 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_EXT\_RISINGFALLING  (ADC\_CR2\_JEXTEN\_1 | ADC\_CR2\_JEXTEN\_0)   }}
+\DoxyCodeLine{814 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_INDEPENDENT        0x00000000UL            }}
+\DoxyCodeLine{815 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_TRIG\_FROM\_GRP\_REGULAR   (ADC\_CR1\_JAUTO)        }}
+\DoxyCodeLine{824 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_SEQ\_SCAN\_DISABLE        0x00000000UL                     }}
+\DoxyCodeLine{825 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_SEQ\_SCAN\_ENABLE\_2RANKS  (                ADC\_JSQR\_JL\_0) }}
+\DoxyCodeLine{826 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_SEQ\_SCAN\_ENABLE\_3RANKS  (ADC\_JSQR\_JL\_1                ) }}
+\DoxyCodeLine{827 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_SEQ\_SCAN\_ENABLE\_4RANKS  (ADC\_JSQR\_JL\_1 | ADC\_JSQR\_JL\_0) }}
+\DoxyCodeLine{835 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_SEQ\_DISCONT\_DISABLE     0x00000000UL            }}
+\DoxyCodeLine{836 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_SEQ\_DISCONT\_1RANK       (ADC\_CR1\_JDISCEN)      }}
+\DoxyCodeLine{844 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_RANK\_1                  (ADC\_JDR1\_REGOFFSET | ADC\_JOFR1\_REGOFFSET | 0x00000001UL) }}
+\DoxyCodeLine{845 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_RANK\_2                  (ADC\_JDR2\_REGOFFSET | ADC\_JOFR2\_REGOFFSET | 0x00000002UL) }}
+\DoxyCodeLine{846 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_RANK\_3                  (ADC\_JDR3\_REGOFFSET | ADC\_JOFR3\_REGOFFSET | 0x00000003UL) }}
+\DoxyCodeLine{847 \textcolor{preprocessor}{\#define LL\_ADC\_INJ\_RANK\_4                  (ADC\_JDR4\_REGOFFSET | ADC\_JOFR4\_REGOFFSET | 0x00000004UL) }}
+\DoxyCodeLine{855 \textcolor{preprocessor}{\#define LL\_ADC\_SAMPLINGTIME\_3CYCLES        0x00000000UL                                              }}
+\DoxyCodeLine{856 \textcolor{preprocessor}{\#define LL\_ADC\_SAMPLINGTIME\_15CYCLES       (ADC\_SMPR1\_SMP10\_0)                                      }}
+\DoxyCodeLine{857 \textcolor{preprocessor}{\#define LL\_ADC\_SAMPLINGTIME\_28CYCLES       (ADC\_SMPR1\_SMP10\_1)                                      }}
+\DoxyCodeLine{858 \textcolor{preprocessor}{\#define LL\_ADC\_SAMPLINGTIME\_56CYCLES       (ADC\_SMPR1\_SMP10\_1 | ADC\_SMPR1\_SMP10\_0)                  }}
+\DoxyCodeLine{859 \textcolor{preprocessor}{\#define LL\_ADC\_SAMPLINGTIME\_84CYCLES       (ADC\_SMPR1\_SMP10\_2)                                      }}
+\DoxyCodeLine{860 \textcolor{preprocessor}{\#define LL\_ADC\_SAMPLINGTIME\_112CYCLES      (ADC\_SMPR1\_SMP10\_2 | ADC\_SMPR1\_SMP10\_0)                  }}
+\DoxyCodeLine{861 \textcolor{preprocessor}{\#define LL\_ADC\_SAMPLINGTIME\_144CYCLES      (ADC\_SMPR1\_SMP10\_2 | ADC\_SMPR1\_SMP10\_1)                  }}
+\DoxyCodeLine{862 \textcolor{preprocessor}{\#define LL\_ADC\_SAMPLINGTIME\_480CYCLES      (ADC\_SMPR1\_SMP10)                                        }}
+\DoxyCodeLine{870 \textcolor{preprocessor}{\#define LL\_ADC\_AWD1                        (ADC\_AWD\_CR1\_CHANNEL\_MASK  | ADC\_AWD\_CR1\_REGOFFSET) }}
+\DoxyCodeLine{878 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_DISABLE                 0x00000000UL                                                                                   }}
+\DoxyCodeLine{879 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_ALL\_CHANNELS\_REG        (                                                             ADC\_CR1\_AWDEN                 ) }}
+\DoxyCodeLine{880 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_ALL\_CHANNELS\_INJ        (                                            ADC\_CR1\_JAWDEN                                 ) }}
+\DoxyCodeLine{881 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_ALL\_CHANNELS\_REG\_INJ    (                                            ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN                 ) }}
+\DoxyCodeLine{882 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_0\_REG           ((LL\_ADC\_CHANNEL\_0  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{883 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_0\_INJ           ((LL\_ADC\_CHANNEL\_0  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{884 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_0\_REG\_INJ       ((LL\_ADC\_CHANNEL\_0  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{885 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_1\_REG           ((LL\_ADC\_CHANNEL\_1  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{886 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_1\_INJ           ((LL\_ADC\_CHANNEL\_1  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{887 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_1\_REG\_INJ       ((LL\_ADC\_CHANNEL\_1  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{888 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_2\_REG           ((LL\_ADC\_CHANNEL\_2  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{889 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_2\_INJ           ((LL\_ADC\_CHANNEL\_2  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{890 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_2\_REG\_INJ       ((LL\_ADC\_CHANNEL\_2  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{891 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_3\_REG           ((LL\_ADC\_CHANNEL\_3  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{892 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_3\_INJ           ((LL\_ADC\_CHANNEL\_3  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{893 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_3\_REG\_INJ       ((LL\_ADC\_CHANNEL\_3  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{894 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_4\_REG           ((LL\_ADC\_CHANNEL\_4  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{895 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_4\_INJ           ((LL\_ADC\_CHANNEL\_4  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{896 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_4\_REG\_INJ       ((LL\_ADC\_CHANNEL\_4  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{897 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_5\_REG           ((LL\_ADC\_CHANNEL\_5  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{898 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_5\_INJ           ((LL\_ADC\_CHANNEL\_5  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{899 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_5\_REG\_INJ       ((LL\_ADC\_CHANNEL\_5  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{900 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_6\_REG           ((LL\_ADC\_CHANNEL\_6  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{901 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_6\_INJ           ((LL\_ADC\_CHANNEL\_6  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{902 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_6\_REG\_INJ       ((LL\_ADC\_CHANNEL\_6  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{903 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_7\_REG           ((LL\_ADC\_CHANNEL\_7  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{904 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_7\_INJ           ((LL\_ADC\_CHANNEL\_7  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{905 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_7\_REG\_INJ       ((LL\_ADC\_CHANNEL\_7  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{906 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_8\_REG           ((LL\_ADC\_CHANNEL\_8  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{907 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_8\_INJ           ((LL\_ADC\_CHANNEL\_8  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{908 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_8\_REG\_INJ       ((LL\_ADC\_CHANNEL\_8  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{909 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_9\_REG           ((LL\_ADC\_CHANNEL\_9  \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{910 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_9\_INJ           ((LL\_ADC\_CHANNEL\_9  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{911 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_9\_REG\_INJ       ((LL\_ADC\_CHANNEL\_9  \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{912 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_10\_REG          ((LL\_ADC\_CHANNEL\_10 \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{913 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_10\_INJ          ((LL\_ADC\_CHANNEL\_10 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{914 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_10\_REG\_INJ      ((LL\_ADC\_CHANNEL\_10 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{915 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_11\_REG          ((LL\_ADC\_CHANNEL\_11 \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{916 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_11\_INJ          ((LL\_ADC\_CHANNEL\_11 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{917 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_11\_REG\_INJ      ((LL\_ADC\_CHANNEL\_11 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{918 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_12\_REG          ((LL\_ADC\_CHANNEL\_12 \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{919 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_12\_INJ          ((LL\_ADC\_CHANNEL\_12 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{920 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_12\_REG\_INJ      ((LL\_ADC\_CHANNEL\_12 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{921 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_13\_REG          ((LL\_ADC\_CHANNEL\_13 \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{922 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_13\_INJ          ((LL\_ADC\_CHANNEL\_13 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{923 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_13\_REG\_INJ      ((LL\_ADC\_CHANNEL\_13 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{924 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_14\_REG          ((LL\_ADC\_CHANNEL\_14 \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{925 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_14\_INJ          ((LL\_ADC\_CHANNEL\_14 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{926 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_14\_REG\_INJ      ((LL\_ADC\_CHANNEL\_14 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{927 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_15\_REG          ((LL\_ADC\_CHANNEL\_15 \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{928 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_15\_INJ          ((LL\_ADC\_CHANNEL\_15 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{929 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_15\_REG\_INJ      ((LL\_ADC\_CHANNEL\_15 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{930 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_16\_REG          ((LL\_ADC\_CHANNEL\_16 \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{931 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_16\_INJ          ((LL\_ADC\_CHANNEL\_16 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{932 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_16\_REG\_INJ      ((LL\_ADC\_CHANNEL\_16 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{933 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_17\_REG          ((LL\_ADC\_CHANNEL\_17 \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{934 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_17\_INJ          ((LL\_ADC\_CHANNEL\_17 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{935 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_17\_REG\_INJ      ((LL\_ADC\_CHANNEL\_17 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{936 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_18\_REG          ((LL\_ADC\_CHANNEL\_18 \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{937 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_18\_INJ          ((LL\_ADC\_CHANNEL\_18 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{938 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CHANNEL\_18\_REG\_INJ      ((LL\_ADC\_CHANNEL\_18 \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{939 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_VREFINT\_REG          ((LL\_ADC\_CHANNEL\_VREFINT    \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{940 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_VREFINT\_INJ          ((LL\_ADC\_CHANNEL\_VREFINT    \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{941 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_VREFINT\_REG\_INJ      ((LL\_ADC\_CHANNEL\_VREFINT    \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{942 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_VBAT\_REG             ((LL\_ADC\_CHANNEL\_VBAT       \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{943 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_VBAT\_INJ             ((LL\_ADC\_CHANNEL\_VBAT       \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{944 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_VBAT\_REG\_INJ         ((LL\_ADC\_CHANNEL\_VBAT       \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{945 \textcolor{preprocessor}{\#if defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F405xx) || defined(STM32F407xx) || defined(STM32F410Tx) || defined(STM32F410Cx) || defined(STM32F410Rx) || defined(STM32F415xx) || defined(STM32F417xx)}}
+\DoxyCodeLine{946 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_TEMPSENSOR\_REG       ((LL\_ADC\_CHANNEL\_TEMPSENSOR \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{947 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_TEMPSENSOR\_INJ       ((LL\_ADC\_CHANNEL\_TEMPSENSOR \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{948 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_TEMPSENSOR\_REG\_INJ   ((LL\_ADC\_CHANNEL\_TEMPSENSOR \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{949 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F401xC || STM32F401xE || STM32F410xx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{950 \textcolor{preprocessor}{\#if defined(STM32F411xE) || defined(STM32F412Cx) || defined(STM32F412Rx) || defined(STM32F412Vx) || defined(STM32F412Zx) || defined(STM32F413xx) || defined(STM32F423xx) || defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)}}
+\DoxyCodeLine{951 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_TEMPSENSOR\_REG       ((LL\_ADC\_CHANNEL\_TEMPSENSOR \& ADC\_CHANNEL\_ID\_MASK)                  | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{952 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_TEMPSENSOR\_INJ       ((LL\_ADC\_CHANNEL\_TEMPSENSOR \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN                 | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{953 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_CH\_TEMPSENSOR\_REG\_INJ   ((LL\_ADC\_CHANNEL\_TEMPSENSOR \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL) }}
+\DoxyCodeLine{954 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F411xE || STM32F412Cx || STM32F412Rx || STM32F412Vx || STM32F412Zx || STM32F413xx || STM32F423xx || STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{962 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_THRESHOLD\_HIGH          (ADC\_AWD\_TR1\_HIGH\_REGOFFSET) }}
+\DoxyCodeLine{963 \textcolor{preprocessor}{\#define LL\_ADC\_AWD\_THRESHOLD\_LOW           (ADC\_AWD\_TR1\_LOW\_REGOFFSET)  }}
+\DoxyCodeLine{968 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{972 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_INDEPENDENT           0x00000000UL                                                             }}
+\DoxyCodeLine{973 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_DUAL\_REG\_SIMULT       (                  ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_1                  ) }}
+\DoxyCodeLine{974 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_DUAL\_REG\_INTERL       (                  ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_1 | ADC\_CCR\_MULTI\_0) }}
+\DoxyCodeLine{975 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_DUAL\_INJ\_SIMULT       (                  ADC\_CCR\_MULTI\_2                   | ADC\_CCR\_MULTI\_0) }}
+\DoxyCodeLine{976 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_DUAL\_INJ\_ALTERN       (ADC\_CCR\_MULTI\_3                                     | ADC\_CCR\_MULTI\_0) }}
+\DoxyCodeLine{977 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_DUAL\_REG\_SIM\_INJ\_SIM  (                                                      ADC\_CCR\_MULTI\_0) }}
+\DoxyCodeLine{978 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_DUAL\_REG\_SIM\_INJ\_ALT  (                                    ADC\_CCR\_MULTI\_1                  ) }}
+\DoxyCodeLine{979 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_DUAL\_REG\_INT\_INJ\_SIM  (                                    ADC\_CCR\_MULTI\_1 | ADC\_CCR\_MULTI\_0) }}
+\DoxyCodeLine{980 \textcolor{preprocessor}{\#if defined(ADC3)}}
+\DoxyCodeLine{981 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TRIPLE\_REG\_SIM\_INJ\_SIM  (ADC\_CCR\_MULTI\_4                                                       | ADC\_CCR\_MULTI\_0) }}
+\DoxyCodeLine{982 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TRIPLE\_REG\_SIM\_INJ\_ALT  (ADC\_CCR\_MULTI\_4                                     | ADC\_CCR\_MULTI\_1                  ) }}
+\DoxyCodeLine{983 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TRIPLE\_INJ\_SIMULT       (ADC\_CCR\_MULTI\_4                   | ADC\_CCR\_MULTI\_2                   | ADC\_CCR\_MULTI\_0) }}
+\DoxyCodeLine{984 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TRIPLE\_REG\_SIMULT       (ADC\_CCR\_MULTI\_4                   | ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_1                  ) }}
+\DoxyCodeLine{985 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TRIPLE\_REG\_INTERL       (ADC\_CCR\_MULTI\_4                   | ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_1 | ADC\_CCR\_MULTI\_0) }}
+\DoxyCodeLine{986 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TRIPLE\_INJ\_ALTERN       (ADC\_CCR\_MULTI\_4                                                       | ADC\_CCR\_MULTI\_0) }}
+\DoxyCodeLine{987 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{995 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_REG\_DMA\_EACH\_ADC        0x00000000UL                                   }}
+\DoxyCodeLine{996 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_REG\_DMA\_LIMIT\_1         (                              ADC\_CCR\_DMA\_0) }}
+\DoxyCodeLine{997 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_REG\_DMA\_LIMIT\_2         (              ADC\_CCR\_DMA\_1                ) }}
+\DoxyCodeLine{998 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_REG\_DMA\_LIMIT\_3         (              ADC\_CCR\_DMA\_1 | ADC\_CCR\_DMA\_0) }}
+\DoxyCodeLine{999 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_REG\_DMA\_UNLMT\_1         (ADC\_CCR\_DDS |                 ADC\_CCR\_DMA\_0) }}
+\DoxyCodeLine{1000 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_REG\_DMA\_UNLMT\_2         (ADC\_CCR\_DDS | ADC\_CCR\_DMA\_1                ) }}
+\DoxyCodeLine{1001 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_REG\_DMA\_UNLMT\_3         (ADC\_CCR\_DDS | ADC\_CCR\_DMA\_1 | ADC\_CCR\_DMA\_0) }}
+\DoxyCodeLine{1009 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_5CYCLES  0x00000000UL                                                             }}
+\DoxyCodeLine{1010 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_6CYCLES  (                                                      ADC\_CCR\_DELAY\_0) }}
+\DoxyCodeLine{1011 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_7CYCLES  (                                    ADC\_CCR\_DELAY\_1                  ) }}
+\DoxyCodeLine{1012 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_8CYCLES  (                                    ADC\_CCR\_DELAY\_1 | ADC\_CCR\_DELAY\_0) }}
+\DoxyCodeLine{1013 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_9CYCLES  (                  ADC\_CCR\_DELAY\_2                                    ) }}
+\DoxyCodeLine{1014 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_10CYCLES (                  ADC\_CCR\_DELAY\_2                   | ADC\_CCR\_DELAY\_0) }}
+\DoxyCodeLine{1015 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_11CYCLES (                  ADC\_CCR\_DELAY\_2 | ADC\_CCR\_DELAY\_1                  ) }}
+\DoxyCodeLine{1016 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_12CYCLES (                  ADC\_CCR\_DELAY\_2 | ADC\_CCR\_DELAY\_1 | ADC\_CCR\_DELAY\_0) }}
+\DoxyCodeLine{1017 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_13CYCLES (ADC\_CCR\_DELAY\_3                                                      ) }}
+\DoxyCodeLine{1018 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_14CYCLES (ADC\_CCR\_DELAY\_3                                     | ADC\_CCR\_DELAY\_0) }}
+\DoxyCodeLine{1019 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_15CYCLES (ADC\_CCR\_DELAY\_3                   | ADC\_CCR\_DELAY\_1                  ) }}
+\DoxyCodeLine{1020 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_16CYCLES (ADC\_CCR\_DELAY\_3                   | ADC\_CCR\_DELAY\_1 | ADC\_CCR\_DELAY\_0) }}
+\DoxyCodeLine{1021 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_17CYCLES (ADC\_CCR\_DELAY\_3 | ADC\_CCR\_DELAY\_2                                    ) }}
+\DoxyCodeLine{1022 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_18CYCLES (ADC\_CCR\_DELAY\_3 | ADC\_CCR\_DELAY\_2                   | ADC\_CCR\_DELAY\_0) }}
+\DoxyCodeLine{1023 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_19CYCLES (ADC\_CCR\_DELAY\_3 | ADC\_CCR\_DELAY\_2 | ADC\_CCR\_DELAY\_1                  ) }}
+\DoxyCodeLine{1024 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_TWOSMP\_DELAY\_20CYCLES (ADC\_CCR\_DELAY\_3 | ADC\_CCR\_DELAY\_2 | ADC\_CCR\_DELAY\_1 | ADC\_CCR\_DELAY\_0) }}
+\DoxyCodeLine{1032 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_MASTER                (                    ADC\_CDR\_RDATA\_MST) }}
+\DoxyCodeLine{1033 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_SLAVE                 (ADC\_CDR\_RDATA\_SLV                    ) }}
+\DoxyCodeLine{1034 \textcolor{preprocessor}{\#define LL\_ADC\_MULTI\_MASTER\_SLAVE          (ADC\_CDR\_RDATA\_SLV | ADC\_CDR\_RDATA\_MST) }}
+\DoxyCodeLine{1039 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{1040 }
+\DoxyCodeLine{1041 }
+\DoxyCodeLine{1050 \textcolor{comment}{/* Note: Only ADC IP HW delays are defined in ADC LL driver driver,           */}}
+\DoxyCodeLine{1051 \textcolor{comment}{/*       not timeout values.                                                  */}}
+\DoxyCodeLine{1052 \textcolor{comment}{/*       Timeout values for ADC operations are dependent to device clock      */}}
+\DoxyCodeLine{1053 \textcolor{comment}{/*       configuration (system clock versus ADC clock),                       */}}
+\DoxyCodeLine{1054 \textcolor{comment}{/*       and therefore must be defined in user application.                   */}}
+\DoxyCodeLine{1055 \textcolor{comment}{/*       Indications for estimation of ADC timeout delays, for this           */}}
+\DoxyCodeLine{1056 \textcolor{comment}{/*       STM32 series:                                                        */}}
+\DoxyCodeLine{1057 \textcolor{comment}{/*       -\/ ADC enable time: maximum delay is 2us                              */}}
+\DoxyCodeLine{1058 \textcolor{comment}{/*         (refer to device datasheet, parameter "{}tSTAB"{})                     */}}
+\DoxyCodeLine{1059 \textcolor{comment}{/*       -\/ ADC conversion time: duration depending on ADC clock and ADC       */}}
+\DoxyCodeLine{1060 \textcolor{comment}{/*         configuration.                                                     */}}
+\DoxyCodeLine{1061 \textcolor{comment}{/*         (refer to device reference manual, section "{}Timing"{})               */}}
+\DoxyCodeLine{1062 }
+\DoxyCodeLine{1063 \textcolor{comment}{/* Delay for internal voltage reference stabilization time.                   */}}
+\DoxyCodeLine{1064 \textcolor{comment}{/* Delay set to maximum value (refer to device datasheet,                     */}}
+\DoxyCodeLine{1065 \textcolor{comment}{/* parameter "{}tSTART"{}).                                                       */}}
+\DoxyCodeLine{1066 \textcolor{comment}{/* Unit: us                                                                   */}}
+\DoxyCodeLine{1067 \textcolor{preprocessor}{\#define LL\_ADC\_DELAY\_VREFINT\_STAB\_US       (  10UL)  }}
+\DoxyCodeLine{1069 \textcolor{comment}{/* Delay for temperature sensor stabilization time.                           */}}
+\DoxyCodeLine{1070 \textcolor{comment}{/* Literal set to maximum value (refer to device datasheet,                   */}}
+\DoxyCodeLine{1071 \textcolor{comment}{/* parameter "{}tSTART"{}).                                                       */}}
+\DoxyCodeLine{1072 \textcolor{comment}{/* Unit: us                                                                   */}}
+\DoxyCodeLine{1073 \textcolor{preprocessor}{\#define LL\_ADC\_DELAY\_TEMPSENSOR\_STAB\_US    (  10UL)  }}
+\DoxyCodeLine{1084 \textcolor{comment}{/* Exported macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{1100 \textcolor{preprocessor}{\#define LL\_ADC\_WriteReg(\_\_INSTANCE\_\_, \_\_REG\_\_, \_\_VALUE\_\_) WRITE\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_, (\_\_VALUE\_\_))}}
+\DoxyCodeLine{1101 }
+\DoxyCodeLine{1108 \textcolor{preprocessor}{\#define LL\_ADC\_ReadReg(\_\_INSTANCE\_\_, \_\_REG\_\_) READ\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_)}}
+\DoxyCodeLine{1154 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_CHANNEL\_TO\_DECIMAL\_NB(\_\_CHANNEL\_\_)                                        \(\backslash\)}}
+\DoxyCodeLine{1155 \textcolor{preprocessor}{  (((\_\_CHANNEL\_\_) \& ADC\_CHANNEL\_ID\_NUMBER\_MASK) >> ADC\_CHANNEL\_ID\_NUMBER\_BITOFFSET\_POS)}}
+\DoxyCodeLine{1156 }
+\DoxyCodeLine{1194 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_DECIMAL\_NB\_TO\_CHANNEL(\_\_DECIMAL\_NB\_\_)                                                          \(\backslash\)}}
+\DoxyCodeLine{1195 \textcolor{preprocessor}{  (((\_\_DECIMAL\_NB\_\_) <= 9UL)                                                                                     \(\backslash\)}}
+\DoxyCodeLine{1196 \textcolor{preprocessor}{    ? (                                                                                                         \(\backslash\)}}
+\DoxyCodeLine{1197 \textcolor{preprocessor}{       ((\_\_DECIMAL\_NB\_\_) << ADC\_CHANNEL\_ID\_NUMBER\_BITOFFSET\_POS)                                       |        \(\backslash\)}}
+\DoxyCodeLine{1198 \textcolor{preprocessor}{       (ADC\_SMPR2\_REGOFFSET | (((uint32\_t) (3UL * (\_\_DECIMAL\_NB\_\_))) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS))         \(\backslash\)}}
+\DoxyCodeLine{1199 \textcolor{preprocessor}{      )                                                                                                         \(\backslash\)}}
+\DoxyCodeLine{1200 \textcolor{preprocessor}{      :                                                                                                         \(\backslash\)}}
+\DoxyCodeLine{1201 \textcolor{preprocessor}{      (                                                                                                         \(\backslash\)}}
+\DoxyCodeLine{1202 \textcolor{preprocessor}{       ((\_\_DECIMAL\_NB\_\_) << ADC\_CHANNEL\_ID\_NUMBER\_BITOFFSET\_POS)                                              | \(\backslash\)}}
+\DoxyCodeLine{1203 \textcolor{preprocessor}{       (ADC\_SMPR1\_REGOFFSET | (((uint32\_t) (3UL * ((\_\_DECIMAL\_NB\_\_) -\/ 10UL))) << ADC\_CHANNEL\_SMPx\_BITOFFSET\_POS)) \(\backslash\)}}
+\DoxyCodeLine{1204 \textcolor{preprocessor}{      )                                                                                                         \(\backslash\)}}
+\DoxyCodeLine{1205 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{1206 }
+\DoxyCodeLine{1253 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_IS\_CHANNEL\_INTERNAL(\_\_CHANNEL\_\_)                              \(\backslash\)}}
+\DoxyCodeLine{1254 \textcolor{preprocessor}{  (((\_\_CHANNEL\_\_) \& ADC\_CHANNEL\_ID\_INTERNAL\_CH\_MASK) != 0UL)}}
+\DoxyCodeLine{1255 }
+\DoxyCodeLine{1316 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_CHANNEL\_INTERNAL\_TO\_EXTERNAL(\_\_CHANNEL\_\_)                     \(\backslash\)}}
+\DoxyCodeLine{1317 \textcolor{preprocessor}{  ((\_\_CHANNEL\_\_) \& \string~ADC\_CHANNEL\_ID\_INTERNAL\_CH\_MASK)}}
+\DoxyCodeLine{1318 }
+\DoxyCodeLine{1343 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_IS\_CHANNEL\_INTERNAL\_AVAILABLE(\_\_ADC\_INSTANCE\_\_, \_\_CHANNEL\_\_)  \(\backslash\)}}
+\DoxyCodeLine{1344 \textcolor{preprocessor}{  (                                                                            \(\backslash\)}}
+\DoxyCodeLine{1345 \textcolor{preprocessor}{   ((\_\_CHANNEL\_\_) == LL\_ADC\_CHANNEL\_VREFINT)    ||                             \(\backslash\)}}
+\DoxyCodeLine{1346 \textcolor{preprocessor}{   ((\_\_CHANNEL\_\_) == LL\_ADC\_CHANNEL\_TEMPSENSOR) ||                             \(\backslash\)}}
+\DoxyCodeLine{1347 \textcolor{preprocessor}{   ((\_\_CHANNEL\_\_) == LL\_ADC\_CHANNEL\_VBAT)                                      \(\backslash\)}}
+\DoxyCodeLine{1348 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{1466 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_ANALOGWD\_CHANNEL\_GROUP(\_\_CHANNEL\_\_, \_\_GROUP\_\_)                                           \(\backslash\)}}
+\DoxyCodeLine{1467 \textcolor{preprocessor}{  (((\_\_GROUP\_\_) == LL\_ADC\_GROUP\_REGULAR)                                                                  \(\backslash\)}}
+\DoxyCodeLine{1468 \textcolor{preprocessor}{    ? (((\_\_CHANNEL\_\_) \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL)                            \(\backslash\)}}
+\DoxyCodeLine{1469 \textcolor{preprocessor}{      :                                                                                                   \(\backslash\)}}
+\DoxyCodeLine{1470 \textcolor{preprocessor}{      ((\_\_GROUP\_\_) == LL\_ADC\_GROUP\_INJECTED)                                                              \(\backslash\)}}
+\DoxyCodeLine{1471 \textcolor{preprocessor}{       ? (((\_\_CHANNEL\_\_) \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDSGL)                        \(\backslash\)}}
+\DoxyCodeLine{1472 \textcolor{preprocessor}{         :                                                                                                \(\backslash\)}}
+\DoxyCodeLine{1473 \textcolor{preprocessor}{         (((\_\_CHANNEL\_\_) \& ADC\_CHANNEL\_ID\_MASK) | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDEN | ADC\_CR1\_AWDSGL)        \(\backslash\)}}
+\DoxyCodeLine{1474 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{1475 }
+\DoxyCodeLine{1495 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_ANALOGWD\_SET\_THRESHOLD\_RESOLUTION(\_\_ADC\_RESOLUTION\_\_, \_\_AWD\_THRESHOLD\_\_) \(\backslash\)}}
+\DoxyCodeLine{1496 \textcolor{preprocessor}{  ((\_\_AWD\_THRESHOLD\_\_) << ((\_\_ADC\_RESOLUTION\_\_) >> (ADC\_CR1\_RES\_BITOFFSET\_POS -\/ 1UL )))}}
+\DoxyCodeLine{1497 }
+\DoxyCodeLine{1517 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_ANALOGWD\_GET\_THRESHOLD\_RESOLUTION(\_\_ADC\_RESOLUTION\_\_, \_\_AWD\_THRESHOLD\_12\_BITS\_\_) \(\backslash\)}}
+\DoxyCodeLine{1518 \textcolor{preprocessor}{  ((\_\_AWD\_THRESHOLD\_12\_BITS\_\_) >> ((\_\_ADC\_RESOLUTION\_\_) >> (ADC\_CR1\_RES\_BITOFFSET\_POS -\/ 1UL )))}}
+\DoxyCodeLine{1519 }
+\DoxyCodeLine{1520 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{1534 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_MULTI\_CONV\_DATA\_MASTER\_SLAVE(\_\_ADC\_MULTI\_MASTER\_SLAVE\_\_, \_\_ADC\_MULTI\_CONV\_DATA\_\_)  \(\backslash\)}}
+\DoxyCodeLine{1535 \textcolor{preprocessor}{  (((\_\_ADC\_MULTI\_CONV\_DATA\_\_) >> POSITION\_VAL((\_\_ADC\_MULTI\_MASTER\_SLAVE\_\_))) \& ADC\_CDR\_RDATA\_MST)}}
+\DoxyCodeLine{1536 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1537 }
+\DoxyCodeLine{1548 \textcolor{preprocessor}{\#if defined(ADC1) \&\& defined(ADC2) \&\& defined(ADC3)}}
+\DoxyCodeLine{1549 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_COMMON\_INSTANCE(\_\_ADCx\_\_)                                     \(\backslash\)}}
+\DoxyCodeLine{1550 \textcolor{preprocessor}{  (ADC123\_COMMON)}}
+\DoxyCodeLine{1551 \textcolor{preprocessor}{\#elif defined(ADC1) \&\& defined(ADC2)}}
+\DoxyCodeLine{1552 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_COMMON\_INSTANCE(\_\_ADCx\_\_)                                     \(\backslash\)}}
+\DoxyCodeLine{1553 \textcolor{preprocessor}{  (ADC12\_COMMON)}}
+\DoxyCodeLine{1554 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{1555 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_COMMON\_INSTANCE(\_\_ADCx\_\_)                                     \(\backslash\)}}
+\DoxyCodeLine{1556 \textcolor{preprocessor}{  (ADC1\_COMMON)}}
+\DoxyCodeLine{1557 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1558 }
+\DoxyCodeLine{1576 \textcolor{preprocessor}{\#if defined(ADC1) \&\& defined(ADC2) \&\& defined(ADC3)}}
+\DoxyCodeLine{1577 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_IS\_ENABLED\_ALL\_COMMON\_INSTANCE(\_\_ADCXY\_COMMON\_\_)              \(\backslash\)}}
+\DoxyCodeLine{1578 \textcolor{preprocessor}{  (LL\_ADC\_IsEnabled(ADC1) |                                                    \(\backslash\)}}
+\DoxyCodeLine{1579 \textcolor{preprocessor}{   LL\_ADC\_IsEnabled(ADC2) |                                                    \(\backslash\)}}
+\DoxyCodeLine{1580 \textcolor{preprocessor}{   LL\_ADC\_IsEnabled(ADC3)  )}}
+\DoxyCodeLine{1581 \textcolor{preprocessor}{\#elif defined(ADC1) \&\& defined(ADC2)}}
+\DoxyCodeLine{1582 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_IS\_ENABLED\_ALL\_COMMON\_INSTANCE(\_\_ADCXY\_COMMON\_\_)              \(\backslash\)}}
+\DoxyCodeLine{1583 \textcolor{preprocessor}{  (LL\_ADC\_IsEnabled(ADC1) |                                                    \(\backslash\)}}
+\DoxyCodeLine{1584 \textcolor{preprocessor}{   LL\_ADC\_IsEnabled(ADC2)  )}}
+\DoxyCodeLine{1585 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{1586 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_IS\_ENABLED\_ALL\_COMMON\_INSTANCE(\_\_ADCXY\_COMMON\_\_)              \(\backslash\)}}
+\DoxyCodeLine{1587 \textcolor{preprocessor}{  (LL\_ADC\_IsEnabled(ADC1))}}
+\DoxyCodeLine{1588 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1589 }
+\DoxyCodeLine{1603 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_DIGITAL\_SCALE(\_\_ADC\_RESOLUTION\_\_)                             \(\backslash\)}}
+\DoxyCodeLine{1604 \textcolor{preprocessor}{  (0xFFFU >> ((\_\_ADC\_RESOLUTION\_\_) >> (ADC\_CR1\_RES\_BITOFFSET\_POS -\/ 1UL)))}}
+\DoxyCodeLine{1605 }
+\DoxyCodeLine{1624 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_CONVERT\_DATA\_RESOLUTION(\_\_DATA\_\_, \_\_ADC\_RESOLUTION\_CURRENT\_\_, \_\_ADC\_RESOLUTION\_TARGET\_\_) \(\backslash\)}}
+\DoxyCodeLine{1625 \textcolor{preprocessor}{  (((\_\_DATA\_\_)                                                                 \(\backslash\)}}
+\DoxyCodeLine{1626 \textcolor{preprocessor}{    << ((\_\_ADC\_RESOLUTION\_CURRENT\_\_) >> (ADC\_CR1\_RES\_BITOFFSET\_POS -\/ 1UL)))     \(\backslash\)}}
+\DoxyCodeLine{1627 \textcolor{preprocessor}{   >> ((\_\_ADC\_RESOLUTION\_TARGET\_\_) >> (ADC\_CR1\_RES\_BITOFFSET\_POS -\/ 1UL))        \(\backslash\)}}
+\DoxyCodeLine{1628 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{1629 }
+\DoxyCodeLine{1646 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_CALC\_DATA\_TO\_VOLTAGE(\_\_VREFANALOG\_VOLTAGE\_\_,\(\backslash\)}}
+\DoxyCodeLine{1647 \textcolor{preprocessor}{                                      \_\_ADC\_DATA\_\_,\(\backslash\)}}
+\DoxyCodeLine{1648 \textcolor{preprocessor}{                                      \_\_ADC\_RESOLUTION\_\_)                      \(\backslash\)}}
+\DoxyCodeLine{1649 \textcolor{preprocessor}{  ((\_\_ADC\_DATA\_\_) * (\_\_VREFANALOG\_VOLTAGE\_\_)                                   \(\backslash\)}}
+\DoxyCodeLine{1650 \textcolor{preprocessor}{   / \_\_LL\_ADC\_DIGITAL\_SCALE(\_\_ADC\_RESOLUTION\_\_)                                \(\backslash\)}}
+\DoxyCodeLine{1651 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{1652 }
+\DoxyCodeLine{1678 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_CALC\_VREFANALOG\_VOLTAGE(\_\_VREFINT\_ADC\_DATA\_\_,\(\backslash\)}}
+\DoxyCodeLine{1679 \textcolor{preprocessor}{                                         \_\_ADC\_RESOLUTION\_\_)                   \(\backslash\)}}
+\DoxyCodeLine{1680 \textcolor{preprocessor}{  (((uint32\_t)(*VREFINT\_CAL\_ADDR) * VREFINT\_CAL\_VREF)                          \(\backslash\)}}
+\DoxyCodeLine{1681 \textcolor{preprocessor}{   / \_\_LL\_ADC\_CONVERT\_DATA\_RESOLUTION((\_\_VREFINT\_ADC\_DATA\_\_),                  \(\backslash\)}}
+\DoxyCodeLine{1682 \textcolor{preprocessor}{                                      (\_\_ADC\_RESOLUTION\_\_),                    \(\backslash\)}}
+\DoxyCodeLine{1683 \textcolor{preprocessor}{                                      LL\_ADC\_RESOLUTION\_12B))}}
+\DoxyCodeLine{1684 }
+\DoxyCodeLine{1685 \textcolor{comment}{/* Note: On device STM32F4x9, calibration parameter TS\_CAL2 is not available. */}}
+\DoxyCodeLine{1686 \textcolor{comment}{/*       Therefore, helper macro \_\_LL\_ADC\_CALC\_TEMPERATURE() is not available.*/}}
+\DoxyCodeLine{1687 \textcolor{comment}{/*       Use helper macro @ref \_\_LL\_ADC\_CALC\_TEMPERATURE\_TYP\_PARAMS().        */}}
+\DoxyCodeLine{1688 \textcolor{preprocessor}{\#if !defined(STM32F469) \&\& !defined(STM32F479xx) \&\& !defined(STM32F429xx) \&\& !defined(STM32F439xx)}}
+\DoxyCodeLine{1734 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_CALC\_TEMPERATURE(\_\_VREFANALOG\_VOLTAGE\_\_,\(\backslash\)}}
+\DoxyCodeLine{1735 \textcolor{preprocessor}{                                  \_\_TEMPSENSOR\_ADC\_DATA\_\_,\(\backslash\)}}
+\DoxyCodeLine{1736 \textcolor{preprocessor}{                                  \_\_ADC\_RESOLUTION\_\_)                              \(\backslash\)}}
+\DoxyCodeLine{1737 \textcolor{preprocessor}{  (((( ((int32\_t)((\_\_LL\_ADC\_CONVERT\_DATA\_RESOLUTION((\_\_TEMPSENSOR\_ADC\_DATA\_\_),     \(\backslash\)}}
+\DoxyCodeLine{1738 \textcolor{preprocessor}{                                                    (\_\_ADC\_RESOLUTION\_\_),          \(\backslash\)}}
+\DoxyCodeLine{1739 \textcolor{preprocessor}{                                                    LL\_ADC\_RESOLUTION\_12B)         \(\backslash\)}}
+\DoxyCodeLine{1740 \textcolor{preprocessor}{                   * (\_\_VREFANALOG\_VOLTAGE\_\_))                                     \(\backslash\)}}
+\DoxyCodeLine{1741 \textcolor{preprocessor}{                  / TEMPSENSOR\_CAL\_VREFANALOG)                                     \(\backslash\)}}
+\DoxyCodeLine{1742 \textcolor{preprocessor}{        -\/ (int32\_t) *TEMPSENSOR\_CAL1\_ADDR)                                         \(\backslash\)}}
+\DoxyCodeLine{1743 \textcolor{preprocessor}{     ) * (int32\_t)(TEMPSENSOR\_CAL2\_TEMP -\/ TEMPSENSOR\_CAL1\_TEMP)                    \(\backslash\)}}
+\DoxyCodeLine{1744 \textcolor{preprocessor}{    ) / (int32\_t)((int32\_t)*TEMPSENSOR\_CAL2\_ADDR -\/ (int32\_t)*TEMPSENSOR\_CAL1\_ADDR) \(\backslash\)}}
+\DoxyCodeLine{1745 \textcolor{preprocessor}{   ) + TEMPSENSOR\_CAL1\_TEMP                                                        \(\backslash\)}}
+\DoxyCodeLine{1746 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{1747 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1748 }
+\DoxyCodeLine{1793 \textcolor{preprocessor}{\#define \_\_LL\_ADC\_CALC\_TEMPERATURE\_TYP\_PARAMS(\_\_TEMPSENSOR\_TYP\_AVGSLOPE\_\_,\(\backslash\)}}
+\DoxyCodeLine{1794 \textcolor{preprocessor}{                                             \_\_TEMPSENSOR\_TYP\_CALX\_V\_\_,\(\backslash\)}}
+\DoxyCodeLine{1795 \textcolor{preprocessor}{                                             \_\_TEMPSENSOR\_CALX\_TEMP\_\_,\(\backslash\)}}
+\DoxyCodeLine{1796 \textcolor{preprocessor}{                                             \_\_VREFANALOG\_VOLTAGE\_\_,\(\backslash\)}}
+\DoxyCodeLine{1797 \textcolor{preprocessor}{                                             \_\_TEMPSENSOR\_ADC\_DATA\_\_,\(\backslash\)}}
+\DoxyCodeLine{1798 \textcolor{preprocessor}{                                             \_\_ADC\_RESOLUTION\_\_)               \(\backslash\)}}
+\DoxyCodeLine{1799 \textcolor{preprocessor}{  ((( (                                                                        \(\backslash\)}}
+\DoxyCodeLine{1800 \textcolor{preprocessor}{       (int32\_t)(((\_\_TEMPSENSOR\_TYP\_CALX\_V\_\_))                                 \(\backslash\)}}
+\DoxyCodeLine{1801 \textcolor{preprocessor}{                 * 1000)                                                       \(\backslash\)}}
+\DoxyCodeLine{1802 \textcolor{preprocessor}{       -\/                                                                       \(\backslash\)}}
+\DoxyCodeLine{1803 \textcolor{preprocessor}{       (int32\_t)((((\_\_TEMPSENSOR\_ADC\_DATA\_\_) * (\_\_VREFANALOG\_VOLTAGE\_\_))       \(\backslash\)}}
+\DoxyCodeLine{1804 \textcolor{preprocessor}{                  / \_\_LL\_ADC\_DIGITAL\_SCALE(\_\_ADC\_RESOLUTION\_\_))                \(\backslash\)}}
+\DoxyCodeLine{1805 \textcolor{preprocessor}{                 * 1000)                                                       \(\backslash\)}}
+\DoxyCodeLine{1806 \textcolor{preprocessor}{      )                                                                        \(\backslash\)}}
+\DoxyCodeLine{1807 \textcolor{preprocessor}{    ) / (\_\_TEMPSENSOR\_TYP\_AVGSLOPE\_\_)                                          \(\backslash\)}}
+\DoxyCodeLine{1808 \textcolor{preprocessor}{   ) + (\_\_TEMPSENSOR\_CALX\_TEMP\_\_)                                              \(\backslash\)}}
+\DoxyCodeLine{1809 \textcolor{preprocessor}{  )}}
+\DoxyCodeLine{1810 }
+\DoxyCodeLine{1820 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{1828 \textcolor{comment}{/* Note: LL ADC functions to set DMA transfer are located into sections of    */}}
+\DoxyCodeLine{1829 \textcolor{comment}{/*       configuration of ADC instance, groups and multimode (if available):  */}}
+\DoxyCodeLine{1830 \textcolor{comment}{/*       @ref LL\_ADC\_REG\_SetDMATransfer(), ...                                */}}
+\DoxyCodeLine{1831 }
+\DoxyCodeLine{1862 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{1863 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_DMA\_GetRegAddr(ADC\_TypeDef *ADCx, uint32\_t Register)}
+\DoxyCodeLine{1864 \{}
+\DoxyCodeLine{1865   uint32\_t data\_reg\_addr = 0UL;}
+\DoxyCodeLine{1866   }
+\DoxyCodeLine{1867   \textcolor{keywordflow}{if} (Register == LL\_ADC\_DMA\_REG\_REGULAR\_DATA)}
+\DoxyCodeLine{1868   \{}
+\DoxyCodeLine{1869     \textcolor{comment}{/* Retrieve address of register DR */}}
+\DoxyCodeLine{1870     data\_reg\_addr = (uint32\_t)\&(ADCx-\/>DR);}
+\DoxyCodeLine{1871   \}}
+\DoxyCodeLine{1872   \textcolor{keywordflow}{else} \textcolor{comment}{/* (Register == LL\_ADC\_DMA\_REG\_REGULAR\_DATA\_MULTI) */}}
+\DoxyCodeLine{1873   \{}
+\DoxyCodeLine{1874     \textcolor{comment}{/* Retrieve address of register CDR */}}
+\DoxyCodeLine{1875     data\_reg\_addr = (uint32\_t)\&((\_\_LL\_ADC\_COMMON\_INSTANCE(ADCx))-\/>CDR);}
+\DoxyCodeLine{1876   \}}
+\DoxyCodeLine{1877   }
+\DoxyCodeLine{1878   \textcolor{keywordflow}{return} data\_reg\_addr;}
+\DoxyCodeLine{1879 \}}
+\DoxyCodeLine{1880 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{1881 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_DMA\_GetRegAddr(ADC\_TypeDef *ADCx, uint32\_t Register)}
+\DoxyCodeLine{1882 \{}
+\DoxyCodeLine{1883   \textcolor{comment}{/* Retrieve address of register DR */}}
+\DoxyCodeLine{1884   \textcolor{keywordflow}{return} (uint32\_t)\&(ADCx-\/>DR);}
+\DoxyCodeLine{1885 \}}
+\DoxyCodeLine{1886 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{1887 }
+\DoxyCodeLine{1908 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetCommonClock(ADC\_Common\_TypeDef *ADCxy\_COMMON, uint32\_t CommonClock)}
+\DoxyCodeLine{1909 \{}
+\DoxyCodeLine{1910   MODIFY\_REG(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_ADCPRE, CommonClock);}
+\DoxyCodeLine{1911 \}}
+\DoxyCodeLine{1912 }
+\DoxyCodeLine{1924 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetCommonClock(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{1925 \{}
+\DoxyCodeLine{1926   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_ADCPRE));}
+\DoxyCodeLine{1927 \}}
+\DoxyCodeLine{1928 }
+\DoxyCodeLine{1957 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetCommonPathInternalCh(ADC\_Common\_TypeDef *ADCxy\_COMMON, uint32\_t PathInternal)}
+\DoxyCodeLine{1958 \{}
+\DoxyCodeLine{1959   MODIFY\_REG(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_TSVREFE | ADC\_CCR\_VBATE, PathInternal);}
+\DoxyCodeLine{1960 \}}
+\DoxyCodeLine{1961 }
+\DoxyCodeLine{1978 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetCommonPathInternalCh(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{1979 \{}
+\DoxyCodeLine{1980   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_TSVREFE | ADC\_CCR\_VBATE));}
+\DoxyCodeLine{1981 \}}
+\DoxyCodeLine{1982 }
+\DoxyCodeLine{2004 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetResolution(ADC\_TypeDef *ADCx, uint32\_t Resolution)}
+\DoxyCodeLine{2005 \{}
+\DoxyCodeLine{2006   MODIFY\_REG(ADCx-\/>CR1, ADC\_CR1\_RES, Resolution);}
+\DoxyCodeLine{2007 \}}
+\DoxyCodeLine{2008 }
+\DoxyCodeLine{2021 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetResolution(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2022 \{}
+\DoxyCodeLine{2023   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR1, ADC\_CR1\_RES));}
+\DoxyCodeLine{2024 \}}
+\DoxyCodeLine{2025 }
+\DoxyCodeLine{2037 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetDataAlignment(ADC\_TypeDef *ADCx, uint32\_t DataAlignment)}
+\DoxyCodeLine{2038 \{}
+\DoxyCodeLine{2039   MODIFY\_REG(ADCx-\/>CR2, ADC\_CR2\_ALIGN, DataAlignment);}
+\DoxyCodeLine{2040 \}}
+\DoxyCodeLine{2041 }
+\DoxyCodeLine{2052 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetDataAlignment(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2053 \{}
+\DoxyCodeLine{2054   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_ALIGN));}
+\DoxyCodeLine{2055 \}}
+\DoxyCodeLine{2056 }
+\DoxyCodeLine{2078 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetSequencersScanMode(ADC\_TypeDef *ADCx, uint32\_t ScanMode)}
+\DoxyCodeLine{2079 \{}
+\DoxyCodeLine{2080   MODIFY\_REG(ADCx-\/>CR1, ADC\_CR1\_SCAN, ScanMode);}
+\DoxyCodeLine{2081 \}}
+\DoxyCodeLine{2082 }
+\DoxyCodeLine{2103 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetSequencersScanMode(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2104 \{}
+\DoxyCodeLine{2105   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR1, ADC\_CR1\_SCAN));}
+\DoxyCodeLine{2106 \}}
+\DoxyCodeLine{2107 }
+\DoxyCodeLine{2147 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_SetTriggerSource(ADC\_TypeDef *ADCx, uint32\_t TriggerSource)}
+\DoxyCodeLine{2148 \{}
+\DoxyCodeLine{2149 \textcolor{comment}{/* Note: On this STM32 series, ADC group regular external trigger edge        */}}
+\DoxyCodeLine{2150 \textcolor{comment}{/*       is used to perform a ADC conversion start.                           */}}
+\DoxyCodeLine{2151 \textcolor{comment}{/*       This function does not set external trigger edge.                    */}}
+\DoxyCodeLine{2152 \textcolor{comment}{/*       This feature is set using function                                   */}}
+\DoxyCodeLine{2153 \textcolor{comment}{/*       @ref LL\_ADC\_REG\_StartConversionExtTrig().                            */}}
+\DoxyCodeLine{2154   MODIFY\_REG(ADCx-\/>CR2, ADC\_CR2\_EXTSEL, (TriggerSource \& ADC\_CR2\_EXTSEL));}
+\DoxyCodeLine{2155 \}}
+\DoxyCodeLine{2156 }
+\DoxyCodeLine{2191 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_GetTriggerSource(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2192 \{}
+\DoxyCodeLine{2193   uint32\_t TriggerSource = READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_EXTSEL | ADC\_CR2\_EXTEN);}
+\DoxyCodeLine{2194   }
+\DoxyCodeLine{2195   \textcolor{comment}{/* Value for shift of \{0; 4; 8; 12\} depending on value of bitfield          */}}
+\DoxyCodeLine{2196   \textcolor{comment}{/* corresponding to ADC\_CR2\_EXTEN \{0; 1; 2; 3\}.                             */}}
+\DoxyCodeLine{2197   uint32\_t ShiftExten = ((TriggerSource \& ADC\_CR2\_EXTEN) >> (ADC\_REG\_TRIG\_EXTEN\_BITOFFSET\_POS -\/ 2UL));}
+\DoxyCodeLine{2198   }
+\DoxyCodeLine{2199   \textcolor{comment}{/* Set bitfield corresponding to ADC\_CR2\_EXTEN and ADC\_CR2\_EXTSEL           */}}
+\DoxyCodeLine{2200   \textcolor{comment}{/* to match with triggers literals definition.                              */}}
+\DoxyCodeLine{2201   \textcolor{keywordflow}{return} ((TriggerSource}
+\DoxyCodeLine{2202            \& (ADC\_REG\_TRIG\_SOURCE\_MASK << ShiftExten) \& ADC\_CR2\_EXTSEL)}
+\DoxyCodeLine{2203           | ((ADC\_REG\_TRIG\_EDGE\_MASK << ShiftExten) \& ADC\_CR2\_EXTEN)}
+\DoxyCodeLine{2204          );}
+\DoxyCodeLine{2205 \}}
+\DoxyCodeLine{2206 }
+\DoxyCodeLine{2218 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_IsTriggerSourceSWStart(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2219 \{}
+\DoxyCodeLine{2220   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_EXTEN) == (LL\_ADC\_REG\_TRIG\_SOFTWARE \& ADC\_CR2\_EXTEN));}
+\DoxyCodeLine{2221 \}}
+\DoxyCodeLine{2222 }
+\DoxyCodeLine{2235 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_GetTriggerEdge(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2236 \{}
+\DoxyCodeLine{2237   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_EXTEN));}
+\DoxyCodeLine{2238 \}}
+\DoxyCodeLine{2239 }
+\DoxyCodeLine{2240 }
+\DoxyCodeLine{2297 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_SetSequencerLength(ADC\_TypeDef *ADCx, uint32\_t SequencerNbRanks)}
+\DoxyCodeLine{2298 \{}
+\DoxyCodeLine{2299   MODIFY\_REG(ADCx-\/>SQR1, ADC\_SQR1\_L, SequencerNbRanks);}
+\DoxyCodeLine{2300 \}}
+\DoxyCodeLine{2301 }
+\DoxyCodeLine{2357 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_GetSequencerLength(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2358 \{}
+\DoxyCodeLine{2359   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>SQR1, ADC\_SQR1\_L));}
+\DoxyCodeLine{2360 \}}
+\DoxyCodeLine{2361 }
+\DoxyCodeLine{2385 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_SetSequencerDiscont(ADC\_TypeDef *ADCx, uint32\_t SeqDiscont)}
+\DoxyCodeLine{2386 \{}
+\DoxyCodeLine{2387   MODIFY\_REG(ADCx-\/>CR1, ADC\_CR1\_DISCEN | ADC\_CR1\_DISCNUM, SeqDiscont);}
+\DoxyCodeLine{2388 \}}
+\DoxyCodeLine{2389 }
+\DoxyCodeLine{2408 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_GetSequencerDiscont(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2409 \{}
+\DoxyCodeLine{2410   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR1, ADC\_CR1\_DISCEN | ADC\_CR1\_DISCNUM));}
+\DoxyCodeLine{2411 \}}
+\DoxyCodeLine{2412 }
+\DoxyCodeLine{2491 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_SetSequencerRanks(ADC\_TypeDef *ADCx, uint32\_t Rank, uint32\_t Channel)}
+\DoxyCodeLine{2492 \{}
+\DoxyCodeLine{2493   \textcolor{comment}{/* Set bits with content of parameter "{}Channel"{} with bits position          */}}
+\DoxyCodeLine{2494   \textcolor{comment}{/* in register and register position depending on parameter "{}Rank"{}.         */}}
+\DoxyCodeLine{2495   \textcolor{comment}{/* Parameters "{}Rank"{} and "{}Channel"{} are used with masks because containing   */}}
+\DoxyCodeLine{2496   \textcolor{comment}{/* other bits reserved for other purpose.                                   */}}
+\DoxyCodeLine{2497   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>SQR1, \_\_ADC\_MASK\_SHIFT(Rank, ADC\_REG\_SQRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{2498   }
+\DoxyCodeLine{2499   MODIFY\_REG(*preg,}
+\DoxyCodeLine{2500              ADC\_CHANNEL\_ID\_NUMBER\_MASK << (Rank \& ADC\_REG\_RANK\_ID\_SQRX\_MASK),}
+\DoxyCodeLine{2501              (Channel \& ADC\_CHANNEL\_ID\_NUMBER\_MASK) << (Rank \& ADC\_REG\_RANK\_ID\_SQRX\_MASK));}
+\DoxyCodeLine{2502 \}}
+\DoxyCodeLine{2503 }
+\DoxyCodeLine{2588 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_GetSequencerRanks(ADC\_TypeDef *ADCx, uint32\_t Rank)}
+\DoxyCodeLine{2589 \{}
+\DoxyCodeLine{2590   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>SQR1, \_\_ADC\_MASK\_SHIFT(Rank, ADC\_REG\_SQRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{2591   }
+\DoxyCodeLine{2592   \textcolor{keywordflow}{return} (uint32\_t) (READ\_BIT(*preg,}
+\DoxyCodeLine{2593                               ADC\_CHANNEL\_ID\_NUMBER\_MASK << (Rank \& ADC\_REG\_RANK\_ID\_SQRX\_MASK))}
+\DoxyCodeLine{2594                      >> (Rank \& ADC\_REG\_RANK\_ID\_SQRX\_MASK)}
+\DoxyCodeLine{2595                     );}
+\DoxyCodeLine{2596 \}}
+\DoxyCodeLine{2597 }
+\DoxyCodeLine{2613 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_SetContinuousMode(ADC\_TypeDef *ADCx, uint32\_t Continuous)}
+\DoxyCodeLine{2614 \{}
+\DoxyCodeLine{2615   MODIFY\_REG(ADCx-\/>CR2, ADC\_CR2\_CONT, Continuous);}
+\DoxyCodeLine{2616 \}}
+\DoxyCodeLine{2617 }
+\DoxyCodeLine{2630 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_GetContinuousMode(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2631 \{}
+\DoxyCodeLine{2632   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_CONT));}
+\DoxyCodeLine{2633 \}}
+\DoxyCodeLine{2634 }
+\DoxyCodeLine{2666 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_SetDMATransfer(ADC\_TypeDef *ADCx, uint32\_t DMATransfer)}
+\DoxyCodeLine{2667 \{}
+\DoxyCodeLine{2668   MODIFY\_REG(ADCx-\/>CR2, ADC\_CR2\_DMA | ADC\_CR2\_DDS, DMATransfer);}
+\DoxyCodeLine{2669 \}}
+\DoxyCodeLine{2670 }
+\DoxyCodeLine{2701 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_GetDMATransfer(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2702 \{}
+\DoxyCodeLine{2703   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_DMA | ADC\_CR2\_DDS));}
+\DoxyCodeLine{2704 \}}
+\DoxyCodeLine{2705 }
+\DoxyCodeLine{2723 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_SetFlagEndOfConversion(ADC\_TypeDef *ADCx, uint32\_t EocSelection)}
+\DoxyCodeLine{2724 \{}
+\DoxyCodeLine{2725   MODIFY\_REG(ADCx-\/>CR2, ADC\_CR2\_EOCS, EocSelection);}
+\DoxyCodeLine{2726 \}}
+\DoxyCodeLine{2727 }
+\DoxyCodeLine{2738 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_GetFlagEndOfConversion(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2739 \{}
+\DoxyCodeLine{2740   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_EOCS));}
+\DoxyCodeLine{2741 \}}
+\DoxyCodeLine{2742 }
+\DoxyCodeLine{2782 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_INJ\_SetTriggerSource(ADC\_TypeDef *ADCx, uint32\_t TriggerSource)}
+\DoxyCodeLine{2783 \{}
+\DoxyCodeLine{2784 \textcolor{comment}{/* Note: On this STM32 series, ADC group injected external trigger edge       */}}
+\DoxyCodeLine{2785 \textcolor{comment}{/*       is used to perform a ADC conversion start.                           */}}
+\DoxyCodeLine{2786 \textcolor{comment}{/*       This function does not set external trigger edge.                    */}}
+\DoxyCodeLine{2787 \textcolor{comment}{/*       This feature is set using function                                   */}}
+\DoxyCodeLine{2788 \textcolor{comment}{/*       @ref LL\_ADC\_INJ\_StartConversionExtTrig().                            */}}
+\DoxyCodeLine{2789   MODIFY\_REG(ADCx-\/>CR2, ADC\_CR2\_JEXTSEL, (TriggerSource \& ADC\_CR2\_JEXTSEL));}
+\DoxyCodeLine{2790 \}}
+\DoxyCodeLine{2791 }
+\DoxyCodeLine{2826 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_INJ\_GetTriggerSource(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2827 \{}
+\DoxyCodeLine{2828   uint32\_t TriggerSource = READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_JEXTSEL | ADC\_CR2\_JEXTEN);}
+\DoxyCodeLine{2829   }
+\DoxyCodeLine{2830   \textcolor{comment}{/* Value for shift of \{0; 4; 8; 12\} depending on value of bitfield          */}}
+\DoxyCodeLine{2831   \textcolor{comment}{/* corresponding to ADC\_CR2\_JEXTEN \{0; 1; 2; 3\}.                            */}}
+\DoxyCodeLine{2832   uint32\_t ShiftExten = ((TriggerSource \& ADC\_CR2\_JEXTEN) >> (ADC\_INJ\_TRIG\_EXTEN\_BITOFFSET\_POS -\/ 2UL));}
+\DoxyCodeLine{2833   }
+\DoxyCodeLine{2834   \textcolor{comment}{/* Set bitfield corresponding to ADC\_CR2\_JEXTEN and ADC\_CR2\_JEXTSEL         */}}
+\DoxyCodeLine{2835   \textcolor{comment}{/* to match with triggers literals definition.                              */}}
+\DoxyCodeLine{2836   \textcolor{keywordflow}{return} ((TriggerSource}
+\DoxyCodeLine{2837            \& (ADC\_INJ\_TRIG\_SOURCE\_MASK << ShiftExten) \& ADC\_CR2\_JEXTSEL)}
+\DoxyCodeLine{2838           | ((ADC\_INJ\_TRIG\_EDGE\_MASK << ShiftExten) \& ADC\_CR2\_JEXTEN)}
+\DoxyCodeLine{2839          );}
+\DoxyCodeLine{2840 \}}
+\DoxyCodeLine{2841 }
+\DoxyCodeLine{2853 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_INJ\_IsTriggerSourceSWStart(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2854 \{}
+\DoxyCodeLine{2855   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_JEXTEN) == (LL\_ADC\_INJ\_TRIG\_SOFTWARE \& ADC\_CR2\_JEXTEN));}
+\DoxyCodeLine{2856 \}}
+\DoxyCodeLine{2857 }
+\DoxyCodeLine{2868 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_INJ\_GetTriggerEdge(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2869 \{}
+\DoxyCodeLine{2870   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_JEXTEN));}
+\DoxyCodeLine{2871 \}}
+\DoxyCodeLine{2872 }
+\DoxyCodeLine{2896 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_INJ\_SetSequencerLength(ADC\_TypeDef *ADCx, uint32\_t SequencerNbRanks)}
+\DoxyCodeLine{2897 \{}
+\DoxyCodeLine{2898   MODIFY\_REG(ADCx-\/>JSQR, ADC\_JSQR\_JL, SequencerNbRanks);}
+\DoxyCodeLine{2899 \}}
+\DoxyCodeLine{2900 }
+\DoxyCodeLine{2923 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_INJ\_GetSequencerLength(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2924 \{}
+\DoxyCodeLine{2925   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>JSQR, ADC\_JSQR\_JL));}
+\DoxyCodeLine{2926 \}}
+\DoxyCodeLine{2927 }
+\DoxyCodeLine{2941 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_INJ\_SetSequencerDiscont(ADC\_TypeDef *ADCx, uint32\_t SeqDiscont)}
+\DoxyCodeLine{2942 \{}
+\DoxyCodeLine{2943   MODIFY\_REG(ADCx-\/>CR1, ADC\_CR1\_JDISCEN, SeqDiscont);}
+\DoxyCodeLine{2944 \}}
+\DoxyCodeLine{2945 }
+\DoxyCodeLine{2956 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_INJ\_GetSequencerDiscont(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{2957 \{}
+\DoxyCodeLine{2958   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR1, ADC\_CR1\_JDISCEN));}
+\DoxyCodeLine{2959 \}}
+\DoxyCodeLine{2960 }
+\DoxyCodeLine{3008 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_INJ\_SetSequencerRanks(ADC\_TypeDef *ADCx, uint32\_t Rank, uint32\_t Channel)}
+\DoxyCodeLine{3009 \{}
+\DoxyCodeLine{3010   \textcolor{comment}{/* Set bits with content of parameter "{}Channel"{} with bits position          */}}
+\DoxyCodeLine{3011   \textcolor{comment}{/* in register depending on parameter "{}Rank"{}.                               */}}
+\DoxyCodeLine{3012   \textcolor{comment}{/* Parameters "{}Rank"{} and "{}Channel"{} are used with masks because containing   */}}
+\DoxyCodeLine{3013   \textcolor{comment}{/* other bits reserved for other purpose.                                   */}}
+\DoxyCodeLine{3014   uint32\_t tmpreg1 = (READ\_BIT(ADCx-\/>JSQR, ADC\_JSQR\_JL) >> ADC\_JSQR\_JL\_Pos) + 1UL;}
+\DoxyCodeLine{3015   }
+\DoxyCodeLine{3016   MODIFY\_REG(ADCx-\/>JSQR,}
+\DoxyCodeLine{3017              ADC\_CHANNEL\_ID\_NUMBER\_MASK << (5UL * (uint8\_t)(((Rank) + 3UL) -\/ (tmpreg1))),}
+\DoxyCodeLine{3018              (Channel \& ADC\_CHANNEL\_ID\_NUMBER\_MASK) << (5UL * (uint8\_t)(((Rank) + 3UL) -\/ (tmpreg1))));}
+\DoxyCodeLine{3019 \}}
+\DoxyCodeLine{3020 }
+\DoxyCodeLine{3077 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_INJ\_GetSequencerRanks(ADC\_TypeDef *ADCx, uint32\_t Rank)}
+\DoxyCodeLine{3078 \{}
+\DoxyCodeLine{3079   uint32\_t tmpreg1 = (READ\_BIT(ADCx-\/>JSQR, ADC\_JSQR\_JL) >> ADC\_JSQR\_JL\_Pos)  + 1UL;}
+\DoxyCodeLine{3080   }
+\DoxyCodeLine{3081   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>JSQR,}
+\DoxyCodeLine{3082                              ADC\_CHANNEL\_ID\_NUMBER\_MASK << (5UL * (uint8\_t)(((Rank) + 3UL) -\/ (tmpreg1))))}
+\DoxyCodeLine{3083                     >> (5UL * (uint8\_t)(((Rank) + 3UL) -\/ (tmpreg1)))}
+\DoxyCodeLine{3084                    );}
+\DoxyCodeLine{3085 \}}
+\DoxyCodeLine{3086 }
+\DoxyCodeLine{3113 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_INJ\_SetTrigAuto(ADC\_TypeDef *ADCx, uint32\_t TrigAuto)}
+\DoxyCodeLine{3114 \{}
+\DoxyCodeLine{3115   MODIFY\_REG(ADCx-\/>CR1, ADC\_CR1\_JAUTO, TrigAuto);}
+\DoxyCodeLine{3116 \}}
+\DoxyCodeLine{3117 }
+\DoxyCodeLine{3127 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_INJ\_GetTrigAuto(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{3128 \{}
+\DoxyCodeLine{3129   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR1, ADC\_CR1\_JAUTO));}
+\DoxyCodeLine{3130 \}}
+\DoxyCodeLine{3131 }
+\DoxyCodeLine{3157 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_INJ\_SetOffset(ADC\_TypeDef *ADCx, uint32\_t Rank, uint32\_t OffsetLevel)}
+\DoxyCodeLine{3158 \{}
+\DoxyCodeLine{3159   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>JOFR1, \_\_ADC\_MASK\_SHIFT(Rank, ADC\_INJ\_JOFRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{3160   }
+\DoxyCodeLine{3161   MODIFY\_REG(*preg,}
+\DoxyCodeLine{3162              ADC\_JOFR1\_JOFFSET1,}
+\DoxyCodeLine{3163              OffsetLevel);}
+\DoxyCodeLine{3164 \}}
+\DoxyCodeLine{3165 }
+\DoxyCodeLine{3184 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_INJ\_GetOffset(ADC\_TypeDef *ADCx, uint32\_t Rank)}
+\DoxyCodeLine{3185 \{}
+\DoxyCodeLine{3186   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>JOFR1, \_\_ADC\_MASK\_SHIFT(Rank, ADC\_INJ\_JOFRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{3187   }
+\DoxyCodeLine{3188   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(*preg,}
+\DoxyCodeLine{3189                              ADC\_JOFR1\_JOFFSET1)}
+\DoxyCodeLine{3190                    );}
+\DoxyCodeLine{3191 \}}
+\DoxyCodeLine{3192 }
+\DoxyCodeLine{3277 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetChannelSamplingTime(ADC\_TypeDef *ADCx, uint32\_t Channel, uint32\_t SamplingTime)}
+\DoxyCodeLine{3278 \{}
+\DoxyCodeLine{3279   \textcolor{comment}{/* Set bits with content of parameter "{}SamplingTime"{} with bits position     */}}
+\DoxyCodeLine{3280   \textcolor{comment}{/* in register and register position depending on parameter "{}Channel"{}.      */}}
+\DoxyCodeLine{3281   \textcolor{comment}{/* Parameter "{}Channel"{} is used with masks because containing                */}}
+\DoxyCodeLine{3282   \textcolor{comment}{/* other bits reserved for other purpose.                                   */}}
+\DoxyCodeLine{3283   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>SMPR1, \_\_ADC\_MASK\_SHIFT(Channel, ADC\_CHANNEL\_SMPRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{3284   }
+\DoxyCodeLine{3285   MODIFY\_REG(*preg,}
+\DoxyCodeLine{3286              ADC\_SMPR2\_SMP0 << \_\_ADC\_MASK\_SHIFT(Channel, ADC\_CHANNEL\_SMPx\_BITOFFSET\_MASK),}
+\DoxyCodeLine{3287              SamplingTime   << \_\_ADC\_MASK\_SHIFT(Channel, ADC\_CHANNEL\_SMPx\_BITOFFSET\_MASK));}
+\DoxyCodeLine{3288 \}}
+\DoxyCodeLine{3289 }
+\DoxyCodeLine{3354 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetChannelSamplingTime(ADC\_TypeDef *ADCx, uint32\_t Channel)}
+\DoxyCodeLine{3355 \{}
+\DoxyCodeLine{3356   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>SMPR1, \_\_ADC\_MASK\_SHIFT(Channel, ADC\_CHANNEL\_SMPRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{3357   }
+\DoxyCodeLine{3358   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(*preg,}
+\DoxyCodeLine{3359                              ADC\_SMPR2\_SMP0 << \_\_ADC\_MASK\_SHIFT(Channel, ADC\_CHANNEL\_SMPx\_BITOFFSET\_MASK))}
+\DoxyCodeLine{3360                     >> \_\_ADC\_MASK\_SHIFT(Channel, ADC\_CHANNEL\_SMPx\_BITOFFSET\_MASK)}
+\DoxyCodeLine{3361                    );}
+\DoxyCodeLine{3362 \}}
+\DoxyCodeLine{3363 }
+\DoxyCodeLine{3468 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetAnalogWDMonitChannels(ADC\_TypeDef *ADCx, uint32\_t AWDChannelGroup)}
+\DoxyCodeLine{3469 \{}
+\DoxyCodeLine{3470   MODIFY\_REG(ADCx-\/>CR1,}
+\DoxyCodeLine{3471              (ADC\_CR1\_AWDEN | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDSGL | ADC\_CR1\_AWDCH),}
+\DoxyCodeLine{3472              AWDChannelGroup);}
+\DoxyCodeLine{3473 \}}
+\DoxyCodeLine{3474 }
+\DoxyCodeLine{3564 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetAnalogWDMonitChannels(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{3565 \{}
+\DoxyCodeLine{3566   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCx-\/>CR1, (ADC\_CR1\_AWDEN | ADC\_CR1\_JAWDEN | ADC\_CR1\_AWDSGL | ADC\_CR1\_AWDCH)));}
+\DoxyCodeLine{3567 \}}
+\DoxyCodeLine{3568 }
+\DoxyCodeLine{3591 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetAnalogWDThresholds(ADC\_TypeDef *ADCx, uint32\_t AWDThresholdsHighLow, uint32\_t AWDThresholdValue)}
+\DoxyCodeLine{3592 \{}
+\DoxyCodeLine{3593   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>HTR, AWDThresholdsHighLow);}
+\DoxyCodeLine{3594   }
+\DoxyCodeLine{3595   MODIFY\_REG(*preg,}
+\DoxyCodeLine{3596              ADC\_HTR\_HT,}
+\DoxyCodeLine{3597              AWDThresholdValue);}
+\DoxyCodeLine{3598 \}}
+\DoxyCodeLine{3599 }
+\DoxyCodeLine{3614 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetAnalogWDThresholds(ADC\_TypeDef *ADCx, uint32\_t AWDThresholdsHighLow)}
+\DoxyCodeLine{3615 \{}
+\DoxyCodeLine{3616   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>HTR, AWDThresholdsHighLow);}
+\DoxyCodeLine{3617   }
+\DoxyCodeLine{3618   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(*preg, ADC\_HTR\_HT));}
+\DoxyCodeLine{3619 \}}
+\DoxyCodeLine{3620 }
+\DoxyCodeLine{3629 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{3656 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetMultimode(ADC\_Common\_TypeDef *ADCxy\_COMMON, uint32\_t Multimode)}
+\DoxyCodeLine{3657 \{}
+\DoxyCodeLine{3658   MODIFY\_REG(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_MULTI, Multimode);}
+\DoxyCodeLine{3659 \}}
+\DoxyCodeLine{3660 }
+\DoxyCodeLine{3686 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetMultimode(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{3687 \{}
+\DoxyCodeLine{3688   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_MULTI));}
+\DoxyCodeLine{3689 \}}
+\DoxyCodeLine{3690 }
+\DoxyCodeLine{3735 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetMultiDMATransfer(ADC\_Common\_TypeDef *ADCxy\_COMMON, uint32\_t MultiDMATransfer)}
+\DoxyCodeLine{3736 \{}
+\DoxyCodeLine{3737   MODIFY\_REG(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_DMA | ADC\_CCR\_DDS, MultiDMATransfer);}
+\DoxyCodeLine{3738 \}}
+\DoxyCodeLine{3739 }
+\DoxyCodeLine{3783 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetMultiDMATransfer(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{3784 \{}
+\DoxyCodeLine{3785   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_DMA | ADC\_CCR\_DDS));}
+\DoxyCodeLine{3786 \}}
+\DoxyCodeLine{3787 }
+\DoxyCodeLine{3817 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_SetMultiTwoSamplingDelay(ADC\_Common\_TypeDef *ADCxy\_COMMON, uint32\_t MultiTwoSamplingDelay)}
+\DoxyCodeLine{3818 \{}
+\DoxyCodeLine{3819   MODIFY\_REG(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_DELAY, MultiTwoSamplingDelay);}
+\DoxyCodeLine{3820 \}}
+\DoxyCodeLine{3821 }
+\DoxyCodeLine{3845 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_GetMultiTwoSamplingDelay(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{3846 \{}
+\DoxyCodeLine{3847   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCxy\_COMMON-\/>CCR, ADC\_CCR\_DELAY));}
+\DoxyCodeLine{3848 \}}
+\DoxyCodeLine{3849 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{3850 }
+\DoxyCodeLine{3868 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_Enable(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{3869 \{}
+\DoxyCodeLine{3870   SET\_BIT(ADCx-\/>CR2, ADC\_CR2\_ADON);}
+\DoxyCodeLine{3871 \}}
+\DoxyCodeLine{3872 }
+\DoxyCodeLine{3879 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_Disable(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{3880 \{}
+\DoxyCodeLine{3881   CLEAR\_BIT(ADCx-\/>CR2, ADC\_CR2\_ADON);}
+\DoxyCodeLine{3882 \}}
+\DoxyCodeLine{3883 }
+\DoxyCodeLine{3890 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsEnabled(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{3891 \{}
+\DoxyCodeLine{3892   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>CR2, ADC\_CR2\_ADON) == (ADC\_CR2\_ADON));}
+\DoxyCodeLine{3893 \}}
+\DoxyCodeLine{3894 }
+\DoxyCodeLine{3919 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_StartConversionSWStart(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{3920 \{}
+\DoxyCodeLine{3921   SET\_BIT(ADCx-\/>CR2, ADC\_CR2\_SWSTART);}
+\DoxyCodeLine{3922 \}}
+\DoxyCodeLine{3923 }
+\DoxyCodeLine{3940 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_StartConversionExtTrig(ADC\_TypeDef *ADCx, uint32\_t ExternalTriggerEdge)}
+\DoxyCodeLine{3941 \{}
+\DoxyCodeLine{3942   SET\_BIT(ADCx-\/>CR2, ExternalTriggerEdge);}
+\DoxyCodeLine{3943 \}}
+\DoxyCodeLine{3944 }
+\DoxyCodeLine{3958 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_REG\_StopConversionExtTrig(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{3959 \{}
+\DoxyCodeLine{3960   CLEAR\_BIT(ADCx-\/>CR2, ADC\_CR2\_EXTEN);}
+\DoxyCodeLine{3961 \}}
+\DoxyCodeLine{3962 }
+\DoxyCodeLine{3972 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_ReadConversionData32(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{3973 \{}
+\DoxyCodeLine{3974   \textcolor{keywordflow}{return} (uint16\_t)(READ\_BIT(ADCx-\/>DR, ADC\_DR\_DATA));}
+\DoxyCodeLine{3975 \}}
+\DoxyCodeLine{3976 }
+\DoxyCodeLine{3987 \_\_STATIC\_INLINE uint16\_t LL\_ADC\_REG\_ReadConversionData12(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{3988 \{}
+\DoxyCodeLine{3989   \textcolor{keywordflow}{return} (uint16\_t)(READ\_BIT(ADCx-\/>DR, ADC\_DR\_DATA));}
+\DoxyCodeLine{3990 \}}
+\DoxyCodeLine{3991 }
+\DoxyCodeLine{4002 \_\_STATIC\_INLINE uint16\_t LL\_ADC\_REG\_ReadConversionData10(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4003 \{}
+\DoxyCodeLine{4004   \textcolor{keywordflow}{return} (uint16\_t)(READ\_BIT(ADCx-\/>DR, ADC\_DR\_DATA));}
+\DoxyCodeLine{4005 \}}
+\DoxyCodeLine{4006 }
+\DoxyCodeLine{4017 \_\_STATIC\_INLINE uint8\_t LL\_ADC\_REG\_ReadConversionData8(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4018 \{}
+\DoxyCodeLine{4019   \textcolor{keywordflow}{return} (uint16\_t)(READ\_BIT(ADCx-\/>DR, ADC\_DR\_DATA));}
+\DoxyCodeLine{4020 \}}
+\DoxyCodeLine{4021 }
+\DoxyCodeLine{4032 \_\_STATIC\_INLINE uint8\_t LL\_ADC\_REG\_ReadConversionData6(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4033 \{}
+\DoxyCodeLine{4034   \textcolor{keywordflow}{return} (uint16\_t)(READ\_BIT(ADCx-\/>DR, ADC\_DR\_DATA));}
+\DoxyCodeLine{4035 \}}
+\DoxyCodeLine{4036 }
+\DoxyCodeLine{4037 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{4059 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_REG\_ReadMultiConversionData32(ADC\_Common\_TypeDef *ADCxy\_COMMON, uint32\_t ConversionData)}
+\DoxyCodeLine{4060 \{}
+\DoxyCodeLine{4061   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(ADCxy\_COMMON-\/>CDR,}
+\DoxyCodeLine{4062                              ADC\_DR\_ADC2DATA)}
+\DoxyCodeLine{4063                     >> POSITION\_VAL(ConversionData)}
+\DoxyCodeLine{4064                    );}
+\DoxyCodeLine{4065 \}}
+\DoxyCodeLine{4066 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{4067 }
+\DoxyCodeLine{4092 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_INJ\_StartConversionSWStart(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4093 \{}
+\DoxyCodeLine{4094   SET\_BIT(ADCx-\/>CR2, ADC\_CR2\_JSWSTART);}
+\DoxyCodeLine{4095 \}}
+\DoxyCodeLine{4096 }
+\DoxyCodeLine{4113 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_INJ\_StartConversionExtTrig(ADC\_TypeDef *ADCx, uint32\_t ExternalTriggerEdge)}
+\DoxyCodeLine{4114 \{}
+\DoxyCodeLine{4115   SET\_BIT(ADCx-\/>CR2, ExternalTriggerEdge);}
+\DoxyCodeLine{4116 \}}
+\DoxyCodeLine{4117 }
+\DoxyCodeLine{4131 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_INJ\_StopConversionExtTrig(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4132 \{}
+\DoxyCodeLine{4133   CLEAR\_BIT(ADCx-\/>CR2, ADC\_CR2\_JEXTEN);}
+\DoxyCodeLine{4134 \}}
+\DoxyCodeLine{4135 }
+\DoxyCodeLine{4153 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_INJ\_ReadConversionData32(ADC\_TypeDef *ADCx, uint32\_t Rank)}
+\DoxyCodeLine{4154 \{}
+\DoxyCodeLine{4155   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>JDR1, \_\_ADC\_MASK\_SHIFT(Rank, ADC\_INJ\_JDRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{4156   }
+\DoxyCodeLine{4157   \textcolor{keywordflow}{return} (uint32\_t)(READ\_BIT(*preg,}
+\DoxyCodeLine{4158                              ADC\_JDR1\_JDATA)}
+\DoxyCodeLine{4159                    );}
+\DoxyCodeLine{4160 \}}
+\DoxyCodeLine{4161 }
+\DoxyCodeLine{4180 \_\_STATIC\_INLINE uint16\_t LL\_ADC\_INJ\_ReadConversionData12(ADC\_TypeDef *ADCx, uint32\_t Rank)}
+\DoxyCodeLine{4181 \{}
+\DoxyCodeLine{4182   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>JDR1, \_\_ADC\_MASK\_SHIFT(Rank, ADC\_INJ\_JDRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{4183   }
+\DoxyCodeLine{4184   \textcolor{keywordflow}{return} (uint16\_t)(READ\_BIT(*preg,}
+\DoxyCodeLine{4185                              ADC\_JDR1\_JDATA)}
+\DoxyCodeLine{4186                    );}
+\DoxyCodeLine{4187 \}}
+\DoxyCodeLine{4188 }
+\DoxyCodeLine{4207 \_\_STATIC\_INLINE uint16\_t LL\_ADC\_INJ\_ReadConversionData10(ADC\_TypeDef *ADCx, uint32\_t Rank)}
+\DoxyCodeLine{4208 \{}
+\DoxyCodeLine{4209   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>JDR1, \_\_ADC\_MASK\_SHIFT(Rank, ADC\_INJ\_JDRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{4210   }
+\DoxyCodeLine{4211   \textcolor{keywordflow}{return} (uint16\_t)(READ\_BIT(*preg,}
+\DoxyCodeLine{4212                              ADC\_JDR1\_JDATA)}
+\DoxyCodeLine{4213                    );}
+\DoxyCodeLine{4214 \}}
+\DoxyCodeLine{4215 }
+\DoxyCodeLine{4234 \_\_STATIC\_INLINE uint8\_t LL\_ADC\_INJ\_ReadConversionData8(ADC\_TypeDef *ADCx, uint32\_t Rank)}
+\DoxyCodeLine{4235 \{}
+\DoxyCodeLine{4236   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>JDR1, \_\_ADC\_MASK\_SHIFT(Rank, ADC\_INJ\_JDRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{4237   }
+\DoxyCodeLine{4238   \textcolor{keywordflow}{return} (uint8\_t)(READ\_BIT(*preg,}
+\DoxyCodeLine{4239                             ADC\_JDR1\_JDATA)}
+\DoxyCodeLine{4240                   );}
+\DoxyCodeLine{4241 \}}
+\DoxyCodeLine{4242 }
+\DoxyCodeLine{4261 \_\_STATIC\_INLINE uint8\_t LL\_ADC\_INJ\_ReadConversionData6(ADC\_TypeDef *ADCx, uint32\_t Rank)}
+\DoxyCodeLine{4262 \{}
+\DoxyCodeLine{4263   \_\_IO uint32\_t *preg = \_\_ADC\_PTR\_REG\_OFFSET(ADCx-\/>JDR1, \_\_ADC\_MASK\_SHIFT(Rank, ADC\_INJ\_JDRX\_REGOFFSET\_MASK));}
+\DoxyCodeLine{4264   }
+\DoxyCodeLine{4265   \textcolor{keywordflow}{return} (uint8\_t)(READ\_BIT(*preg,}
+\DoxyCodeLine{4266                             ADC\_JDR1\_JDATA)}
+\DoxyCodeLine{4267                   );}
+\DoxyCodeLine{4268 \}}
+\DoxyCodeLine{4269 }
+\DoxyCodeLine{4288 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_EOCS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4289 \{}
+\DoxyCodeLine{4290   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>SR, LL\_ADC\_FLAG\_EOCS) == (LL\_ADC\_FLAG\_EOCS));}
+\DoxyCodeLine{4291 \}}
+\DoxyCodeLine{4292 }
+\DoxyCodeLine{4299 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_OVR(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4300 \{}
+\DoxyCodeLine{4301   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>SR, LL\_ADC\_FLAG\_OVR) == (LL\_ADC\_FLAG\_OVR));}
+\DoxyCodeLine{4302 \}}
+\DoxyCodeLine{4303 }
+\DoxyCodeLine{4304 }
+\DoxyCodeLine{4311 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_JEOS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4312 \{}
+\DoxyCodeLine{4313   \textcolor{comment}{/* Note: on this STM32 series, there is no flag ADC group injected          */}}
+\DoxyCodeLine{4314   \textcolor{comment}{/*       end of unitary conversion.                                         */}}
+\DoxyCodeLine{4315   \textcolor{comment}{/*       Flag noted as "{}JEOC"{} is corresponding to flag "{}JEOS"{}               */}}
+\DoxyCodeLine{4316   \textcolor{comment}{/*       in other STM32 families).                                          */}}
+\DoxyCodeLine{4317   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>SR, LL\_ADC\_FLAG\_JEOS) == (LL\_ADC\_FLAG\_JEOS));}
+\DoxyCodeLine{4318 \}}
+\DoxyCodeLine{4319 }
+\DoxyCodeLine{4326 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_AWD1(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4327 \{}
+\DoxyCodeLine{4328   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>SR, LL\_ADC\_FLAG\_AWD1) == (LL\_ADC\_FLAG\_AWD1));}
+\DoxyCodeLine{4329 \}}
+\DoxyCodeLine{4330 }
+\DoxyCodeLine{4341 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_ClearFlag\_EOCS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4342 \{}
+\DoxyCodeLine{4343   WRITE\_REG(ADCx-\/>SR, \string~LL\_ADC\_FLAG\_EOCS);}
+\DoxyCodeLine{4344 \}}
+\DoxyCodeLine{4345 }
+\DoxyCodeLine{4352 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_ClearFlag\_OVR(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4353 \{}
+\DoxyCodeLine{4354   WRITE\_REG(ADCx-\/>SR, \string~LL\_ADC\_FLAG\_OVR);}
+\DoxyCodeLine{4355 \}}
+\DoxyCodeLine{4356 }
+\DoxyCodeLine{4357 }
+\DoxyCodeLine{4364 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_ClearFlag\_JEOS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4365 \{}
+\DoxyCodeLine{4366   \textcolor{comment}{/* Note: on this STM32 series, there is no flag ADC group injected          */}}
+\DoxyCodeLine{4367   \textcolor{comment}{/*       end of unitary conversion.                                         */}}
+\DoxyCodeLine{4368   \textcolor{comment}{/*       Flag noted as "{}JEOC"{} is corresponding to flag "{}JEOS"{}               */}}
+\DoxyCodeLine{4369   \textcolor{comment}{/*       in other STM32 families).                                          */}}
+\DoxyCodeLine{4370   WRITE\_REG(ADCx-\/>SR, \string~LL\_ADC\_FLAG\_JEOS);}
+\DoxyCodeLine{4371 \}}
+\DoxyCodeLine{4372 }
+\DoxyCodeLine{4379 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_ClearFlag\_AWD1(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4380 \{}
+\DoxyCodeLine{4381   WRITE\_REG(ADCx-\/>SR, \string~LL\_ADC\_FLAG\_AWD1);}
+\DoxyCodeLine{4382 \}}
+\DoxyCodeLine{4383 }
+\DoxyCodeLine{4384 \textcolor{preprocessor}{\#if defined(ADC\_MULTIMODE\_SUPPORT)}}
+\DoxyCodeLine{4396 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_MST\_EOCS(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4397 \{}
+\DoxyCodeLine{4398   \textcolor{keywordflow}{return} (READ\_BIT(ADC1-\/>SR, LL\_ADC\_FLAG\_EOCS) == (LL\_ADC\_FLAG\_EOCS));}
+\DoxyCodeLine{4399 \}}
+\DoxyCodeLine{4400 }
+\DoxyCodeLine{4412 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_SLV1\_EOCS(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4413 \{}
+\DoxyCodeLine{4414   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, LL\_ADC\_FLAG\_EOCS\_SLV1) == (LL\_ADC\_FLAG\_EOCS\_SLV1));}
+\DoxyCodeLine{4415 \}}
+\DoxyCodeLine{4416 }
+\DoxyCodeLine{4428 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_SLV2\_EOCS(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4429 \{}
+\DoxyCodeLine{4430   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, LL\_ADC\_FLAG\_EOCS\_SLV2) == (LL\_ADC\_FLAG\_EOCS\_SLV2));}
+\DoxyCodeLine{4431 \}}
+\DoxyCodeLine{4439 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_MST\_OVR(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4440 \{}
+\DoxyCodeLine{4441   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, LL\_ADC\_FLAG\_OVR\_MST) == (LL\_ADC\_FLAG\_OVR\_MST));}
+\DoxyCodeLine{4442 \}}
+\DoxyCodeLine{4443 }
+\DoxyCodeLine{4451 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_SLV1\_OVR(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4452 \{}
+\DoxyCodeLine{4453   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, LL\_ADC\_FLAG\_OVR\_SLV1) == (LL\_ADC\_FLAG\_OVR\_SLV1));}
+\DoxyCodeLine{4454 \}}
+\DoxyCodeLine{4455 }
+\DoxyCodeLine{4463 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_SLV2\_OVR(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4464 \{}
+\DoxyCodeLine{4465   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, LL\_ADC\_FLAG\_OVR\_SLV2) == (LL\_ADC\_FLAG\_OVR\_SLV2));}
+\DoxyCodeLine{4466 \}}
+\DoxyCodeLine{4467 }
+\DoxyCodeLine{4468 }
+\DoxyCodeLine{4476 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_MST\_JEOS(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4477 \{}
+\DoxyCodeLine{4478   \textcolor{comment}{/* Note: on this STM32 series, there is no flag ADC group injected          */}}
+\DoxyCodeLine{4479   \textcolor{comment}{/*       end of unitary conversion.                                         */}}
+\DoxyCodeLine{4480   \textcolor{comment}{/*       Flag noted as "{}JEOC"{} is corresponding to flag "{}JEOS"{}               */}}
+\DoxyCodeLine{4481   \textcolor{comment}{/*       in other STM32 families).                                          */}}
+\DoxyCodeLine{4482   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, ADC\_CSR\_JEOC1) == (ADC\_CSR\_JEOC1));}
+\DoxyCodeLine{4483 \}}
+\DoxyCodeLine{4484 }
+\DoxyCodeLine{4492 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_SLV1\_JEOS(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4493 \{}
+\DoxyCodeLine{4494   \textcolor{comment}{/* Note: on this STM32 series, there is no flag ADC group injected          */}}
+\DoxyCodeLine{4495   \textcolor{comment}{/*       end of unitary conversion.                                         */}}
+\DoxyCodeLine{4496   \textcolor{comment}{/*       Flag noted as "{}JEOC"{} is corresponding to flag "{}JEOS"{}               */}}
+\DoxyCodeLine{4497   \textcolor{comment}{/*       in other STM32 families).                                          */}}
+\DoxyCodeLine{4498   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, ADC\_CSR\_JEOC2) == (ADC\_CSR\_JEOC2));}
+\DoxyCodeLine{4499 \}}
+\DoxyCodeLine{4500 }
+\DoxyCodeLine{4508 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_SLV2\_JEOS(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4509 \{}
+\DoxyCodeLine{4510   \textcolor{comment}{/* Note: on this STM32 series, there is no flag ADC group injected          */}}
+\DoxyCodeLine{4511   \textcolor{comment}{/*       end of unitary conversion.                                         */}}
+\DoxyCodeLine{4512   \textcolor{comment}{/*       Flag noted as "{}JEOC"{} is corresponding to flag "{}JEOS"{}               */}}
+\DoxyCodeLine{4513   \textcolor{comment}{/*       in other STM32 families).                                          */}}
+\DoxyCodeLine{4514   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, ADC\_CSR\_JEOC3) == (ADC\_CSR\_JEOC3));}
+\DoxyCodeLine{4515 \}}
+\DoxyCodeLine{4516 }
+\DoxyCodeLine{4524 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_MST\_AWD1(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4525 \{}
+\DoxyCodeLine{4526   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, LL\_ADC\_FLAG\_AWD1\_MST) == (LL\_ADC\_FLAG\_AWD1\_MST));}
+\DoxyCodeLine{4527 \}}
+\DoxyCodeLine{4528 }
+\DoxyCodeLine{4536 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_SLV1\_AWD1(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4537 \{}
+\DoxyCodeLine{4538   \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, LL\_ADC\_FLAG\_AWD1\_SLV1) == (LL\_ADC\_FLAG\_AWD1\_SLV1));}
+\DoxyCodeLine{4539 \}}
+\DoxyCodeLine{4540 }
+\DoxyCodeLine{4548 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsActiveFlag\_SLV2\_AWD1(ADC\_Common\_TypeDef *ADCxy\_COMMON)}
+\DoxyCodeLine{4549 \{}
+\DoxyCodeLine{4550     \textcolor{keywordflow}{return} (READ\_BIT(ADCxy\_COMMON-\/>CSR, LL\_ADC\_FLAG\_AWD1\_SLV2) == (LL\_ADC\_FLAG\_AWD1\_SLV2));}
+\DoxyCodeLine{4551 \}}
+\DoxyCodeLine{4552 }
+\DoxyCodeLine{4553 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC\_MULTIMODE\_SUPPORT */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{4554 }
+\DoxyCodeLine{4573 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_EnableIT\_EOCS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4574 \{}
+\DoxyCodeLine{4575   SET\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_EOCS);}
+\DoxyCodeLine{4576 \}}
+\DoxyCodeLine{4577 }
+\DoxyCodeLine{4584 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_EnableIT\_OVR(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4585 \{}
+\DoxyCodeLine{4586   SET\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_OVR);}
+\DoxyCodeLine{4587 \}}
+\DoxyCodeLine{4588 }
+\DoxyCodeLine{4589 }
+\DoxyCodeLine{4596 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_EnableIT\_JEOS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4597 \{}
+\DoxyCodeLine{4598   \textcolor{comment}{/* Note: on this STM32 series, there is no flag ADC group injected          */}}
+\DoxyCodeLine{4599   \textcolor{comment}{/*       end of unitary conversion.                                         */}}
+\DoxyCodeLine{4600   \textcolor{comment}{/*       Flag noted as "{}JEOC"{} is corresponding to flag "{}JEOS"{}               */}}
+\DoxyCodeLine{4601   \textcolor{comment}{/*       in other STM32 families).                                          */}}
+\DoxyCodeLine{4602   SET\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_JEOS);}
+\DoxyCodeLine{4603 \}}
+\DoxyCodeLine{4604 }
+\DoxyCodeLine{4611 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_EnableIT\_AWD1(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4612 \{}
+\DoxyCodeLine{4613   SET\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_AWD1);}
+\DoxyCodeLine{4614 \}}
+\DoxyCodeLine{4615 }
+\DoxyCodeLine{4626 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_DisableIT\_EOCS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4627 \{}
+\DoxyCodeLine{4628   CLEAR\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_EOCS);}
+\DoxyCodeLine{4629 \}}
+\DoxyCodeLine{4630 }
+\DoxyCodeLine{4637 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_DisableIT\_OVR(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4638 \{}
+\DoxyCodeLine{4639   CLEAR\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_OVR);}
+\DoxyCodeLine{4640 \}}
+\DoxyCodeLine{4641 }
+\DoxyCodeLine{4642 }
+\DoxyCodeLine{4649 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_DisableIT\_JEOS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4650 \{}
+\DoxyCodeLine{4651   \textcolor{comment}{/* Note: on this STM32 series, there is no flag ADC group injected          */}}
+\DoxyCodeLine{4652   \textcolor{comment}{/*       end of unitary conversion.                                         */}}
+\DoxyCodeLine{4653   \textcolor{comment}{/*       Flag noted as "{}JEOC"{} is corresponding to flag "{}JEOS"{}               */}}
+\DoxyCodeLine{4654   \textcolor{comment}{/*       in other STM32 families).                                          */}}
+\DoxyCodeLine{4655   CLEAR\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_JEOS);}
+\DoxyCodeLine{4656 \}}
+\DoxyCodeLine{4657 }
+\DoxyCodeLine{4664 \_\_STATIC\_INLINE \textcolor{keywordtype}{void} LL\_ADC\_DisableIT\_AWD1(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4665 \{}
+\DoxyCodeLine{4666   CLEAR\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_AWD1);}
+\DoxyCodeLine{4667 \}}
+\DoxyCodeLine{4668 }
+\DoxyCodeLine{4680 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsEnabledIT\_EOCS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4681 \{}
+\DoxyCodeLine{4682   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_EOCS) == (LL\_ADC\_IT\_EOCS));}
+\DoxyCodeLine{4683 \}}
+\DoxyCodeLine{4684 }
+\DoxyCodeLine{4692 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsEnabledIT\_OVR(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4693 \{}
+\DoxyCodeLine{4694   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_OVR) == (LL\_ADC\_IT\_OVR));}
+\DoxyCodeLine{4695 \}}
+\DoxyCodeLine{4696 }
+\DoxyCodeLine{4697 }
+\DoxyCodeLine{4705 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsEnabledIT\_JEOS(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4706 \{}
+\DoxyCodeLine{4707   \textcolor{comment}{/* Note: on this STM32 series, there is no flag ADC group injected          */}}
+\DoxyCodeLine{4708   \textcolor{comment}{/*       end of unitary conversion.                                         */}}
+\DoxyCodeLine{4709   \textcolor{comment}{/*       Flag noted as "{}JEOC"{} is corresponding to flag "{}JEOS"{}               */}}
+\DoxyCodeLine{4710   \textcolor{comment}{/*       in other STM32 families).                                          */}}
+\DoxyCodeLine{4711   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_JEOS) == (LL\_ADC\_IT\_JEOS));}
+\DoxyCodeLine{4712 \}}
+\DoxyCodeLine{4713 }
+\DoxyCodeLine{4721 \_\_STATIC\_INLINE uint32\_t LL\_ADC\_IsEnabledIT\_AWD1(ADC\_TypeDef *ADCx)}
+\DoxyCodeLine{4722 \{}
+\DoxyCodeLine{4723   \textcolor{keywordflow}{return} (READ\_BIT(ADCx-\/>CR1, LL\_ADC\_IT\_AWD1) == (LL\_ADC\_IT\_AWD1));}
+\DoxyCodeLine{4724 \}}
+\DoxyCodeLine{4725 }
+\DoxyCodeLine{4730 \textcolor{preprocessor}{\#if defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{4735 \textcolor{comment}{/* Initialization of some features of ADC common parameters and multimode */}}
+\DoxyCodeLine{4736 ErrorStatus LL\_ADC\_CommonDeInit(ADC\_Common\_TypeDef *ADCxy\_COMMON);}
+\DoxyCodeLine{4737 ErrorStatus LL\_ADC\_CommonInit(ADC\_Common\_TypeDef *ADCxy\_COMMON, LL\_ADC\_CommonInitTypeDef *ADC\_CommonInitStruct);}
+\DoxyCodeLine{4738 \textcolor{keywordtype}{void}        LL\_ADC\_CommonStructInit(LL\_ADC\_CommonInitTypeDef *ADC\_CommonInitStruct);}
+\DoxyCodeLine{4739 }
+\DoxyCodeLine{4740 \textcolor{comment}{/* De-\/initialization of ADC instance, ADC group regular and ADC group injected */}}
+\DoxyCodeLine{4741 \textcolor{comment}{/* (availability of ADC group injected depends on STM32 families) */}}
+\DoxyCodeLine{4742 ErrorStatus LL\_ADC\_DeInit(ADC\_TypeDef *ADCx);}
+\DoxyCodeLine{4743 }
+\DoxyCodeLine{4744 \textcolor{comment}{/* Initialization of some features of ADC instance */}}
+\DoxyCodeLine{4745 ErrorStatus LL\_ADC\_Init(ADC\_TypeDef *ADCx, LL\_ADC\_InitTypeDef *ADC\_InitStruct);}
+\DoxyCodeLine{4746 \textcolor{keywordtype}{void}        LL\_ADC\_StructInit(LL\_ADC\_InitTypeDef *ADC\_InitStruct);}
+\DoxyCodeLine{4747 }
+\DoxyCodeLine{4748 \textcolor{comment}{/* Initialization of some features of ADC instance and ADC group regular */}}
+\DoxyCodeLine{4749 ErrorStatus LL\_ADC\_REG\_Init(ADC\_TypeDef *ADCx, LL\_ADC\_REG\_InitTypeDef *ADC\_REG\_InitStruct);}
+\DoxyCodeLine{4750 \textcolor{keywordtype}{void}        LL\_ADC\_REG\_StructInit(LL\_ADC\_REG\_InitTypeDef *ADC\_REG\_InitStruct);}
+\DoxyCodeLine{4751 }
+\DoxyCodeLine{4752 \textcolor{comment}{/* Initialization of some features of ADC instance and ADC group injected */}}
+\DoxyCodeLine{4753 ErrorStatus LL\_ADC\_INJ\_Init(ADC\_TypeDef *ADCx, LL\_ADC\_INJ\_InitTypeDef *ADC\_INJ\_InitStruct);}
+\DoxyCodeLine{4754 \textcolor{keywordtype}{void}        LL\_ADC\_INJ\_StructInit(LL\_ADC\_INJ\_InitTypeDef *ADC\_INJ\_InitStruct);}
+\DoxyCodeLine{4755 }
+\DoxyCodeLine{4759 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* USE\_FULL\_LL\_DRIVER */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{4760 }
+\DoxyCodeLine{4769 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ADC1 || ADC2 || ADC3 */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{4770 }
+\DoxyCodeLine{4775 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{4776 \}}
+\DoxyCodeLine{4777 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{4778 }
+\DoxyCodeLine{4779 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* \_\_STM32F4xx\_LL\_ADC\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{4780 }
+\DoxyCodeLine{4781 \textcolor{comment}{/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/}}
+
+\end{DoxyCode}

@@ -1,0 +1,76 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Drivers/\+STM32\+F4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32f4xx\+\_\+hal\+\_\+pwr\+\_\+ex.h File Reference}
+\label{stm32f4xx__hal__pwr__ex_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_pwr\_ex.h@{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_pwr\_ex.h}}
+
+
+Header file of PWR HAL Extension module.  
+
+
+{\ttfamily \#include \char`\"{}stm32f4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ PWR\+\_\+\+REGULATOR\+\_\+\+VOLTAGE\+\_\+\+SCALE1}
+\item 
+\#define \textbf{ PWR\+\_\+\+REGULATOR\+\_\+\+VOLTAGE\+\_\+\+SCALE2}
+\item 
+\#define \textbf{ PWR\+\_\+\+REGULATOR\+\_\+\+VOLTAGE\+\_\+\+SCALE3}~\textbf{ PWR\+\_\+\+CR\+\_\+\+VOS\+\_\+0}           /$\ast$ Scale 3 mode\+: the maximum value of f\+HCLK is 120 MHz. $\ast$/
+\item 
+\#define \textbf{ \+\_\+\+\_\+\+HAL\+\_\+\+PWR\+\_\+\+VOLTAGESCALING\+\_\+\+CONFIG}(\+\_\+\+\_\+\+REGULATOR\+\_\+\+\_\+)
+\begin{DoxyCompactList}\small\item\em macros configure the main internal regulator output voltage. \end{DoxyCompactList}\item 
+\#define \textbf{ FPDS\+\_\+\+BIT\+\_\+\+NUMBER}~\textbf{ PWR\+\_\+\+CR\+\_\+\+FPDS\+\_\+\+Pos}
+\item 
+\#define \textbf{ CR\+\_\+\+FPDS\+\_\+\+BB}~(uint32\+\_\+t)(\textbf{ PERIPH\+\_\+\+BB\+\_\+\+BASE} + (\textbf{ PWR\+\_\+\+CR\+\_\+\+OFFSET\+\_\+\+BB} $\ast$ 32U) + (\textbf{ FPDS\+\_\+\+BIT\+\_\+\+NUMBER} $\ast$ 4U))
+\item 
+\#define \textbf{ ODEN\+\_\+\+BIT\+\_\+\+NUMBER}~PWR\+\_\+\+CR\+\_\+\+ODEN\+\_\+\+Pos
+\item 
+\#define \textbf{ CR\+\_\+\+ODEN\+\_\+\+BB}~(uint32\+\_\+t)(\textbf{ PERIPH\+\_\+\+BB\+\_\+\+BASE} + (\textbf{ PWR\+\_\+\+CR\+\_\+\+OFFSET\+\_\+\+BB} $\ast$ 32U) + (\textbf{ ODEN\+\_\+\+BIT\+\_\+\+NUMBER} $\ast$ 4U))
+\item 
+\#define \textbf{ ODSWEN\+\_\+\+BIT\+\_\+\+NUMBER}~PWR\+\_\+\+CR\+\_\+\+ODSWEN\+\_\+\+Pos
+\item 
+\#define \textbf{ CR\+\_\+\+ODSWEN\+\_\+\+BB}~(uint32\+\_\+t)(\textbf{ PERIPH\+\_\+\+BB\+\_\+\+BASE} + (\textbf{ PWR\+\_\+\+CR\+\_\+\+OFFSET\+\_\+\+BB} $\ast$ 32U) + (\textbf{ ODSWEN\+\_\+\+BIT\+\_\+\+NUMBER} $\ast$ 4U))
+\item 
+\#define \textbf{ MRLVDS\+\_\+\+BIT\+\_\+\+NUMBER}~\textbf{ PWR\+\_\+\+CR\+\_\+\+MRLVDS\+\_\+\+Pos}
+\item 
+\#define \textbf{ CR\+\_\+\+MRLVDS\+\_\+\+BB}~(uint32\+\_\+t)(\textbf{ PERIPH\+\_\+\+BB\+\_\+\+BASE} + (\textbf{ PWR\+\_\+\+CR\+\_\+\+OFFSET\+\_\+\+BB} $\ast$ 32U) + (\textbf{ MRLVDS\+\_\+\+BIT\+\_\+\+NUMBER} $\ast$ 4U))
+\item 
+\#define \textbf{ LPLVDS\+\_\+\+BIT\+\_\+\+NUMBER}~\textbf{ PWR\+\_\+\+CR\+\_\+\+LPLVDS\+\_\+\+Pos}
+\item 
+\#define \textbf{ CR\+\_\+\+LPLVDS\+\_\+\+BB}~(uint32\+\_\+t)(\textbf{ PERIPH\+\_\+\+BB\+\_\+\+BASE} + (\textbf{ PWR\+\_\+\+CR\+\_\+\+OFFSET\+\_\+\+BB} $\ast$ 32U) + (\textbf{ LPLVDS\+\_\+\+BIT\+\_\+\+NUMBER} $\ast$ 4U))
+\item 
+\#define \textbf{ BRE\+\_\+\+BIT\+\_\+\+NUMBER}~\textbf{ PWR\+\_\+\+CSR\+\_\+\+BRE\+\_\+\+Pos}
+\item 
+\#define \textbf{ CSR\+\_\+\+BRE\+\_\+\+BB}~(uint32\+\_\+t)(\textbf{ PERIPH\+\_\+\+BB\+\_\+\+BASE} + (\textbf{ PWR\+\_\+\+CSR\+\_\+\+OFFSET\+\_\+\+BB} $\ast$ 32U) + (\textbf{ BRE\+\_\+\+BIT\+\_\+\+NUMBER} $\ast$ 4U))
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+VOLTAGE\+\_\+\+SCALING\+\_\+\+RANGE}(VOLTAGE)
+\item 
+\#define \textbf{ IS\+\_\+\+PWR\+\_\+\+WAKEUP\+\_\+\+PIN}(PIN)~((PIN) == \textbf{ PWR\+\_\+\+WAKEUP\+\_\+\+PIN1})
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ HAL\+\_\+\+PWREx\+\_\+\+Enable\+Flash\+Power\+Down} (void)
+\item 
+void \textbf{ HAL\+\_\+\+PWREx\+\_\+\+Disable\+Flash\+Power\+Down} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+PWREx\+\_\+\+Enable\+Bk\+Up\+Reg} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+PWREx\+\_\+\+Disable\+Bk\+Up\+Reg} (void)
+\item 
+uint32\+\_\+t \textbf{ HAL\+\_\+\+PWREx\+\_\+\+Get\+Voltage\+Range} (void)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+PWREx\+\_\+\+Control\+Voltage\+Scaling} (uint32\+\_\+t Voltage\+Scaling)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of PWR HAL Extension module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+\doxysubsubsection*{\begin{center}\copyright{} Copyright (c) 2017 STMicroelectronics. All rights reserved.\end{center} }
+
+This software component is licensed by ST under BSD 3-\/Clause license, the \char`\"{}\+License\char`\"{}; You may not use this file except in compliance with the License. You may obtain a copy of the License at\+: opensource.\+org/licenses/\+BSD-\/3-\/\+Clause 

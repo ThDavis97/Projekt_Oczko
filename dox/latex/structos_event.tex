@@ -1,0 +1,127 @@
+\doxysection{os\+Event Struct Reference}
+\label{structos_event}\index{osEvent@{osEvent}}
+
+
+{\ttfamily \#include $<$cmsis\+\_\+os.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ os\+Status} \textbf{ status}
+\begin{DoxyCompactList}\small\item\em status code\+: event or error information \end{DoxyCompactList}\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>uint32\_t \textbf{ v}\\
+\>\>{\em message as 32-\/bit value }\\
+\>void $\ast$ \textbf{ p}\\
+\>\>{\em message or mail as void pointer }\\
+\>int32\_t \textbf{ signals}\\
+\>\>{\em signal flags }\\
+\} \textbf{ value}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em event value \end{DoxyCompactList}\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>\textbf{ osMailQId} \textbf{ mail\_id}\\
+\>\>{\em mail id obtained by \doxyref{osMailCreate}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174} }\\
+\>\textbf{ osMessageQId} \textbf{ message\_id}\\
+\>\>{\em message id obtained by \doxyref{osMessageCreate}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78} }\\
+\} \textbf{ def}\\
+
+\end{tabbing}\begin{DoxyCompactList}\small\item\em event definition \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Event structure contains detailed information about an event. \begin{DoxyNote}{Note}
+MUST REMAIN UNCHANGED\+: {\bfseries{os\+\_\+event}} shall be consistent in every CMSIS-\/\+RTOS. However the struct may be extended at the end. 
+\end{DoxyNote}
+
+
+\doxysubsection{Field Documentation}
+\mbox{\label{structos_event_a3ace9121f1502dfa1bfb6612072322bc}} 
+\index{osEvent@{osEvent}!def@{def}}
+\index{def@{def}!osEvent@{osEvent}}
+\doxysubsubsection{}
+{\footnotesize\ttfamily union  \{ ... \}  def}
+
+
+
+event definition 
+
+\mbox{\label{structos_event_ac86175a4b1706bee596f3018322df26e}} 
+\index{osEvent@{osEvent}!mail\_id@{mail\_id}}
+\index{mail\_id@{mail\_id}!osEvent@{osEvent}}
+\doxysubsubsection{mail\_id}
+{\footnotesize\ttfamily \textbf{ os\+Mail\+QId} mail\+\_\+id}
+
+
+
+mail id obtained by \doxyref{os\+Mail\+Create}{p.}{cmsis__os_8h_aa177e7fe5820dd70d8c9e46ded131174} 
+
+\mbox{\label{structos_event_af394cbe21dde7377974e63af38cd87b0}} 
+\index{osEvent@{osEvent}!message\_id@{message\_id}}
+\index{message\_id@{message\_id}!osEvent@{osEvent}}
+\doxysubsubsection{message\_id}
+{\footnotesize\ttfamily \textbf{ os\+Message\+QId} message\+\_\+id}
+
+
+
+message id obtained by \doxyref{os\+Message\+Create}{p.}{cmsis__os_8h_af3b9345cf426304d46565152bc26fb78} 
+
+\mbox{\label{structos_event_a117104b82864d3b23ec174af6d392709}} 
+\index{osEvent@{osEvent}!p@{p}}
+\index{p@{p}!osEvent@{osEvent}}
+\doxysubsubsection{p}
+{\footnotesize\ttfamily void$\ast$ p}
+
+
+
+message or mail as void pointer 
+
+\mbox{\label{structos_event_ad0dda1bf7e74f1576261d493fba232b6}} 
+\index{osEvent@{osEvent}!signals@{signals}}
+\index{signals@{signals}!osEvent@{osEvent}}
+\doxysubsubsection{signals}
+{\footnotesize\ttfamily int32\+\_\+t signals}
+
+
+
+signal flags 
+
+\mbox{\label{structos_event_ad477a289f1f03ac45407b64268d707d3}} 
+\index{osEvent@{osEvent}!status@{status}}
+\index{status@{status}!osEvent@{osEvent}}
+\doxysubsubsection{status}
+{\footnotesize\ttfamily \textbf{ os\+Status} status}
+
+
+
+status code\+: event or error information 
+
+\mbox{\label{structos_event_a9e0a00edabf3b8a5dafff624fff7bbfc}} 
+\index{osEvent@{osEvent}!v@{v}}
+\index{v@{v}!osEvent@{osEvent}}
+\doxysubsubsection{v}
+{\footnotesize\ttfamily uint32\+\_\+t v}
+
+
+
+message as 32-\/bit value 
+
+\mbox{\label{structos_event_ad924224263902f0738e7cf7a2bb448a6}} 
+\index{osEvent@{osEvent}!value@{value}}
+\index{value@{value}!osEvent@{osEvent}}
+\doxysubsubsection{}
+{\footnotesize\ttfamily union  \{ ... \}  value}
+
+
+
+event value 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/\+CMSIS\+\_\+\+RTOS/\textbf{ cmsis\+\_\+os.\+h}\end{DoxyCompactItemize}

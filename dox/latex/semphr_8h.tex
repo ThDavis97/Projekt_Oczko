@@ -1,0 +1,146 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/include/semphr.h File Reference}
+\label{semphr_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/semphr.h@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/semphr.h}}
+{\ttfamily \#include \char`\"{}queue.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ sem\+BINARY\+\_\+\+SEMAPHORE\+\_\+\+QUEUE\+\_\+\+LENGTH}~( ( uint8\+\_\+t ) 1U )
+\item 
+\#define \textbf{ sem\+SEMAPHORE\+\_\+\+QUEUE\+\_\+\+ITEM\+\_\+\+LENGTH}~( ( uint8\+\_\+t ) 0U )
+\item 
+\#define \textbf{ sem\+GIVE\+\_\+\+BLOCK\+\_\+\+TIME}~( ( \textbf{ Tick\+Type\+\_\+t} ) 0U )
+\item 
+\#define \textbf{ x\+Semaphore\+Take}(x\+Semaphore,  x\+Block\+Time)~\textbf{ x\+Queue\+Semaphore\+Take}( ( x\+Semaphore ), ( x\+Block\+Time ) )
+\item 
+\#define \textbf{ x\+Semaphore\+Give}(x\+Semaphore)~\textbf{ x\+Queue\+Generic\+Send}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ), NULL, \textbf{ sem\+GIVE\+\_\+\+BLOCK\+\_\+\+TIME}, \textbf{ queue\+SEND\+\_\+\+TO\+\_\+\+BACK} )
+\item 
+\#define \textbf{ x\+Semaphore\+Give\+From\+ISR}(x\+Semaphore,  px\+Higher\+Priority\+Task\+Woken)~\textbf{ x\+Queue\+Give\+From\+ISR}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ), ( px\+Higher\+Priority\+Task\+Woken ) )
+\item 
+\#define \textbf{ x\+Semaphore\+Take\+From\+ISR}(x\+Semaphore,  px\+Higher\+Priority\+Task\+Woken)~\textbf{ x\+Queue\+Receive\+From\+ISR}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ), NULL, ( px\+Higher\+Priority\+Task\+Woken ) )
+\item 
+\#define \textbf{ v\+Semaphore\+Delete}(x\+Semaphore)~\textbf{ v\+Queue\+Delete}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ) )
+\item 
+\#define \textbf{ x\+Semaphore\+Get\+Mutex\+Holder}(x\+Semaphore)~\textbf{ x\+Queue\+Get\+Mutex\+Holder}( ( x\+Semaphore ) )
+\item 
+\#define \textbf{ x\+Semaphore\+Get\+Mutex\+Holder\+From\+ISR}(x\+Semaphore)~\textbf{ x\+Queue\+Get\+Mutex\+Holder\+From\+ISR}( ( x\+Semaphore ) )
+\item 
+\#define \textbf{ ux\+Semaphore\+Get\+Count}(x\+Semaphore)~\textbf{ ux\+Queue\+Messages\+Waiting}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ) )
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \textbf{ Queue\+Handle\+\_\+t} \textbf{ Semaphore\+Handle\+\_\+t}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{semphr_8h_a73cfd14cf25a13f8dd4dc1d74b7fc04a}} 
+\index{semphr.h@{semphr.h}!semBINARY\_SEMAPHORE\_QUEUE\_LENGTH@{semBINARY\_SEMAPHORE\_QUEUE\_LENGTH}}
+\index{semBINARY\_SEMAPHORE\_QUEUE\_LENGTH@{semBINARY\_SEMAPHORE\_QUEUE\_LENGTH}!semphr.h@{semphr.h}}
+\doxysubsubsection{semBINARY\_SEMAPHORE\_QUEUE\_LENGTH}
+{\footnotesize\ttfamily \#define sem\+BINARY\+\_\+\+SEMAPHORE\+\_\+\+QUEUE\+\_\+\+LENGTH~( ( uint8\+\_\+t ) 1U )}
+
+\mbox{\label{semphr_8h_a124bb5bd7805baa06fbd3239840d6803}} 
+\index{semphr.h@{semphr.h}!semGIVE\_BLOCK\_TIME@{semGIVE\_BLOCK\_TIME}}
+\index{semGIVE\_BLOCK\_TIME@{semGIVE\_BLOCK\_TIME}!semphr.h@{semphr.h}}
+\doxysubsubsection{semGIVE\_BLOCK\_TIME}
+{\footnotesize\ttfamily \#define sem\+GIVE\+\_\+\+BLOCK\+\_\+\+TIME~( ( \textbf{ Tick\+Type\+\_\+t} ) 0U )}
+
+\mbox{\label{semphr_8h_a93bd07e28aed3084bdafa1f4e99700b2}} 
+\index{semphr.h@{semphr.h}!semSEMAPHORE\_QUEUE\_ITEM\_LENGTH@{semSEMAPHORE\_QUEUE\_ITEM\_LENGTH}}
+\index{semSEMAPHORE\_QUEUE\_ITEM\_LENGTH@{semSEMAPHORE\_QUEUE\_ITEM\_LENGTH}!semphr.h@{semphr.h}}
+\doxysubsubsection{semSEMAPHORE\_QUEUE\_ITEM\_LENGTH}
+{\footnotesize\ttfamily \#define sem\+SEMAPHORE\+\_\+\+QUEUE\+\_\+\+ITEM\+\_\+\+LENGTH~( ( uint8\+\_\+t ) 0U )}
+
+\mbox{\label{semphr_8h_aa26a3d7cf9b5595a652daeb7f81229f3}} 
+\index{semphr.h@{semphr.h}!uxSemaphoreGetCount@{uxSemaphoreGetCount}}
+\index{uxSemaphoreGetCount@{uxSemaphoreGetCount}!semphr.h@{semphr.h}}
+\doxysubsubsection{uxSemaphoreGetCount}
+{\footnotesize\ttfamily \#define ux\+Semaphore\+Get\+Count(\begin{DoxyParamCaption}\item[{}]{x\+Semaphore }\end{DoxyParamCaption})~\textbf{ ux\+Queue\+Messages\+Waiting}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ) )}
+
+\doxyref{semphr.\+h}{p.}{semphr_8h} 
+\begin{DoxyPre}UBaseType\_t \doxyref{uxSemaphoreGetCount( SemaphoreHandle\_t xSemaphore )}{p.}{semphr_8h_aa26a3d7cf9b5595a652daeb7f81229f3};\end{DoxyPre}
+
+
+If the semaphore is a counting semaphore then \doxyref{ux\+Semaphore\+Get\+Count()}{p.}{semphr_8h_aa26a3d7cf9b5595a652daeb7f81229f3} returns its current count value. If the semaphore is a binary semaphore then \doxyref{ux\+Semaphore\+Get\+Count()}{p.}{semphr_8h_aa26a3d7cf9b5595a652daeb7f81229f3} returns 1 if the semaphore is available, and 0 if the semaphore is not available. \mbox{\label{semphr_8h_acd7d0eda0923d7caeeaaee9202c43eab}} 
+\index{semphr.h@{semphr.h}!vSemaphoreDelete@{vSemaphoreDelete}}
+\index{vSemaphoreDelete@{vSemaphoreDelete}!semphr.h@{semphr.h}}
+\doxysubsubsection{vSemaphoreDelete}
+{\footnotesize\ttfamily \#define v\+Semaphore\+Delete(\begin{DoxyParamCaption}\item[{}]{x\+Semaphore }\end{DoxyParamCaption})~\textbf{ v\+Queue\+Delete}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ) )}
+
+\mbox{\label{semphr_8h_a7403bfbc06fb8449b2334f55d939a4c4}} 
+\index{semphr.h@{semphr.h}!xSemaphoreGetMutexHolder@{xSemaphoreGetMutexHolder}}
+\index{xSemaphoreGetMutexHolder@{xSemaphoreGetMutexHolder}!semphr.h@{semphr.h}}
+\doxysubsubsection{xSemaphoreGetMutexHolder}
+{\footnotesize\ttfamily \#define x\+Semaphore\+Get\+Mutex\+Holder(\begin{DoxyParamCaption}\item[{}]{x\+Semaphore }\end{DoxyParamCaption})~\textbf{ x\+Queue\+Get\+Mutex\+Holder}( ( x\+Semaphore ) )}
+
+\doxyref{semphr.\+h}{p.}{semphr_8h} 
+\begin{DoxyPre}TaskHandle\_t \doxyref{xSemaphoreGetMutexHolder( SemaphoreHandle\_t xMutex )}{p.}{semphr_8h_a7403bfbc06fb8449b2334f55d939a4c4};\end{DoxyPre}
+
+
+If x\+Mutex is indeed a mutex type semaphore, return the current mutex holder. If x\+Mutex is not a mutex type semaphore, or the mutex is available (not held by a task), return NULL.
+
+Note\+: This is a good way of determining if the calling task is the mutex holder, but not a good way of determining the identity of the mutex holder as the holder may change between the function exiting and the returned value being tested. \mbox{\label{semphr_8h_ac3db48a47d2030b535651f306b44191b}} 
+\index{semphr.h@{semphr.h}!xSemaphoreGetMutexHolderFromISR@{xSemaphoreGetMutexHolderFromISR}}
+\index{xSemaphoreGetMutexHolderFromISR@{xSemaphoreGetMutexHolderFromISR}!semphr.h@{semphr.h}}
+\doxysubsubsection{xSemaphoreGetMutexHolderFromISR}
+{\footnotesize\ttfamily \#define x\+Semaphore\+Get\+Mutex\+Holder\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Semaphore }\end{DoxyParamCaption})~\textbf{ x\+Queue\+Get\+Mutex\+Holder\+From\+ISR}( ( x\+Semaphore ) )}
+
+\doxyref{semphr.\+h}{p.}{semphr_8h} 
+\begin{DoxyPre}TaskHandle\_t \doxyref{xSemaphoreGetMutexHolderFromISR( SemaphoreHandle\_t xMutex )}{p.}{semphr_8h_ac3db48a47d2030b535651f306b44191b};\end{DoxyPre}
+
+
+If x\+Mutex is indeed a mutex type semaphore, return the current mutex holder. If x\+Mutex is not a mutex type semaphore, or the mutex is available (not held by a task), return NULL. \mbox{\label{semphr_8h_aae55761cabfa9bf85c8f4430f78c0953}} 
+\index{semphr.h@{semphr.h}!xSemaphoreGive@{xSemaphoreGive}}
+\index{xSemaphoreGive@{xSemaphoreGive}!semphr.h@{semphr.h}}
+\doxysubsubsection{xSemaphoreGive}
+{\footnotesize\ttfamily \#define x\+Semaphore\+Give(\begin{DoxyParamCaption}\item[{}]{x\+Semaphore }\end{DoxyParamCaption})~\textbf{ x\+Queue\+Generic\+Send}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ), NULL, \textbf{ sem\+GIVE\+\_\+\+BLOCK\+\_\+\+TIME}, \textbf{ queue\+SEND\+\_\+\+TO\+\_\+\+BACK} )}
+
+\mbox{\label{semphr_8h_a68aa43df8b2a0dbe17d05fad74670ef0}} 
+\index{semphr.h@{semphr.h}!xSemaphoreGiveFromISR@{xSemaphoreGiveFromISR}}
+\index{xSemaphoreGiveFromISR@{xSemaphoreGiveFromISR}!semphr.h@{semphr.h}}
+\doxysubsubsection{xSemaphoreGiveFromISR}
+{\footnotesize\ttfamily \#define x\+Semaphore\+Give\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Semaphore,  }\item[{}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})~\textbf{ x\+Queue\+Give\+From\+ISR}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ), ( px\+Higher\+Priority\+Task\+Woken ) )}
+
+\mbox{\label{semphr_8h_af116e436d2a5ae5bd72dbade2b5ea930}} 
+\index{semphr.h@{semphr.h}!xSemaphoreTake@{xSemaphoreTake}}
+\index{xSemaphoreTake@{xSemaphoreTake}!semphr.h@{semphr.h}}
+\doxysubsubsection{xSemaphoreTake}
+{\footnotesize\ttfamily \#define x\+Semaphore\+Take(\begin{DoxyParamCaption}\item[{}]{x\+Semaphore,  }\item[{}]{x\+Block\+Time }\end{DoxyParamCaption})~\textbf{ x\+Queue\+Semaphore\+Take}( ( x\+Semaphore ), ( x\+Block\+Time ) )}
+
+\mbox{\label{semphr_8h_a076419b58e072655686939016e7ca3c5}} 
+\index{semphr.h@{semphr.h}!xSemaphoreTakeFromISR@{xSemaphoreTakeFromISR}}
+\index{xSemaphoreTakeFromISR@{xSemaphoreTakeFromISR}!semphr.h@{semphr.h}}
+\doxysubsubsection{xSemaphoreTakeFromISR}
+{\footnotesize\ttfamily \#define x\+Semaphore\+Take\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Semaphore,  }\item[{}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})~\textbf{ x\+Queue\+Receive\+From\+ISR}( ( \textbf{ Queue\+Handle\+\_\+t} ) ( x\+Semaphore ), NULL, ( px\+Higher\+Priority\+Task\+Woken ) )}
+
+semphr. h 
+\begin{DoxyPre}
+\doxyref{xSemaphoreTakeFromISR(                          SemaphoreHandle\_t xSemaphore,                          BaseType\_t *pxHigherPriorityTaskWoken                      )}{p.}{semphr_8h_a076419b58e072655686939016e7ca3c5}\end{DoxyPre}
+
+
+{\itshape Macro} to take a semaphore from an ISR. The semaphore must have previously been created with a call to x\+Semaphore\+Create\+Binary() or x\+Semaphore\+Create\+Counting().
+
+Mutex type semaphores (those created using a call to x\+Semaphore\+Create\+Mutex()) must not be used with this macro.
+
+This macro can be used from an ISR, however taking a semaphore from an ISR is not a common operation. It is likely to only be useful when taking a counting semaphore when an interrupt is obtaining an object from a resource pool (when the semaphore count indicates the number of resources available).
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Semaphore} & A handle to the semaphore being taken. This is the handle returned when the semaphore was created.\\
+\hline
+{\em px\+Higher\+Priority\+Task\+Woken} & \doxyref{x\+Semaphore\+Take\+From\+ISR()}{p.}{semphr_8h_a076419b58e072655686939016e7ca3c5} will set $\ast$px\+Higher\+Priority\+Task\+Woken to pd\+TRUE if taking the semaphore caused a task to unblock, and the unblocked task has a priority higher than the currently running task. If \doxyref{x\+Semaphore\+Take\+From\+ISR()}{p.}{semphr_8h_a076419b58e072655686939016e7ca3c5} sets this value to pd\+TRUE then a context switch should be requested before the interrupt is exited.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pd\+TRUE if the semaphore was successfully taken, otherwise pd\+FALSE 
+\end{DoxyReturn}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{semphr_8h_ad88c6df4a04beedeac782918c8a332f5}} 
+\index{semphr.h@{semphr.h}!SemaphoreHandle\_t@{SemaphoreHandle\_t}}
+\index{SemaphoreHandle\_t@{SemaphoreHandle\_t}!semphr.h@{semphr.h}}
+\doxysubsubsection{SemaphoreHandle\_t}
+{\footnotesize\ttfamily typedef \textbf{ Queue\+Handle\+\_\+t} \textbf{ Semaphore\+Handle\+\_\+t}}
+

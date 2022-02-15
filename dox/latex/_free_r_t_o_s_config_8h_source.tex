@@ -1,0 +1,155 @@
+\doxysection{Free\+RTOSConfig.\+h}
+\label{_free_r_t_o_s_config_8h_source}\index{C:/ALL/STM32/Projekty/OczkoGierka/Core/Inc/FreeRTOSConfig.h@{C:/ALL/STM32/Projekty/OczkoGierka/Core/Inc/FreeRTOSConfig.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{/* USER CODE BEGIN Header */}}
+\DoxyCodeLine{2 \textcolor{comment}{/*}}
+\DoxyCodeLine{3 \textcolor{comment}{ * FreeRTOS Kernel V10.3.1}}
+\DoxyCodeLine{4 \textcolor{comment}{ * Portion Copyright (C) 2017 Amazon.com, Inc. or its affiliates.  All Rights Reserved.}}
+\DoxyCodeLine{5 \textcolor{comment}{ * Portion Copyright (C) 2019 StMicroelectronics, Inc.  All Rights Reserved.}}
+\DoxyCodeLine{6 \textcolor{comment}{ *}}
+\DoxyCodeLine{7 \textcolor{comment}{ * Permission is hereby granted, free of charge, to any person obtaining a copy of}}
+\DoxyCodeLine{8 \textcolor{comment}{ * this software and associated documentation files (the "{}Software"{}), to deal in}}
+\DoxyCodeLine{9 \textcolor{comment}{ * the Software without restriction, including without limitation the rights to}}
+\DoxyCodeLine{10 \textcolor{comment}{ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of}}
+\DoxyCodeLine{11 \textcolor{comment}{ * the Software, and to permit persons to whom the Software is furnished to do so,}}
+\DoxyCodeLine{12 \textcolor{comment}{ * subject to the following conditions:}}
+\DoxyCodeLine{13 \textcolor{comment}{ *}}
+\DoxyCodeLine{14 \textcolor{comment}{ * The above copyright notice and this permission notice shall be included in all}}
+\DoxyCodeLine{15 \textcolor{comment}{ * copies or substantial portions of the Software.}}
+\DoxyCodeLine{16 \textcolor{comment}{ *}}
+\DoxyCodeLine{17 \textcolor{comment}{ * THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{18 \textcolor{comment}{ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS}}
+\DoxyCodeLine{19 \textcolor{comment}{ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR}}
+\DoxyCodeLine{20 \textcolor{comment}{ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER}}
+\DoxyCodeLine{21 \textcolor{comment}{ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN}}
+\DoxyCodeLine{22 \textcolor{comment}{ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.}}
+\DoxyCodeLine{23 \textcolor{comment}{ *}}
+\DoxyCodeLine{24 \textcolor{comment}{ * http://www.FreeRTOS.org}}
+\DoxyCodeLine{25 \textcolor{comment}{ * http://aws.amazon.com/freertos}}
+\DoxyCodeLine{26 \textcolor{comment}{ *}}
+\DoxyCodeLine{27 \textcolor{comment}{ * 1 tab == 4 spaces!}}
+\DoxyCodeLine{28 \textcolor{comment}{ */}}
+\DoxyCodeLine{29 \textcolor{comment}{/* USER CODE END Header */}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#ifndef FREERTOS\_CONFIG\_H}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#define FREERTOS\_CONFIG\_H}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{comment}{/*-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{35 \textcolor{comment}{ * Application specific definitions.}}
+\DoxyCodeLine{36 \textcolor{comment}{ *}}
+\DoxyCodeLine{37 \textcolor{comment}{ * These definitions should be adjusted for your particular hardware and}}
+\DoxyCodeLine{38 \textcolor{comment}{ * application requirements.}}
+\DoxyCodeLine{39 \textcolor{comment}{ *}}
+\DoxyCodeLine{40 \textcolor{comment}{ * These parameters and more are described within the 'configuration' section of the}}
+\DoxyCodeLine{41 \textcolor{comment}{ * FreeRTOS API documentation available on the FreeRTOS.org web site.}}
+\DoxyCodeLine{42 \textcolor{comment}{ *}}
+\DoxyCodeLine{43 \textcolor{comment}{ * See http://www.freertos.org/a00110.html}}
+\DoxyCodeLine{44 \textcolor{comment}{ *-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{/* USER CODE BEGIN Includes */}}
+\DoxyCodeLine{47 \textcolor{comment}{/* Section where include file can be added */}}
+\DoxyCodeLine{48 \textcolor{comment}{/* USER CODE END Includes */}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \textcolor{comment}{/* Ensure definitions are only used by the compiler, and not by the assembler. */}}
+\DoxyCodeLine{51 \textcolor{preprocessor}{\#if defined(\_\_ICCARM\_\_) || defined(\_\_CC\_ARM) || defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{52 \textcolor{preprocessor}{  \#include <stdint.h>}}
+\DoxyCodeLine{53   \textcolor{keyword}{extern} uint32\_t SystemCoreClock;}
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{55 \textcolor{preprocessor}{\#define configENABLE\_FPU                         0}}
+\DoxyCodeLine{56 \textcolor{preprocessor}{\#define configENABLE\_MPU                         0}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{preprocessor}{\#define configUSE\_PREEMPTION                     1}}
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define configSUPPORT\_STATIC\_ALLOCATION          1}}
+\DoxyCodeLine{60 \textcolor{preprocessor}{\#define configSUPPORT\_DYNAMIC\_ALLOCATION         1}}
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#define configUSE\_IDLE\_HOOK                      0}}
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define configUSE\_TICK\_HOOK                      0}}
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#define configCPU\_CLOCK\_HZ                       ( SystemCoreClock )}}
+\DoxyCodeLine{64 \textcolor{preprocessor}{\#define configTICK\_RATE\_HZ                       ((TickType\_t)1000)}}
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#define configMAX\_PRIORITIES                     ( 7 )}}
+\DoxyCodeLine{66 \textcolor{preprocessor}{\#define configMINIMAL\_STACK\_SIZE                 ((uint16\_t)128)}}
+\DoxyCodeLine{67 \textcolor{preprocessor}{\#define configTOTAL\_HEAP\_SIZE                    ((size\_t)15360)}}
+\DoxyCodeLine{68 \textcolor{preprocessor}{\#define configMAX\_TASK\_NAME\_LEN                  ( 16 )}}
+\DoxyCodeLine{69 \textcolor{preprocessor}{\#define configUSE\_16\_BIT\_TICKS                   0}}
+\DoxyCodeLine{70 \textcolor{preprocessor}{\#define configUSE\_MUTEXES                        1}}
+\DoxyCodeLine{71 \textcolor{preprocessor}{\#define configQUEUE\_REGISTRY\_SIZE                8}}
+\DoxyCodeLine{72 \textcolor{preprocessor}{\#define configUSE\_COUNTING\_SEMAPHORES            1}}
+\DoxyCodeLine{73 \textcolor{preprocessor}{\#define configUSE\_PORT\_OPTIMISED\_TASK\_SELECTION  1}}
+\DoxyCodeLine{74 \textcolor{comment}{/* USER CODE BEGIN MESSAGE\_BUFFER\_LENGTH\_TYPE */}}
+\DoxyCodeLine{75 \textcolor{comment}{/* Defaults to size\_t for backward compatibility, but can be changed}}
+\DoxyCodeLine{76 \textcolor{comment}{   if lengths will always be less than the number of bytes in a size\_t. */}}
+\DoxyCodeLine{77 \textcolor{preprocessor}{\#define configMESSAGE\_BUFFER\_LENGTH\_TYPE         size\_t}}
+\DoxyCodeLine{78 \textcolor{comment}{/* USER CODE END MESSAGE\_BUFFER\_LENGTH\_TYPE */}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 \textcolor{comment}{/* Co-\/routine definitions. */}}
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#define configUSE\_CO\_ROUTINES                    0}}
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#define configMAX\_CO\_ROUTINE\_PRIORITIES          ( 2 )}}
+\DoxyCodeLine{83 }
+\DoxyCodeLine{84 \textcolor{comment}{/* Software timer definitions. */}}
+\DoxyCodeLine{85 \textcolor{preprocessor}{\#define configUSE\_TIMERS                         1}}
+\DoxyCodeLine{86 \textcolor{preprocessor}{\#define configTIMER\_TASK\_PRIORITY                ( 2 )}}
+\DoxyCodeLine{87 \textcolor{preprocessor}{\#define configTIMER\_QUEUE\_LENGTH                 10}}
+\DoxyCodeLine{88 \textcolor{preprocessor}{\#define configTIMER\_TASK\_STACK\_DEPTH             256}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90 \textcolor{comment}{/* The following flag must be enabled only when using newlib */}}
+\DoxyCodeLine{91 \textcolor{preprocessor}{\#define configUSE\_NEWLIB\_REENTRANT          1}}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{comment}{/* Set the following definitions to 1 to include the API function, or zero}}
+\DoxyCodeLine{94 \textcolor{comment}{to exclude the API function. */}}
+\DoxyCodeLine{95 \textcolor{preprocessor}{\#define INCLUDE\_vTaskPrioritySet             1}}
+\DoxyCodeLine{96 \textcolor{preprocessor}{\#define INCLUDE\_uxTaskPriorityGet            1}}
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#define INCLUDE\_vTaskDelete                  1}}
+\DoxyCodeLine{98 \textcolor{preprocessor}{\#define INCLUDE\_vTaskCleanUpResources        0}}
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#define INCLUDE\_vTaskSuspend                 1}}
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#define INCLUDE\_vTaskDelayUntil              1}}
+\DoxyCodeLine{101 \textcolor{preprocessor}{\#define INCLUDE\_vTaskDelay                   1}}
+\DoxyCodeLine{102 \textcolor{preprocessor}{\#define INCLUDE\_xTaskGetSchedulerState       1}}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{comment}{/* Cortex-\/M specific definitions. */}}
+\DoxyCodeLine{105 \textcolor{preprocessor}{\#ifdef \_\_NVIC\_PRIO\_BITS}}
+\DoxyCodeLine{106  \textcolor{comment}{/* \_\_BVIC\_PRIO\_BITS will be specified when CMSIS is being used. */}}
+\DoxyCodeLine{107 \textcolor{preprocessor}{ \#define configPRIO\_BITS         \_\_NVIC\_PRIO\_BITS}}
+\DoxyCodeLine{108 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{109 \textcolor{preprocessor}{ \#define configPRIO\_BITS         4}}
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{comment}{/* The lowest interrupt priority that can be used in a call to a "{}set priority"{}}}
+\DoxyCodeLine{113 \textcolor{comment}{function. */}}
+\DoxyCodeLine{114 \textcolor{preprocessor}{\#define configLIBRARY\_LOWEST\_INTERRUPT\_PRIORITY   15}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{comment}{/* The highest interrupt priority that can be used by any interrupt service}}
+\DoxyCodeLine{117 \textcolor{comment}{routine that makes calls to interrupt safe FreeRTOS API functions.  DO NOT CALL}}
+\DoxyCodeLine{118 \textcolor{comment}{INTERRUPT SAFE FREERTOS API FUNCTIONS FROM ANY INTERRUPT THAT HAS A HIGHER}}
+\DoxyCodeLine{119 \textcolor{comment}{PRIORITY THAN THIS! (higher priorities are lower numeric values. */}}
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#define configLIBRARY\_MAX\_SYSCALL\_INTERRUPT\_PRIORITY 5}}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122 \textcolor{comment}{/* Interrupt priorities used by the kernel port layer itself.  These are generic}}
+\DoxyCodeLine{123 \textcolor{comment}{to all Cortex-\/M ports, and do not rely on any particular library functions. */}}
+\DoxyCodeLine{124 \textcolor{preprocessor}{\#define configKERNEL\_INTERRUPT\_PRIORITY         ( configLIBRARY\_LOWEST\_INTERRUPT\_PRIORITY << (8 -\/ configPRIO\_BITS) )}}
+\DoxyCodeLine{125 \textcolor{comment}{/* !!!! configMAX\_SYSCALL\_INTERRUPT\_PRIORITY must not be set to zero !!!!}}
+\DoxyCodeLine{126 \textcolor{comment}{See http://www.FreeRTOS.org/RTOS-\/Cortex-\/M3-\/M4.html. */}}
+\DoxyCodeLine{127 \textcolor{preprocessor}{\#define configMAX\_SYSCALL\_INTERRUPT\_PRIORITY    ( configLIBRARY\_MAX\_SYSCALL\_INTERRUPT\_PRIORITY << (8 -\/ configPRIO\_BITS) )}}
+\DoxyCodeLine{128 }
+\DoxyCodeLine{129 \textcolor{comment}{/* Normal assert() semantics without relying on the provision of an assert.h}}
+\DoxyCodeLine{130 \textcolor{comment}{header file. */}}
+\DoxyCodeLine{131 \textcolor{comment}{/* USER CODE BEGIN 1 */}}
+\DoxyCodeLine{132 \textcolor{preprocessor}{\#define configASSERT( x ) if ((x) == 0) \{taskDISABLE\_INTERRUPTS(); for( ;; );\}}}
+\DoxyCodeLine{133 \textcolor{comment}{/* USER CODE END 1 */}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135 \textcolor{comment}{/* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS}}
+\DoxyCodeLine{136 \textcolor{comment}{standard names. */}}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#define vPortSVCHandler    SVC\_Handler}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#define xPortPendSVHandler PendSV\_Handler}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \textcolor{comment}{/* IMPORTANT: This define is commented when used with STM32Cube firmware, when the timebase source is SysTick,}}
+\DoxyCodeLine{141 \textcolor{comment}{              to prevent overwriting SysTick\_Handler defined within STM32Cube HAL */}}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#define xPortSysTickHandler SysTick\_Handler}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145 \textcolor{comment}{/* USER CODE BEGIN Defines */}}
+\DoxyCodeLine{146 \textcolor{comment}{/* Section where parameter definitions can be added (for instance, to override default ones in FreeRTOS.h) */}}
+\DoxyCodeLine{147 \textcolor{comment}{/* USER CODE END Defines */}}
+\DoxyCodeLine{148 }
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* FREERTOS\_CONFIG\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

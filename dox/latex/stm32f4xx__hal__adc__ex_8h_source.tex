@@ -1,0 +1,192 @@
+\doxysection{stm32f4xx\+\_\+hal\+\_\+adc\+\_\+ex.\+h}
+\label{stm32f4xx__hal__adc__ex_8h_source}\index{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_adc\_ex.h@{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_adc\_ex.h}}
+\textbf{ Go to the documentation of this file.}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{20 \textcolor{comment}{/* Define to prevent recursive inclusion -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#ifndef \_\_STM32F4xx\_ADC\_EX\_H}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define \_\_STM32F4xx\_ADC\_EX\_H}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{25  \textcolor{keyword}{extern} \textcolor{stringliteral}{"{}C"{}} \{}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{comment}{/* Includes -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include "{}stm32f4xx\_hal\_def.h"{}}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{39 \textcolor{comment}{/* Exported types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{56 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }}
+\DoxyCodeLine{57 \{}
+\DoxyCodeLine{58   uint32\_t InjectedChannel;                      }
+\DoxyCodeLine{61   uint32\_t InjectedRank;                         }
+\DoxyCodeLine{64   uint32\_t InjectedSamplingTime;                 }
+\DoxyCodeLine{73   uint32\_t InjectedOffset;                       }
+\DoxyCodeLine{77   uint32\_t InjectedNbrOfConversion;              }
+\DoxyCodeLine{82   FunctionalState InjectedDiscontinuousConvMode; }
+\DoxyCodeLine{89   FunctionalState AutoInjectedConv;              }
+\DoxyCodeLine{97   uint32\_t ExternalTrigInjecConv;                }
+\DoxyCodeLine{105   uint32\_t ExternalTrigInjecConvEdge;            }
+\DoxyCodeLine{110 \}ADC\_InjectionConfTypeDef; }
+\DoxyCodeLine{111 }
+\DoxyCodeLine{115 \textcolor{keyword}{typedef} \textcolor{keyword}{struct}}
+\DoxyCodeLine{116 \{}
+\DoxyCodeLine{117   uint32\_t Mode;              }
+\DoxyCodeLine{119   uint32\_t DMAAccessMode;     }
+\DoxyCodeLine{121   uint32\_t TwoSamplingDelay;  }
+\DoxyCodeLine{123 \}ADC\_MultiModeTypeDef;}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{129 \textcolor{comment}{/* Exported constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{137 \textcolor{preprocessor}{\#define ADC\_MODE\_INDEPENDENT                  0x00000000U}}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_REGSIMULT\_INJECSIMULT    ((uint32\_t)ADC\_CCR\_MULTI\_0)}}
+\DoxyCodeLine{139 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_REGSIMULT\_ALTERTRIG      ((uint32\_t)ADC\_CCR\_MULTI\_1)}}
+\DoxyCodeLine{140 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_INJECSIMULT              ((uint32\_t)(ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_0))}}
+\DoxyCodeLine{141 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_REGSIMULT                ((uint32\_t)(ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_1))}}
+\DoxyCodeLine{142 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_INTERL                   ((uint32\_t)(ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_1 | ADC\_CCR\_MULTI\_0))}}
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#define ADC\_DUALMODE\_ALTERTRIG                ((uint32\_t)(ADC\_CCR\_MULTI\_3 | ADC\_CCR\_MULTI\_0))}}
+\DoxyCodeLine{144 \textcolor{preprocessor}{\#define ADC\_TRIPLEMODE\_REGSIMULT\_INJECSIMULT  ((uint32\_t)(ADC\_CCR\_MULTI\_4 | ADC\_CCR\_MULTI\_0))}}
+\DoxyCodeLine{145 \textcolor{preprocessor}{\#define ADC\_TRIPLEMODE\_REGSIMULT\_AlterTrig    ((uint32\_t)(ADC\_CCR\_MULTI\_4 | ADC\_CCR\_MULTI\_1))}}
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#define ADC\_TRIPLEMODE\_INJECSIMULT            ((uint32\_t)(ADC\_CCR\_MULTI\_4 | ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_0))}}
+\DoxyCodeLine{147 \textcolor{preprocessor}{\#define ADC\_TRIPLEMODE\_REGSIMULT              ((uint32\_t)(ADC\_CCR\_MULTI\_4 | ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_1))}}
+\DoxyCodeLine{148 \textcolor{preprocessor}{\#define ADC\_TRIPLEMODE\_INTERL                 ((uint32\_t)(ADC\_CCR\_MULTI\_4 | ADC\_CCR\_MULTI\_2 | ADC\_CCR\_MULTI\_1 | ADC\_CCR\_MULTI\_0))}}
+\DoxyCodeLine{149 \textcolor{preprocessor}{\#define ADC\_TRIPLEMODE\_ALTERTRIG              ((uint32\_t)(ADC\_CCR\_MULTI\_4 | ADC\_CCR\_MULTI\_3 | ADC\_CCR\_MULTI\_0))}}
+\DoxyCodeLine{157 \textcolor{preprocessor}{\#define ADC\_DMAACCESSMODE\_DISABLED  0x00000000U                }}
+\DoxyCodeLine{158 \textcolor{preprocessor}{\#define ADC\_DMAACCESSMODE\_1         ((uint32\_t)ADC\_CCR\_DMA\_0)  }}
+\DoxyCodeLine{159 \textcolor{preprocessor}{\#define ADC\_DMAACCESSMODE\_2         ((uint32\_t)ADC\_CCR\_DMA\_1)  }}
+\DoxyCodeLine{160 \textcolor{preprocessor}{\#define ADC\_DMAACCESSMODE\_3         ((uint32\_t)ADC\_CCR\_DMA)    }}
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONVEDGE\_NONE           0x00000000U}}
+\DoxyCodeLine{169 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONVEDGE\_RISING         ((uint32\_t)ADC\_CR2\_JEXTEN\_0)}}
+\DoxyCodeLine{170 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONVEDGE\_FALLING        ((uint32\_t)ADC\_CR2\_JEXTEN\_1)}}
+\DoxyCodeLine{171 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONVEDGE\_RISINGFALLING  ((uint32\_t)ADC\_CR2\_JEXTEN)}}
+\DoxyCodeLine{179 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T1\_CC4           0x00000000U}}
+\DoxyCodeLine{180 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T1\_TRGO          ((uint32\_t)ADC\_CR2\_JEXTSEL\_0)}}
+\DoxyCodeLine{181 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T2\_CC1           ((uint32\_t)ADC\_CR2\_JEXTSEL\_1)}}
+\DoxyCodeLine{182 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T2\_TRGO          ((uint32\_t)(ADC\_CR2\_JEXTSEL\_1 | ADC\_CR2\_JEXTSEL\_0))}}
+\DoxyCodeLine{183 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T3\_CC2           ((uint32\_t)ADC\_CR2\_JEXTSEL\_2)}}
+\DoxyCodeLine{184 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T3\_CC4           ((uint32\_t)(ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_0))}}
+\DoxyCodeLine{185 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T4\_CC1           ((uint32\_t)(ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_1))}}
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T4\_CC2           ((uint32\_t)(ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_1 | ADC\_CR2\_JEXTSEL\_0))}}
+\DoxyCodeLine{187 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T4\_CC3           ((uint32\_t)ADC\_CR2\_JEXTSEL\_3)}}
+\DoxyCodeLine{188 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T4\_TRGO          ((uint32\_t)(ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_0))}}
+\DoxyCodeLine{189 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T5\_CC4           ((uint32\_t)(ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_1))}}
+\DoxyCodeLine{190 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T5\_TRGO          ((uint32\_t)(ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_1 | ADC\_CR2\_JEXTSEL\_0))}}
+\DoxyCodeLine{191 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T8\_CC2           ((uint32\_t)(ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_2))}}
+\DoxyCodeLine{192 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T8\_CC3           ((uint32\_t)(ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_0))}}
+\DoxyCodeLine{193 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_T8\_CC4           ((uint32\_t)(ADC\_CR2\_JEXTSEL\_3 | ADC\_CR2\_JEXTSEL\_2 | ADC\_CR2\_JEXTSEL\_1))}}
+\DoxyCodeLine{194 \textcolor{preprocessor}{\#define ADC\_EXTERNALTRIGINJECCONV\_EXT\_IT15         ((uint32\_t)ADC\_CR2\_JEXTSEL)}}
+\DoxyCodeLine{195 \textcolor{preprocessor}{\#define ADC\_INJECTED\_SOFTWARE\_START                ((uint32\_t)ADC\_CR2\_JEXTSEL + 1U)}}
+\DoxyCodeLine{203 \textcolor{preprocessor}{\#define ADC\_INJECTED\_RANK\_1    0x00000001U}}
+\DoxyCodeLine{204 \textcolor{preprocessor}{\#define ADC\_INJECTED\_RANK\_2    0x00000002U}}
+\DoxyCodeLine{205 \textcolor{preprocessor}{\#define ADC\_INJECTED\_RANK\_3    0x00000003U}}
+\DoxyCodeLine{206 \textcolor{preprocessor}{\#define ADC\_INJECTED\_RANK\_4    0x00000004U}}
+\DoxyCodeLine{214 \textcolor{preprocessor}{\#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) || \(\backslash\)}}
+\DoxyCodeLine{215 \textcolor{preprocessor}{    defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F410Tx) || defined(STM32F410Cx) || \(\backslash\)}}
+\DoxyCodeLine{216 \textcolor{preprocessor}{    defined(STM32F410Rx) || defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || \(\backslash\)}}
+\DoxyCodeLine{217 \textcolor{preprocessor}{    defined(STM32F412Cx)}}
+\DoxyCodeLine{218 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_TEMPSENSOR  ((uint32\_t)ADC\_CHANNEL\_16)}}
+\DoxyCodeLine{219 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F401xC || STM32F401xE || STM32F410xx || STM32F412Zx ||}}
+\DoxyCodeLine{220 \textcolor{comment}{          STM32F412Vx || STM32F412Rx || STM32F412Cx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{221 }
+\DoxyCodeLine{222 \textcolor{preprocessor}{\#if defined(STM32F411xE) || defined(STM32F413xx) || defined(STM32F423xx) || defined(STM32F427xx) || defined(STM32F437xx) ||\(\backslash\)}}
+\DoxyCodeLine{223 \textcolor{preprocessor}{    defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx) }}
+\DoxyCodeLine{224 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_DIFFERENCIATION\_TEMPSENSOR\_VBAT 0x10000000U }\textcolor{comment}{/* Dummy bit for driver internal usage, not used in ADC channel setting registers CR1 or SQRx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{225 \textcolor{preprocessor}{\#define ADC\_CHANNEL\_TEMPSENSOR  ((uint32\_t)ADC\_CHANNEL\_18 | ADC\_CHANNEL\_DIFFERENCIATION\_TEMPSENSOR\_VBAT)}}
+\DoxyCodeLine{226 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F411xE || STM32F413xx || STM32F423xx || STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{236 \textcolor{comment}{/* Exported macro -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{240 \textcolor{preprocessor}{\#if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx)|| defined(STM32F439xx)}}
+\DoxyCodeLine{252 \textcolor{preprocessor}{\#define \_\_HAL\_ADC\_PATH\_INTERNAL\_VBAT\_DISABLE() (ADC-\/>CCR \&= \string~(ADC\_CCR\_VBATE))}}
+\DoxyCodeLine{253 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{258 \textcolor{comment}{/* Exported functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{267 \textcolor{comment}{/* I/O operation functions ******************************************************/}}
+\DoxyCodeLine{268 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedStart(ADC\_HandleTypeDef* hadc);}
+\DoxyCodeLine{269 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedStop(ADC\_HandleTypeDef* hadc);}
+\DoxyCodeLine{270 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedPollForConversion(ADC\_HandleTypeDef* hadc, uint32\_t Timeout);}
+\DoxyCodeLine{271 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedStart\_IT(ADC\_HandleTypeDef* hadc);}
+\DoxyCodeLine{272 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedStop\_IT(ADC\_HandleTypeDef* hadc);}
+\DoxyCodeLine{273 uint32\_t HAL\_ADCEx\_InjectedGetValue(ADC\_HandleTypeDef* hadc, uint32\_t InjectedRank);}
+\DoxyCodeLine{274 HAL\_StatusTypeDef HAL\_ADCEx\_MultiModeStart\_DMA(ADC\_HandleTypeDef* hadc, uint32\_t* pData, uint32\_t Length);}
+\DoxyCodeLine{275 HAL\_StatusTypeDef HAL\_ADCEx\_MultiModeStop\_DMA(ADC\_HandleTypeDef* hadc);}
+\DoxyCodeLine{276 uint32\_t HAL\_ADCEx\_MultiModeGetValue(ADC\_HandleTypeDef* hadc);}
+\DoxyCodeLine{277 \textcolor{keywordtype}{void} HAL\_ADCEx\_InjectedConvCpltCallback(ADC\_HandleTypeDef* hadc);}
+\DoxyCodeLine{278 }
+\DoxyCodeLine{279 \textcolor{comment}{/* Peripheral Control functions *************************************************/}}
+\DoxyCodeLine{280 HAL\_StatusTypeDef HAL\_ADCEx\_InjectedConfigChannel(ADC\_HandleTypeDef* hadc,ADC\_InjectionConfTypeDef* sConfigInjected);}
+\DoxyCodeLine{281 HAL\_StatusTypeDef HAL\_ADCEx\_MultiModeConfigChannel(ADC\_HandleTypeDef* hadc, ADC\_MultiModeTypeDef* multimode);}
+\DoxyCodeLine{282 }
+\DoxyCodeLine{290 \textcolor{comment}{/* Private types -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{291 \textcolor{comment}{/* Private variables -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{292 \textcolor{comment}{/* Private constants -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{301 \textcolor{comment}{/* Private macros -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{305 \textcolor{preprocessor}{\#if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) || \(\backslash\)}}
+\DoxyCodeLine{306 \textcolor{preprocessor}{    defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F410Tx) || defined(STM32F410Cx) || \(\backslash\)}}
+\DoxyCodeLine{307 \textcolor{preprocessor}{    defined(STM32F410Rx) || defined(STM32F412Zx) || defined(STM32F412Vx) || defined(STM32F412Rx) || \(\backslash\)}}
+\DoxyCodeLine{308 \textcolor{preprocessor}{    defined(STM32F412Cx)}}
+\DoxyCodeLine{309 \textcolor{preprocessor}{\#define IS\_ADC\_CHANNEL(CHANNEL) ((CHANNEL) <= ADC\_CHANNEL\_18)}}
+\DoxyCodeLine{310 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F405xx || STM32F415xx || STM32F407xx || STM32F417xx || STM32F401xC || STM32F401xE ||}}
+\DoxyCodeLine{311 \textcolor{comment}{          STM32F410xx || STM32F412Zx || STM32F412Vx || STM32F412Rx || STM32F412Cx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{312       }
+\DoxyCodeLine{313 \textcolor{preprocessor}{\#if defined(STM32F411xE) || defined(STM32F413xx) || defined(STM32F423xx) || defined(STM32F427xx) || \(\backslash\)}}
+\DoxyCodeLine{314 \textcolor{preprocessor}{    defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F446xx) || \(\backslash\)}}
+\DoxyCodeLine{315 \textcolor{preprocessor}{    defined(STM32F469xx) || defined(STM32F479xx)}}
+\DoxyCodeLine{316 \textcolor{preprocessor}{\#define IS\_ADC\_CHANNEL(CHANNEL) (((CHANNEL) <= ADC\_CHANNEL\_18)  || \(\backslash\)}}
+\DoxyCodeLine{317 \textcolor{preprocessor}{                                 ((CHANNEL) == ADC\_CHANNEL\_TEMPSENSOR))}}
+\DoxyCodeLine{318 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F411xE || STM32F413xx || STM32F423xx || STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{319 }
+\DoxyCodeLine{320 \textcolor{preprocessor}{\#define IS\_ADC\_MODE(MODE) (((MODE) == ADC\_MODE\_INDEPENDENT)                 || \(\backslash\)}}
+\DoxyCodeLine{321 \textcolor{preprocessor}{                           ((MODE) == ADC\_DUALMODE\_REGSIMULT\_INJECSIMULT)   || \(\backslash\)}}
+\DoxyCodeLine{322 \textcolor{preprocessor}{                           ((MODE) == ADC\_DUALMODE\_REGSIMULT\_ALTERTRIG)     || \(\backslash\)}}
+\DoxyCodeLine{323 \textcolor{preprocessor}{                           ((MODE) == ADC\_DUALMODE\_INJECSIMULT)             || \(\backslash\)}}
+\DoxyCodeLine{324 \textcolor{preprocessor}{                           ((MODE) == ADC\_DUALMODE\_REGSIMULT)               || \(\backslash\)}}
+\DoxyCodeLine{325 \textcolor{preprocessor}{                           ((MODE) == ADC\_DUALMODE\_INTERL)                  || \(\backslash\)}}
+\DoxyCodeLine{326 \textcolor{preprocessor}{                           ((MODE) == ADC\_DUALMODE\_ALTERTRIG)               || \(\backslash\)}}
+\DoxyCodeLine{327 \textcolor{preprocessor}{                           ((MODE) == ADC\_TRIPLEMODE\_REGSIMULT\_INJECSIMULT) || \(\backslash\)}}
+\DoxyCodeLine{328 \textcolor{preprocessor}{                           ((MODE) == ADC\_TRIPLEMODE\_REGSIMULT\_AlterTrig)   || \(\backslash\)}}
+\DoxyCodeLine{329 \textcolor{preprocessor}{                           ((MODE) == ADC\_TRIPLEMODE\_INJECSIMULT)           || \(\backslash\)}}
+\DoxyCodeLine{330 \textcolor{preprocessor}{                           ((MODE) == ADC\_TRIPLEMODE\_REGSIMULT)             || \(\backslash\)}}
+\DoxyCodeLine{331 \textcolor{preprocessor}{                           ((MODE) == ADC\_TRIPLEMODE\_INTERL)                || \(\backslash\)}}
+\DoxyCodeLine{332 \textcolor{preprocessor}{                           ((MODE) == ADC\_TRIPLEMODE\_ALTERTRIG))}}
+\DoxyCodeLine{333 \textcolor{preprocessor}{\#define IS\_ADC\_DMA\_ACCESS\_MODE(MODE) (((MODE) == ADC\_DMAACCESSMODE\_DISABLED) || \(\backslash\)}}
+\DoxyCodeLine{334 \textcolor{preprocessor}{                                      ((MODE) == ADC\_DMAACCESSMODE\_1)        || \(\backslash\)}}
+\DoxyCodeLine{335 \textcolor{preprocessor}{                                      ((MODE) == ADC\_DMAACCESSMODE\_2)        || \(\backslash\)}}
+\DoxyCodeLine{336 \textcolor{preprocessor}{                                      ((MODE) == ADC\_DMAACCESSMODE\_3))}}
+\DoxyCodeLine{337 \textcolor{preprocessor}{\#define IS\_ADC\_EXT\_INJEC\_TRIG\_EDGE(EDGE) (((EDGE) == ADC\_EXTERNALTRIGINJECCONVEDGE\_NONE)    || \(\backslash\)}}
+\DoxyCodeLine{338 \textcolor{preprocessor}{                                          ((EDGE) == ADC\_EXTERNALTRIGINJECCONVEDGE\_RISING)  || \(\backslash\)}}
+\DoxyCodeLine{339 \textcolor{preprocessor}{                                          ((EDGE) == ADC\_EXTERNALTRIGINJECCONVEDGE\_FALLING) || \(\backslash\)}}
+\DoxyCodeLine{340 \textcolor{preprocessor}{                                          ((EDGE) == ADC\_EXTERNALTRIGINJECCONVEDGE\_RISINGFALLING))}}
+\DoxyCodeLine{341 \textcolor{preprocessor}{\#define IS\_ADC\_EXT\_INJEC\_TRIG(INJTRIG) (((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T1\_CC4)  || \(\backslash\)}}
+\DoxyCodeLine{342 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T1\_TRGO) || \(\backslash\)}}
+\DoxyCodeLine{343 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T2\_CC1)  || \(\backslash\)}}
+\DoxyCodeLine{344 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T2\_TRGO) || \(\backslash\)}}
+\DoxyCodeLine{345 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T3\_CC2)  || \(\backslash\)}}
+\DoxyCodeLine{346 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T3\_CC4)  || \(\backslash\)}}
+\DoxyCodeLine{347 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T4\_CC1)  || \(\backslash\)}}
+\DoxyCodeLine{348 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T4\_CC2)  || \(\backslash\)}}
+\DoxyCodeLine{349 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T4\_CC3)  || \(\backslash\)}}
+\DoxyCodeLine{350 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T4\_TRGO) || \(\backslash\)}}
+\DoxyCodeLine{351 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T5\_CC4)  || \(\backslash\)}}
+\DoxyCodeLine{352 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T5\_TRGO) || \(\backslash\)}}
+\DoxyCodeLine{353 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T8\_CC2)  || \(\backslash\)}}
+\DoxyCodeLine{354 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T8\_CC3)  || \(\backslash\)}}
+\DoxyCodeLine{355 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_T8\_CC4)  || \(\backslash\)}}
+\DoxyCodeLine{356 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_EXTERNALTRIGINJECCONV\_EXT\_IT15)|| \(\backslash\)}}
+\DoxyCodeLine{357 \textcolor{preprocessor}{                                        ((INJTRIG) == ADC\_INJECTED\_SOFTWARE\_START))}}
+\DoxyCodeLine{358 \textcolor{preprocessor}{\#define IS\_ADC\_INJECTED\_LENGTH(LENGTH) (((LENGTH) >= 1U) \&\& ((LENGTH) <= 4U))}}
+\DoxyCodeLine{359 \textcolor{preprocessor}{\#define IS\_ADC\_INJECTED\_RANK(RANK) (((RANK) >= 1U) \&\& ((RANK) <= 4U))}}
+\DoxyCodeLine{360 }
+\DoxyCodeLine{368 \textcolor{preprocessor}{\#define   ADC\_JSQR(\_CHANNELNB\_, \_RANKNB\_, \_JSQR\_JL\_)  (((uint32\_t)((uint16\_t)(\_CHANNELNB\_))) << (5U * (uint8\_t)(((\_RANKNB\_) + 3U) -\/ (\_JSQR\_JL\_))))}}
+\DoxyCodeLine{369 }
+\DoxyCodeLine{376 \textcolor{preprocessor}{\#if defined(STM32F405xx) || defined(STM32F407xx) || defined(STM32F415xx) || defined(STM32F417xx) || defined(STM32F427xx) || defined(STM32F429xx) || defined(STM32F437xx) || defined(STM32F439xx) || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)}}
+\DoxyCodeLine{377 \textcolor{preprocessor}{\#define ADC\_COMMON\_REGISTER(\_\_HANDLE\_\_)                ADC123\_COMMON}}
+\DoxyCodeLine{378 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{379 \textcolor{preprocessor}{\#define ADC\_COMMON\_REGISTER(\_\_HANDLE\_\_)                ADC1\_COMMON}}
+\DoxyCodeLine{380 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* STM32F405xx || STM32F407xx || STM32F415xx || STM32F417xx || STM32F427xx || STM32F429xx || STM32F437xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{385 \textcolor{comment}{/* Private functions -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{402 \textcolor{preprocessor}{\#ifdef \_\_cplusplus}}
+\DoxyCodeLine{403 \}}
+\DoxyCodeLine{404 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{405 }
+\DoxyCodeLine{406 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/*\_\_STM32F4xx\_ADC\_EX\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{407 }
+\DoxyCodeLine{408 }
+\DoxyCodeLine{409 \textcolor{comment}{/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/}}
+
+\end{DoxyCode}

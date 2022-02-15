@@ -1,0 +1,72 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Core/\+Src/freertos.c File Reference}
+\label{freertos_8c}\index{C:/ALL/STM32/Projekty/OczkoGierka/Core/Src/freertos.c@{C:/ALL/STM32/Projekty/OczkoGierka/Core/Src/freertos.c}}
+{\ttfamily \#include \char`\"{}Free\+RTOS.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}task.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ v\+Application\+Get\+Idle\+Task\+Memory} (\textbf{ Static\+Task\+\_\+t} $\ast$$\ast$ppx\+Idle\+Task\+TCBBuffer, \textbf{ Stack\+Type\+\_\+t} $\ast$$\ast$ppx\+Idle\+Task\+Stack\+Buffer, uint32\+\_\+t $\ast$pul\+Idle\+Task\+Stack\+Size)
+\item 
+void \textbf{ v\+Application\+Get\+Timer\+Task\+Memory} (\textbf{ Static\+Task\+\_\+t} $\ast$$\ast$ppx\+Timer\+Task\+TCBBuffer, \textbf{ Stack\+Type\+\_\+t} $\ast$$\ast$ppx\+Timer\+Task\+Stack\+Buffer, uint32\+\_\+t $\ast$pul\+Timer\+Task\+Stack\+Size)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static \textbf{ Static\+Task\+\_\+t} \textbf{ x\+Idle\+Task\+TCBBuffer}
+\item 
+static \textbf{ Stack\+Type\+\_\+t} \textbf{ x\+Idle\+Stack} [\textbf{ config\+MINIMAL\+\_\+\+STACK\+\_\+\+SIZE}]
+\item 
+static \textbf{ Static\+Task\+\_\+t} \textbf{ x\+Timer\+Task\+TCBBuffer}
+\item 
+static \textbf{ Stack\+Type\+\_\+t} \textbf{ x\+Timer\+Stack} [\textbf{ config\+TIMER\+\_\+\+TASK\+\_\+\+STACK\+\_\+\+DEPTH}]
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{freertos_8c_a1988aa923b19fa6f31c93afa7773f793}} 
+\index{freertos.c@{freertos.c}!vApplicationGetIdleTaskMemory@{vApplicationGetIdleTaskMemory}}
+\index{vApplicationGetIdleTaskMemory@{vApplicationGetIdleTaskMemory}!freertos.c@{freertos.c}}
+\doxysubsubsection{vApplicationGetIdleTaskMemory()}
+{\footnotesize\ttfamily void v\+Application\+Get\+Idle\+Task\+Memory (\begin{DoxyParamCaption}\item[{\textbf{ Static\+Task\+\_\+t} $\ast$$\ast$}]{ppx\+Idle\+Task\+TCBBuffer,  }\item[{\textbf{ Stack\+Type\+\_\+t} $\ast$$\ast$}]{ppx\+Idle\+Task\+Stack\+Buffer,  }\item[{uint32\+\_\+t $\ast$}]{pul\+Idle\+Task\+Stack\+Size }\end{DoxyParamCaption})}
+
+File Name \+: \doxyref{freertos.\+c}{p.}{freertos_8c} Description \+: Code for freertos applications
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2022 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. \mbox{\label{freertos_8c_a1e80ecbd3fc2d04f18d6409ffa893a86}} 
+\index{freertos.c@{freertos.c}!vApplicationGetTimerTaskMemory@{vApplicationGetTimerTaskMemory}}
+\index{vApplicationGetTimerTaskMemory@{vApplicationGetTimerTaskMemory}!freertos.c@{freertos.c}}
+\doxysubsubsection{vApplicationGetTimerTaskMemory()}
+{\footnotesize\ttfamily void v\+Application\+Get\+Timer\+Task\+Memory (\begin{DoxyParamCaption}\item[{\textbf{ Static\+Task\+\_\+t} $\ast$$\ast$}]{ppx\+Timer\+Task\+TCBBuffer,  }\item[{\textbf{ Stack\+Type\+\_\+t} $\ast$$\ast$}]{ppx\+Timer\+Task\+Stack\+Buffer,  }\item[{uint32\+\_\+t $\ast$}]{pul\+Timer\+Task\+Stack\+Size }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{freertos_8c_af311b04396149ce536fe1a3b5f127445}} 
+\index{freertos.c@{freertos.c}!xIdleStack@{xIdleStack}}
+\index{xIdleStack@{xIdleStack}!freertos.c@{freertos.c}}
+\doxysubsubsection{xIdleStack}
+{\footnotesize\ttfamily \textbf{ Stack\+Type\+\_\+t} x\+Idle\+Stack[\textbf{ config\+MINIMAL\+\_\+\+STACK\+\_\+\+SIZE}]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{freertos_8c_a2dd1013c5ef8f355ac2f1479e36ec659}} 
+\index{freertos.c@{freertos.c}!xIdleTaskTCBBuffer@{xIdleTaskTCBBuffer}}
+\index{xIdleTaskTCBBuffer@{xIdleTaskTCBBuffer}!freertos.c@{freertos.c}}
+\doxysubsubsection{xIdleTaskTCBBuffer}
+{\footnotesize\ttfamily \textbf{ Static\+Task\+\_\+t} x\+Idle\+Task\+TCBBuffer\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{freertos_8c_ac4bbf08a713d317769fd40e9474a279b}} 
+\index{freertos.c@{freertos.c}!xTimerStack@{xTimerStack}}
+\index{xTimerStack@{xTimerStack}!freertos.c@{freertos.c}}
+\doxysubsubsection{xTimerStack}
+{\footnotesize\ttfamily \textbf{ Stack\+Type\+\_\+t} x\+Timer\+Stack[\textbf{ config\+TIMER\+\_\+\+TASK\+\_\+\+STACK\+\_\+\+DEPTH}]\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{freertos_8c_a38d479dc434b1716ec493c97d862680e}} 
+\index{freertos.c@{freertos.c}!xTimerTaskTCBBuffer@{xTimerTaskTCBBuffer}}
+\index{xTimerTaskTCBBuffer@{xTimerTaskTCBBuffer}!freertos.c@{freertos.c}}
+\doxysubsubsection{xTimerTaskTCBBuffer}
+{\footnotesize\ttfamily \textbf{ Static\+Task\+\_\+t} x\+Timer\+Task\+TCBBuffer\hspace{0.3cm}{\ttfamily [static]}}
+

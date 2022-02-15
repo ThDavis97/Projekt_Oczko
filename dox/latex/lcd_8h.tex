@@ -1,0 +1,343 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Core/\+Inc/lcd.h File Reference}
+\label{lcd_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Core/Inc/lcd.h@{C:/ALL/STM32/Projekty/OczkoGierka/Core/Inc/lcd.h}}
+{\ttfamily \#include \char`\"{}stm32f4xx\+\_\+hal.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}string.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stdio.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Lcd\+\_\+\+Handle\+Type\+Def}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ LCD16xN}
+\item 
+\#define \textbf{ CLEAR\+\_\+\+DISPLAY}~0x01
+\item 
+\#define \textbf{ RETURN\+\_\+\+HOME}~0x02
+\item 
+\#define \textbf{ ENTRY\+\_\+\+MODE\+\_\+\+SET}~0x04
+\item 
+\#define \textbf{ OPT\+\_\+S}~0x01
+\item 
+\#define \textbf{ OPT\+\_\+\+INC}~0x02
+\item 
+\#define \textbf{ DISPLAY\+\_\+\+ON\+\_\+\+OFF\+\_\+\+CONTROL}~0x08
+\item 
+\#define \textbf{ OPT\+\_\+D}~0x04
+\item 
+\#define \textbf{ OPT\+\_\+C}~0x02
+\item 
+\#define \textbf{ OPT\+\_\+B}~0x01
+\item 
+\#define \textbf{ CURSOR\+\_\+\+DISPLAY\+\_\+\+SHIFT}~0x10
+\item 
+\#define \textbf{ OPT\+\_\+\+SC}~0x08
+\item 
+\#define \textbf{ OPT\+\_\+\+RL}~0x04
+\item 
+\#define \textbf{ FUNCTION\+\_\+\+SET}~0x20
+\item 
+\#define \textbf{ OPT\+\_\+\+DL}~0x10
+\item 
+\#define \textbf{ OPT\+\_\+N}~0x08
+\item 
+\#define \textbf{ OPT\+\_\+F}~0x04
+\item 
+\#define \textbf{ SETCGRAM\+\_\+\+ADDR}~0x040
+\item 
+\#define \textbf{ SET\+\_\+\+DDRAM\+\_\+\+ADDR}~0x80
+\item 
+\#define \textbf{ DELAY}(X)~\textbf{ HAL\+\_\+\+Delay}(X)
+\item 
+\#define \textbf{ LCD\+\_\+\+NIB}~4
+\item 
+\#define \textbf{ LCD\+\_\+\+BYTE}~8
+\item 
+\#define \textbf{ LCD\+\_\+\+DATA\+\_\+\+REG}~1
+\item 
+\#define \textbf{ LCD\+\_\+\+COMMAND\+\_\+\+REG}~0
+\item 
+\#define \textbf{ Lcd\+\_\+\+Port\+Type}~\textbf{ GPIO\+\_\+\+Type\+Def}$\ast$
+\item 
+\#define \textbf{ Lcd\+\_\+\+Pin\+Type}~uint16\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ Lcd\+\_\+\+Mode\+Type\+Def} \{ \textbf{ LCD\+\_\+4\+\_\+\+BIT\+\_\+\+MODE}
+, \textbf{ LCD\+\_\+8\+\_\+\+BIT\+\_\+\+MODE}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ Lcd\+\_\+init} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd)
+\item 
+void \textbf{ Lcd\+\_\+int} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, int number)
+\item 
+void \textbf{ Lcd\+\_\+char} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, char $\ast$char\+\_\+)
+\item 
+void \textbf{ Lcd\+\_\+string} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, char $\ast$string)
+\item 
+void \textbf{ Lcd\+\_\+cursor} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, uint8\+\_\+t row, uint8\+\_\+t col)
+\item 
+\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} \textbf{ Lcd\+\_\+create} (\textbf{ Lcd\+\_\+\+Port\+Type} port[$\,$], \textbf{ Lcd\+\_\+\+Pin\+Type} pin[$\,$], \textbf{ Lcd\+\_\+\+Port\+Type} rs\+\_\+port, \textbf{ Lcd\+\_\+\+Pin\+Type} rs\+\_\+pin, \textbf{ Lcd\+\_\+\+Port\+Type} en\+\_\+port, \textbf{ Lcd\+\_\+\+Pin\+Type} en\+\_\+pin, \textbf{ Lcd\+\_\+\+Mode\+Type\+Def} mode)
+\item 
+void \textbf{ Lcd\+\_\+define\+\_\+char} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd, uint8\+\_\+t code, uint8\+\_\+t bitmap[$\,$])
+\item 
+void \textbf{ Lcd\+\_\+clear} (\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$lcd)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint8\+\_\+t \textbf{ ROW\+\_\+16} [$\,$]
+\item 
+const uint8\+\_\+t \textbf{ ROW\+\_\+20} [$\,$]
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{lcd_8h_a221b02b65527a670a158a9b1387e877c}} 
+\index{lcd.h@{lcd.h}!CLEAR\_DISPLAY@{CLEAR\_DISPLAY}}
+\index{CLEAR\_DISPLAY@{CLEAR\_DISPLAY}!lcd.h@{lcd.h}}
+\doxysubsubsection{CLEAR\_DISPLAY}
+{\footnotesize\ttfamily \#define CLEAR\+\_\+\+DISPLAY~0x01}
+
+\mbox{\label{lcd_8h_aee44c28b3237b814efa557a2429023b8}} 
+\index{lcd.h@{lcd.h}!CURSOR\_DISPLAY\_SHIFT@{CURSOR\_DISPLAY\_SHIFT}}
+\index{CURSOR\_DISPLAY\_SHIFT@{CURSOR\_DISPLAY\_SHIFT}!lcd.h@{lcd.h}}
+\doxysubsubsection{CURSOR\_DISPLAY\_SHIFT}
+{\footnotesize\ttfamily \#define CURSOR\+\_\+\+DISPLAY\+\_\+\+SHIFT~0x10}
+
+\mbox{\label{lcd_8h_a7842602635de866f58163d938460a2fa}} 
+\index{lcd.h@{lcd.h}!DELAY@{DELAY}}
+\index{DELAY@{DELAY}!lcd.h@{lcd.h}}
+\doxysubsubsection{DELAY}
+{\footnotesize\ttfamily \#define DELAY(\begin{DoxyParamCaption}\item[{}]{X }\end{DoxyParamCaption})~\textbf{ HAL\+\_\+\+Delay}(X)}
+
+\mbox{\label{lcd_8h_a24f46498474a578f07d9d30d5dc48b0a}} 
+\index{lcd.h@{lcd.h}!DISPLAY\_ON\_OFF\_CONTROL@{DISPLAY\_ON\_OFF\_CONTROL}}
+\index{DISPLAY\_ON\_OFF\_CONTROL@{DISPLAY\_ON\_OFF\_CONTROL}!lcd.h@{lcd.h}}
+\doxysubsubsection{DISPLAY\_ON\_OFF\_CONTROL}
+{\footnotesize\ttfamily \#define DISPLAY\+\_\+\+ON\+\_\+\+OFF\+\_\+\+CONTROL~0x08}
+
+\mbox{\label{lcd_8h_aa609aa58e71261c40627750bbaa1ca1c}} 
+\index{lcd.h@{lcd.h}!ENTRY\_MODE\_SET@{ENTRY\_MODE\_SET}}
+\index{ENTRY\_MODE\_SET@{ENTRY\_MODE\_SET}!lcd.h@{lcd.h}}
+\doxysubsubsection{ENTRY\_MODE\_SET}
+{\footnotesize\ttfamily \#define ENTRY\+\_\+\+MODE\+\_\+\+SET~0x04}
+
+\mbox{\label{lcd_8h_a59f35c48e6411073b387a95fa81df8be}} 
+\index{lcd.h@{lcd.h}!FUNCTION\_SET@{FUNCTION\_SET}}
+\index{FUNCTION\_SET@{FUNCTION\_SET}!lcd.h@{lcd.h}}
+\doxysubsubsection{FUNCTION\_SET}
+{\footnotesize\ttfamily \#define FUNCTION\+\_\+\+SET~0x20}
+
+\mbox{\label{lcd_8h_a6f09e6ce3df3c7508268c6d669c115bd}} 
+\index{lcd.h@{lcd.h}!LCD16xN@{LCD16xN}}
+\index{LCD16xN@{LCD16xN}!lcd.h@{lcd.h}}
+\doxysubsubsection{LCD16xN}
+{\footnotesize\ttfamily \#define LCD16xN}
+
+\mbox{\label{lcd_8h_aa700aac384bbe44ebaab96310a50c9d8}} 
+\index{lcd.h@{lcd.h}!LCD\_BYTE@{LCD\_BYTE}}
+\index{LCD\_BYTE@{LCD\_BYTE}!lcd.h@{lcd.h}}
+\doxysubsubsection{LCD\_BYTE}
+{\footnotesize\ttfamily \#define LCD\+\_\+\+BYTE~8}
+
+\mbox{\label{lcd_8h_aabf117bdc3cce4e1919bbfee78127c71}} 
+\index{lcd.h@{lcd.h}!LCD\_COMMAND\_REG@{LCD\_COMMAND\_REG}}
+\index{LCD\_COMMAND\_REG@{LCD\_COMMAND\_REG}!lcd.h@{lcd.h}}
+\doxysubsubsection{LCD\_COMMAND\_REG}
+{\footnotesize\ttfamily \#define LCD\+\_\+\+COMMAND\+\_\+\+REG~0}
+
+\mbox{\label{lcd_8h_abb7a5e0607e71d97379c04e5d707b89c}} 
+\index{lcd.h@{lcd.h}!LCD\_DATA\_REG@{LCD\_DATA\_REG}}
+\index{LCD\_DATA\_REG@{LCD\_DATA\_REG}!lcd.h@{lcd.h}}
+\doxysubsubsection{LCD\_DATA\_REG}
+{\footnotesize\ttfamily \#define LCD\+\_\+\+DATA\+\_\+\+REG~1}
+
+\mbox{\label{lcd_8h_a3b4a905bfe895c8abb17f2ff9e8d91ec}} 
+\index{lcd.h@{lcd.h}!LCD\_NIB@{LCD\_NIB}}
+\index{LCD\_NIB@{LCD\_NIB}!lcd.h@{lcd.h}}
+\doxysubsubsection{LCD\_NIB}
+{\footnotesize\ttfamily \#define LCD\+\_\+\+NIB~4}
+
+\mbox{\label{lcd_8h_a52d3b2f0ccdbb6bacc93c0d892c3a65e}} 
+\index{lcd.h@{lcd.h}!Lcd\_PinType@{Lcd\_PinType}}
+\index{Lcd\_PinType@{Lcd\_PinType}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_PinType}
+{\footnotesize\ttfamily \#define Lcd\+\_\+\+Pin\+Type~uint16\+\_\+t}
+
+\mbox{\label{lcd_8h_a5032730cd6aec5706ab225bf2693521d}} 
+\index{lcd.h@{lcd.h}!Lcd\_PortType@{Lcd\_PortType}}
+\index{Lcd\_PortType@{Lcd\_PortType}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_PortType}
+{\footnotesize\ttfamily \#define Lcd\+\_\+\+Port\+Type~\textbf{ GPIO\+\_\+\+Type\+Def}$\ast$}
+
+\mbox{\label{lcd_8h_a81b6f4d86bf9b1917f279d22cf98d95b}} 
+\index{lcd.h@{lcd.h}!OPT\_B@{OPT\_B}}
+\index{OPT\_B@{OPT\_B}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_B}
+{\footnotesize\ttfamily \#define OPT\+\_\+B~0x01}
+
+\mbox{\label{lcd_8h_a0562e9e9aaffa9b708586e4745fb4b9b}} 
+\index{lcd.h@{lcd.h}!OPT\_C@{OPT\_C}}
+\index{OPT\_C@{OPT\_C}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_C}
+{\footnotesize\ttfamily \#define OPT\+\_\+C~0x02}
+
+\mbox{\label{lcd_8h_a6f46fa48b21b175bed7a6340c14ee1db}} 
+\index{lcd.h@{lcd.h}!OPT\_D@{OPT\_D}}
+\index{OPT\_D@{OPT\_D}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_D}
+{\footnotesize\ttfamily \#define OPT\+\_\+D~0x04}
+
+\mbox{\label{lcd_8h_a9671212c2a07be77cc90ae24ecb706fb}} 
+\index{lcd.h@{lcd.h}!OPT\_DL@{OPT\_DL}}
+\index{OPT\_DL@{OPT\_DL}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_DL}
+{\footnotesize\ttfamily \#define OPT\+\_\+\+DL~0x10}
+
+\mbox{\label{lcd_8h_a976e46f9c07b79f0da652238441cf3b7}} 
+\index{lcd.h@{lcd.h}!OPT\_F@{OPT\_F}}
+\index{OPT\_F@{OPT\_F}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_F}
+{\footnotesize\ttfamily \#define OPT\+\_\+F~0x04}
+
+\mbox{\label{lcd_8h_a6a16603ffeb92e30149567b72b511cea}} 
+\index{lcd.h@{lcd.h}!OPT\_INC@{OPT\_INC}}
+\index{OPT\_INC@{OPT\_INC}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_INC}
+{\footnotesize\ttfamily \#define OPT\+\_\+\+INC~0x02}
+
+\mbox{\label{lcd_8h_a057f13d946ace762a29f12136e8d0deb}} 
+\index{lcd.h@{lcd.h}!OPT\_N@{OPT\_N}}
+\index{OPT\_N@{OPT\_N}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_N}
+{\footnotesize\ttfamily \#define OPT\+\_\+N~0x08}
+
+\mbox{\label{lcd_8h_a89880243a59be6b413f8e3c2b5085524}} 
+\index{lcd.h@{lcd.h}!OPT\_RL@{OPT\_RL}}
+\index{OPT\_RL@{OPT\_RL}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_RL}
+{\footnotesize\ttfamily \#define OPT\+\_\+\+RL~0x04}
+
+\mbox{\label{lcd_8h_a1e8afedf48dcf376594702002a8162a2}} 
+\index{lcd.h@{lcd.h}!OPT\_S@{OPT\_S}}
+\index{OPT\_S@{OPT\_S}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_S}
+{\footnotesize\ttfamily \#define OPT\+\_\+S~0x01}
+
+\mbox{\label{lcd_8h_a0001d0dad84f4580afc8e5efdd506158}} 
+\index{lcd.h@{lcd.h}!OPT\_SC@{OPT\_SC}}
+\index{OPT\_SC@{OPT\_SC}!lcd.h@{lcd.h}}
+\doxysubsubsection{OPT\_SC}
+{\footnotesize\ttfamily \#define OPT\+\_\+\+SC~0x08}
+
+\mbox{\label{lcd_8h_a132a90af728916a595bcf5a52cfac21c}} 
+\index{lcd.h@{lcd.h}!RETURN\_HOME@{RETURN\_HOME}}
+\index{RETURN\_HOME@{RETURN\_HOME}!lcd.h@{lcd.h}}
+\doxysubsubsection{RETURN\_HOME}
+{\footnotesize\ttfamily \#define RETURN\+\_\+\+HOME~0x02}
+
+\mbox{\label{lcd_8h_a83a17f2aebcd5eefff0ff4d0439fb929}} 
+\index{lcd.h@{lcd.h}!SET\_DDRAM\_ADDR@{SET\_DDRAM\_ADDR}}
+\index{SET\_DDRAM\_ADDR@{SET\_DDRAM\_ADDR}!lcd.h@{lcd.h}}
+\doxysubsubsection{SET\_DDRAM\_ADDR}
+{\footnotesize\ttfamily \#define SET\+\_\+\+DDRAM\+\_\+\+ADDR~0x80}
+
+\mbox{\label{lcd_8h_ac8f9cf3f15e7eebcb7abcb5c7f8cc1bb}} 
+\index{lcd.h@{lcd.h}!SETCGRAM\_ADDR@{SETCGRAM\_ADDR}}
+\index{SETCGRAM\_ADDR@{SETCGRAM\_ADDR}!lcd.h@{lcd.h}}
+\doxysubsubsection{SETCGRAM\_ADDR}
+{\footnotesize\ttfamily \#define SETCGRAM\+\_\+\+ADDR~0x040}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\label{lcd_8h_a3f91f51a22930c98fed044e5c3c6da4d}} 
+\index{lcd.h@{lcd.h}!Lcd\_ModeTypeDef@{Lcd\_ModeTypeDef}}
+\index{Lcd\_ModeTypeDef@{Lcd\_ModeTypeDef}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_ModeTypeDef}
+{\footnotesize\ttfamily enum \textbf{ Lcd\+\_\+\+Mode\+Type\+Def}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LCD\_4\_BIT\_MODE@{LCD\_4\_BIT\_MODE}!lcd.h@{lcd.h}}\index{lcd.h@{lcd.h}!LCD\_4\_BIT\_MODE@{LCD\_4\_BIT\_MODE}}}\mbox{\label{lcd_8h_a3f91f51a22930c98fed044e5c3c6da4da6e6400186caf21a8d0e79a9514aca0ab}} 
+LCD\+\_\+4\+\_\+\+BIT\+\_\+\+MODE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LCD\_8\_BIT\_MODE@{LCD\_8\_BIT\_MODE}!lcd.h@{lcd.h}}\index{lcd.h@{lcd.h}!LCD\_8\_BIT\_MODE@{LCD\_8\_BIT\_MODE}}}\mbox{\label{lcd_8h_a3f91f51a22930c98fed044e5c3c6da4da480df27ddfffd0244eed2c72ed6f8bd2}} 
+LCD\+\_\+8\+\_\+\+BIT\+\_\+\+MODE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{lcd_8h_ac16826789d555b3dd17f742e6a69c2c9}} 
+\index{lcd.h@{lcd.h}!Lcd\_char@{Lcd\_char}}
+\index{Lcd\_char@{Lcd\_char}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_char()}
+{\footnotesize\ttfamily void Lcd\+\_\+char (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{char $\ast$}]{char\+\_\+ }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_ad2be8694070f64fe09c1e35469a568b6}} 
+\index{lcd.h@{lcd.h}!Lcd\_clear@{Lcd\_clear}}
+\index{Lcd\_clear@{Lcd\_clear}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_clear()}
+{\footnotesize\ttfamily void Lcd\+\_\+clear (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd }\end{DoxyParamCaption})}
+
+Clear the screen \mbox{\label{lcd_8h_a555f8cc26de31bbf138597e8a658d43f}} 
+\index{lcd.h@{lcd.h}!Lcd\_create@{Lcd\_create}}
+\index{Lcd\_create@{Lcd\_create}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_create()}
+{\footnotesize\ttfamily \textbf{ Lcd\+\_\+\+Handle\+Type\+Def} Lcd\+\_\+create (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Port\+Type}}]{port[$\,$],  }\item[{\textbf{ Lcd\+\_\+\+Pin\+Type}}]{pin[$\,$],  }\item[{\textbf{ Lcd\+\_\+\+Port\+Type}}]{rs\+\_\+port,  }\item[{\textbf{ Lcd\+\_\+\+Pin\+Type}}]{rs\+\_\+pin,  }\item[{\textbf{ Lcd\+\_\+\+Port\+Type}}]{en\+\_\+port,  }\item[{\textbf{ Lcd\+\_\+\+Pin\+Type}}]{en\+\_\+pin,  }\item[{\textbf{ Lcd\+\_\+\+Mode\+Type\+Def}}]{mode }\end{DoxyParamCaption})}
+
+Create new \doxyref{Lcd\+\_\+\+Handle\+Type\+Def}{p.}{struct_lcd___handle_type_def} and initialize the Lcd \mbox{\label{lcd_8h_ae31b55ceec6ac19f04e4f8afe641d304}} 
+\index{lcd.h@{lcd.h}!Lcd\_cursor@{Lcd\_cursor}}
+\index{Lcd\_cursor@{Lcd\_cursor}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_cursor()}
+{\footnotesize\ttfamily void Lcd\+\_\+cursor (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{uint8\+\_\+t}]{row,  }\item[{uint8\+\_\+t}]{col }\end{DoxyParamCaption})}
+
+Set the cursor position \mbox{\label{lcd_8h_aad2da0b28baec7977d14487555a6d7f0}} 
+\index{lcd.h@{lcd.h}!Lcd\_define\_char@{Lcd\_define\_char}}
+\index{Lcd\_define\_char@{Lcd\_define\_char}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_define\_char()}
+{\footnotesize\ttfamily void Lcd\+\_\+define\+\_\+char (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{uint8\+\_\+t}]{code,  }\item[{uint8\+\_\+t}]{bitmap[$\,$] }\end{DoxyParamCaption})}
+
+\mbox{\label{lcd_8h_a812f628ceebeae7c8acdd608d13467b5}} 
+\index{lcd.h@{lcd.h}!Lcd\_init@{Lcd\_init}}
+\index{Lcd\_init@{Lcd\_init}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_init()}
+{\footnotesize\ttfamily void Lcd\+\_\+init (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd }\end{DoxyParamCaption})}
+
+Initialize 16x2-\/lcd without cursor \mbox{\label{lcd_8h_aeb7d8cf010d0431082793c35d2f3986a}} 
+\index{lcd.h@{lcd.h}!Lcd\_int@{Lcd\_int}}
+\index{Lcd\_int@{Lcd\_int}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_int()}
+{\footnotesize\ttfamily void Lcd\+\_\+int (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{int}]{number }\end{DoxyParamCaption})}
+
+Write a number on the current position \mbox{\label{lcd_8h_a41b19f1767241abaad51ba81820a1f8b}} 
+\index{lcd.h@{lcd.h}!Lcd\_string@{Lcd\_string}}
+\index{Lcd\_string@{Lcd\_string}!lcd.h@{lcd.h}}
+\doxysubsubsection{Lcd\_string()}
+{\footnotesize\ttfamily void Lcd\+\_\+string (\begin{DoxyParamCaption}\item[{\textbf{ Lcd\+\_\+\+Handle\+Type\+Def} $\ast$}]{lcd,  }\item[{char $\ast$}]{string }\end{DoxyParamCaption})}
+
+Write a string on the current position 
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{lcd_8h_a4be6f3b251ac82300f2047124369e92d}} 
+\index{lcd.h@{lcd.h}!ROW\_16@{ROW\_16}}
+\index{ROW\_16@{ROW\_16}!lcd.h@{lcd.h}}
+\doxysubsubsection{ROW\_16}
+{\footnotesize\ttfamily const uint8\+\_\+t ROW\+\_\+16[$\,$]\hspace{0.3cm}{\ttfamily [extern]}}
+
+\mbox{\label{lcd_8h_a8ce7cee6a792ba94fce40e64a8a593bd}} 
+\index{lcd.h@{lcd.h}!ROW\_20@{ROW\_20}}
+\index{ROW\_20@{ROW\_20}!lcd.h@{lcd.h}}
+\doxysubsubsection{ROW\_20}
+{\footnotesize\ttfamily const uint8\+\_\+t ROW\+\_\+20[$\,$]\hspace{0.3cm}{\ttfamily [extern]}}
+

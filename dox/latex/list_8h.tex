@@ -1,0 +1,316 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/include/list.h File Reference}
+\label{list_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/list.h@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/list.h}}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ x\+LIST\+\_\+\+ITEM}
+\item 
+struct \textbf{ x\+MINI\+\_\+\+LIST\+\_\+\+ITEM}
+\item 
+struct \textbf{ x\+LIST}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ config\+LIST\+\_\+\+VOLATILE}
+\item 
+\#define \textbf{ list\+FIRST\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}
+\item 
+\#define \textbf{ list\+SECOND\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}
+\item 
+\#define \textbf{ list\+FIRST\+\_\+\+LIST\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}
+\item 
+\#define \textbf{ list\+SECOND\+\_\+\+LIST\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}
+\item 
+\#define \textbf{ list\+SET\+\_\+\+FIRST\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}(px\+Item)
+\item 
+\#define \textbf{ list\+SET\+\_\+\+SECOND\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}(px\+Item)
+\item 
+\#define \textbf{ list\+SET\+\_\+\+LIST\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+1\+\_\+\+VALUE}(px\+List)
+\item 
+\#define \textbf{ list\+SET\+\_\+\+LIST\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+2\+\_\+\+VALUE}(px\+List)
+\item 
+\#define \textbf{ list\+TEST\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY}(px\+Item)
+\item 
+\#define \textbf{ list\+TEST\+\_\+\+LIST\+\_\+\+INTEGRITY}(px\+List)
+\item 
+\#define \textbf{ list\+SET\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+OWNER}(px\+List\+Item,  px\+Owner)~( ( px\+List\+Item )-\/$>$pv\+Owner = ( void $\ast$ ) ( px\+Owner ) )
+\item 
+\#define \textbf{ list\+GET\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+OWNER}(px\+List\+Item)~( ( px\+List\+Item )-\/$>$pv\+Owner )
+\item 
+\#define \textbf{ list\+SET\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+VALUE}(px\+List\+Item,  x\+Value)~( ( px\+List\+Item )-\/$>$x\+Item\+Value = ( x\+Value ) )
+\item 
+\#define \textbf{ list\+GET\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+VALUE}(px\+List\+Item)~( ( px\+List\+Item )-\/$>$x\+Item\+Value )
+\item 
+\#define \textbf{ list\+GET\+\_\+\+ITEM\+\_\+\+VALUE\+\_\+\+OF\+\_\+\+HEAD\+\_\+\+ENTRY}(px\+List)~( ( ( px\+List )-\/$>$x\+List\+End ).px\+Next-\/$>$x\+Item\+Value )
+\item 
+\#define \textbf{ list\+GET\+\_\+\+HEAD\+\_\+\+ENTRY}(px\+List)~( ( ( px\+List )-\/$>$x\+List\+End ).px\+Next )
+\item 
+\#define \textbf{ list\+GET\+\_\+\+NEXT}(px\+List\+Item)~( ( px\+List\+Item )-\/$>$px\+Next )
+\item 
+\#define \textbf{ list\+GET\+\_\+\+END\+\_\+\+MARKER}(px\+List)~( ( \textbf{ List\+Item\+\_\+t} const $\ast$ ) ( \&( ( px\+List )-\/$>$x\+List\+End ) ) )
+\item 
+\#define \textbf{ list\+LIST\+\_\+\+IS\+\_\+\+EMPTY}(px\+List)~( ( ( px\+List )-\/$>$ux\+Number\+Of\+Items == ( \textbf{ UBase\+Type\+\_\+t} ) 0 ) ? \textbf{ pd\+TRUE} \+: \textbf{ pd\+FALSE} )
+\item 
+\#define \textbf{ list\+CURRENT\+\_\+\+LIST\+\_\+\+LENGTH}(px\+List)~( ( px\+List )-\/$>$ux\+Number\+Of\+Items )
+\item 
+\#define \textbf{ list\+GET\+\_\+\+OWNER\+\_\+\+OF\+\_\+\+NEXT\+\_\+\+ENTRY}(px\+TCB,  px\+List)
+\item 
+\#define \textbf{ list\+GET\+\_\+\+OWNER\+\_\+\+OF\+\_\+\+HEAD\+\_\+\+ENTRY}(px\+List)~( (\&( ( px\+List )-\/$>$x\+List\+End ))-\/$>$px\+Next-\/$>$pv\+Owner )
+\item 
+\#define \textbf{ list\+IS\+\_\+\+CONTAINED\+\_\+\+WITHIN}(px\+List,  px\+List\+Item)~( ( ( px\+List\+Item )-\/$>$\textbf{ px\+Container} == ( px\+List ) ) ? ( \textbf{ pd\+TRUE} ) \+: ( \textbf{ pd\+FALSE} ) )
+\item 
+\#define \textbf{ list\+LIST\+\_\+\+ITEM\+\_\+\+CONTAINER}(px\+List\+Item)~( ( px\+List\+Item )-\/$>$\textbf{ px\+Container} )
+\item 
+\#define \textbf{ list\+LIST\+\_\+\+IS\+\_\+\+INITIALISED}(px\+List)~( ( px\+List )-\/$>$x\+List\+End.\+x\+Item\+Value == \textbf{ port\+MAX\+\_\+\+DELAY} )
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \textbf{ x\+LIST\+\_\+\+ITEM} \textbf{ List\+Item\+\_\+t}
+\item 
+typedef struct \textbf{ x\+MINI\+\_\+\+LIST\+\_\+\+ITEM} \textbf{ Mini\+List\+Item\+\_\+t}
+\item 
+typedef struct \textbf{ x\+LIST} \textbf{ List\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ v\+List\+Initialise} (\textbf{ List\+\_\+t} $\ast$const px\+List) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+void \textbf{ v\+List\+Initialise\+Item} (\textbf{ List\+Item\+\_\+t} $\ast$const px\+Item) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+void \textbf{ v\+List\+Insert} (\textbf{ List\+\_\+t} $\ast$const px\+List, \textbf{ List\+Item\+\_\+t} $\ast$const px\+New\+List\+Item) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+void \textbf{ v\+List\+Insert\+End} (\textbf{ List\+\_\+t} $\ast$const px\+List, \textbf{ List\+Item\+\_\+t} $\ast$const px\+New\+List\+Item) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+\textbf{ UBase\+Type\+\_\+t} \textbf{ ux\+List\+Remove} (\textbf{ List\+Item\+\_\+t} $\ast$const px\+Item\+To\+Remove) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{list_8h_a2d5de557c5561c8980d1bf51d87d8cba}} 
+\index{list.h@{list.h}!configLIST\_VOLATILE@{configLIST\_VOLATILE}}
+\index{configLIST\_VOLATILE@{configLIST\_VOLATILE}!list.h@{list.h}}
+\doxysubsubsection{configLIST\_VOLATILE}
+{\footnotesize\ttfamily \#define config\+LIST\+\_\+\+VOLATILE}
+
+\mbox{\label{list_8h_a18b4aded515bdc512017ea6e677a13bb}} 
+\index{list.h@{list.h}!listCURRENT\_LIST\_LENGTH@{listCURRENT\_LIST\_LENGTH}}
+\index{listCURRENT\_LIST\_LENGTH@{listCURRENT\_LIST\_LENGTH}!list.h@{list.h}}
+\doxysubsubsection{listCURRENT\_LIST\_LENGTH}
+{\footnotesize\ttfamily \#define list\+CURRENT\+\_\+\+LIST\+\_\+\+LENGTH(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})~( ( px\+List )-\/$>$ux\+Number\+Of\+Items )}
+
+\mbox{\label{list_8h_a3a52b5a4f70d3a07e37a5814a23ba880}} 
+\index{list.h@{list.h}!listFIRST\_LIST\_INTEGRITY\_CHECK\_VALUE@{listFIRST\_LIST\_INTEGRITY\_CHECK\_VALUE}}
+\index{listFIRST\_LIST\_INTEGRITY\_CHECK\_VALUE@{listFIRST\_LIST\_INTEGRITY\_CHECK\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listFIRST\_LIST\_INTEGRITY\_CHECK\_VALUE}
+{\footnotesize\ttfamily \#define list\+FIRST\+\_\+\+LIST\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}
+
+\mbox{\label{list_8h_a3611bd5d5d87cb26ac1dc7a4852b94a0}} 
+\index{list.h@{list.h}!listFIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE@{listFIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}}
+\index{listFIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE@{listFIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listFIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}
+{\footnotesize\ttfamily \#define list\+FIRST\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}
+
+\mbox{\label{list_8h_a96cb0919f02e5c0d8e41ded0e65197a3}} 
+\index{list.h@{list.h}!listGET\_END\_MARKER@{listGET\_END\_MARKER}}
+\index{listGET\_END\_MARKER@{listGET\_END\_MARKER}!list.h@{list.h}}
+\doxysubsubsection{listGET\_END\_MARKER}
+{\footnotesize\ttfamily \#define list\+GET\+\_\+\+END\+\_\+\+MARKER(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})~( ( \textbf{ List\+Item\+\_\+t} const $\ast$ ) ( \&( ( px\+List )-\/$>$x\+List\+End ) ) )}
+
+\mbox{\label{list_8h_a987cb2766e509022c23b654907cea199}} 
+\index{list.h@{list.h}!listGET\_HEAD\_ENTRY@{listGET\_HEAD\_ENTRY}}
+\index{listGET\_HEAD\_ENTRY@{listGET\_HEAD\_ENTRY}!list.h@{list.h}}
+\doxysubsubsection{listGET\_HEAD\_ENTRY}
+{\footnotesize\ttfamily \#define list\+GET\+\_\+\+HEAD\+\_\+\+ENTRY(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})~( ( ( px\+List )-\/$>$x\+List\+End ).px\+Next )}
+
+\mbox{\label{list_8h_a63742b27958b959ac9ab69d8e9aed241}} 
+\index{list.h@{list.h}!listGET\_ITEM\_VALUE\_OF\_HEAD\_ENTRY@{listGET\_ITEM\_VALUE\_OF\_HEAD\_ENTRY}}
+\index{listGET\_ITEM\_VALUE\_OF\_HEAD\_ENTRY@{listGET\_ITEM\_VALUE\_OF\_HEAD\_ENTRY}!list.h@{list.h}}
+\doxysubsubsection{listGET\_ITEM\_VALUE\_OF\_HEAD\_ENTRY}
+{\footnotesize\ttfamily \#define list\+GET\+\_\+\+ITEM\+\_\+\+VALUE\+\_\+\+OF\+\_\+\+HEAD\+\_\+\+ENTRY(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})~( ( ( px\+List )-\/$>$x\+List\+End ).px\+Next-\/$>$x\+Item\+Value )}
+
+\mbox{\label{list_8h_aa9469bd061a44b4f75d30c6175f66d5c}} 
+\index{list.h@{list.h}!listGET\_LIST\_ITEM\_OWNER@{listGET\_LIST\_ITEM\_OWNER}}
+\index{listGET\_LIST\_ITEM\_OWNER@{listGET\_LIST\_ITEM\_OWNER}!list.h@{list.h}}
+\doxysubsubsection{listGET\_LIST\_ITEM\_OWNER}
+{\footnotesize\ttfamily \#define list\+GET\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+OWNER(\begin{DoxyParamCaption}\item[{}]{px\+List\+Item }\end{DoxyParamCaption})~( ( px\+List\+Item )-\/$>$pv\+Owner )}
+
+\mbox{\label{list_8h_aa50d09950abc602741d7ebe8387f4e1a}} 
+\index{list.h@{list.h}!listGET\_LIST\_ITEM\_VALUE@{listGET\_LIST\_ITEM\_VALUE}}
+\index{listGET\_LIST\_ITEM\_VALUE@{listGET\_LIST\_ITEM\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listGET\_LIST\_ITEM\_VALUE}
+{\footnotesize\ttfamily \#define list\+GET\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{px\+List\+Item }\end{DoxyParamCaption})~( ( px\+List\+Item )-\/$>$x\+Item\+Value )}
+
+\mbox{\label{list_8h_aabf78d3f24ba56ac1d0bf0179438b960}} 
+\index{list.h@{list.h}!listGET\_NEXT@{listGET\_NEXT}}
+\index{listGET\_NEXT@{listGET\_NEXT}!list.h@{list.h}}
+\doxysubsubsection{listGET\_NEXT}
+{\footnotesize\ttfamily \#define list\+GET\+\_\+\+NEXT(\begin{DoxyParamCaption}\item[{}]{px\+List\+Item }\end{DoxyParamCaption})~( ( px\+List\+Item )-\/$>$px\+Next )}
+
+\mbox{\label{list_8h_a715561302af8cb5b74416b23ce4e999d}} 
+\index{list.h@{list.h}!listGET\_OWNER\_OF\_HEAD\_ENTRY@{listGET\_OWNER\_OF\_HEAD\_ENTRY}}
+\index{listGET\_OWNER\_OF\_HEAD\_ENTRY@{listGET\_OWNER\_OF\_HEAD\_ENTRY}!list.h@{list.h}}
+\doxysubsubsection{listGET\_OWNER\_OF\_HEAD\_ENTRY}
+{\footnotesize\ttfamily \#define list\+GET\+\_\+\+OWNER\+\_\+\+OF\+\_\+\+HEAD\+\_\+\+ENTRY(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})~( (\&( ( px\+List )-\/$>$x\+List\+End ))-\/$>$px\+Next-\/$>$pv\+Owner )}
+
+\mbox{\label{list_8h_a275d9855e9b71652e2b8f6e2ed62aadd}} 
+\index{list.h@{list.h}!listGET\_OWNER\_OF\_NEXT\_ENTRY@{listGET\_OWNER\_OF\_NEXT\_ENTRY}}
+\index{listGET\_OWNER\_OF\_NEXT\_ENTRY@{listGET\_OWNER\_OF\_NEXT\_ENTRY}!list.h@{list.h}}
+\doxysubsubsection{listGET\_OWNER\_OF\_NEXT\_ENTRY}
+{\footnotesize\ttfamily \#define list\+GET\+\_\+\+OWNER\+\_\+\+OF\+\_\+\+NEXT\+\_\+\+ENTRY(\begin{DoxyParamCaption}\item[{}]{px\+TCB,  }\item[{}]{px\+List }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{                                                                                           \(\backslash\)}
+\DoxyCodeLine{List\_t * \textcolor{keyword}{const} pxConstList = ( pxList );                                                    \(\backslash\)}
+\DoxyCodeLine{    \textcolor{comment}{/* Increment the index to the next item and return the item, ensuring */}                \(\backslash\)}
+\DoxyCodeLine{    \textcolor{comment}{/* we don't return the marker used at the end of the list.  */}                          \(\backslash\)}
+\DoxyCodeLine{    ( pxConstList )-\/>pxIndex = ( pxConstList )-\/>pxIndex-\/>pxNext;                            \(\backslash\)}
+\DoxyCodeLine{    if( ( \textcolor{keywordtype}{void} * ) ( pxConstList )-\/>pxIndex == ( \textcolor{keywordtype}{void} * ) \&( ( pxConstList )-\/>xListEnd ) )  \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                       \(\backslash\)}
+\DoxyCodeLine{        ( pxConstList )-\/>pxIndex = ( pxConstList )-\/>pxIndex-\/>pxNext;                        \(\backslash\)}
+\DoxyCodeLine{    \}                                                                                       \(\backslash\)}
+\DoxyCodeLine{    ( pxTCB ) = ( pxConstList )-\/>pxIndex-\/>pvOwner;                                          \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\label{list_8h_a60302b468d21f8c53d13987372acb8fa}} 
+\index{list.h@{list.h}!listIS\_CONTAINED\_WITHIN@{listIS\_CONTAINED\_WITHIN}}
+\index{listIS\_CONTAINED\_WITHIN@{listIS\_CONTAINED\_WITHIN}!list.h@{list.h}}
+\doxysubsubsection{listIS\_CONTAINED\_WITHIN}
+{\footnotesize\ttfamily \#define list\+IS\+\_\+\+CONTAINED\+\_\+\+WITHIN(\begin{DoxyParamCaption}\item[{}]{px\+List,  }\item[{}]{px\+List\+Item }\end{DoxyParamCaption})~( ( ( px\+List\+Item )-\/$>$\textbf{ px\+Container} == ( px\+List ) ) ? ( \textbf{ pd\+TRUE} ) \+: ( \textbf{ pd\+FALSE} ) )}
+
+\mbox{\label{list_8h_aaba6eb05d67ebc8026bea29193eca28f}} 
+\index{list.h@{list.h}!listLIST\_IS\_EMPTY@{listLIST\_IS\_EMPTY}}
+\index{listLIST\_IS\_EMPTY@{listLIST\_IS\_EMPTY}!list.h@{list.h}}
+\doxysubsubsection{listLIST\_IS\_EMPTY}
+{\footnotesize\ttfamily \#define list\+LIST\+\_\+\+IS\+\_\+\+EMPTY(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})~( ( ( px\+List )-\/$>$ux\+Number\+Of\+Items == ( \textbf{ UBase\+Type\+\_\+t} ) 0 ) ? \textbf{ pd\+TRUE} \+: \textbf{ pd\+FALSE} )}
+
+\mbox{\label{list_8h_a7e17f81438dd0bd705714267a611ff28}} 
+\index{list.h@{list.h}!listLIST\_IS\_INITIALISED@{listLIST\_IS\_INITIALISED}}
+\index{listLIST\_IS\_INITIALISED@{listLIST\_IS\_INITIALISED}!list.h@{list.h}}
+\doxysubsubsection{listLIST\_IS\_INITIALISED}
+{\footnotesize\ttfamily \#define list\+LIST\+\_\+\+IS\+\_\+\+INITIALISED(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})~( ( px\+List )-\/$>$x\+List\+End.\+x\+Item\+Value == \textbf{ port\+MAX\+\_\+\+DELAY} )}
+
+\mbox{\label{list_8h_a7c4dff11380cd843ed0b6a8dc065916b}} 
+\index{list.h@{list.h}!listLIST\_ITEM\_CONTAINER@{listLIST\_ITEM\_CONTAINER}}
+\index{listLIST\_ITEM\_CONTAINER@{listLIST\_ITEM\_CONTAINER}!list.h@{list.h}}
+\doxysubsubsection{listLIST\_ITEM\_CONTAINER}
+{\footnotesize\ttfamily \#define list\+LIST\+\_\+\+ITEM\+\_\+\+CONTAINER(\begin{DoxyParamCaption}\item[{}]{px\+List\+Item }\end{DoxyParamCaption})~( ( px\+List\+Item )-\/$>$\textbf{ px\+Container} )}
+
+\mbox{\label{list_8h_a87dc70c22e3ff0eba560d6f357472634}} 
+\index{list.h@{list.h}!listSECOND\_LIST\_INTEGRITY\_CHECK\_VALUE@{listSECOND\_LIST\_INTEGRITY\_CHECK\_VALUE}}
+\index{listSECOND\_LIST\_INTEGRITY\_CHECK\_VALUE@{listSECOND\_LIST\_INTEGRITY\_CHECK\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listSECOND\_LIST\_INTEGRITY\_CHECK\_VALUE}
+{\footnotesize\ttfamily \#define list\+SECOND\+\_\+\+LIST\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}
+
+\mbox{\label{list_8h_abf45f853974db484cd7df434bd006e98}} 
+\index{list.h@{list.h}!listSECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE@{listSECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}}
+\index{listSECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE@{listSECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listSECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}
+{\footnotesize\ttfamily \#define list\+SECOND\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE}
+
+\mbox{\label{list_8h_a0e65118e1baa7ab805cdfb37e580501d}} 
+\index{list.h@{list.h}!listSET\_FIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE@{listSET\_FIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}}
+\index{listSET\_FIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE@{listSET\_FIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listSET\_FIRST\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}
+{\footnotesize\ttfamily \#define list\+SET\+\_\+\+FIRST\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{px\+Item }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8h_a5d68b1187d09c64d6ee329786cb0289b}} 
+\index{list.h@{list.h}!listSET\_LIST\_INTEGRITY\_CHECK\_1\_VALUE@{listSET\_LIST\_INTEGRITY\_CHECK\_1\_VALUE}}
+\index{listSET\_LIST\_INTEGRITY\_CHECK\_1\_VALUE@{listSET\_LIST\_INTEGRITY\_CHECK\_1\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listSET\_LIST\_INTEGRITY\_CHECK\_1\_VALUE}
+{\footnotesize\ttfamily \#define list\+SET\+\_\+\+LIST\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+1\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8h_a83b40c6e61534ef41229bd912dacab48}} 
+\index{list.h@{list.h}!listSET\_LIST\_INTEGRITY\_CHECK\_2\_VALUE@{listSET\_LIST\_INTEGRITY\_CHECK\_2\_VALUE}}
+\index{listSET\_LIST\_INTEGRITY\_CHECK\_2\_VALUE@{listSET\_LIST\_INTEGRITY\_CHECK\_2\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listSET\_LIST\_INTEGRITY\_CHECK\_2\_VALUE}
+{\footnotesize\ttfamily \#define list\+SET\+\_\+\+LIST\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+2\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8h_acc01a08e534b54fe438847ef02e5060a}} 
+\index{list.h@{list.h}!listSET\_LIST\_ITEM\_OWNER@{listSET\_LIST\_ITEM\_OWNER}}
+\index{listSET\_LIST\_ITEM\_OWNER@{listSET\_LIST\_ITEM\_OWNER}!list.h@{list.h}}
+\doxysubsubsection{listSET\_LIST\_ITEM\_OWNER}
+{\footnotesize\ttfamily \#define list\+SET\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+OWNER(\begin{DoxyParamCaption}\item[{}]{px\+List\+Item,  }\item[{}]{px\+Owner }\end{DoxyParamCaption})~( ( px\+List\+Item )-\/$>$pv\+Owner = ( void $\ast$ ) ( px\+Owner ) )}
+
+\mbox{\label{list_8h_a83e95e61652f032fdc26aa622f5e2610}} 
+\index{list.h@{list.h}!listSET\_LIST\_ITEM\_VALUE@{listSET\_LIST\_ITEM\_VALUE}}
+\index{listSET\_LIST\_ITEM\_VALUE@{listSET\_LIST\_ITEM\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listSET\_LIST\_ITEM\_VALUE}
+{\footnotesize\ttfamily \#define list\+SET\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{px\+List\+Item,  }\item[{}]{x\+Value }\end{DoxyParamCaption})~( ( px\+List\+Item )-\/$>$x\+Item\+Value = ( x\+Value ) )}
+
+\mbox{\label{list_8h_ac8b9d912bdcfdb5544f373d2a94268b2}} 
+\index{list.h@{list.h}!listSET\_SECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE@{listSET\_SECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}}
+\index{listSET\_SECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE@{listSET\_SECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}!list.h@{list.h}}
+\doxysubsubsection{listSET\_SECOND\_LIST\_ITEM\_INTEGRITY\_CHECK\_VALUE}
+{\footnotesize\ttfamily \#define list\+SET\+\_\+\+SECOND\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY\+\_\+\+CHECK\+\_\+\+VALUE(\begin{DoxyParamCaption}\item[{}]{px\+Item }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8h_a337d6137e0a4d37321efc5c2f31dba22}} 
+\index{list.h@{list.h}!listTEST\_LIST\_INTEGRITY@{listTEST\_LIST\_INTEGRITY}}
+\index{listTEST\_LIST\_INTEGRITY@{listTEST\_LIST\_INTEGRITY}!list.h@{list.h}}
+\doxysubsubsection{listTEST\_LIST\_INTEGRITY}
+{\footnotesize\ttfamily \#define list\+TEST\+\_\+\+LIST\+\_\+\+INTEGRITY(\begin{DoxyParamCaption}\item[{}]{px\+List }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8h_a95b994725c299cdc81c74efc16210cc6}} 
+\index{list.h@{list.h}!listTEST\_LIST\_ITEM\_INTEGRITY@{listTEST\_LIST\_ITEM\_INTEGRITY}}
+\index{listTEST\_LIST\_ITEM\_INTEGRITY@{listTEST\_LIST\_ITEM\_INTEGRITY}!list.h@{list.h}}
+\doxysubsubsection{listTEST\_LIST\_ITEM\_INTEGRITY}
+{\footnotesize\ttfamily \#define list\+TEST\+\_\+\+LIST\+\_\+\+ITEM\+\_\+\+INTEGRITY(\begin{DoxyParamCaption}\item[{}]{px\+Item }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{list_8h_ad14d7e3de1350e459c7c23c6f59c902a}} 
+\index{list.h@{list.h}!List\_t@{List\_t}}
+\index{List\_t@{List\_t}!list.h@{list.h}}
+\doxysubsubsection{List\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ x\+LIST} \textbf{ List\+\_\+t}}
+
+\mbox{\label{list_8h_a1a62d469392f9bfe2443e7efab9c8398}} 
+\index{list.h@{list.h}!ListItem\_t@{ListItem\_t}}
+\index{ListItem\_t@{ListItem\_t}!list.h@{list.h}}
+\doxysubsubsection{ListItem\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ x\+LIST\+\_\+\+ITEM} \textbf{ List\+Item\+\_\+t}}
+
+\mbox{\label{list_8h_a542a8d55e98bc407593979e61f83cd02}} 
+\index{list.h@{list.h}!MiniListItem\_t@{MiniListItem\_t}}
+\index{MiniListItem\_t@{MiniListItem\_t}!list.h@{list.h}}
+\doxysubsubsection{MiniListItem\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ x\+MINI\+\_\+\+LIST\+\_\+\+ITEM} \textbf{ Mini\+List\+Item\+\_\+t}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{list_8h_a2eb1558482076fff8cafc63419c2d34a}} 
+\index{list.h@{list.h}!uxListRemove@{uxListRemove}}
+\index{uxListRemove@{uxListRemove}!list.h@{list.h}}
+\doxysubsubsection{uxListRemove()}
+{\footnotesize\ttfamily \textbf{ UBase\+Type\+\_\+t} ux\+List\+Remove (\begin{DoxyParamCaption}\item[{\textbf{ List\+Item\+\_\+t} $\ast$const}]{px\+Item\+To\+Remove }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8h_adeef7734d7d6d9a3eea642a70c106919}} 
+\index{list.h@{list.h}!vListInitialise@{vListInitialise}}
+\index{vListInitialise@{vListInitialise}!list.h@{list.h}}
+\doxysubsubsection{vListInitialise()}
+{\footnotesize\ttfamily void v\+List\+Initialise (\begin{DoxyParamCaption}\item[{\textbf{ List\+\_\+t} $\ast$const}]{px\+List }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8h_ab91611baae53be209a05d211f55f5395}} 
+\index{list.h@{list.h}!vListInitialiseItem@{vListInitialiseItem}}
+\index{vListInitialiseItem@{vListInitialiseItem}!list.h@{list.h}}
+\doxysubsubsection{vListInitialiseItem()}
+{\footnotesize\ttfamily void v\+List\+Initialise\+Item (\begin{DoxyParamCaption}\item[{\textbf{ List\+Item\+\_\+t} $\ast$const}]{px\+Item }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8h_aa129290da5cbda47dffb7bf877b2f02a}} 
+\index{list.h@{list.h}!vListInsert@{vListInsert}}
+\index{vListInsert@{vListInsert}!list.h@{list.h}}
+\doxysubsubsection{vListInsert()}
+{\footnotesize\ttfamily void v\+List\+Insert (\begin{DoxyParamCaption}\item[{\textbf{ List\+\_\+t} $\ast$const}]{px\+List,  }\item[{\textbf{ List\+Item\+\_\+t} $\ast$const}]{px\+New\+List\+Item }\end{DoxyParamCaption})}
+
+\mbox{\label{list_8h_a71a6a6099b3cbd8f90539aabe5c9e572}} 
+\index{list.h@{list.h}!vListInsertEnd@{vListInsertEnd}}
+\index{vListInsertEnd@{vListInsertEnd}!list.h@{list.h}}
+\doxysubsubsection{vListInsertEnd()}
+{\footnotesize\ttfamily void v\+List\+Insert\+End (\begin{DoxyParamCaption}\item[{\textbf{ List\+\_\+t} $\ast$const}]{px\+List,  }\item[{\textbf{ List\+Item\+\_\+t} $\ast$const}]{px\+New\+List\+Item }\end{DoxyParamCaption})}
+

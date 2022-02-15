@@ -1,0 +1,151 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Core/\+Src/stm32f4xx\+\_\+hal\+\_\+timebase\+\_\+tim.c File Reference}
+\label{stm32f4xx__hal__timebase__tim_8c}\index{C:/ALL/STM32/Projekty/OczkoGierka/Core/Src/stm32f4xx\_hal\_timebase\_tim.c@{C:/ALL/STM32/Projekty/OczkoGierka/Core/Src/stm32f4xx\_hal\_timebase\_tim.c}}
+
+
+HAL time base based on the hardware TIM.  
+
+
+{\ttfamily \#include \char`\"{}stm32f4xx\+\_\+hal.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}stm32f4xx\+\_\+hal\+\_\+tim.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+Init\+Tick} (uint32\+\_\+t Tick\+Priority)
+\begin{DoxyCompactList}\small\item\em This function configures the TIM1 as a time base source. The time source is configured to have 1ms time base with a dedicated Tick interrupt priority. \end{DoxyCompactList}\item 
+void \textbf{ HAL\+\_\+\+Suspend\+Tick} (void)
+\begin{DoxyCompactList}\small\item\em Suspend Tick increment. \end{DoxyCompactList}\item 
+void \textbf{ HAL\+\_\+\+Resume\+Tick} (void)
+\begin{DoxyCompactList}\small\item\em Resume Tick increment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ TIM\+\_\+\+Handle\+Type\+Def} \textbf{ htim1}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+HAL time base based on the hardware TIM. 
+
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+Copyright (c) 2022 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS. 
+
+\doxysubsection{Function Documentation}
+\mbox{\label{stm32f4xx__hal__timebase__tim_8c_ga879cdb21ef051eb81ec51c18147397d5}} 
+\index{stm32f4xx\_hal\_timebase\_tim.c@{stm32f4xx\_hal\_timebase\_tim.c}!HAL\_InitTick@{HAL\_InitTick}}
+\index{HAL\_InitTick@{HAL\_InitTick}!stm32f4xx\_hal\_timebase\_tim.c@{stm32f4xx\_hal\_timebase\_tim.c}}
+\doxysubsubsection{HAL\_InitTick()}
+{\footnotesize\ttfamily \+\_\+\+\_\+weak \textbf{ HAL\+\_\+\+Status\+Type\+Def} HAL\+\_\+\+Init\+Tick (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{Tick\+Priority }\end{DoxyParamCaption})}
+
+
+
+This function configures the TIM1 as a time base source. The time source is configured to have 1ms time base with a dedicated Tick interrupt priority. 
+
+This function configures the source of the time base. The time source is configured to have 1ms time base with a dedicated Tick interrupt priority.
+
+\begin{DoxyNote}{Note}
+This function is called automatically at the beginning of program after reset by \doxyref{HAL\+\_\+\+Init()}{p.}{group___h_a_l___exported___functions___group1_gaecac54d350c3730e6831eb404e557dc4} or at any time when clock is configured, by \doxyref{HAL\+\_\+\+RCC\+\_\+\+Clock\+Config()}{p.}{group___r_c_c___exported___functions___group1_gad0a4b5c7459219fafc15f3f867563ef3}. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em Tick\+Priority} & Tick interrupt priority. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em HAL} & status\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+This function is called automatically at the beginning of program after reset by \doxyref{HAL\+\_\+\+Init()}{p.}{group___h_a_l___exported___functions___group1_gaecac54d350c3730e6831eb404e557dc4} or at any time when clock is reconfigured by \doxyref{HAL\+\_\+\+RCC\+\_\+\+Clock\+Config()}{p.}{group___r_c_c___exported___functions___group1_gad0a4b5c7459219fafc15f3f867563ef3}. 
+
+In the default implementation, Sys\+Tick timer is the source of time base. It is used to generate interrupts at regular time intervals. Care must be taken if \doxyref{HAL\+\_\+\+Delay()}{p.}{group___h_a_l___exported___functions___group2_gab1dc1e6b438daacfe38a312a90221330} is called from a peripheral ISR process, The Sys\+Tick interrupt must have higher priority (numerically lower) than the peripheral interrupt. Otherwise the caller ISR process will be blocked. The function is declared as \+\_\+\+\_\+weak to be overwritten in case of other implementation in user file. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em Tick\+Priority} & Tick interrupt priority. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em HAL} & status \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{stm32f4xx__hal__timebase__tim_8c_ga24e0ee9dae1ec0f9d19200f5575ff790}} 
+\index{stm32f4xx\_hal\_timebase\_tim.c@{stm32f4xx\_hal\_timebase\_tim.c}!HAL\_ResumeTick@{HAL\_ResumeTick}}
+\index{HAL\_ResumeTick@{HAL\_ResumeTick}!stm32f4xx\_hal\_timebase\_tim.c@{stm32f4xx\_hal\_timebase\_tim.c}}
+\doxysubsubsection{HAL\_ResumeTick()}
+{\footnotesize\ttfamily \+\_\+\+\_\+weak void HAL\+\_\+\+Resume\+Tick (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Resume Tick increment. 
+
+\begin{DoxyNote}{Note}
+Enable the tick increment by Enabling TIM1 update interrupt. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+In the default implementation , Sys\+Tick timer is the source of time base. It is used to generate interrupts at regular time intervals. Once \doxyref{HAL\+\_\+\+Resume\+Tick()}{p.}{stm32f4xx__hal__timebase__tim_8c_ga24e0ee9dae1ec0f9d19200f5575ff790} is called, the Sys\+Tick interrupt will be enabled and so Tick increment is resumed. 
+
+This function is declared as \+\_\+\+\_\+weak to be overwritten in case of other implementations in user file. 
+\end{DoxyNote}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{stm32f4xx__hal__timebase__tim_8c_gaaf651af2afe688a991c657f64f8fa5f9}} 
+\index{stm32f4xx\_hal\_timebase\_tim.c@{stm32f4xx\_hal\_timebase\_tim.c}!HAL\_SuspendTick@{HAL\_SuspendTick}}
+\index{HAL\_SuspendTick@{HAL\_SuspendTick}!stm32f4xx\_hal\_timebase\_tim.c@{stm32f4xx\_hal\_timebase\_tim.c}}
+\doxysubsubsection{HAL\_SuspendTick()}
+{\footnotesize\ttfamily \+\_\+\+\_\+weak void HAL\+\_\+\+Suspend\+Tick (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Suspend Tick increment. 
+
+\begin{DoxyNote}{Note}
+Disable the tick increment by disabling TIM1 update interrupt. 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{Note}
+In the default implementation , Sys\+Tick timer is the source of time base. It is used to generate interrupts at regular time intervals. Once \doxyref{HAL\+\_\+\+Suspend\+Tick()}{p.}{stm32f4xx__hal__timebase__tim_8c_gaaf651af2afe688a991c657f64f8fa5f9} is called, the Sys\+Tick interrupt will be disabled and so Tick increment is suspended. 
+
+This function is declared as \+\_\+\+\_\+weak to be overwritten in case of other implementations in user file. 
+\end{DoxyNote}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{stm32f4xx__hal__timebase__tim_8c_a25fc663547539bc49fecc0011bd76ab5}} 
+\index{stm32f4xx\_hal\_timebase\_tim.c@{stm32f4xx\_hal\_timebase\_tim.c}!htim1@{htim1}}
+\index{htim1@{htim1}!stm32f4xx\_hal\_timebase\_tim.c@{stm32f4xx\_hal\_timebase\_tim.c}}
+\doxysubsubsection{htim1}
+{\footnotesize\ttfamily \textbf{ TIM\+\_\+\+Handle\+Type\+Def} htim1}
+

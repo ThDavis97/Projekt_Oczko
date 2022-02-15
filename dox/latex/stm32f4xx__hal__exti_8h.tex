@@ -1,0 +1,157 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Drivers/\+STM32\+F4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/stm32f4xx\+\_\+hal\+\_\+exti.h File Reference}
+\label{stm32f4xx__hal__exti_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_exti.h@{C:/ALL/STM32/Projekty/OczkoGierka/Drivers/STM32F4xx\_HAL\_Driver/Inc/stm32f4xx\_hal\_exti.h}}
+
+
+Header file of EXTI HAL module.  
+
+
+{\ttfamily \#include \char`\"{}stm32f4xx\+\_\+hal\+\_\+def.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ EXTI\+\_\+\+Handle\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em EXTI Handle structure definition. \end{DoxyCompactList}\item 
+struct \textbf{ EXTI\+\_\+\+Config\+Type\+Def}
+\begin{DoxyCompactList}\small\item\em EXTI Configuration structure definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+0}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x00u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+1}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x01u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+2}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x02u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+3}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x03u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+4}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x04u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+5}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x05u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+6}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x06u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+7}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x07u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+8}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x08u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+9}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x09u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+10}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x0\+Au)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+11}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x0\+Bu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+12}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x0\+Cu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+13}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x0\+Du)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+14}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x0\+Eu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+15}~(\textbf{ EXTI\+\_\+\+GPIO}       $\vert$ 0x0\+Fu)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+16}~(\textbf{ EXTI\+\_\+\+CONFIG}     $\vert$ 0x10u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+17}~(\textbf{ EXTI\+\_\+\+CONFIG}     $\vert$ 0x11u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+18}~(\textbf{ EXTI\+\_\+\+RESERVED}   $\vert$ 0x12u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+19}~(\textbf{ EXTI\+\_\+\+RESERVED}   $\vert$ 0x13u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+20}~(\textbf{ EXTI\+\_\+\+RESERVED}   $\vert$ 0x14u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+21}~(\textbf{ EXTI\+\_\+\+CONFIG}     $\vert$ 0x15u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+22}~(\textbf{ EXTI\+\_\+\+CONFIG}     $\vert$ 0x16u)
+\item 
+\#define \textbf{ EXTI\+\_\+\+MODE\+\_\+\+NONE}~0x00000000u
+\item 
+\#define \textbf{ EXTI\+\_\+\+MODE\+\_\+\+INTERRUPT}~0x00000001u
+\item 
+\#define \textbf{ EXTI\+\_\+\+MODE\+\_\+\+EVENT}~0x00000002u
+\item 
+\#define \textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+NONE}~0x00000000u
+\item 
+\#define \textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+RISING}~0x00000001u
+\item 
+\#define \textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+FALLING}~0x00000002u
+\item 
+\#define \textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+RISING\+\_\+\+FALLING}~(\textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+RISING} $\vert$ \textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+FALLING})
+\item 
+\#define \textbf{ EXTI\+\_\+\+GPIOA}~0x00000000u
+\item 
+\#define \textbf{ EXTI\+\_\+\+GPIOB}~0x00000001u
+\item 
+\#define \textbf{ EXTI\+\_\+\+GPIOC}~0x00000002u
+\item 
+\#define \textbf{ EXTI\+\_\+\+PROPERTY\+\_\+\+SHIFT}~24u
+\begin{DoxyCompactList}\small\item\em EXTI Line property definition. \end{DoxyCompactList}\item 
+\#define \textbf{ EXTI\+\_\+\+CONFIG}~(0x02uL $<$$<$ \textbf{ EXTI\+\_\+\+PROPERTY\+\_\+\+SHIFT})
+\item 
+\#define \textbf{ EXTI\+\_\+\+GPIO}~((0x04uL $<$$<$ \textbf{ EXTI\+\_\+\+PROPERTY\+\_\+\+SHIFT}) $\vert$ \textbf{ EXTI\+\_\+\+CONFIG})
+\item 
+\#define \textbf{ EXTI\+\_\+\+RESERVED}~(0x08uL $<$$<$ \textbf{ EXTI\+\_\+\+PROPERTY\+\_\+\+SHIFT})
+\item 
+\#define \textbf{ EXTI\+\_\+\+PROPERTY\+\_\+\+MASK}~(\textbf{ EXTI\+\_\+\+CONFIG} $\vert$ \textbf{ EXTI\+\_\+\+GPIO})
+\item 
+\#define \textbf{ EXTI\+\_\+\+PIN\+\_\+\+MASK}~0x0000001\+Fu
+\begin{DoxyCompactList}\small\item\em EXTI bit usage. \end{DoxyCompactList}\item 
+\#define \textbf{ EXTI\+\_\+\+MODE\+\_\+\+MASK}~(\textbf{ EXTI\+\_\+\+MODE\+\_\+\+EVENT} $\vert$ \textbf{ EXTI\+\_\+\+MODE\+\_\+\+INTERRUPT})
+\begin{DoxyCompactList}\small\item\em EXTI Mask for interrupt \& event mode. \end{DoxyCompactList}\item 
+\#define \textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+MASK}~(\textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+RISING} $\vert$ \textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+FALLING})
+\begin{DoxyCompactList}\small\item\em EXTI Mask for trigger possibilities. \end{DoxyCompactList}\item 
+\#define \textbf{ EXTI\+\_\+\+LINE\+\_\+\+NB}~23UL
+\begin{DoxyCompactList}\small\item\em EXTI Line number. \end{DoxyCompactList}\item 
+\#define \textbf{ IS\+\_\+\+EXTI\+\_\+\+LINE}(\+\_\+\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+EXTI\+\_\+\+MODE}(\+\_\+\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+EXTI\+\_\+\+TRIGGER}(\+\_\+\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+\_\+)  \& $\sim$\textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+MASK}) == 0x00u)
+\item 
+\#define \textbf{ IS\+\_\+\+EXTI\+\_\+\+PENDING\+\_\+\+EDGE}(\+\_\+\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+\_\+)~((\+\_\+\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+\_\+) == \textbf{ EXTI\+\_\+\+TRIGGER\+\_\+\+RISING\+\_\+\+FALLING})
+\item 
+\#define \textbf{ IS\+\_\+\+EXTI\+\_\+\+CONFIG\+\_\+\+LINE}(\+\_\+\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+\_\+)~(((\+\_\+\+\_\+\+EXTI\+\_\+\+LINE\+\_\+\+\_\+) \& \textbf{ EXTI\+\_\+\+CONFIG}) != 0x00u)
+\item 
+\#define \textbf{ IS\+\_\+\+EXTI\+\_\+\+GPIO\+\_\+\+PORT}(\+\_\+\+\_\+\+PORT\+\_\+\+\_\+)
+\item 
+\#define \textbf{ IS\+\_\+\+EXTI\+\_\+\+GPIO\+\_\+\+PIN}(\+\_\+\+\_\+\+PIN\+\_\+\+\_\+)~((\+\_\+\+\_\+\+PIN\+\_\+\+\_\+) $<$ 16U)
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ EXTI\+\_\+\+Callback\+IDType\+Def} \{ \textbf{ HAL\+\_\+\+EXTI\+\_\+\+COMMON\+\_\+\+CB\+\_\+\+ID} = 0x00U
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+EXTI\+\_\+\+Set\+Config\+Line} (\textbf{ EXTI\+\_\+\+Handle\+Type\+Def} $\ast$hexti, \textbf{ EXTI\+\_\+\+Config\+Type\+Def} $\ast$p\+Exti\+Config)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+EXTI\+\_\+\+Get\+Config\+Line} (\textbf{ EXTI\+\_\+\+Handle\+Type\+Def} $\ast$hexti, \textbf{ EXTI\+\_\+\+Config\+Type\+Def} $\ast$p\+Exti\+Config)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+EXTI\+\_\+\+Clear\+Config\+Line} (\textbf{ EXTI\+\_\+\+Handle\+Type\+Def} $\ast$hexti)
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+EXTI\+\_\+\+Register\+Callback} (\textbf{ EXTI\+\_\+\+Handle\+Type\+Def} $\ast$hexti, \textbf{ EXTI\+\_\+\+Callback\+IDType\+Def} Callback\+ID, void($\ast$p\+Pending\+Cbfn)(void))
+\item 
+\textbf{ HAL\+\_\+\+Status\+Type\+Def} \textbf{ HAL\+\_\+\+EXTI\+\_\+\+Get\+Handle} (\textbf{ EXTI\+\_\+\+Handle\+Type\+Def} $\ast$hexti, uint32\+\_\+t Exti\+Line)
+\item 
+void \textbf{ HAL\+\_\+\+EXTI\+\_\+\+IRQHandler} (\textbf{ EXTI\+\_\+\+Handle\+Type\+Def} $\ast$hexti)
+\item 
+uint32\+\_\+t \textbf{ HAL\+\_\+\+EXTI\+\_\+\+Get\+Pending} (\textbf{ EXTI\+\_\+\+Handle\+Type\+Def} $\ast$hexti, uint32\+\_\+t Edge)
+\item 
+void \textbf{ HAL\+\_\+\+EXTI\+\_\+\+Clear\+Pending} (\textbf{ EXTI\+\_\+\+Handle\+Type\+Def} $\ast$hexti, uint32\+\_\+t Edge)
+\item 
+void \textbf{ HAL\+\_\+\+EXTI\+\_\+\+Generate\+SWI} (\textbf{ EXTI\+\_\+\+Handle\+Type\+Def} $\ast$hexti)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file of EXTI HAL module. 
+
+\begin{DoxyAuthor}{Author}
+MCD Application Team
+\end{DoxyAuthor}
+\begin{DoxyAttention}{Attention}
+
+\end{DoxyAttention}
+\doxysubsubsection*{\begin{center}\copyright{} Copyright (c) 2018 STMicroelectronics. All rights reserved.\end{center} }
+
+This software component is licensed by ST under BSD 3-\/Clause license, the \char`\"{}\+License\char`\"{}; You may not use this file except in compliance with the License. You may obtain a copy of the License at\+: opensource.\+org/licenses/\+BSD-\/3-\/\+Clause 

@@ -1,0 +1,60 @@
+\doxysection{TIM Extended Remapping}
+\label{group___t_i_m_ex___remap}\index{TIM Extended Remapping@{TIM Extended Remapping}}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM5\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM5\+\_\+\+LSI}~\textbf{ TIM\+\_\+\+OR\+\_\+\+TI4\+\_\+\+RMP\+\_\+0}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM5\+\_\+\+LSE}~\textbf{ TIM\+\_\+\+OR\+\_\+\+TI4\+\_\+\+RMP\+\_\+1}
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM5\+\_\+\+RTC}~(\textbf{ TIM\+\_\+\+OR\+\_\+\+TI4\+\_\+\+RMP\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+OR\+\_\+\+TI4\+\_\+\+RMP\+\_\+0})
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM11\+\_\+\+GPIO}~0x00000000U
+\item 
+\#define \textbf{ TIM\+\_\+\+TIM11\+\_\+\+HSE}~\textbf{ TIM\+\_\+\+OR\+\_\+\+TI1\+\_\+\+RMP\+\_\+1}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{group___t_i_m_ex___remap_gac8a0bac87924350651da1957081bc9ae}} 
+\index{TIM Extended Remapping@{TIM Extended Remapping}!TIM\_TIM11\_GPIO@{TIM\_TIM11\_GPIO}}
+\index{TIM\_TIM11\_GPIO@{TIM\_TIM11\_GPIO}!TIM Extended Remapping@{TIM Extended Remapping}}
+\doxysubsubsection{TIM\_TIM11\_GPIO}
+{\footnotesize\ttfamily \#define TIM\+\_\+\+TIM11\+\_\+\+GPIO~0x00000000U}
+
+TIM11 TI1 is connected to GPIO \mbox{\label{group___t_i_m_ex___remap_ga3b08e8165670e3034401099aada7712d}} 
+\index{TIM Extended Remapping@{TIM Extended Remapping}!TIM\_TIM11\_HSE@{TIM\_TIM11\_HSE}}
+\index{TIM\_TIM11\_HSE@{TIM\_TIM11\_HSE}!TIM Extended Remapping@{TIM Extended Remapping}}
+\doxysubsubsection{TIM\_TIM11\_HSE}
+{\footnotesize\ttfamily \#define TIM\+\_\+\+TIM11\+\_\+\+HSE~\textbf{ TIM\+\_\+\+OR\+\_\+\+TI1\+\_\+\+RMP\+\_\+1}}
+
+TIM11 TI1 is connected to HSE\+\_\+\+RTC clock \mbox{\label{group___t_i_m_ex___remap_ga8525d77a5f6fea05530e812e991e4d6d}} 
+\index{TIM Extended Remapping@{TIM Extended Remapping}!TIM\_TIM5\_GPIO@{TIM\_TIM5\_GPIO}}
+\index{TIM\_TIM5\_GPIO@{TIM\_TIM5\_GPIO}!TIM Extended Remapping@{TIM Extended Remapping}}
+\doxysubsubsection{TIM\_TIM5\_GPIO}
+{\footnotesize\ttfamily \#define TIM\+\_\+\+TIM5\+\_\+\+GPIO~0x00000000U}
+
+TIM5 TI4 is connected to GPIO \mbox{\label{group___t_i_m_ex___remap_ga9f09de021d2f68730c952b4f0ebb82bc}} 
+\index{TIM Extended Remapping@{TIM Extended Remapping}!TIM\_TIM5\_LSE@{TIM\_TIM5\_LSE}}
+\index{TIM\_TIM5\_LSE@{TIM\_TIM5\_LSE}!TIM Extended Remapping@{TIM Extended Remapping}}
+\doxysubsubsection{TIM\_TIM5\_LSE}
+{\footnotesize\ttfamily \#define TIM\+\_\+\+TIM5\+\_\+\+LSE~\textbf{ TIM\+\_\+\+OR\+\_\+\+TI4\+\_\+\+RMP\+\_\+1}}
+
+TIM5 TI4 is connected to LSE \mbox{\label{group___t_i_m_ex___remap_ga62000fc12a4ed5909723b881533a2f93}} 
+\index{TIM Extended Remapping@{TIM Extended Remapping}!TIM\_TIM5\_LSI@{TIM\_TIM5\_LSI}}
+\index{TIM\_TIM5\_LSI@{TIM\_TIM5\_LSI}!TIM Extended Remapping@{TIM Extended Remapping}}
+\doxysubsubsection{TIM\_TIM5\_LSI}
+{\footnotesize\ttfamily \#define TIM\+\_\+\+TIM5\+\_\+\+LSI~\textbf{ TIM\+\_\+\+OR\+\_\+\+TI4\+\_\+\+RMP\+\_\+0}}
+
+TIM5 TI4 is connected to LSI \mbox{\label{group___t_i_m_ex___remap_ga93e312581ffb28601b36b4f8b240df79}} 
+\index{TIM Extended Remapping@{TIM Extended Remapping}!TIM\_TIM5\_RTC@{TIM\_TIM5\_RTC}}
+\index{TIM\_TIM5\_RTC@{TIM\_TIM5\_RTC}!TIM Extended Remapping@{TIM Extended Remapping}}
+\doxysubsubsection{TIM\_TIM5\_RTC}
+{\footnotesize\ttfamily \#define TIM\+\_\+\+TIM5\+\_\+\+RTC~(\textbf{ TIM\+\_\+\+OR\+\_\+\+TI4\+\_\+\+RMP\+\_\+1} $\vert$ \textbf{ TIM\+\_\+\+OR\+\_\+\+TI4\+\_\+\+RMP\+\_\+0})}
+
+TIM5 TI4 is connected to the RTC wakeup interrupt 

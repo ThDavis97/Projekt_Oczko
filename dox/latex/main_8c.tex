@@ -1,0 +1,1428 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Core/\+Src/main.c File Reference}
+\label{main_8c}\index{C:/ALL/STM32/Projekty/OczkoGierka/Core/Src/main.c@{C:/ALL/STM32/Projekty/OczkoGierka/Core/Src/main.c}}
+
+
+Główny plik programu, który odpowiada za obsługę zadań w Free\+RTOS oraz część sprzętową. Zawiera PINOUT układu.  
+
+
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}cmsis\+\_\+os.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}lcd.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ time\+\_\+to\+\_\+press}~5
+\begin{DoxyCompactList}\small\item\em 1 odpowiada 20ms, 2 odpowiada 40ms, ... \end{DoxyCompactList}\item 
+\#define \textbf{ time\+\_\+to\+\_\+wait}~0
+\begin{DoxyCompactList}\small\item\em czas jaki bedzie czekac kolejka na nadanie/odbior danych \end{DoxyCompactList}\item 
+\#define \textbf{ amount\+\_\+rounds\+\_\+to\+\_\+win\+\_\+game}~3
+\begin{DoxyCompactList}\small\item\em ilość rund jaką należy wygrać, aby wygrać grę \end{DoxyCompactList}\item 
+\#define \textbf{ value\+\_\+fight\+\_\+\+CPU}~16
+\begin{DoxyCompactList}\small\item\em Wartość do której włacznie, komputer będzie dobierał karty. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+template}~\textbf{ x\+Queue\+Send}(\textbf{ interface\+LCDqueue}, \&special\+\_\+screen, \textbf{ time\+\_\+to\+\_\+wait})
+\item 
+\#define \textbf{ screen\+\_\+default}~1
+\item 
+\#define \textbf{ screen\+\_\+loading}~2
+\item 
+\#define \textbf{ screen\+\_\+winner\+\_\+this\+\_\+round\+\_\+U}~3
+\item 
+\#define \textbf{ screen\+\_\+winner\+\_\+this\+\_\+round\+\_\+C}~4
+\item 
+\#define \textbf{ screen\+\_\+winner\+\_\+this\+\_\+round\+\_\+D}~5
+\item 
+\#define \textbf{ screen\+\_\+clean\+\_\+place\+\_\+cards}~6
+\item 
+\#define \textbf{ screen\+\_\+winner\+\_\+this\+\_\+game\+\_\+U}~1
+\item 
+\#define \textbf{ screen\+\_\+winner\+\_\+this\+\_\+game\+\_\+C}~2
+\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+points\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ points\+\_\+\+U\+\_\+\+LCDqueue}, \&number\+\_\+of\+\_\+points\+\_\+\+USER, \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetl liczbę punktów gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+points\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ points\+\_\+\+C\+\_\+\+LCDqueue}, \&number\+\_\+of\+\_\+points\+\_\+\+CPU, \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetl liczbę punktów CPU na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+round\+\_\+wins\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ wins\+\_\+\+U\+\_\+\+LCDqueue}, \&number\+\_\+of\+\_\+wins\+\_\+\+USER, \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetl liczbę wygranych rund gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+round\+\_\+wins\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ wins\+\_\+\+C\+\_\+\+LCDqueue}, \&number\+\_\+of\+\_\+wins\+\_\+\+CPU, \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetl liczbę wygranych rund CPU na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card1\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ card1\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[1], \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 1 przez gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card2\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ card2\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[2], \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 2 przez gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card3\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ card3\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[3], \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 3 przez gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card4\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ card4\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[4], \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 4 przez gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card5\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ card5\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[5], \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 5 przez gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card6\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ card6\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[6], \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 6 przez gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card7\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ card7\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[7], \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 7 przez gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card8\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ card8\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[8], \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 8 przez gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card9\+\_\+U}~\textbf{ x\+Queue\+Send}(\textbf{ card9\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[9], \textbf{ time\+\_\+to\+\_\+wait})
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 9 przez gracza na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card1\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ card1\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[1], \textbf{ time\+\_\+to\+\_\+wait});
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 1 przez komputer na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card2\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ card2\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[2], \textbf{ time\+\_\+to\+\_\+wait});
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 2 przez komputer na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card3\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ card3\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[3], \textbf{ time\+\_\+to\+\_\+wait});
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 3 przez komputer na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card4\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ card4\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[4], \textbf{ time\+\_\+to\+\_\+wait});
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 4 przez komputer na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card5\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ card5\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[5], \textbf{ time\+\_\+to\+\_\+wait});
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 5 przez komputer na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card6\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ card6\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[6], \textbf{ time\+\_\+to\+\_\+wait});
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 6 przez komputer na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card7\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ card7\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[7], \textbf{ time\+\_\+to\+\_\+wait});
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 7 przez komputer na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card8\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ card8\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[8], \textbf{ time\+\_\+to\+\_\+wait});
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 8 przez komputer na ekranie LCD. \end{DoxyCompactList}\item 
+\#define \textbf{ LCD\+\_\+show\+\_\+card9\+\_\+C}~\textbf{ x\+Queue\+Send}(\textbf{ card9\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[9], \textbf{ time\+\_\+to\+\_\+wait});
+\begin{DoxyCompactList}\small\item\em Wyświetlenie wylosowanej karty nr 9 przez komputer na ekranie LCD. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \textbf{ card\+\_\+for\+\_\+number} (uint8\+\_\+t card)
+\item 
+void \textbf{ Task1} (void $\ast$argument)
+\begin{DoxyCompactList}\small\item\em Funkcja dla Task1 (obsługa LCD) \end{DoxyCompactList}\item 
+void \textbf{ Task2} (void $\ast$argument)
+\begin{DoxyCompactList}\small\item\em Funkcja dla Task2 (obsługa przycisków) \end{DoxyCompactList}\item 
+void \textbf{ Task3} (void $\ast$argument)
+\begin{DoxyCompactList}\small\item\em Funkcja dla Task3 (obsługa całej gry) \end{DoxyCompactList}\item 
+void \textbf{ System\+Clock\+\_\+\+Config} (void)
+\begin{DoxyCompactList}\small\item\em System Clock Configuration. \end{DoxyCompactList}\item 
+static void \textbf{ MX\+\_\+\+GPIO\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em GPIO Initialization Function. \end{DoxyCompactList}\item 
+static void \textbf{ MX\+\_\+\+TIM4\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em TIM4 Initialization Function. \end{DoxyCompactList}\item 
+static void \textbf{ MX\+\_\+\+ADC1\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em ADC1 Initialization Function. \end{DoxyCompactList}\item 
+void \textbf{ Start\+Default\+Task} (void const $\ast$argument)
+\begin{DoxyCompactList}\small\item\em Function implementing the default\+Task thread. \end{DoxyCompactList}\item 
+int \textbf{ main} (void)
+\begin{DoxyCompactList}\small\item\em The application entry point. \end{DoxyCompactList}\item 
+void \textbf{ HAL\+\_\+\+TIM\+\_\+\+Period\+Elapsed\+Callback} (\textbf{ TIM\+\_\+\+Handle\+Type\+Def} $\ast$htim)
+\begin{DoxyCompactList}\small\item\em Period elapsed callback in non blocking mode. \end{DoxyCompactList}\item 
+void \textbf{ Error\+\_\+\+Handler} (void)
+\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \textbf{ ADC\+\_\+measure}
+\begin{DoxyCompactList}\small\item\em Zmienna przechowujaca wyniki pomiaru z przetwornika ADC. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ random\+\_\+card\+\_\+board\+\_\+1} [52]
+\begin{DoxyCompactList}\small\item\em Tablica przechowujaca wylosowane karty (cala talie) \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ nr\+\_\+random\+\_\+card\+\_\+to\+\_\+draw\+\_\+board\+\_\+1} = 0
+\begin{DoxyCompactList}\small\item\em Numer tablicy gdzie umiescic wylosowana karte. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+2} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+3} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+4} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+5} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+6} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+7} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+8} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+9} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+T} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+J} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+Q} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+K} = 4
+\item 
+uint8\+\_\+t \textbf{ number\+\_\+of\+\_\+cards\+\_\+A} = 4
+\item 
+uint8\+\_\+t \textbf{ assignment\+\_\+card\+\_\+to\+\_\+board} = 0
+\begin{DoxyCompactList}\small\item\em umożliwia odpowiednie przypisanie wylosowanych kart do tablicy \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ if\+\_\+board\+\_\+1\+\_\+prepare} = 0
+\begin{DoxyCompactList}\small\item\em Czy tablica 1 z wylosowanymi kartami jest gotowa? 1 -\/ tak, 0 -\/ nie. \end{DoxyCompactList}\item 
+\textbf{ ADC\+\_\+\+Handle\+Type\+Def} \textbf{ hadc1}
+\item 
+\textbf{ TIM\+\_\+\+Handle\+Type\+Def} \textbf{ htim4}
+\item 
+\textbf{ os\+Thread\+Id} \textbf{ default\+Task\+Handle}
+\item 
+uint8\+\_\+t \textbf{ Deb\+Count\+\_\+nowa\+\_\+gra} = 0
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca czas wciśnięcia przycisku nowa gra. 1 odpowiada 20ms. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Deb\+Count\+\_\+reset} = 0
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca czas wciśnięcia przycisku reset. 1 odpowiada 20ms. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Deb\+Count\+\_\+wystarczy\+\_\+kart} = 0
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca czas wciśnięcia przycisku wystarczy kart. 1 odpowiada 20ms. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Deb\+Count\+\_\+kolejna\+\_\+karta} = 0
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca czas wciśnięcia przycisku kolejna karta. 1 odpowiada 20ms. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Switched\+\_\+nowa\+\_\+gra} = 0
+\begin{DoxyCompactList}\small\item\em zmienna do obslugi debouncingu (do przelaczenia jednorazowo stanu -\/ toggle) \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Switched\+\_\+reset} = 0
+\begin{DoxyCompactList}\small\item\em zmienna do obslugi debouncingu (do przelaczenia jednorazowo stanu -\/ toggle) \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Switched\+\_\+wystarczy\+\_\+kart} = 0
+\begin{DoxyCompactList}\small\item\em zmienna do obslugi debouncingu (do przelaczenia jednorazowo stanu -\/ toggle) \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Switched\+\_\+kolejna\+\_\+karta} = 0
+\begin{DoxyCompactList}\small\item\em zmienna do obslugi debouncingu (do przelaczenia jednorazowo stanu -\/ toggle) \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Pressed\+\_\+nowa\+\_\+gra} = 0
+\begin{DoxyCompactList}\small\item\em Zmienne informujące że przycisk (po debouncerze) został wciśnięty. Dzięki temu wiadomo, że trzeba aktywować odpowiedni semafor. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Pressed\+\_\+reset} = 0
+\begin{DoxyCompactList}\small\item\em Zmienne informujące że przycisk (po debouncerze) został wciśnięty. Dzięki temu wiadomo, że trzeba aktywować odpowiedni semafor. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Pressed\+\_\+wystarczy\+\_\+kart} = 0
+\begin{DoxyCompactList}\small\item\em Zmienne informujące że przycisk (po debouncerze) został wciśnięty. Dzięki temu wiadomo, że trzeba aktywować odpowiedni semafor. \end{DoxyCompactList}\item 
+uint8\+\_\+t \textbf{ Pressed\+\_\+kolejna\+\_\+karta} = 0
+\begin{DoxyCompactList}\small\item\em Zmienne informujące że przycisk (po debouncerze) został wciśnięty. Dzięki temu wiadomo, że trzeba aktywować odpowiedni semafor. \end{DoxyCompactList}\item 
+\textbf{ x\+Task\+Handle} \textbf{ Task1\+\_\+\+Handler}
+\begin{DoxyCompactList}\small\item\em Handler dla Task1 (obsługa LCD) \end{DoxyCompactList}\item 
+\textbf{ x\+Task\+Handle} \textbf{ Task2\+\_\+\+Handler}
+\begin{DoxyCompactList}\small\item\em Handler dla Task2 (obsługa przycisków) \end{DoxyCompactList}\item 
+\textbf{ x\+Task\+Handle} \textbf{ Task3\+\_\+\+Handler}
+\begin{DoxyCompactList}\small\item\em Handler dla Task3 (obsługa całej gry) \end{DoxyCompactList}\item 
+\textbf{ os\+Thread\+Id} \textbf{ Task1\+Handle}
+\begin{DoxyCompactList}\small\item\em ID dla Task1 (obsługa LCD) \end{DoxyCompactList}\item 
+\textbf{ os\+Thread\+Id} \textbf{ Task2\+Handle}
+\begin{DoxyCompactList}\small\item\em ID dla Task2 (obsługa przycisków) \end{DoxyCompactList}\item 
+\textbf{ os\+Thread\+Id} \textbf{ Task3\+Handle}
+\begin{DoxyCompactList}\small\item\em ID dla Task3 (obsługa całej gry) \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ interface\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania tzw. szablonów które mają zostać wyświetlone na LCD. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ wins\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania liczby wygranych rund przez gracza które mają zostać wyświetlone na LCD poczas gry. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ wins\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania liczby wygranych rund przez komputer które mają zostać wyświetlone na LCD poczas gry. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ points\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania liczby zdobytych punktów przez gracza które mają zostać wyświetlone na LCD przy podsumowaniu gry. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ points\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania liczby zdobytych punktów przez komputer które mają zostać wyświetlone na LCD przy podsumowaniu gry. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ winner\+\_\+the\+\_\+game\+LCDqueue}
+\item 
+\textbf{ x\+Queue\+Handle} \textbf{ wins\+\_\+\+U\+\_\+end\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania liczby wygranych rund przez gracza które mają zostać wyświetlone na LCD przy podsumowaniu gry. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ wins\+\_\+\+C\+\_\+end\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania liczby wygranych rund przez komputer które mają zostać wyświetlone na LCD przy podsumowaniu gry. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card1\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 1 przez gracza. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card2\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 2 przez gracza. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card3\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 3 przez gracza. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card4\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 4 przez gracza. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card5\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 5 przez gracza. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card6\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 6 przez gracza. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card7\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 7 przez gracza. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card8\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 8 przez gracza. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card9\+\_\+\+U\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 9 przez gracza. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card1\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 1 przez komputer. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card2\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 2 przez komputer. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card3\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 3 przez komputer. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card4\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 4 przez komputer. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card5\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 5 przez komputer. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card6\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 6 przez komputer. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card7\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 7 przez komputer. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card8\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 8 przez komputer. \end{DoxyCompactList}\item 
+\textbf{ x\+Queue\+Handle} \textbf{ card9\+\_\+\+C\+\_\+\+LCDqueue}
+\begin{DoxyCompactList}\small\item\em Do przesyłania wylosowanej karty nr 9 przez komputer. \end{DoxyCompactList}\item 
+\textbf{ x\+Semaphore\+Handle} \textbf{ Semaphore\+\_\+nowa\+\_\+gra\+\_\+pressed}
+\begin{DoxyCompactList}\small\item\em Semafor informujący czy przycisk nowa gra został wciśnięty. \end{DoxyCompactList}\item 
+\textbf{ x\+Semaphore\+Handle} \textbf{ Semaphore\+\_\+reset\+\_\+pressed}
+\begin{DoxyCompactList}\small\item\em Semafor informujący czy przycisk reset został wciśnięty. \end{DoxyCompactList}\item 
+\textbf{ x\+Semaphore\+Handle} \textbf{ Semaphore\+\_\+kolejna\+\_\+karta\+\_\+pressed}
+\begin{DoxyCompactList}\small\item\em Semafor informujący czy przycisk kolejna karta został wciśnięty. \end{DoxyCompactList}\item 
+\textbf{ x\+Semaphore\+Handle} \textbf{ Semaphore\+\_\+wystarczy\+\_\+kart\+\_\+pressed}
+\begin{DoxyCompactList}\small\item\em Semafor informujący czy przycisk wystarczy kart został wciśnięty. \end{DoxyCompactList}\item 
+\textbf{ os\+Semaphore\+Id} \textbf{ Semaphore\+\_\+nowa\+\_\+gra\+\_\+pressed\+\_\+handle}
+\begin{DoxyCompactList}\small\item\em Semafor informujący czy przycisk nowa gra został wciśnięty. \end{DoxyCompactList}\item 
+\textbf{ os\+Semaphore\+Id} \textbf{ Semaphore\+\_\+reset\+\_\+pressed\+\_\+handle}
+\begin{DoxyCompactList}\small\item\em Semafor informujący czy przycisk reset został wciśnięty. \end{DoxyCompactList}\item 
+\textbf{ os\+Semaphore\+Id} \textbf{ Semaphore\+\_\+kolejna\+\_\+karta\+\_\+pressed\+\_\+handle}
+\begin{DoxyCompactList}\small\item\em Semafor informujący czy przycisk kolejna karta został wciśnięty. \end{DoxyCompactList}\item 
+\textbf{ os\+Semaphore\+Id} \textbf{ Semaphore\+\_\+wystarczy\+\_\+kart\+\_\+pressed\+\_\+handle}
+\begin{DoxyCompactList}\small\item\em Semafor informujący czy przycisk wystarczy kart został wciśnięty. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Główny plik programu, który odpowiada za obsługę zadań w Free\+RTOS oraz część sprzętową. Zawiera PINOUT układu. 
+
+\begin{DoxyAuthor}{Authors}
+Dawid Stolarski, Bartosz Czemiel oraz Dawid Lypaczewski 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+15-\/02-\/2022
+\end{DoxyDate}
+Copyright (c) 2022 STMicroelectronics. All rights reserved.
+
+This software is licensed under terms that can be found in the LICENSE file in the root directory of this software component. If no LICENSE file comes with this software, it is provided AS-\/\+IS.
+
+@\+PINOUT\+:
+
+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---Przyciski\+: PD8 -\/ Przycisk nowa gra; PD9 -\/ Przycisk reset; PD10 -\/ Przycisk wystarczy kart; PD11 -\/ Przycisk kolejna karta; Wszystkie przyciski należy podłączyć do GND; -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---LCD\+: D4 -\/ PE7; D5 -\/ PE8; D6 -\/ PE9; D7 -\/ PE10; RS -\/ PE11; E -\/ PE12; -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---ADC\+: PA1 -\/ kabelek zbierający zakłocenia do ADC; 
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{main_8c_a0e33c24c138271a5ccad3b1ca461c483}} 
+\index{main.c@{main.c}!amount\_rounds\_to\_win\_game@{amount\_rounds\_to\_win\_game}}
+\index{amount\_rounds\_to\_win\_game@{amount\_rounds\_to\_win\_game}!main.c@{main.c}}
+\doxysubsubsection{amount\_rounds\_to\_win\_game}
+{\footnotesize\ttfamily \#define amount\+\_\+rounds\+\_\+to\+\_\+win\+\_\+game~3}
+
+
+
+ilość rund jaką należy wygrać, aby wygrać grę 
+
+\mbox{\label{main_8c_a34d33d444b407e7b96f3e78ca3fd7eb0}} 
+\index{main.c@{main.c}!LCD\_show\_card1\_C@{LCD\_show\_card1\_C}}
+\index{LCD\_show\_card1\_C@{LCD\_show\_card1\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card1\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card1\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ card1\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[1], \textbf{ time\+\_\+to\+\_\+wait});}
+
+
+
+Wyświetlenie wylosowanej karty nr 1 przez komputer na ekranie LCD. 
+
+\mbox{\label{main_8c_a23329239073fac03861fd1a7be2e3a89}} 
+\index{main.c@{main.c}!LCD\_show\_card1\_U@{LCD\_show\_card1\_U}}
+\index{LCD\_show\_card1\_U@{LCD\_show\_card1\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card1\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card1\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ card1\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[1], \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetlenie wylosowanej karty nr 1 przez gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_a72739cf7b6c546a59b2ce2ed030280f6}} 
+\index{main.c@{main.c}!LCD\_show\_card2\_C@{LCD\_show\_card2\_C}}
+\index{LCD\_show\_card2\_C@{LCD\_show\_card2\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card2\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card2\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ card2\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[2], \textbf{ time\+\_\+to\+\_\+wait});}
+
+
+
+Wyświetlenie wylosowanej karty nr 2 przez komputer na ekranie LCD. 
+
+\mbox{\label{main_8c_a006f254137593b3f048c691e2b0a6595}} 
+\index{main.c@{main.c}!LCD\_show\_card2\_U@{LCD\_show\_card2\_U}}
+\index{LCD\_show\_card2\_U@{LCD\_show\_card2\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card2\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card2\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ card2\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[2], \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetlenie wylosowanej karty nr 2 przez gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_a8179132888b2cd6f3b217f9dd9231598}} 
+\index{main.c@{main.c}!LCD\_show\_card3\_C@{LCD\_show\_card3\_C}}
+\index{LCD\_show\_card3\_C@{LCD\_show\_card3\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card3\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card3\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ card3\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[3], \textbf{ time\+\_\+to\+\_\+wait});}
+
+
+
+Wyświetlenie wylosowanej karty nr 3 przez komputer na ekranie LCD. 
+
+\mbox{\label{main_8c_ad687bc59a0773861498982bbdee288fb}} 
+\index{main.c@{main.c}!LCD\_show\_card3\_U@{LCD\_show\_card3\_U}}
+\index{LCD\_show\_card3\_U@{LCD\_show\_card3\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card3\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card3\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ card3\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[3], \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetlenie wylosowanej karty nr 3 przez gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_afaca54b4cfabf7ba3cb985b32f776c54}} 
+\index{main.c@{main.c}!LCD\_show\_card4\_C@{LCD\_show\_card4\_C}}
+\index{LCD\_show\_card4\_C@{LCD\_show\_card4\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card4\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card4\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ card4\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[4], \textbf{ time\+\_\+to\+\_\+wait});}
+
+
+
+Wyświetlenie wylosowanej karty nr 4 przez komputer na ekranie LCD. 
+
+\mbox{\label{main_8c_a63d2e9e3fadfbd9842744ac665572026}} 
+\index{main.c@{main.c}!LCD\_show\_card4\_U@{LCD\_show\_card4\_U}}
+\index{LCD\_show\_card4\_U@{LCD\_show\_card4\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card4\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card4\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ card4\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[4], \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetlenie wylosowanej karty nr 4 przez gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_aa7a0c8dad9951769b77d0592f344b4e5}} 
+\index{main.c@{main.c}!LCD\_show\_card5\_C@{LCD\_show\_card5\_C}}
+\index{LCD\_show\_card5\_C@{LCD\_show\_card5\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card5\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card5\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ card5\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[5], \textbf{ time\+\_\+to\+\_\+wait});}
+
+
+
+Wyświetlenie wylosowanej karty nr 5 przez komputer na ekranie LCD. 
+
+\mbox{\label{main_8c_a70e336330297745ed868489947d355e8}} 
+\index{main.c@{main.c}!LCD\_show\_card5\_U@{LCD\_show\_card5\_U}}
+\index{LCD\_show\_card5\_U@{LCD\_show\_card5\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card5\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card5\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ card5\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[5], \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetlenie wylosowanej karty nr 5 przez gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_a1520f5a3b6fbda3512ef094d470fd01a}} 
+\index{main.c@{main.c}!LCD\_show\_card6\_C@{LCD\_show\_card6\_C}}
+\index{LCD\_show\_card6\_C@{LCD\_show\_card6\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card6\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card6\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ card6\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[6], \textbf{ time\+\_\+to\+\_\+wait});}
+
+
+
+Wyświetlenie wylosowanej karty nr 6 przez komputer na ekranie LCD. 
+
+\mbox{\label{main_8c_a5fdf7d4ab2915205a7f1cf387462223b}} 
+\index{main.c@{main.c}!LCD\_show\_card6\_U@{LCD\_show\_card6\_U}}
+\index{LCD\_show\_card6\_U@{LCD\_show\_card6\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card6\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card6\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ card6\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[6], \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetlenie wylosowanej karty nr 6 przez gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_a4afe9367930a147c0cb934f00553720b}} 
+\index{main.c@{main.c}!LCD\_show\_card7\_C@{LCD\_show\_card7\_C}}
+\index{LCD\_show\_card7\_C@{LCD\_show\_card7\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card7\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card7\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ card7\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[7], \textbf{ time\+\_\+to\+\_\+wait});}
+
+
+
+Wyświetlenie wylosowanej karty nr 7 przez komputer na ekranie LCD. 
+
+\mbox{\label{main_8c_a335f2ec4d4d645b54d8c4866603f1097}} 
+\index{main.c@{main.c}!LCD\_show\_card7\_U@{LCD\_show\_card7\_U}}
+\index{LCD\_show\_card7\_U@{LCD\_show\_card7\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card7\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card7\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ card7\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[7], \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetlenie wylosowanej karty nr 7 przez gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_a59e1693059af569a51258030cd5f8dbf}} 
+\index{main.c@{main.c}!LCD\_show\_card8\_C@{LCD\_show\_card8\_C}}
+\index{LCD\_show\_card8\_C@{LCD\_show\_card8\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card8\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card8\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ card8\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[8], \textbf{ time\+\_\+to\+\_\+wait});}
+
+
+
+Wyświetlenie wylosowanej karty nr 8 przez komputer na ekranie LCD. 
+
+\mbox{\label{main_8c_a1774a02b4c47da998fbbb072f65ee900}} 
+\index{main.c@{main.c}!LCD\_show\_card8\_U@{LCD\_show\_card8\_U}}
+\index{LCD\_show\_card8\_U@{LCD\_show\_card8\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card8\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card8\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ card8\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[8], \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetlenie wylosowanej karty nr 8 przez gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_a223e7e4b1199e79de6b4d0805f4e509f}} 
+\index{main.c@{main.c}!LCD\_show\_card9\_C@{LCD\_show\_card9\_C}}
+\index{LCD\_show\_card9\_C@{LCD\_show\_card9\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card9\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card9\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ card9\+\_\+\+C\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+C[9], \textbf{ time\+\_\+to\+\_\+wait});}
+
+
+
+Wyświetlenie wylosowanej karty nr 9 przez komputer na ekranie LCD. 
+
+\mbox{\label{main_8c_a255267924f5573fab6c4fda6e89e7d03}} 
+\index{main.c@{main.c}!LCD\_show\_card9\_U@{LCD\_show\_card9\_U}}
+\index{LCD\_show\_card9\_U@{LCD\_show\_card9\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_card9\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+card9\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ card9\+\_\+\+U\+\_\+\+LCDqueue}, \&card\+\_\+to\+\_\+show\+\_\+U[9], \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetlenie wylosowanej karty nr 9 przez gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_aff79e7adf6c313fd04fa2644cf2bb4c0}} 
+\index{main.c@{main.c}!LCD\_show\_points\_C@{LCD\_show\_points\_C}}
+\index{LCD\_show\_points\_C@{LCD\_show\_points\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_points\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+points\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ points\+\_\+\+C\+\_\+\+LCDqueue}, \&number\+\_\+of\+\_\+points\+\_\+\+CPU, \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetl liczbę punktów CPU na ekranie LCD. 
+
+\mbox{\label{main_8c_a49aaede9d62782bfd47b59b98be93403}} 
+\index{main.c@{main.c}!LCD\_show\_points\_U@{LCD\_show\_points\_U}}
+\index{LCD\_show\_points\_U@{LCD\_show\_points\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_points\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+points\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ points\+\_\+\+U\+\_\+\+LCDqueue}, \&number\+\_\+of\+\_\+points\+\_\+\+USER, \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetl liczbę punktów gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_a51463e2f648a22131ec24b95e204f021}} 
+\index{main.c@{main.c}!LCD\_show\_round\_wins\_C@{LCD\_show\_round\_wins\_C}}
+\index{LCD\_show\_round\_wins\_C@{LCD\_show\_round\_wins\_C}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_round\_wins\_C}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+round\+\_\+wins\+\_\+C~\textbf{ x\+Queue\+Send}(\textbf{ wins\+\_\+\+C\+\_\+\+LCDqueue}, \&number\+\_\+of\+\_\+wins\+\_\+\+CPU, \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetl liczbę wygranych rund CPU na ekranie LCD. 
+
+\mbox{\label{main_8c_aff581a6cf32c255a2f7c26407ad98cbf}} 
+\index{main.c@{main.c}!LCD\_show\_round\_wins\_U@{LCD\_show\_round\_wins\_U}}
+\index{LCD\_show\_round\_wins\_U@{LCD\_show\_round\_wins\_U}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_round\_wins\_U}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+round\+\_\+wins\+\_\+U~\textbf{ x\+Queue\+Send}(\textbf{ wins\+\_\+\+U\+\_\+\+LCDqueue}, \&number\+\_\+of\+\_\+wins\+\_\+\+USER, \textbf{ time\+\_\+to\+\_\+wait})}
+
+
+
+Wyświetl liczbę wygranych rund gracza na ekranie LCD. 
+
+\mbox{\label{main_8c_a083d9e6cee700f827a893d3081b96343}} 
+\index{main.c@{main.c}!LCD\_show\_template@{LCD\_show\_template}}
+\index{LCD\_show\_template@{LCD\_show\_template}!main.c@{main.c}}
+\doxysubsubsection{LCD\_show\_template}
+{\footnotesize\ttfamily \#define LCD\+\_\+show\+\_\+template~\textbf{ x\+Queue\+Send}(\textbf{ interface\+LCDqueue}, \&special\+\_\+screen, \textbf{ time\+\_\+to\+\_\+wait})}
+
+\mbox{\label{main_8c_aadddd9777bb41671da76e18329063042}} 
+\index{main.c@{main.c}!screen\_clean\_place\_cards@{screen\_clean\_place\_cards}}
+\index{screen\_clean\_place\_cards@{screen\_clean\_place\_cards}!main.c@{main.c}}
+\doxysubsubsection{screen\_clean\_place\_cards}
+{\footnotesize\ttfamily \#define screen\+\_\+clean\+\_\+place\+\_\+cards~6}
+
+\mbox{\label{main_8c_aa47fdb7916e50fde2fe9488c1c8a6dfa}} 
+\index{main.c@{main.c}!screen\_default@{screen\_default}}
+\index{screen\_default@{screen\_default}!main.c@{main.c}}
+\doxysubsubsection{screen\_default}
+{\footnotesize\ttfamily \#define screen\+\_\+default~1}
+
+\mbox{\label{main_8c_adf2c01ea767dd0a8a78398334cfeab93}} 
+\index{main.c@{main.c}!screen\_loading@{screen\_loading}}
+\index{screen\_loading@{screen\_loading}!main.c@{main.c}}
+\doxysubsubsection{screen\_loading}
+{\footnotesize\ttfamily \#define screen\+\_\+loading~2}
+
+\mbox{\label{main_8c_a0d782b4650c67da781f147080799db4a}} 
+\index{main.c@{main.c}!screen\_winner\_this\_game\_C@{screen\_winner\_this\_game\_C}}
+\index{screen\_winner\_this\_game\_C@{screen\_winner\_this\_game\_C}!main.c@{main.c}}
+\doxysubsubsection{screen\_winner\_this\_game\_C}
+{\footnotesize\ttfamily \#define screen\+\_\+winner\+\_\+this\+\_\+game\+\_\+C~2}
+
+\mbox{\label{main_8c_a7c94fc81e7be6d201581ba57b4103a30}} 
+\index{main.c@{main.c}!screen\_winner\_this\_game\_U@{screen\_winner\_this\_game\_U}}
+\index{screen\_winner\_this\_game\_U@{screen\_winner\_this\_game\_U}!main.c@{main.c}}
+\doxysubsubsection{screen\_winner\_this\_game\_U}
+{\footnotesize\ttfamily \#define screen\+\_\+winner\+\_\+this\+\_\+game\+\_\+U~1}
+
+\mbox{\label{main_8c_a267d0e3fafd2997dfd9b3de87bbe2afd}} 
+\index{main.c@{main.c}!screen\_winner\_this\_round\_C@{screen\_winner\_this\_round\_C}}
+\index{screen\_winner\_this\_round\_C@{screen\_winner\_this\_round\_C}!main.c@{main.c}}
+\doxysubsubsection{screen\_winner\_this\_round\_C}
+{\footnotesize\ttfamily \#define screen\+\_\+winner\+\_\+this\+\_\+round\+\_\+C~4}
+
+\mbox{\label{main_8c_ab57fad05e907f43872c7c2600225fb92}} 
+\index{main.c@{main.c}!screen\_winner\_this\_round\_D@{screen\_winner\_this\_round\_D}}
+\index{screen\_winner\_this\_round\_D@{screen\_winner\_this\_round\_D}!main.c@{main.c}}
+\doxysubsubsection{screen\_winner\_this\_round\_D}
+{\footnotesize\ttfamily \#define screen\+\_\+winner\+\_\+this\+\_\+round\+\_\+D~5}
+
+\mbox{\label{main_8c_ab7864616db734cf0360e485d9fc619cf}} 
+\index{main.c@{main.c}!screen\_winner\_this\_round\_U@{screen\_winner\_this\_round\_U}}
+\index{screen\_winner\_this\_round\_U@{screen\_winner\_this\_round\_U}!main.c@{main.c}}
+\doxysubsubsection{screen\_winner\_this\_round\_U}
+{\footnotesize\ttfamily \#define screen\+\_\+winner\+\_\+this\+\_\+round\+\_\+U~3}
+
+\mbox{\label{main_8c_a32aec07e52f1cda14ad52571a0983adf}} 
+\index{main.c@{main.c}!time\_to\_press@{time\_to\_press}}
+\index{time\_to\_press@{time\_to\_press}!main.c@{main.c}}
+\doxysubsubsection{time\_to\_press}
+{\footnotesize\ttfamily \#define time\+\_\+to\+\_\+press~5}
+
+
+
+1 odpowiada 20ms, 2 odpowiada 40ms, ... 
+
+czas wymagany aby STM przyjal sygnal z przycisku \mbox{\label{main_8c_aabff61df1ef67fdf4b01889e355f9264}} 
+\index{main.c@{main.c}!time\_to\_wait@{time\_to\_wait}}
+\index{time\_to\_wait@{time\_to\_wait}!main.c@{main.c}}
+\doxysubsubsection{time\_to\_wait}
+{\footnotesize\ttfamily \#define time\+\_\+to\+\_\+wait~0}
+
+
+
+czas jaki bedzie czekac kolejka na nadanie/odbior danych 
+
+\mbox{\label{main_8c_abfadd6d0b43d0c31fdf1c5f181d0f7ad}} 
+\index{main.c@{main.c}!value\_fight\_CPU@{value\_fight\_CPU}}
+\index{value\_fight\_CPU@{value\_fight\_CPU}!main.c@{main.c}}
+\doxysubsubsection{value\_fight\_CPU}
+{\footnotesize\ttfamily \#define value\+\_\+fight\+\_\+\+CPU~16}
+
+
+
+Wartość do której włacznie, komputer będzie dobierał karty. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{main_8c_abfe08294374bc7c3e5be2273f54335f4}} 
+\index{main.c@{main.c}!card\_for\_number@{card\_for\_number}}
+\index{card\_for\_number@{card\_for\_number}!main.c@{main.c}}
+\doxysubsubsection{card\_for\_number()}
+{\footnotesize\ttfamily uint8\+\_\+t card\+\_\+for\+\_\+number (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{card }\end{DoxyParamCaption})}
+
+\mbox{\label{main_8c_a1730ffe1e560465665eb47d9264826f9}} 
+\index{main.c@{main.c}!Error\_Handler@{Error\_Handler}}
+\index{Error\_Handler@{Error\_Handler}!main.c@{main.c}}
+\doxysubsubsection{Error\_Handler()}
+{\footnotesize\ttfamily void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+This function is executed in case of error occurrence. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{main_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{main()}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+The application entry point. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{main_8c_aaa163e37853e6fc971474824d9f655ca}} 
+\index{main.c@{main.c}!MX\_ADC1\_Init@{MX\_ADC1\_Init}}
+\index{MX\_ADC1\_Init@{MX\_ADC1\_Init}!main.c@{main.c}}
+\doxysubsubsection{MX\_ADC1\_Init()}
+{\footnotesize\ttfamily static void MX\+\_\+\+ADC1\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+ADC1 Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
+
+Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.\mbox{\label{main_8c_ae89fdd15729ad41a66911190fcbab23a}} 
+\index{main.c@{main.c}!MX\_GPIO\_Init@{MX\_GPIO\_Init}}
+\index{MX\_GPIO\_Init@{MX\_GPIO\_Init}!main.c@{main.c}}
+\doxysubsubsection{MX\_GPIO\_Init()}
+{\footnotesize\ttfamily static void MX\+\_\+\+GPIO\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+GPIO Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{main_8c_aa33f0698b12657979eb254584682d30d}} 
+\index{main.c@{main.c}!MX\_TIM4\_Init@{MX\_TIM4\_Init}}
+\index{MX\_TIM4\_Init@{MX\_TIM4\_Init}!main.c@{main.c}}
+\doxysubsubsection{MX\_TIM4\_Init()}
+{\footnotesize\ttfamily static void MX\+\_\+\+TIM4\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+TIM4 Initialization Function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{main_8c_a016544463b4842ced7191baf8f449cea}} 
+\index{main.c@{main.c}!StartDefaultTask@{StartDefaultTask}}
+\index{StartDefaultTask@{StartDefaultTask}!main.c@{main.c}}
+\doxysubsubsection{StartDefaultTask()}
+{\footnotesize\ttfamily void Start\+Default\+Task (\begin{DoxyParamCaption}\item[{void const $\ast$}]{argument }\end{DoxyParamCaption})}
+
+
+
+Function implementing the default\+Task thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & Not used \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\mbox{\label{main_8c_a70af21c671abfcc773614a9a4f63d920}} 
+\index{main.c@{main.c}!SystemClock\_Config@{SystemClock\_Config}}
+\index{SystemClock\_Config@{SystemClock\_Config}!main.c@{main.c}}
+\doxysubsubsection{SystemClock\_Config()}
+{\footnotesize\ttfamily void System\+Clock\+\_\+\+Config (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+System Clock Configuration. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+Configure the main internal regulator output voltage
+
+Initializes the RCC Oscillators according to the specified parameters in the \doxyref{RCC\+\_\+\+Osc\+Init\+Type\+Def}{p.}{struct_r_c_c___osc_init_type_def} structure.
+
+Initializes the CPU, AHB and APB buses clocks\mbox{\label{main_8c_a56cf533944a548e25196f1ecf14b15aa}} 
+\index{main.c@{main.c}!Task1@{Task1}}
+\index{Task1@{Task1}!main.c@{main.c}}
+\doxysubsubsection{Task1()}
+{\footnotesize\ttfamily void Task1 (\begin{DoxyParamCaption}\item[{void $\ast$}]{argument }\end{DoxyParamCaption})}
+
+
+
+Funkcja dla Task1 (obsługa LCD) 
+
+\mbox{\label{main_8c_a9f42abcbefaaaa07a78601bf98db7a61}} 
+\index{main.c@{main.c}!Task2@{Task2}}
+\index{Task2@{Task2}!main.c@{main.c}}
+\doxysubsubsection{Task2()}
+{\footnotesize\ttfamily void Task2 (\begin{DoxyParamCaption}\item[{void $\ast$}]{argument }\end{DoxyParamCaption})}
+
+
+
+Funkcja dla Task2 (obsługa przycisków) 
+
+\mbox{\label{main_8c_a2f827bbe7b7684eeda30f1d76e5bd994}} 
+\index{main.c@{main.c}!Task3@{Task3}}
+\index{Task3@{Task3}!main.c@{main.c}}
+\doxysubsubsection{Task3()}
+{\footnotesize\ttfamily void Task3 (\begin{DoxyParamCaption}\item[{void $\ast$}]{argument }\end{DoxyParamCaption})}
+
+
+
+Funkcja dla Task3 (obsługa całej gry) 
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\label{main_8c_a953f18813a360f7714be9fa95dd9884d}} 
+\index{main.c@{main.c}!ADC\_measure@{ADC\_measure}}
+\index{ADC\_measure@{ADC\_measure}!main.c@{main.c}}
+\doxysubsubsection{ADC\_measure}
+{\footnotesize\ttfamily uint16\+\_\+t ADC\+\_\+measure}
+
+
+
+Zmienna przechowujaca wyniki pomiaru z przetwornika ADC. 
+
+\mbox{\label{main_8c_abef3f7d9e97a75a02bb83666c58beee2}} 
+\index{main.c@{main.c}!assignment\_card\_to\_board@{assignment\_card\_to\_board}}
+\index{assignment\_card\_to\_board@{assignment\_card\_to\_board}!main.c@{main.c}}
+\doxysubsubsection{assignment\_card\_to\_board}
+{\footnotesize\ttfamily uint8\+\_\+t assignment\+\_\+card\+\_\+to\+\_\+board = 0}
+
+
+
+umożliwia odpowiednie przypisanie wylosowanych kart do tablicy 
+
+\mbox{\label{main_8c_a625bdd99110bf7230439737e667949b7}} 
+\index{main.c@{main.c}!card1\_C\_LCDqueue@{card1\_C\_LCDqueue}}
+\index{card1\_C\_LCDqueue@{card1\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card1\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card1\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 1 przez komputer. 
+
+\mbox{\label{main_8c_a62b2bf4db21e79f0f46b293843de3659}} 
+\index{main.c@{main.c}!card1\_U\_LCDqueue@{card1\_U\_LCDqueue}}
+\index{card1\_U\_LCDqueue@{card1\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card1\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card1\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 1 przez gracza. 
+
+\mbox{\label{main_8c_afca9a74751be565247bbc8936b2b0792}} 
+\index{main.c@{main.c}!card2\_C\_LCDqueue@{card2\_C\_LCDqueue}}
+\index{card2\_C\_LCDqueue@{card2\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card2\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card2\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 2 przez komputer. 
+
+\mbox{\label{main_8c_adb218116373bce762db68198b724c329}} 
+\index{main.c@{main.c}!card2\_U\_LCDqueue@{card2\_U\_LCDqueue}}
+\index{card2\_U\_LCDqueue@{card2\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card2\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card2\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 2 przez gracza. 
+
+\mbox{\label{main_8c_a36c938f7e183c902eb084173006b5088}} 
+\index{main.c@{main.c}!card3\_C\_LCDqueue@{card3\_C\_LCDqueue}}
+\index{card3\_C\_LCDqueue@{card3\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card3\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card3\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 3 przez komputer. 
+
+\mbox{\label{main_8c_a3bb4a84947044532a3e68e07722140e0}} 
+\index{main.c@{main.c}!card3\_U\_LCDqueue@{card3\_U\_LCDqueue}}
+\index{card3\_U\_LCDqueue@{card3\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card3\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card3\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 3 przez gracza. 
+
+\mbox{\label{main_8c_a9f008010f73939f79f0354fde0357c0e}} 
+\index{main.c@{main.c}!card4\_C\_LCDqueue@{card4\_C\_LCDqueue}}
+\index{card4\_C\_LCDqueue@{card4\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card4\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card4\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 4 przez komputer. 
+
+\mbox{\label{main_8c_a0b91a44785a2fe2e8af198bfc2a905c8}} 
+\index{main.c@{main.c}!card4\_U\_LCDqueue@{card4\_U\_LCDqueue}}
+\index{card4\_U\_LCDqueue@{card4\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card4\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card4\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 4 przez gracza. 
+
+\mbox{\label{main_8c_af80aa930bcecb3ffabd4543a03d9213a}} 
+\index{main.c@{main.c}!card5\_C\_LCDqueue@{card5\_C\_LCDqueue}}
+\index{card5\_C\_LCDqueue@{card5\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card5\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card5\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 5 przez komputer. 
+
+\mbox{\label{main_8c_a7ce235a6a003dea5103f3ada8f6c1afa}} 
+\index{main.c@{main.c}!card5\_U\_LCDqueue@{card5\_U\_LCDqueue}}
+\index{card5\_U\_LCDqueue@{card5\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card5\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card5\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 5 przez gracza. 
+
+\mbox{\label{main_8c_a84412c0d3295922ec2d0a0fd4b3630f9}} 
+\index{main.c@{main.c}!card6\_C\_LCDqueue@{card6\_C\_LCDqueue}}
+\index{card6\_C\_LCDqueue@{card6\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card6\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card6\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 6 przez komputer. 
+
+\mbox{\label{main_8c_ae72910172b65d2604315c6db5cd774f6}} 
+\index{main.c@{main.c}!card6\_U\_LCDqueue@{card6\_U\_LCDqueue}}
+\index{card6\_U\_LCDqueue@{card6\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card6\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card6\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 6 przez gracza. 
+
+\mbox{\label{main_8c_a95fd747497c099a85813f76864f702aa}} 
+\index{main.c@{main.c}!card7\_C\_LCDqueue@{card7\_C\_LCDqueue}}
+\index{card7\_C\_LCDqueue@{card7\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card7\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card7\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 7 przez komputer. 
+
+\mbox{\label{main_8c_a2669d99d8836efec2951664d009711e9}} 
+\index{main.c@{main.c}!card7\_U\_LCDqueue@{card7\_U\_LCDqueue}}
+\index{card7\_U\_LCDqueue@{card7\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card7\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card7\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 7 przez gracza. 
+
+\mbox{\label{main_8c_a3c81b90f530dbc7c2bccedba1c7d4cb9}} 
+\index{main.c@{main.c}!card8\_C\_LCDqueue@{card8\_C\_LCDqueue}}
+\index{card8\_C\_LCDqueue@{card8\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card8\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card8\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 8 przez komputer. 
+
+\mbox{\label{main_8c_afd9f6557ddfa7857c48238d4febcdce3}} 
+\index{main.c@{main.c}!card8\_U\_LCDqueue@{card8\_U\_LCDqueue}}
+\index{card8\_U\_LCDqueue@{card8\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card8\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card8\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 8 przez gracza. 
+
+\mbox{\label{main_8c_ad78bcea8f9c63cbcde8c08a33510f984}} 
+\index{main.c@{main.c}!card9\_C\_LCDqueue@{card9\_C\_LCDqueue}}
+\index{card9\_C\_LCDqueue@{card9\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card9\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card9\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 9 przez komputer. 
+
+\mbox{\label{main_8c_a672d08dd2bb60dd600401fdd2a024865}} 
+\index{main.c@{main.c}!card9\_U\_LCDqueue@{card9\_U\_LCDqueue}}
+\index{card9\_U\_LCDqueue@{card9\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{card9\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} card9\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania wylosowanej karty nr 9 przez gracza. 
+
+\mbox{\label{main_8c_ad53edd9cf745e5a0506747cfc60a1419}} 
+\index{main.c@{main.c}!DebCount\_kolejna\_karta@{DebCount\_kolejna\_karta}}
+\index{DebCount\_kolejna\_karta@{DebCount\_kolejna\_karta}!main.c@{main.c}}
+\doxysubsubsection{DebCount\_kolejna\_karta}
+{\footnotesize\ttfamily uint8\+\_\+t Deb\+Count\+\_\+kolejna\+\_\+karta = 0}
+
+
+
+Zmienna przechowująca czas wciśnięcia przycisku kolejna karta. 1 odpowiada 20ms. 
+
+\mbox{\label{main_8c_af4e3518674d5f95596dea7f015477b20}} 
+\index{main.c@{main.c}!DebCount\_nowa\_gra@{DebCount\_nowa\_gra}}
+\index{DebCount\_nowa\_gra@{DebCount\_nowa\_gra}!main.c@{main.c}}
+\doxysubsubsection{DebCount\_nowa\_gra}
+{\footnotesize\ttfamily uint8\+\_\+t Deb\+Count\+\_\+nowa\+\_\+gra = 0}
+
+
+
+Zmienna przechowująca czas wciśnięcia przycisku nowa gra. 1 odpowiada 20ms. 
+
+\mbox{\label{main_8c_abfe05d04cb1a2f332f5fe0f4a15e21fc}} 
+\index{main.c@{main.c}!DebCount\_reset@{DebCount\_reset}}
+\index{DebCount\_reset@{DebCount\_reset}!main.c@{main.c}}
+\doxysubsubsection{DebCount\_reset}
+{\footnotesize\ttfamily uint8\+\_\+t Deb\+Count\+\_\+reset = 0}
+
+
+
+Zmienna przechowująca czas wciśnięcia przycisku reset. 1 odpowiada 20ms. 
+
+\mbox{\label{main_8c_a84066fbdda811c172d294459df14acbf}} 
+\index{main.c@{main.c}!DebCount\_wystarczy\_kart@{DebCount\_wystarczy\_kart}}
+\index{DebCount\_wystarczy\_kart@{DebCount\_wystarczy\_kart}!main.c@{main.c}}
+\doxysubsubsection{DebCount\_wystarczy\_kart}
+{\footnotesize\ttfamily uint8\+\_\+t Deb\+Count\+\_\+wystarczy\+\_\+kart = 0}
+
+
+
+Zmienna przechowująca czas wciśnięcia przycisku wystarczy kart. 1 odpowiada 20ms. 
+
+\mbox{\label{main_8c_aa658fe134a5d1309d7a15c8116fa142c}} 
+\index{main.c@{main.c}!defaultTaskHandle@{defaultTaskHandle}}
+\index{defaultTaskHandle@{defaultTaskHandle}!main.c@{main.c}}
+\doxysubsubsection{defaultTaskHandle}
+{\footnotesize\ttfamily \textbf{ os\+Thread\+Id} default\+Task\+Handle}
+
+\mbox{\label{main_8c_a22b804736f5648d52f639b2647d4ed13}} 
+\index{main.c@{main.c}!hadc1@{hadc1}}
+\index{hadc1@{hadc1}!main.c@{main.c}}
+\doxysubsubsection{hadc1}
+{\footnotesize\ttfamily \textbf{ ADC\+\_\+\+Handle\+Type\+Def} hadc1}
+
+\mbox{\label{main_8c_a85788cec5a97ee377e4ee2e74f026484}} 
+\index{main.c@{main.c}!htim4@{htim4}}
+\index{htim4@{htim4}!main.c@{main.c}}
+\doxysubsubsection{htim4}
+{\footnotesize\ttfamily \textbf{ TIM\+\_\+\+Handle\+Type\+Def} htim4}
+
+\mbox{\label{main_8c_a78381bf8ef3e8c188d87c2217b8eb959}} 
+\index{main.c@{main.c}!if\_board\_1\_prepare@{if\_board\_1\_prepare}}
+\index{if\_board\_1\_prepare@{if\_board\_1\_prepare}!main.c@{main.c}}
+\doxysubsubsection{if\_board\_1\_prepare}
+{\footnotesize\ttfamily uint8\+\_\+t if\+\_\+board\+\_\+1\+\_\+prepare = 0}
+
+
+
+Czy tablica 1 z wylosowanymi kartami jest gotowa? 1 -\/ tak, 0 -\/ nie. 
+
+\mbox{\label{main_8c_a0902cb2dc7976ae528674fc8a7aa4947}} 
+\index{main.c@{main.c}!interfaceLCDqueue@{interfaceLCDqueue}}
+\index{interfaceLCDqueue@{interfaceLCDqueue}!main.c@{main.c}}
+\doxysubsubsection{interfaceLCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} interface\+LCDqueue}
+
+
+
+Do przesyłania tzw. szablonów które mają zostać wyświetlone na LCD. 
+
+\mbox{\label{main_8c_acc0f0fd7eaa20a3853908fb3ef396ae4}} 
+\index{main.c@{main.c}!nr\_random\_card\_to\_draw\_board\_1@{nr\_random\_card\_to\_draw\_board\_1}}
+\index{nr\_random\_card\_to\_draw\_board\_1@{nr\_random\_card\_to\_draw\_board\_1}!main.c@{main.c}}
+\doxysubsubsection{nr\_random\_card\_to\_draw\_board\_1}
+{\footnotesize\ttfamily uint8\+\_\+t nr\+\_\+random\+\_\+card\+\_\+to\+\_\+draw\+\_\+board\+\_\+1 = 0}
+
+
+
+Numer tablicy gdzie umiescic wylosowana karte. 
+
+\mbox{\label{main_8c_a8e0915d00e7f7c5d75b7262449425ddd}} 
+\index{main.c@{main.c}!number\_of\_cards\_2@{number\_of\_cards\_2}}
+\index{number\_of\_cards\_2@{number\_of\_cards\_2}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_2}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+2 = 4}
+
+\mbox{\label{main_8c_ac3f113266d382316acb80ccb8b1f0ce6}} 
+\index{main.c@{main.c}!number\_of\_cards\_3@{number\_of\_cards\_3}}
+\index{number\_of\_cards\_3@{number\_of\_cards\_3}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_3}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+3 = 4}
+
+\mbox{\label{main_8c_af269de9fe18cb78127b0c3845b7c8516}} 
+\index{main.c@{main.c}!number\_of\_cards\_4@{number\_of\_cards\_4}}
+\index{number\_of\_cards\_4@{number\_of\_cards\_4}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_4}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+4 = 4}
+
+\mbox{\label{main_8c_ad9fe012c79d3241df5ac05bf995619ee}} 
+\index{main.c@{main.c}!number\_of\_cards\_5@{number\_of\_cards\_5}}
+\index{number\_of\_cards\_5@{number\_of\_cards\_5}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_5}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+5 = 4}
+
+\mbox{\label{main_8c_a169d195684a0f033b7f05cf4fc5d99c2}} 
+\index{main.c@{main.c}!number\_of\_cards\_6@{number\_of\_cards\_6}}
+\index{number\_of\_cards\_6@{number\_of\_cards\_6}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_6}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+6 = 4}
+
+\mbox{\label{main_8c_ac0cbb09546cc9a2535c1ebc10b107d55}} 
+\index{main.c@{main.c}!number\_of\_cards\_7@{number\_of\_cards\_7}}
+\index{number\_of\_cards\_7@{number\_of\_cards\_7}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_7}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+7 = 4}
+
+\mbox{\label{main_8c_a8e5e27ef90e2138602d43ea105a30df2}} 
+\index{main.c@{main.c}!number\_of\_cards\_8@{number\_of\_cards\_8}}
+\index{number\_of\_cards\_8@{number\_of\_cards\_8}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_8}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+8 = 4}
+
+\mbox{\label{main_8c_abc08efd36d0805fd1aa2d5f7e24fb36c}} 
+\index{main.c@{main.c}!number\_of\_cards\_9@{number\_of\_cards\_9}}
+\index{number\_of\_cards\_9@{number\_of\_cards\_9}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_9}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+9 = 4}
+
+\mbox{\label{main_8c_a2f4ff5de61a6118d7a62ea0366ab76f1}} 
+\index{main.c@{main.c}!number\_of\_cards\_A@{number\_of\_cards\_A}}
+\index{number\_of\_cards\_A@{number\_of\_cards\_A}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_A}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+A = 4}
+
+\mbox{\label{main_8c_ac068cc75f7dc27108b0168a1e97c0156}} 
+\index{main.c@{main.c}!number\_of\_cards\_J@{number\_of\_cards\_J}}
+\index{number\_of\_cards\_J@{number\_of\_cards\_J}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_J}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+J = 4}
+
+\mbox{\label{main_8c_a8fe8626f180a6d968572ac3bd2e48d4e}} 
+\index{main.c@{main.c}!number\_of\_cards\_K@{number\_of\_cards\_K}}
+\index{number\_of\_cards\_K@{number\_of\_cards\_K}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_K}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+K = 4}
+
+\mbox{\label{main_8c_a1f80159e081ad917bad9fd07b6f37477}} 
+\index{main.c@{main.c}!number\_of\_cards\_Q@{number\_of\_cards\_Q}}
+\index{number\_of\_cards\_Q@{number\_of\_cards\_Q}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_Q}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+Q = 4}
+
+\mbox{\label{main_8c_a3b3989293c6d0f37538112fb8d6f955b}} 
+\index{main.c@{main.c}!number\_of\_cards\_T@{number\_of\_cards\_T}}
+\index{number\_of\_cards\_T@{number\_of\_cards\_T}!main.c@{main.c}}
+\doxysubsubsection{number\_of\_cards\_T}
+{\footnotesize\ttfamily uint8\+\_\+t number\+\_\+of\+\_\+cards\+\_\+T = 4}
+
+\mbox{\label{main_8c_a5dfa879b0879eacd977ed88d122cfeb5}} 
+\index{main.c@{main.c}!points\_C\_LCDqueue@{points\_C\_LCDqueue}}
+\index{points\_C\_LCDqueue@{points\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{points\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} points\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania liczby zdobytych punktów przez komputer które mają zostać wyświetlone na LCD przy podsumowaniu gry. 
+
+\mbox{\label{main_8c_af473f0a9458022e44392049901ea5da3}} 
+\index{main.c@{main.c}!points\_U\_LCDqueue@{points\_U\_LCDqueue}}
+\index{points\_U\_LCDqueue@{points\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{points\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} points\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania liczby zdobytych punktów przez gracza które mają zostać wyświetlone na LCD przy podsumowaniu gry. 
+
+\mbox{\label{main_8c_a32fb00fa8f97cb7a113530595b24396e}} 
+\index{main.c@{main.c}!Pressed\_kolejna\_karta@{Pressed\_kolejna\_karta}}
+\index{Pressed\_kolejna\_karta@{Pressed\_kolejna\_karta}!main.c@{main.c}}
+\doxysubsubsection{Pressed\_kolejna\_karta}
+{\footnotesize\ttfamily uint8\+\_\+t Pressed\+\_\+kolejna\+\_\+karta = 0}
+
+
+
+Zmienne informujące że przycisk (po debouncerze) został wciśnięty. Dzięki temu wiadomo, że trzeba aktywować odpowiedni semafor. 
+
+\mbox{\label{main_8c_ae6e0b754455224b166eb875257cd440c}} 
+\index{main.c@{main.c}!Pressed\_nowa\_gra@{Pressed\_nowa\_gra}}
+\index{Pressed\_nowa\_gra@{Pressed\_nowa\_gra}!main.c@{main.c}}
+\doxysubsubsection{Pressed\_nowa\_gra}
+{\footnotesize\ttfamily uint8\+\_\+t Pressed\+\_\+nowa\+\_\+gra = 0}
+
+
+
+Zmienne informujące że przycisk (po debouncerze) został wciśnięty. Dzięki temu wiadomo, że trzeba aktywować odpowiedni semafor. 
+
+\mbox{\label{main_8c_acd41263d29f535922b927b361cb3c181}} 
+\index{main.c@{main.c}!Pressed\_reset@{Pressed\_reset}}
+\index{Pressed\_reset@{Pressed\_reset}!main.c@{main.c}}
+\doxysubsubsection{Pressed\_reset}
+{\footnotesize\ttfamily uint8\+\_\+t Pressed\+\_\+reset = 0}
+
+
+
+Zmienne informujące że przycisk (po debouncerze) został wciśnięty. Dzięki temu wiadomo, że trzeba aktywować odpowiedni semafor. 
+
+\mbox{\label{main_8c_a41143096ff76bc06a48399056ee96264}} 
+\index{main.c@{main.c}!Pressed\_wystarczy\_kart@{Pressed\_wystarczy\_kart}}
+\index{Pressed\_wystarczy\_kart@{Pressed\_wystarczy\_kart}!main.c@{main.c}}
+\doxysubsubsection{Pressed\_wystarczy\_kart}
+{\footnotesize\ttfamily uint8\+\_\+t Pressed\+\_\+wystarczy\+\_\+kart = 0}
+
+
+
+Zmienne informujące że przycisk (po debouncerze) został wciśnięty. Dzięki temu wiadomo, że trzeba aktywować odpowiedni semafor. 
+
+\mbox{\label{main_8c_af66c606c57d24d1a53e54c20dc676dab}} 
+\index{main.c@{main.c}!random\_card\_board\_1@{random\_card\_board\_1}}
+\index{random\_card\_board\_1@{random\_card\_board\_1}!main.c@{main.c}}
+\doxysubsubsection{random\_card\_board\_1}
+{\footnotesize\ttfamily uint8\+\_\+t random\+\_\+card\+\_\+board\+\_\+1[52]}
+
+
+
+Tablica przechowujaca wylosowane karty (cala talie) 
+
+\mbox{\label{main_8c_a4b38933b33bf0bc9954a92c42a36c034}} 
+\index{main.c@{main.c}!Semaphore\_kolejna\_karta\_pressed@{Semaphore\_kolejna\_karta\_pressed}}
+\index{Semaphore\_kolejna\_karta\_pressed@{Semaphore\_kolejna\_karta\_pressed}!main.c@{main.c}}
+\doxysubsubsection{Semaphore\_kolejna\_karta\_pressed}
+{\footnotesize\ttfamily \textbf{ x\+Semaphore\+Handle} Semaphore\+\_\+kolejna\+\_\+karta\+\_\+pressed}
+
+
+
+Semafor informujący czy przycisk kolejna karta został wciśnięty. 
+
+\mbox{\label{main_8c_a16ba78da83ffa50477599fa0c408f3d5}} 
+\index{main.c@{main.c}!Semaphore\_kolejna\_karta\_pressed\_handle@{Semaphore\_kolejna\_karta\_pressed\_handle}}
+\index{Semaphore\_kolejna\_karta\_pressed\_handle@{Semaphore\_kolejna\_karta\_pressed\_handle}!main.c@{main.c}}
+\doxysubsubsection{Semaphore\_kolejna\_karta\_pressed\_handle}
+{\footnotesize\ttfamily \textbf{ os\+Semaphore\+Id} Semaphore\+\_\+kolejna\+\_\+karta\+\_\+pressed\+\_\+handle}
+
+
+
+Semafor informujący czy przycisk kolejna karta został wciśnięty. 
+
+\mbox{\label{main_8c_a80a4d74a748ba6c826b408fb1aeff0da}} 
+\index{main.c@{main.c}!Semaphore\_nowa\_gra\_pressed@{Semaphore\_nowa\_gra\_pressed}}
+\index{Semaphore\_nowa\_gra\_pressed@{Semaphore\_nowa\_gra\_pressed}!main.c@{main.c}}
+\doxysubsubsection{Semaphore\_nowa\_gra\_pressed}
+{\footnotesize\ttfamily \textbf{ x\+Semaphore\+Handle} Semaphore\+\_\+nowa\+\_\+gra\+\_\+pressed}
+
+
+
+Semafor informujący czy przycisk nowa gra został wciśnięty. 
+
+\mbox{\label{main_8c_a5b65ca41ee81b20b5cbe7b44155f29d1}} 
+\index{main.c@{main.c}!Semaphore\_nowa\_gra\_pressed\_handle@{Semaphore\_nowa\_gra\_pressed\_handle}}
+\index{Semaphore\_nowa\_gra\_pressed\_handle@{Semaphore\_nowa\_gra\_pressed\_handle}!main.c@{main.c}}
+\doxysubsubsection{Semaphore\_nowa\_gra\_pressed\_handle}
+{\footnotesize\ttfamily \textbf{ os\+Semaphore\+Id} Semaphore\+\_\+nowa\+\_\+gra\+\_\+pressed\+\_\+handle}
+
+
+
+Semafor informujący czy przycisk nowa gra został wciśnięty. 
+
+\mbox{\label{main_8c_aa2d896067281fd91509ef9acbe0c0dde}} 
+\index{main.c@{main.c}!Semaphore\_reset\_pressed@{Semaphore\_reset\_pressed}}
+\index{Semaphore\_reset\_pressed@{Semaphore\_reset\_pressed}!main.c@{main.c}}
+\doxysubsubsection{Semaphore\_reset\_pressed}
+{\footnotesize\ttfamily \textbf{ x\+Semaphore\+Handle} Semaphore\+\_\+reset\+\_\+pressed}
+
+
+
+Semafor informujący czy przycisk reset został wciśnięty. 
+
+\mbox{\label{main_8c_a069ca796b401e1f3cb309f8758a2eee7}} 
+\index{main.c@{main.c}!Semaphore\_reset\_pressed\_handle@{Semaphore\_reset\_pressed\_handle}}
+\index{Semaphore\_reset\_pressed\_handle@{Semaphore\_reset\_pressed\_handle}!main.c@{main.c}}
+\doxysubsubsection{Semaphore\_reset\_pressed\_handle}
+{\footnotesize\ttfamily \textbf{ os\+Semaphore\+Id} Semaphore\+\_\+reset\+\_\+pressed\+\_\+handle}
+
+
+
+Semafor informujący czy przycisk reset został wciśnięty. 
+
+\mbox{\label{main_8c_a50f769c88f8fea40f2e545a68dd95943}} 
+\index{main.c@{main.c}!Semaphore\_wystarczy\_kart\_pressed@{Semaphore\_wystarczy\_kart\_pressed}}
+\index{Semaphore\_wystarczy\_kart\_pressed@{Semaphore\_wystarczy\_kart\_pressed}!main.c@{main.c}}
+\doxysubsubsection{Semaphore\_wystarczy\_kart\_pressed}
+{\footnotesize\ttfamily \textbf{ x\+Semaphore\+Handle} Semaphore\+\_\+wystarczy\+\_\+kart\+\_\+pressed}
+
+
+
+Semafor informujący czy przycisk wystarczy kart został wciśnięty. 
+
+\mbox{\label{main_8c_a490746d2da91c32f331ec0df6d763294}} 
+\index{main.c@{main.c}!Semaphore\_wystarczy\_kart\_pressed\_handle@{Semaphore\_wystarczy\_kart\_pressed\_handle}}
+\index{Semaphore\_wystarczy\_kart\_pressed\_handle@{Semaphore\_wystarczy\_kart\_pressed\_handle}!main.c@{main.c}}
+\doxysubsubsection{Semaphore\_wystarczy\_kart\_pressed\_handle}
+{\footnotesize\ttfamily \textbf{ os\+Semaphore\+Id} Semaphore\+\_\+wystarczy\+\_\+kart\+\_\+pressed\+\_\+handle}
+
+
+
+Semafor informujący czy przycisk wystarczy kart został wciśnięty. 
+
+\mbox{\label{main_8c_a65b6f6f65379d8a183b54f2726095d93}} 
+\index{main.c@{main.c}!Switched\_kolejna\_karta@{Switched\_kolejna\_karta}}
+\index{Switched\_kolejna\_karta@{Switched\_kolejna\_karta}!main.c@{main.c}}
+\doxysubsubsection{Switched\_kolejna\_karta}
+{\footnotesize\ttfamily uint8\+\_\+t Switched\+\_\+kolejna\+\_\+karta = 0}
+
+
+
+zmienna do obslugi debouncingu (do przelaczenia jednorazowo stanu -\/ toggle) 
+
+\mbox{\label{main_8c_af396aec8a5ef1a06afe70ab85642c2fc}} 
+\index{main.c@{main.c}!Switched\_nowa\_gra@{Switched\_nowa\_gra}}
+\index{Switched\_nowa\_gra@{Switched\_nowa\_gra}!main.c@{main.c}}
+\doxysubsubsection{Switched\_nowa\_gra}
+{\footnotesize\ttfamily uint8\+\_\+t Switched\+\_\+nowa\+\_\+gra = 0}
+
+
+
+zmienna do obslugi debouncingu (do przelaczenia jednorazowo stanu -\/ toggle) 
+
+\mbox{\label{main_8c_a436af7178a0ce193a411ccf1609d3bcf}} 
+\index{main.c@{main.c}!Switched\_reset@{Switched\_reset}}
+\index{Switched\_reset@{Switched\_reset}!main.c@{main.c}}
+\doxysubsubsection{Switched\_reset}
+{\footnotesize\ttfamily uint8\+\_\+t Switched\+\_\+reset = 0}
+
+
+
+zmienna do obslugi debouncingu (do przelaczenia jednorazowo stanu -\/ toggle) 
+
+\mbox{\label{main_8c_a4217e3776b849c80476d2eb581c69d8e}} 
+\index{main.c@{main.c}!Switched\_wystarczy\_kart@{Switched\_wystarczy\_kart}}
+\index{Switched\_wystarczy\_kart@{Switched\_wystarczy\_kart}!main.c@{main.c}}
+\doxysubsubsection{Switched\_wystarczy\_kart}
+{\footnotesize\ttfamily uint8\+\_\+t Switched\+\_\+wystarczy\+\_\+kart = 0}
+
+
+
+zmienna do obslugi debouncingu (do przelaczenia jednorazowo stanu -\/ toggle) 
+
+\mbox{\label{main_8c_aeb6cb517acf823d299586a092d7c0271}} 
+\index{main.c@{main.c}!Task1\_Handler@{Task1\_Handler}}
+\index{Task1\_Handler@{Task1\_Handler}!main.c@{main.c}}
+\doxysubsubsection{Task1\_Handler}
+{\footnotesize\ttfamily \textbf{ x\+Task\+Handle} Task1\+\_\+\+Handler}
+
+
+
+Handler dla Task1 (obsługa LCD) 
+
+\mbox{\label{main_8c_a5fd7073addb3ac9854822534bbc93308}} 
+\index{main.c@{main.c}!Task1Handle@{Task1Handle}}
+\index{Task1Handle@{Task1Handle}!main.c@{main.c}}
+\doxysubsubsection{Task1Handle}
+{\footnotesize\ttfamily \textbf{ os\+Thread\+Id} Task1\+Handle}
+
+
+
+ID dla Task1 (obsługa LCD) 
+
+\mbox{\label{main_8c_a5e69458d5a784a54d33ff2f4e51019b8}} 
+\index{main.c@{main.c}!Task2\_Handler@{Task2\_Handler}}
+\index{Task2\_Handler@{Task2\_Handler}!main.c@{main.c}}
+\doxysubsubsection{Task2\_Handler}
+{\footnotesize\ttfamily \textbf{ x\+Task\+Handle} Task2\+\_\+\+Handler}
+
+
+
+Handler dla Task2 (obsługa przycisków) 
+
+\mbox{\label{main_8c_a08912c3423164a79295f540fa510efb6}} 
+\index{main.c@{main.c}!Task2Handle@{Task2Handle}}
+\index{Task2Handle@{Task2Handle}!main.c@{main.c}}
+\doxysubsubsection{Task2Handle}
+{\footnotesize\ttfamily \textbf{ os\+Thread\+Id} Task2\+Handle}
+
+
+
+ID dla Task2 (obsługa przycisków) 
+
+\mbox{\label{main_8c_a07955b4499fafde23d9014a937171978}} 
+\index{main.c@{main.c}!Task3\_Handler@{Task3\_Handler}}
+\index{Task3\_Handler@{Task3\_Handler}!main.c@{main.c}}
+\doxysubsubsection{Task3\_Handler}
+{\footnotesize\ttfamily \textbf{ x\+Task\+Handle} Task3\+\_\+\+Handler}
+
+
+
+Handler dla Task3 (obsługa całej gry) 
+
+\mbox{\label{main_8c_a2e39132ff49790a21c1a28f16e2175f2}} 
+\index{main.c@{main.c}!Task3Handle@{Task3Handle}}
+\index{Task3Handle@{Task3Handle}!main.c@{main.c}}
+\doxysubsubsection{Task3Handle}
+{\footnotesize\ttfamily \textbf{ os\+Thread\+Id} Task3\+Handle}
+
+
+
+ID dla Task3 (obsługa całej gry) 
+
+\mbox{\label{main_8c_a236ea8a4b18d9df474180767e9981d6e}} 
+\index{main.c@{main.c}!winner\_the\_gameLCDqueue@{winner\_the\_gameLCDqueue}}
+\index{winner\_the\_gameLCDqueue@{winner\_the\_gameLCDqueue}!main.c@{main.c}}
+\doxysubsubsection{winner\_the\_gameLCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} winner\+\_\+the\+\_\+game\+LCDqueue}
+
+\mbox{\label{main_8c_a4f5879e562008081472b6bf4160cc7b4}} 
+\index{main.c@{main.c}!wins\_C\_end\_LCDqueue@{wins\_C\_end\_LCDqueue}}
+\index{wins\_C\_end\_LCDqueue@{wins\_C\_end\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{wins\_C\_end\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} wins\+\_\+\+C\+\_\+end\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania liczby wygranych rund przez komputer które mają zostać wyświetlone na LCD przy podsumowaniu gry. 
+
+\mbox{\label{main_8c_a557eb9f8bbcdad3cb2507fbb9615b446}} 
+\index{main.c@{main.c}!wins\_C\_LCDqueue@{wins\_C\_LCDqueue}}
+\index{wins\_C\_LCDqueue@{wins\_C\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{wins\_C\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} wins\+\_\+\+C\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania liczby wygranych rund przez komputer które mają zostać wyświetlone na LCD poczas gry. 
+
+\mbox{\label{main_8c_afd312e948dde0cebcdce07874065a1e8}} 
+\index{main.c@{main.c}!wins\_U\_end\_LCDqueue@{wins\_U\_end\_LCDqueue}}
+\index{wins\_U\_end\_LCDqueue@{wins\_U\_end\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{wins\_U\_end\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} wins\+\_\+\+U\+\_\+end\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania liczby wygranych rund przez gracza które mają zostać wyświetlone na LCD przy podsumowaniu gry. 
+
+\mbox{\label{main_8c_ade845c5958b79d520d06069fabb34bc2}} 
+\index{main.c@{main.c}!wins\_U\_LCDqueue@{wins\_U\_LCDqueue}}
+\index{wins\_U\_LCDqueue@{wins\_U\_LCDqueue}!main.c@{main.c}}
+\doxysubsubsection{wins\_U\_LCDqueue}
+{\footnotesize\ttfamily \textbf{ x\+Queue\+Handle} wins\+\_\+\+U\+\_\+\+LCDqueue}
+
+
+
+Do przesyłania liczby wygranych rund przez gracza które mają zostać wyświetlone na LCD poczas gry. 
+

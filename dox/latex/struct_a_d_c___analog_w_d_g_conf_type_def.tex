@@ -1,0 +1,75 @@
+\doxysection{ADC\+\_\+\+Analog\+WDGConf\+Type\+Def Struct Reference}
+\label{struct_a_d_c___analog_w_d_g_conf_type_def}\index{ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}}
+
+
+ADC Configuration multi-\/mode structure definition ~\newline
+  
+
+
+
+
+{\ttfamily \#include $<$stm32f4xx\+\_\+hal\+\_\+adc.\+h$>$}
+
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \textbf{ Watchdog\+Mode}
+\item 
+uint32\+\_\+t \textbf{ High\+Threshold}
+\item 
+uint32\+\_\+t \textbf{ Low\+Threshold}
+\item 
+uint32\+\_\+t \textbf{ Channel}
+\item 
+\textbf{ Functional\+State} \textbf{ ITMode}
+\item 
+uint32\+\_\+t \textbf{ Watchdog\+Number}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+ADC Configuration multi-\/mode structure definition ~\newline
+ 
+
+\doxysubsection{Field Documentation}
+\mbox{\label{struct_a_d_c___analog_w_d_g_conf_type_def_ae82bf9242a014164f9f6907f29782c44}} 
+\index{ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}!Channel@{Channel}}
+\index{Channel@{Channel}!ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}}
+\doxysubsubsection{Channel}
+{\footnotesize\ttfamily uint32\+\_\+t Channel}
+
+Configures ADC channel for the analog watchdog. This parameter has an effect only if watchdog mode is configured on single channel This parameter can be a value of \doxyref{ADC Common Channels}{p.}{group___a_d_c__channels} \mbox{\label{struct_a_d_c___analog_w_d_g_conf_type_def_a5c3a76d9a8ac84c537e7df10b0315e5a}} 
+\index{ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}!HighThreshold@{HighThreshold}}
+\index{HighThreshold@{HighThreshold}!ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}}
+\doxysubsubsection{HighThreshold}
+{\footnotesize\ttfamily uint32\+\_\+t High\+Threshold}
+
+Configures the ADC analog watchdog High threshold value. This parameter must be a 12-\/bit value. \mbox{\label{struct_a_d_c___analog_w_d_g_conf_type_def_a8eb71d040cef0d56f25d29aa57ba5d3d}} 
+\index{ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}!ITMode@{ITMode}}
+\index{ITMode@{ITMode}!ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}}
+\doxysubsubsection{ITMode}
+{\footnotesize\ttfamily \textbf{ Functional\+State} ITMode}
+
+Specifies whether the analog watchdog is configured is interrupt mode or in polling mode. This parameter can be set to ENABLE or DISABLE \mbox{\label{struct_a_d_c___analog_w_d_g_conf_type_def_a018c772cad96f1f0493ec0019ecc08f9}} 
+\index{ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}!LowThreshold@{LowThreshold}}
+\index{LowThreshold@{LowThreshold}!ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}}
+\doxysubsubsection{LowThreshold}
+{\footnotesize\ttfamily uint32\+\_\+t Low\+Threshold}
+
+Configures the ADC analog watchdog High threshold value. This parameter must be a 12-\/bit value. \mbox{\label{struct_a_d_c___analog_w_d_g_conf_type_def_a13924e920be2454c955a2139e2c3eb1a}} 
+\index{ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}!WatchdogMode@{WatchdogMode}}
+\index{WatchdogMode@{WatchdogMode}!ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}}
+\doxysubsubsection{WatchdogMode}
+{\footnotesize\ttfamily uint32\+\_\+t Watchdog\+Mode}
+
+Configures the ADC analog watchdog mode. This parameter can be a value of \doxyref{ADC Analog Watchdog Selection}{p.}{group___a_d_c__analog__watchdog__selection} \mbox{\label{struct_a_d_c___analog_w_d_g_conf_type_def_a316457f389072f7a80b62e2b3c8fdef4}} 
+\index{ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}!WatchdogNumber@{WatchdogNumber}}
+\index{WatchdogNumber@{WatchdogNumber}!ADC\_AnalogWDGConfTypeDef@{ADC\_AnalogWDGConfTypeDef}}
+\doxysubsubsection{WatchdogNumber}
+{\footnotesize\ttfamily uint32\+\_\+t Watchdog\+Number}
+
+Reserved for future use, can be set to 0 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Drivers/\+STM32\+F4xx\+\_\+\+HAL\+\_\+\+Driver/\+Inc/\textbf{ stm32f4xx\+\_\+hal\+\_\+adc.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,163 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/event\+\_\+groups.c File Reference}
+\label{event__groups_8c}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/event\_groups.c@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/event\_groups.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Free\+RTOS.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}task.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}timers.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}event\+\_\+groups.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ Event\+Group\+Def\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+\item 
+\#define \textbf{ event\+CLEAR\+\_\+\+EVENTS\+\_\+\+ON\+\_\+\+EXIT\+\_\+\+BIT}~0x01000000\+UL
+\item 
+\#define \textbf{ event\+UNBLOCKED\+\_\+\+DUE\+\_\+\+TO\+\_\+\+BIT\+\_\+\+SET}~0x02000000\+UL
+\item 
+\#define \textbf{ event\+WAIT\+\_\+\+FOR\+\_\+\+ALL\+\_\+\+BITS}~0x04000000\+UL
+\item 
+\#define \textbf{ event\+EVENT\+\_\+\+BITS\+\_\+\+CONTROL\+\_\+\+BYTES}~0xff000000\+UL
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \textbf{ Event\+Group\+Def\+\_\+t} \textbf{ Event\+Group\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \textbf{ Base\+Type\+\_\+t} \textbf{ prv\+Test\+Wait\+Condition} (const \textbf{ Event\+Bits\+\_\+t} ux\+Current\+Event\+Bits, const \textbf{ Event\+Bits\+\_\+t} ux\+Bits\+To\+Wait\+For, const \textbf{ Base\+Type\+\_\+t} x\+Wait\+For\+All\+Bits) \textbf{ PRIVILEGED\+\_\+\+FUNCTION}
+\item 
+\textbf{ Event\+Bits\+\_\+t} \textbf{ x\+Event\+Group\+Sync} (\textbf{ Event\+Group\+Handle\+\_\+t} x\+Event\+Group, const \textbf{ Event\+Bits\+\_\+t} ux\+Bits\+To\+Set, const \textbf{ Event\+Bits\+\_\+t} ux\+Bits\+To\+Wait\+For, \textbf{ Tick\+Type\+\_\+t} x\+Ticks\+To\+Wait)
+\item 
+\textbf{ Event\+Bits\+\_\+t} \textbf{ x\+Event\+Group\+Wait\+Bits} (\textbf{ Event\+Group\+Handle\+\_\+t} x\+Event\+Group, const \textbf{ Event\+Bits\+\_\+t} ux\+Bits\+To\+Wait\+For, const \textbf{ Base\+Type\+\_\+t} x\+Clear\+On\+Exit, const \textbf{ Base\+Type\+\_\+t} x\+Wait\+For\+All\+Bits, \textbf{ Tick\+Type\+\_\+t} x\+Ticks\+To\+Wait)
+\item 
+\textbf{ Event\+Bits\+\_\+t} \textbf{ x\+Event\+Group\+Clear\+Bits} (\textbf{ Event\+Group\+Handle\+\_\+t} x\+Event\+Group, const \textbf{ Event\+Bits\+\_\+t} ux\+Bits\+To\+Clear)
+\item 
+\textbf{ Event\+Bits\+\_\+t} \textbf{ x\+Event\+Group\+Get\+Bits\+From\+ISR} (\textbf{ Event\+Group\+Handle\+\_\+t} x\+Event\+Group)
+\item 
+\textbf{ Event\+Bits\+\_\+t} \textbf{ x\+Event\+Group\+Set\+Bits} (\textbf{ Event\+Group\+Handle\+\_\+t} x\+Event\+Group, const \textbf{ Event\+Bits\+\_\+t} ux\+Bits\+To\+Set)
+\item 
+void \textbf{ v\+Event\+Group\+Delete} (\textbf{ Event\+Group\+Handle\+\_\+t} x\+Event\+Group)
+\item 
+void \textbf{ v\+Event\+Group\+Set\+Bits\+Callback} (void $\ast$pv\+Event\+Group, const uint32\+\_\+t ul\+Bits\+To\+Set)
+\item 
+void \textbf{ v\+Event\+Group\+Clear\+Bits\+Callback} (void $\ast$pv\+Event\+Group, const uint32\+\_\+t ul\+Bits\+To\+Clear)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{event__groups_8c_a1404686af7c8070fa57675707c817abc}} 
+\index{event\_groups.c@{event\_groups.c}!eventCLEAR\_EVENTS\_ON\_EXIT\_BIT@{eventCLEAR\_EVENTS\_ON\_EXIT\_BIT}}
+\index{eventCLEAR\_EVENTS\_ON\_EXIT\_BIT@{eventCLEAR\_EVENTS\_ON\_EXIT\_BIT}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{eventCLEAR\_EVENTS\_ON\_EXIT\_BIT}
+{\footnotesize\ttfamily \#define event\+CLEAR\+\_\+\+EVENTS\+\_\+\+ON\+\_\+\+EXIT\+\_\+\+BIT~0x01000000\+UL}
+
+\mbox{\label{event__groups_8c_a46c8292a6ba88b017cca402f5baf670b}} 
+\index{event\_groups.c@{event\_groups.c}!eventEVENT\_BITS\_CONTROL\_BYTES@{eventEVENT\_BITS\_CONTROL\_BYTES}}
+\index{eventEVENT\_BITS\_CONTROL\_BYTES@{eventEVENT\_BITS\_CONTROL\_BYTES}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{eventEVENT\_BITS\_CONTROL\_BYTES}
+{\footnotesize\ttfamily \#define event\+EVENT\+\_\+\+BITS\+\_\+\+CONTROL\+\_\+\+BYTES~0xff000000\+UL}
+
+\mbox{\label{event__groups_8c_ab451d5ad95813d5ec7ff1784d69e9ec3}} 
+\index{event\_groups.c@{event\_groups.c}!eventUNBLOCKED\_DUE\_TO\_BIT\_SET@{eventUNBLOCKED\_DUE\_TO\_BIT\_SET}}
+\index{eventUNBLOCKED\_DUE\_TO\_BIT\_SET@{eventUNBLOCKED\_DUE\_TO\_BIT\_SET}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{eventUNBLOCKED\_DUE\_TO\_BIT\_SET}
+{\footnotesize\ttfamily \#define event\+UNBLOCKED\+\_\+\+DUE\+\_\+\+TO\+\_\+\+BIT\+\_\+\+SET~0x02000000\+UL}
+
+\mbox{\label{event__groups_8c_ae98d5f1271845ad42742aef9659e1568}} 
+\index{event\_groups.c@{event\_groups.c}!eventWAIT\_FOR\_ALL\_BITS@{eventWAIT\_FOR\_ALL\_BITS}}
+\index{eventWAIT\_FOR\_ALL\_BITS@{eventWAIT\_FOR\_ALL\_BITS}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{eventWAIT\_FOR\_ALL\_BITS}
+{\footnotesize\ttfamily \#define event\+WAIT\+\_\+\+FOR\+\_\+\+ALL\+\_\+\+BITS~0x04000000\+UL}
+
+\mbox{\label{event__groups_8c_ab622d8c674f2a417a666a7ed89109e79}} 
+\index{event\_groups.c@{event\_groups.c}!MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}}
+\index{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE@{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{MPU\_WRAPPERS\_INCLUDED\_FROM\_API\_FILE}
+{\footnotesize\ttfamily \#define MPU\+\_\+\+WRAPPERS\+\_\+\+INCLUDED\+\_\+\+FROM\+\_\+\+API\+\_\+\+FILE}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{event__groups_8c_ae4fc9408a7fab90c6296379ff3cb0f11}} 
+\index{event\_groups.c@{event\_groups.c}!EventGroup\_t@{EventGroup\_t}}
+\index{EventGroup\_t@{EventGroup\_t}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{EventGroup\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ Event\+Group\+Def\+\_\+t} \textbf{ Event\+Group\+\_\+t}}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{event__groups_8c_a152ce51000f6d8d26afbd14b4794e036}} 
+\index{event\_groups.c@{event\_groups.c}!prvTestWaitCondition@{prvTestWaitCondition}}
+\index{prvTestWaitCondition@{prvTestWaitCondition}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{prvTestWaitCondition()}
+{\footnotesize\ttfamily static \textbf{ Base\+Type\+\_\+t} prv\+Test\+Wait\+Condition (\begin{DoxyParamCaption}\item[{const \textbf{ Event\+Bits\+\_\+t}}]{ux\+Current\+Event\+Bits,  }\item[{const \textbf{ Event\+Bits\+\_\+t}}]{ux\+Bits\+To\+Wait\+For,  }\item[{const \textbf{ Base\+Type\+\_\+t}}]{x\+Wait\+For\+All\+Bits }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\label{event__groups_8c_a3bce459038e87064109c8462b1174c29}} 
+\index{event\_groups.c@{event\_groups.c}!vEventGroupClearBitsCallback@{vEventGroupClearBitsCallback}}
+\index{vEventGroupClearBitsCallback@{vEventGroupClearBitsCallback}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{vEventGroupClearBitsCallback()}
+{\footnotesize\ttfamily void v\+Event\+Group\+Clear\+Bits\+Callback (\begin{DoxyParamCaption}\item[{void $\ast$}]{pv\+Event\+Group,  }\item[{const uint32\+\_\+t}]{ul\+Bits\+To\+Clear }\end{DoxyParamCaption})}
+
+\mbox{\label{event__groups_8c_a6939faca89fc4ba52fa8288527042464}} 
+\index{event\_groups.c@{event\_groups.c}!vEventGroupDelete@{vEventGroupDelete}}
+\index{vEventGroupDelete@{vEventGroupDelete}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{vEventGroupDelete()}
+{\footnotesize\ttfamily void v\+Event\+Group\+Delete (\begin{DoxyParamCaption}\item[{\textbf{ Event\+Group\+Handle\+\_\+t}}]{x\+Event\+Group }\end{DoxyParamCaption})}
+
+\doxyref{event\+\_\+groups.\+h}{p.}{event__groups_8h} 
+\begin{DoxyPre}
+   void xEventGroupDelete( EventGroupHandle\_t xEventGroup );
+\end{DoxyPre}
+
+
+Delete an event group that was previously created by a call to x\+Event\+Group\+Create(). Tasks that are blocked on the event group will be unblocked and obtain 0 as the event group\textquotesingle{}s value.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Event\+Group} & The event group being deleted. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{event__groups_8c_a54db6cc97bbb926aa4b78d5affc257d9}} 
+\index{event\_groups.c@{event\_groups.c}!vEventGroupSetBitsCallback@{vEventGroupSetBitsCallback}}
+\index{vEventGroupSetBitsCallback@{vEventGroupSetBitsCallback}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{vEventGroupSetBitsCallback()}
+{\footnotesize\ttfamily void v\+Event\+Group\+Set\+Bits\+Callback (\begin{DoxyParamCaption}\item[{void $\ast$}]{pv\+Event\+Group,  }\item[{const uint32\+\_\+t}]{ul\+Bits\+To\+Set }\end{DoxyParamCaption})}
+
+\mbox{\label{event__groups_8c_a71dd2680fdfbdde7d6b10db203e266ba}} 
+\index{event\_groups.c@{event\_groups.c}!xEventGroupClearBits@{xEventGroupClearBits}}
+\index{xEventGroupClearBits@{xEventGroupClearBits}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{xEventGroupClearBits()}
+{\footnotesize\ttfamily \textbf{ Event\+Bits\+\_\+t} x\+Event\+Group\+Clear\+Bits (\begin{DoxyParamCaption}\item[{\textbf{ Event\+Group\+Handle\+\_\+t}}]{x\+Event\+Group,  }\item[{const \textbf{ Event\+Bits\+\_\+t}}]{ux\+Bits\+To\+Clear }\end{DoxyParamCaption})}
+
+\mbox{\label{event__groups_8c_adcb3d3f7dded9fa372bb1ee405c36b8d}} 
+\index{event\_groups.c@{event\_groups.c}!xEventGroupGetBitsFromISR@{xEventGroupGetBitsFromISR}}
+\index{xEventGroupGetBitsFromISR@{xEventGroupGetBitsFromISR}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{xEventGroupGetBitsFromISR()}
+{\footnotesize\ttfamily \textbf{ Event\+Bits\+\_\+t} x\+Event\+Group\+Get\+Bits\+From\+ISR (\begin{DoxyParamCaption}\item[{\textbf{ Event\+Group\+Handle\+\_\+t}}]{x\+Event\+Group }\end{DoxyParamCaption})}
+
+\mbox{\label{event__groups_8c_a9ac7cd970f50e2e50a494b656e0eb239}} 
+\index{event\_groups.c@{event\_groups.c}!xEventGroupSetBits@{xEventGroupSetBits}}
+\index{xEventGroupSetBits@{xEventGroupSetBits}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{xEventGroupSetBits()}
+{\footnotesize\ttfamily \textbf{ Event\+Bits\+\_\+t} x\+Event\+Group\+Set\+Bits (\begin{DoxyParamCaption}\item[{\textbf{ Event\+Group\+Handle\+\_\+t}}]{x\+Event\+Group,  }\item[{const \textbf{ Event\+Bits\+\_\+t}}]{ux\+Bits\+To\+Set }\end{DoxyParamCaption})}
+
+\mbox{\label{event__groups_8c_ac38db316f0928c7ddaacb677a75dbc03}} 
+\index{event\_groups.c@{event\_groups.c}!xEventGroupSync@{xEventGroupSync}}
+\index{xEventGroupSync@{xEventGroupSync}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{xEventGroupSync()}
+{\footnotesize\ttfamily \textbf{ Event\+Bits\+\_\+t} x\+Event\+Group\+Sync (\begin{DoxyParamCaption}\item[{\textbf{ Event\+Group\+Handle\+\_\+t}}]{x\+Event\+Group,  }\item[{const \textbf{ Event\+Bits\+\_\+t}}]{ux\+Bits\+To\+Set,  }\item[{const \textbf{ Event\+Bits\+\_\+t}}]{ux\+Bits\+To\+Wait\+For,  }\item[{\textbf{ Tick\+Type\+\_\+t}}]{x\+Ticks\+To\+Wait }\end{DoxyParamCaption})}
+
+\mbox{\label{event__groups_8c_a379c5cca4552d3d8acd4c51e8220a6c3}} 
+\index{event\_groups.c@{event\_groups.c}!xEventGroupWaitBits@{xEventGroupWaitBits}}
+\index{xEventGroupWaitBits@{xEventGroupWaitBits}!event\_groups.c@{event\_groups.c}}
+\doxysubsubsection{xEventGroupWaitBits()}
+{\footnotesize\ttfamily \textbf{ Event\+Bits\+\_\+t} x\+Event\+Group\+Wait\+Bits (\begin{DoxyParamCaption}\item[{\textbf{ Event\+Group\+Handle\+\_\+t}}]{x\+Event\+Group,  }\item[{const \textbf{ Event\+Bits\+\_\+t}}]{ux\+Bits\+To\+Wait\+For,  }\item[{const \textbf{ Base\+Type\+\_\+t}}]{x\+Clear\+On\+Exit,  }\item[{const \textbf{ Base\+Type\+\_\+t}}]{x\+Wait\+For\+All\+Bits,  }\item[{\textbf{ Tick\+Type\+\_\+t}}]{x\+Ticks\+To\+Wait }\end{DoxyParamCaption})}
+

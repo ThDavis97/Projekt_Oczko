@@ -1,0 +1,19 @@
+\doxysection{v\+Stream\+Buffer\+Delete}
+\label{group__v_stream_buffer_delete}\index{vStreamBufferDelete@{vStreamBufferDelete}}
+\doxyref{stream\+\_\+buffer.\+h}{p.}{stream__buffer_8h}
+
+
+\begin{DoxyPre}
+void \doxyref{vStreamBufferDelete( StreamBufferHandle\_t xStreamBuffer )}{p.}{stream__buffer_8h_a05dc9d2ae220a050526a062eddf6d7a2};
+\end{DoxyPre}
+
+
+Deletes a stream buffer that was previously created using a call to \doxyref{x\+Stream\+Buffer\+Create()}{p.}{stream__buffer_8h_a39aa4dd8b83e2df7ded291f863fb5fed} or \doxyref{x\+Stream\+Buffer\+Create\+Static()}{p.}{stream__buffer_8h_a3c248575ac1b83801db605b32a118f77}. If the stream buffer was created using dynamic memory (that is, by \doxyref{x\+Stream\+Buffer\+Create()}{p.}{stream__buffer_8h_a39aa4dd8b83e2df7ded291f863fb5fed}), then the allocated memory is freed.
+
+A stream buffer handle must not be used after the stream buffer has been deleted.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Stream\+Buffer} & The handle of the stream buffer to be deleted. \\
+\hline
+\end{DoxyParams}

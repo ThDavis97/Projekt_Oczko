@@ -1,0 +1,193 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/include/message\+\_\+buffer.h File Reference}
+\label{message__buffer_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/message\_buffer.h@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/message\_buffer.h}}
+{\ttfamily \#include \char`\"{}stream\+\_\+buffer.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Create}(x\+Buffer\+Size\+Bytes)~( \textbf{ Message\+Buffer\+Handle\+\_\+t} ) \textbf{ x\+Stream\+Buffer\+Generic\+Create}( x\+Buffer\+Size\+Bytes, ( size\+\_\+t ) 0, \textbf{ pd\+TRUE} )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Create\+Static}(x\+Buffer\+Size\+Bytes,  puc\+Message\+Buffer\+Storage\+Area,  px\+Static\+Message\+Buffer)~( \textbf{ Message\+Buffer\+Handle\+\_\+t} ) \textbf{ x\+Stream\+Buffer\+Generic\+Create\+Static}( x\+Buffer\+Size\+Bytes, 0, \textbf{ pd\+TRUE}, puc\+Message\+Buffer\+Storage\+Area, px\+Static\+Message\+Buffer )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Send}(x\+Message\+Buffer,  pv\+Tx\+Data,  x\+Data\+Length\+Bytes,  x\+Ticks\+To\+Wait)~\textbf{ x\+Stream\+Buffer\+Send}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, pv\+Tx\+Data, x\+Data\+Length\+Bytes, x\+Ticks\+To\+Wait )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Send\+From\+ISR}(x\+Message\+Buffer,  pv\+Tx\+Data,  x\+Data\+Length\+Bytes,  px\+Higher\+Priority\+Task\+Woken)~\textbf{ x\+Stream\+Buffer\+Send\+From\+ISR}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, pv\+Tx\+Data, x\+Data\+Length\+Bytes, px\+Higher\+Priority\+Task\+Woken )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Receive}(x\+Message\+Buffer,  pv\+Rx\+Data,  x\+Buffer\+Length\+Bytes,  x\+Ticks\+To\+Wait)~\textbf{ x\+Stream\+Buffer\+Receive}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, pv\+Rx\+Data, x\+Buffer\+Length\+Bytes, x\+Ticks\+To\+Wait )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Receive\+From\+ISR}(x\+Message\+Buffer,  pv\+Rx\+Data,  x\+Buffer\+Length\+Bytes,  px\+Higher\+Priority\+Task\+Woken)~\textbf{ x\+Stream\+Buffer\+Receive\+From\+ISR}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, pv\+Rx\+Data, x\+Buffer\+Length\+Bytes, px\+Higher\+Priority\+Task\+Woken )
+\item 
+\#define \textbf{ v\+Message\+Buffer\+Delete}(x\+Message\+Buffer)~\textbf{ v\+Stream\+Buffer\+Delete}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Is\+Full}(x\+Message\+Buffer)~\textbf{ x\+Stream\+Buffer\+Is\+Full}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Is\+Empty}(x\+Message\+Buffer)~\textbf{ x\+Stream\+Buffer\+Is\+Empty}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Reset}(x\+Message\+Buffer)~\textbf{ x\+Stream\+Buffer\+Reset}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Space\+Available}(x\+Message\+Buffer)~\textbf{ x\+Stream\+Buffer\+Spaces\+Available}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Spaces\+Available}(x\+Message\+Buffer)~\textbf{ x\+Stream\+Buffer\+Spaces\+Available}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer ) /$\ast$ Corrects typo in original macro name. $\ast$/
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Next\+Length\+Bytes}(x\+Message\+Buffer)~\textbf{ x\+Stream\+Buffer\+Next\+Message\+Length\+Bytes}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer ) \textbf{ PRIVILEGED\+\_\+\+FUNCTION};
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Send\+Completed\+From\+ISR}(x\+Message\+Buffer,  px\+Higher\+Priority\+Task\+Woken)~\textbf{ x\+Stream\+Buffer\+Send\+Completed\+From\+ISR}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, px\+Higher\+Priority\+Task\+Woken )
+\item 
+\#define \textbf{ x\+Message\+Buffer\+Receive\+Completed\+From\+ISR}(x\+Message\+Buffer,  px\+Higher\+Priority\+Task\+Woken)~\textbf{ x\+Stream\+Buffer\+Receive\+Completed\+From\+ISR}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, px\+Higher\+Priority\+Task\+Woken )
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void $\ast$ \textbf{ Message\+Buffer\+Handle\+\_\+t}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{message__buffer_8h_aa29d6c50600a7b0154e4a47e7c981d1a}} 
+\index{message\_buffer.h@{message\_buffer.h}!vMessageBufferDelete@{vMessageBufferDelete}}
+\index{vMessageBufferDelete@{vMessageBufferDelete}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{vMessageBufferDelete}
+{\footnotesize\ttfamily \#define v\+Message\+Buffer\+Delete(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer }\end{DoxyParamCaption})~\textbf{ v\+Stream\+Buffer\+Delete}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )}
+
+\doxyref{message\+\_\+buffer.\+h}{p.}{message__buffer_8h}
+
+
+\begin{DoxyPre}
+void \doxyref{vMessageBufferDelete( MessageBufferHandle\_t xMessageBuffer )}{p.}{message__buffer_8h_aa29d6c50600a7b0154e4a47e7c981d1a};
+\end{DoxyPre}
+
+
+Deletes a message buffer that was previously created using a call to \doxyref{x\+Message\+Buffer\+Create()}{p.}{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36} or \doxyref{x\+Message\+Buffer\+Create\+Static()}{p.}{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c}. If the message buffer was created using dynamic memory (that is, by \doxyref{x\+Message\+Buffer\+Create()}{p.}{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}), then the allocated memory is freed.
+
+A message buffer handle must not be used after the message buffer has been deleted.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer to be deleted. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferCreate@{xMessageBufferCreate}}
+\index{xMessageBufferCreate@{xMessageBufferCreate}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferCreate}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Create(\begin{DoxyParamCaption}\item[{}]{x\+Buffer\+Size\+Bytes }\end{DoxyParamCaption})~( \textbf{ Message\+Buffer\+Handle\+\_\+t} ) \textbf{ x\+Stream\+Buffer\+Generic\+Create}( x\+Buffer\+Size\+Bytes, ( size\+\_\+t ) 0, \textbf{ pd\+TRUE} )}
+
+\mbox{\label{message__buffer_8h_acc84f4a15dbd39ecbad35f7337e78b2c}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferCreateStatic@{xMessageBufferCreateStatic}}
+\index{xMessageBufferCreateStatic@{xMessageBufferCreateStatic}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferCreateStatic}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Create\+Static(\begin{DoxyParamCaption}\item[{}]{x\+Buffer\+Size\+Bytes,  }\item[{}]{puc\+Message\+Buffer\+Storage\+Area,  }\item[{}]{px\+Static\+Message\+Buffer }\end{DoxyParamCaption})~( \textbf{ Message\+Buffer\+Handle\+\_\+t} ) \textbf{ x\+Stream\+Buffer\+Generic\+Create\+Static}( x\+Buffer\+Size\+Bytes, 0, \textbf{ pd\+TRUE}, puc\+Message\+Buffer\+Storage\+Area, px\+Static\+Message\+Buffer )}
+
+\mbox{\label{message__buffer_8h_a7bc30ef43be4bd228d80de1da88c71d8}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferIsEmpty@{xMessageBufferIsEmpty}}
+\index{xMessageBufferIsEmpty@{xMessageBufferIsEmpty}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferIsEmpty}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Is\+Empty(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Is\+Empty}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )}
+
+\doxyref{message\+\_\+buffer.\+h}{p.}{message__buffer_8h} 
+\begin{DoxyPre}
+BaseType\_t \doxyref{xMessageBufferIsEmpty( MessageBufferHandle\_t xMessageBuffer )}{p.}{message__buffer_8h_a7bc30ef43be4bd228d80de1da88c71d8} );
+\end{DoxyPre}
+
+
+Tests to see if a message buffer is empty (does not contain any messages).
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the message buffer referenced by x\+Message\+Buffer is empty then pd\+TRUE is returned. Otherwise pd\+FALSE is returned. 
+\end{DoxyReturn}
+\mbox{\label{message__buffer_8h_a60a7e136b74c2a8ce703a99ef636f179}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferIsFull@{xMessageBufferIsFull}}
+\index{xMessageBufferIsFull@{xMessageBufferIsFull}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferIsFull}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Is\+Full(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Is\+Full}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )}
+
+\doxyref{message\+\_\+buffer.\+h}{p.}{message__buffer_8h} 
+\begin{DoxyPre}
+BaseType\_t \doxyref{xMessageBufferIsFull( MessageBufferHandle\_t xMessageBuffer )}{p.}{message__buffer_8h_a60a7e136b74c2a8ce703a99ef636f179} );
+\end{DoxyPre}
+
+
+Tests to see if a message buffer is full. A message buffer is full if it cannot accept any more messages, of any size, until space is made available by a message being removed from the message buffer.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+Message\+Buffer} & The handle of the message buffer being queried.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the message buffer referenced by x\+Message\+Buffer is full then pd\+TRUE is returned. Otherwise pd\+FALSE is returned. 
+\end{DoxyReturn}
+\mbox{\label{message__buffer_8h_ae2b56b6564cf2476891394231a31ecad}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferNextLengthBytes@{xMessageBufferNextLengthBytes}}
+\index{xMessageBufferNextLengthBytes@{xMessageBufferNextLengthBytes}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferNextLengthBytes}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Next\+Length\+Bytes(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Next\+Message\+Length\+Bytes}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer ) \textbf{ PRIVILEGED\+\_\+\+FUNCTION};}
+
+\mbox{\label{message__buffer_8h_af12a227ba511a95cbea5aa81c7f3ba12}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferReceive@{xMessageBufferReceive}}
+\index{xMessageBufferReceive@{xMessageBufferReceive}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferReceive}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Receive(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer,  }\item[{}]{pv\+Rx\+Data,  }\item[{}]{x\+Buffer\+Length\+Bytes,  }\item[{}]{x\+Ticks\+To\+Wait }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Receive}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, pv\+Rx\+Data, x\+Buffer\+Length\+Bytes, x\+Ticks\+To\+Wait )}
+
+\mbox{\label{message__buffer_8h_a22b1a37d0d4f39acd87250f73d9aab0c}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferReceiveCompletedFromISR@{xMessageBufferReceiveCompletedFromISR}}
+\index{xMessageBufferReceiveCompletedFromISR@{xMessageBufferReceiveCompletedFromISR}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferReceiveCompletedFromISR}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Receive\+Completed\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer,  }\item[{}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Receive\+Completed\+From\+ISR}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, px\+Higher\+Priority\+Task\+Woken )}
+
+\mbox{\label{message__buffer_8h_adf596c00c44752a3c8c542cc6b5df234}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferReceiveFromISR@{xMessageBufferReceiveFromISR}}
+\index{xMessageBufferReceiveFromISR@{xMessageBufferReceiveFromISR}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferReceiveFromISR}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Receive\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer,  }\item[{}]{pv\+Rx\+Data,  }\item[{}]{x\+Buffer\+Length\+Bytes,  }\item[{}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Receive\+From\+ISR}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, pv\+Rx\+Data, x\+Buffer\+Length\+Bytes, px\+Higher\+Priority\+Task\+Woken )}
+
+\mbox{\label{message__buffer_8h_a6d22ac0fd0463b202f2e22674380a41c}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferReset@{xMessageBufferReset}}
+\index{xMessageBufferReset@{xMessageBufferReset}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferReset}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Reset(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Reset}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )}
+
+\mbox{\label{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSend@{xMessageBufferSend}}
+\index{xMessageBufferSend@{xMessageBufferSend}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferSend}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Send(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer,  }\item[{}]{pv\+Tx\+Data,  }\item[{}]{x\+Data\+Length\+Bytes,  }\item[{}]{x\+Ticks\+To\+Wait }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Send}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, pv\+Tx\+Data, x\+Data\+Length\+Bytes, x\+Ticks\+To\+Wait )}
+
+\mbox{\label{message__buffer_8h_a45918d12bf530cb2b4bf21c0936460a9}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSendCompletedFromISR@{xMessageBufferSendCompletedFromISR}}
+\index{xMessageBufferSendCompletedFromISR@{xMessageBufferSendCompletedFromISR}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferSendCompletedFromISR}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Send\+Completed\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer,  }\item[{}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Send\+Completed\+From\+ISR}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, px\+Higher\+Priority\+Task\+Woken )}
+
+\mbox{\label{message__buffer_8h_aeef5b0c4f8c2db6ca2230a8874813e79}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSendFromISR@{xMessageBufferSendFromISR}}
+\index{xMessageBufferSendFromISR@{xMessageBufferSendFromISR}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferSendFromISR}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Send\+From\+ISR(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer,  }\item[{}]{pv\+Tx\+Data,  }\item[{}]{x\+Data\+Length\+Bytes,  }\item[{}]{px\+Higher\+Priority\+Task\+Woken }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Send\+From\+ISR}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer, pv\+Tx\+Data, x\+Data\+Length\+Bytes, px\+Higher\+Priority\+Task\+Woken )}
+
+\mbox{\label{message__buffer_8h_a9f1e75a283ef603e914e10ae354e5ab8}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSpaceAvailable@{xMessageBufferSpaceAvailable}}
+\index{xMessageBufferSpaceAvailable@{xMessageBufferSpaceAvailable}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferSpaceAvailable}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Space\+Available(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Spaces\+Available}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer )}
+
+\mbox{\label{message__buffer_8h_a572622608a32242b1d7a922b71f96658}} 
+\index{message\_buffer.h@{message\_buffer.h}!xMessageBufferSpacesAvailable@{xMessageBufferSpacesAvailable}}
+\index{xMessageBufferSpacesAvailable@{xMessageBufferSpacesAvailable}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{xMessageBufferSpacesAvailable}
+{\footnotesize\ttfamily \#define x\+Message\+Buffer\+Spaces\+Available(\begin{DoxyParamCaption}\item[{}]{x\+Message\+Buffer }\end{DoxyParamCaption})~\textbf{ x\+Stream\+Buffer\+Spaces\+Available}( ( \textbf{ Stream\+Buffer\+Handle\+\_\+t} ) x\+Message\+Buffer ) /$\ast$ Corrects typo in original macro name. $\ast$/}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{message__buffer_8h_ae8442d50f3b62d237c40b02742f0209a}} 
+\index{message\_buffer.h@{message\_buffer.h}!MessageBufferHandle\_t@{MessageBufferHandle\_t}}
+\index{MessageBufferHandle\_t@{MessageBufferHandle\_t}!message\_buffer.h@{message\_buffer.h}}
+\doxysubsubsection{MessageBufferHandle\_t}
+{\footnotesize\ttfamily typedef void$\ast$ \textbf{ Message\+Buffer\+Handle\+\_\+t}}
+
+Type by which message buffers are referenced. For example, a call to \doxyref{x\+Message\+Buffer\+Create()}{p.}{message__buffer_8h_a2959cd0e3d2bd20d46908e5c9872be36} returns an Message\+Buffer\+Handle\+\_\+t variable that can then be used as a parameter to \doxyref{x\+Message\+Buffer\+Send()}{p.}{message__buffer_8h_a858f6da6fe24a226c45caf1634ea1605}, \doxyref{x\+Message\+Buffer\+Receive()}{p.}{message__buffer_8h_af12a227ba511a95cbea5aa81c7f3ba12}, etc. 

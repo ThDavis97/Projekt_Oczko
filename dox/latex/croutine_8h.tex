@@ -1,0 +1,197 @@
+\doxysection{C\+:/\+ALL/\+STM32/\+Projekty/\+Oczko\+Gierka/\+Middlewares/\+Third\+\_\+\+Party/\+Free\+RTOS/\+Source/include/croutine.h File Reference}
+\label{croutine_8h}\index{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/croutine.h@{C:/ALL/STM32/Projekty/OczkoGierka/Middlewares/Third\_Party/FreeRTOS/Source/include/croutine.h}}
+{\ttfamily \#include \char`\"{}list.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \textbf{ cor\+Co\+Routine\+Control\+Block}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ cr\+START}(px\+CRCB)~switch( ( ( \textbf{ CRCB\+\_\+t} $\ast$ )( px\+CRCB ) )-\/$>$ux\+State ) \{ case 0\+:
+\item 
+\#define \textbf{ cr\+END}()~\}
+\item 
+\#define \textbf{ cr\+SET\+\_\+\+STATE0}(x\+Handle)~( ( \textbf{ CRCB\+\_\+t} $\ast$ )( x\+Handle ) )-\/$>$ux\+State = (\+\_\+\+\_\+\+LINE\+\_\+\+\_\+ $\ast$ 2); return; case (\+\_\+\+\_\+\+LINE\+\_\+\+\_\+ $\ast$ 2)\+:
+\item 
+\#define \textbf{ cr\+SET\+\_\+\+STATE1}(x\+Handle)~( ( \textbf{ CRCB\+\_\+t} $\ast$ )( x\+Handle ) )-\/$>$ux\+State = ((\+\_\+\+\_\+\+LINE\+\_\+\+\_\+ $\ast$ 2)+1); return; case ((\+\_\+\+\_\+\+LINE\+\_\+\+\_\+ $\ast$ 2)+1)\+:
+\item 
+\#define \textbf{ cr\+DELAY}(x\+Handle,  x\+Ticks\+To\+Delay)
+\item 
+\#define \textbf{ cr\+QUEUE\+\_\+\+SEND}(x\+Handle,  px\+Queue,  pv\+Item\+To\+Queue,  x\+Ticks\+To\+Wait,  px\+Result)
+\item 
+\#define \textbf{ cr\+QUEUE\+\_\+\+RECEIVE}(x\+Handle,  px\+Queue,  pv\+Buffer,  x\+Ticks\+To\+Wait,  px\+Result)
+\item 
+\#define \textbf{ cr\+QUEUE\+\_\+\+SEND\+\_\+\+FROM\+\_\+\+ISR}(px\+Queue,  pv\+Item\+To\+Queue,  x\+Co\+Routine\+Previously\+Woken)~\textbf{ x\+Queue\+CRSend\+From\+ISR}( ( px\+Queue ), ( pv\+Item\+To\+Queue ), ( x\+Co\+Routine\+Previously\+Woken ) )
+\item 
+\#define \textbf{ cr\+QUEUE\+\_\+\+RECEIVE\+\_\+\+FROM\+\_\+\+ISR}(px\+Queue,  pv\+Buffer,  px\+Co\+Routine\+Woken)~\textbf{ x\+Queue\+CRReceive\+From\+ISR}( ( px\+Queue ), ( pv\+Buffer ), ( px\+Co\+Routine\+Woken ) )
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef void $\ast$ \textbf{ Co\+Routine\+Handle\+\_\+t}
+\item 
+typedef void($\ast$ \textbf{ cr\+COROUTINE\+\_\+\+CODE}) (\textbf{ Co\+Routine\+Handle\+\_\+t}, \textbf{ UBase\+Type\+\_\+t})
+\item 
+typedef struct \textbf{ cor\+Co\+Routine\+Control\+Block} \textbf{ CRCB\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Base\+Type\+\_\+t} \textbf{ x\+Co\+Routine\+Create} (\textbf{ cr\+COROUTINE\+\_\+\+CODE} px\+Co\+Routine\+Code, \textbf{ UBase\+Type\+\_\+t} ux\+Priority, \textbf{ UBase\+Type\+\_\+t} ux\+Index)
+\item 
+void \textbf{ v\+Co\+Routine\+Schedule} (void)
+\item 
+void \textbf{ v\+Co\+Routine\+Add\+To\+Delayed\+List} (\textbf{ Tick\+Type\+\_\+t} x\+Ticks\+To\+Delay, \textbf{ List\+\_\+t} $\ast$px\+Event\+List)
+\item 
+\textbf{ Base\+Type\+\_\+t} \textbf{ x\+Co\+Routine\+Remove\+From\+Event\+List} (const \textbf{ List\+\_\+t} $\ast$px\+Event\+List)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\label{croutine_8h_a05a06feb11028f2d1d440ea335f562ba}} 
+\index{croutine.h@{croutine.h}!crDELAY@{crDELAY}}
+\index{crDELAY@{crDELAY}!croutine.h@{croutine.h}}
+\doxysubsubsection{crDELAY}
+{\footnotesize\ttfamily \#define cr\+DELAY(\begin{DoxyParamCaption}\item[{}]{x\+Handle,  }\item[{}]{x\+Ticks\+To\+Delay }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{if}( ( xTicksToDelay ) > 0 )                                                         \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                   \(\backslash\)}
+\DoxyCodeLine{        vCoRoutineAddToDelayedList( ( xTicksToDelay ), NULL );                          \(\backslash\)}
+\DoxyCodeLine{    \}                                                                                   \(\backslash\)}
+\DoxyCodeLine{    crSET\_STATE0( ( xHandle ) );}
+
+\end{DoxyCode}
+\mbox{\label{croutine_8h_ae6038cc976689b50000475ebfc4e2f23}} 
+\index{croutine.h@{croutine.h}!crEND@{crEND}}
+\index{crEND@{crEND}!croutine.h@{croutine.h}}
+\doxysubsubsection{crEND}
+{\footnotesize\ttfamily \#define cr\+END(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~\}}
+
+\mbox{\label{croutine_8h_a586d57fd9a3e2aa5ae66484ed3be36c9}} 
+\index{croutine.h@{croutine.h}!crQUEUE\_RECEIVE@{crQUEUE\_RECEIVE}}
+\index{crQUEUE\_RECEIVE@{crQUEUE\_RECEIVE}!croutine.h@{croutine.h}}
+\doxysubsubsection{crQUEUE\_RECEIVE}
+{\footnotesize\ttfamily \#define cr\+QUEUE\+\_\+\+RECEIVE(\begin{DoxyParamCaption}\item[{}]{x\+Handle,  }\item[{}]{px\+Queue,  }\item[{}]{pv\+Buffer,  }\item[{}]{x\+Ticks\+To\+Wait,  }\item[{}]{px\+Result }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{                                                                                       \(\backslash\)}
+\DoxyCodeLine{    *( pxResult ) = xQueueCRReceive( ( pxQueue) , ( pvBuffer ), ( xTicksToWait ) );      \(\backslash\)}
+\DoxyCodeLine{    if( *( pxResult ) == errQUEUE\_BLOCKED )                                             \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                   \(\backslash\)}
+\DoxyCodeLine{        crSET\_STATE0( ( xHandle ) );                                                    \(\backslash\)}
+\DoxyCodeLine{        *( pxResult ) = xQueueCRReceive( ( pxQueue) , ( pvBuffer ), 0 );             \(\backslash\)}
+\DoxyCodeLine{    \}                                                                                   \(\backslash\)}
+\DoxyCodeLine{    if( *( pxResult ) == errQUEUE\_YIELD )                                             \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                   \(\backslash\)}
+\DoxyCodeLine{        crSET\_STATE1( ( xHandle ) );                                                    \(\backslash\)}
+\DoxyCodeLine{        *( pxResult ) = pdPASS;                                                           \(\backslash\)}
+\DoxyCodeLine{    \}                                                                                   \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\label{croutine_8h_a9c0fa977ca69adbddb4811affa2a71f7}} 
+\index{croutine.h@{croutine.h}!crQUEUE\_RECEIVE\_FROM\_ISR@{crQUEUE\_RECEIVE\_FROM\_ISR}}
+\index{crQUEUE\_RECEIVE\_FROM\_ISR@{crQUEUE\_RECEIVE\_FROM\_ISR}!croutine.h@{croutine.h}}
+\doxysubsubsection{crQUEUE\_RECEIVE\_FROM\_ISR}
+{\footnotesize\ttfamily \#define cr\+QUEUE\+\_\+\+RECEIVE\+\_\+\+FROM\+\_\+\+ISR(\begin{DoxyParamCaption}\item[{}]{px\+Queue,  }\item[{}]{pv\+Buffer,  }\item[{}]{px\+Co\+Routine\+Woken }\end{DoxyParamCaption})~\textbf{ x\+Queue\+CRReceive\+From\+ISR}( ( px\+Queue ), ( pv\+Buffer ), ( px\+Co\+Routine\+Woken ) )}
+
+\mbox{\label{croutine_8h_a26af3d36f22a04168eebdf5b08465d6e}} 
+\index{croutine.h@{croutine.h}!crQUEUE\_SEND@{crQUEUE\_SEND}}
+\index{crQUEUE\_SEND@{crQUEUE\_SEND}!croutine.h@{croutine.h}}
+\doxysubsubsection{crQUEUE\_SEND}
+{\footnotesize\ttfamily \#define cr\+QUEUE\+\_\+\+SEND(\begin{DoxyParamCaption}\item[{}]{x\+Handle,  }\item[{}]{px\+Queue,  }\item[{}]{pv\+Item\+To\+Queue,  }\item[{}]{x\+Ticks\+To\+Wait,  }\item[{}]{px\+Result }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{                                                                                       \(\backslash\)}
+\DoxyCodeLine{    *( pxResult ) = xQueueCRSend( ( pxQueue) , ( pvItemToQueue) , ( xTicksToWait ) );   \(\backslash\)}
+\DoxyCodeLine{    if( *( pxResult ) == errQUEUE\_BLOCKED )                                             \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                   \(\backslash\)}
+\DoxyCodeLine{        crSET\_STATE0( ( xHandle ) );                                                    \(\backslash\)}
+\DoxyCodeLine{        *pxResult = xQueueCRSend( ( pxQueue ), ( pvItemToQueue ), 0 );                  \(\backslash\)}
+\DoxyCodeLine{    \}                                                                                   \(\backslash\)}
+\DoxyCodeLine{    if( *pxResult == errQUEUE\_YIELD )                                                 \(\backslash\)}
+\DoxyCodeLine{    \{                                                                                   \(\backslash\)}
+\DoxyCodeLine{        crSET\_STATE1( ( xHandle ) );                                                    \(\backslash\)}
+\DoxyCodeLine{        *pxResult = pdPASS;                                                               \(\backslash\)}
+\DoxyCodeLine{    \}                                                                                   \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\mbox{\label{croutine_8h_ac8eb0a81c5cf69de7e4edd73ce44a3be}} 
+\index{croutine.h@{croutine.h}!crQUEUE\_SEND\_FROM\_ISR@{crQUEUE\_SEND\_FROM\_ISR}}
+\index{crQUEUE\_SEND\_FROM\_ISR@{crQUEUE\_SEND\_FROM\_ISR}!croutine.h@{croutine.h}}
+\doxysubsubsection{crQUEUE\_SEND\_FROM\_ISR}
+{\footnotesize\ttfamily \#define cr\+QUEUE\+\_\+\+SEND\+\_\+\+FROM\+\_\+\+ISR(\begin{DoxyParamCaption}\item[{}]{px\+Queue,  }\item[{}]{pv\+Item\+To\+Queue,  }\item[{}]{x\+Co\+Routine\+Previously\+Woken }\end{DoxyParamCaption})~\textbf{ x\+Queue\+CRSend\+From\+ISR}( ( px\+Queue ), ( pv\+Item\+To\+Queue ), ( x\+Co\+Routine\+Previously\+Woken ) )}
+
+\mbox{\label{croutine_8h_aa8ec8c0192674b896b04df1f82d679f7}} 
+\index{croutine.h@{croutine.h}!crSET\_STATE0@{crSET\_STATE0}}
+\index{crSET\_STATE0@{crSET\_STATE0}!croutine.h@{croutine.h}}
+\doxysubsubsection{crSET\_STATE0}
+{\footnotesize\ttfamily \#define cr\+SET\+\_\+\+STATE0(\begin{DoxyParamCaption}\item[{}]{x\+Handle }\end{DoxyParamCaption})~( ( \textbf{ CRCB\+\_\+t} $\ast$ )( x\+Handle ) )-\/$>$ux\+State = (\+\_\+\+\_\+\+LINE\+\_\+\+\_\+ $\ast$ 2); return; case (\+\_\+\+\_\+\+LINE\+\_\+\+\_\+ $\ast$ 2)\+:}
+
+\mbox{\label{croutine_8h_a345ffc731dc40152bfb1162453ecc1f7}} 
+\index{croutine.h@{croutine.h}!crSET\_STATE1@{crSET\_STATE1}}
+\index{crSET\_STATE1@{crSET\_STATE1}!croutine.h@{croutine.h}}
+\doxysubsubsection{crSET\_STATE1}
+{\footnotesize\ttfamily \#define cr\+SET\+\_\+\+STATE1(\begin{DoxyParamCaption}\item[{}]{x\+Handle }\end{DoxyParamCaption})~( ( \textbf{ CRCB\+\_\+t} $\ast$ )( x\+Handle ) )-\/$>$ux\+State = ((\+\_\+\+\_\+\+LINE\+\_\+\+\_\+ $\ast$ 2)+1); return; case ((\+\_\+\+\_\+\+LINE\+\_\+\+\_\+ $\ast$ 2)+1)\+:}
+
+\mbox{\label{croutine_8h_a19a57a201a325e8af1207ed68c4aedde}} 
+\index{croutine.h@{croutine.h}!crSTART@{crSTART}}
+\index{crSTART@{crSTART}!croutine.h@{croutine.h}}
+\doxysubsubsection{crSTART}
+{\footnotesize\ttfamily \#define cr\+START(\begin{DoxyParamCaption}\item[{}]{px\+CRCB }\end{DoxyParamCaption})~switch( ( ( \textbf{ CRCB\+\_\+t} $\ast$ )( px\+CRCB ) )-\/$>$ux\+State ) \{ case 0\+:}
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\label{croutine_8h_a33b9d058688c92258155b5756d9936dd}} 
+\index{croutine.h@{croutine.h}!CoRoutineHandle\_t@{CoRoutineHandle\_t}}
+\index{CoRoutineHandle\_t@{CoRoutineHandle\_t}!croutine.h@{croutine.h}}
+\doxysubsubsection{CoRoutineHandle\_t}
+{\footnotesize\ttfamily typedef void$\ast$ \textbf{ Co\+Routine\+Handle\+\_\+t}}
+
+\mbox{\label{croutine_8h_a1c15f304ffe02d0777ae2509b3658e6f}} 
+\index{croutine.h@{croutine.h}!CRCB\_t@{CRCB\_t}}
+\index{CRCB\_t@{CRCB\_t}!croutine.h@{croutine.h}}
+\doxysubsubsection{CRCB\_t}
+{\footnotesize\ttfamily typedef struct \textbf{ cor\+Co\+Routine\+Control\+Block} \textbf{ CRCB\+\_\+t}}
+
+\mbox{\label{croutine_8h_a397a7505718dd366d8411ce324c49758}} 
+\index{croutine.h@{croutine.h}!crCOROUTINE\_CODE@{crCOROUTINE\_CODE}}
+\index{crCOROUTINE\_CODE@{crCOROUTINE\_CODE}!croutine.h@{croutine.h}}
+\doxysubsubsection{crCOROUTINE\_CODE}
+{\footnotesize\ttfamily typedef void($\ast$ cr\+COROUTINE\+\_\+\+CODE) (\textbf{ Co\+Routine\+Handle\+\_\+t}, \textbf{ UBase\+Type\+\_\+t})}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\label{croutine_8h_a6b5b1c5857d38b79c96636754208e32d}} 
+\index{croutine.h@{croutine.h}!vCoRoutineAddToDelayedList@{vCoRoutineAddToDelayedList}}
+\index{vCoRoutineAddToDelayedList@{vCoRoutineAddToDelayedList}!croutine.h@{croutine.h}}
+\doxysubsubsection{vCoRoutineAddToDelayedList()}
+{\footnotesize\ttfamily void v\+Co\+Routine\+Add\+To\+Delayed\+List (\begin{DoxyParamCaption}\item[{\textbf{ Tick\+Type\+\_\+t}}]{x\+Ticks\+To\+Delay,  }\item[{\textbf{ List\+\_\+t} $\ast$}]{px\+Event\+List }\end{DoxyParamCaption})}
+
+\mbox{\label{croutine_8h_a5333c649a2c063006ca3cd7a3b5b9240}} 
+\index{croutine.h@{croutine.h}!vCoRoutineSchedule@{vCoRoutineSchedule}}
+\index{vCoRoutineSchedule@{vCoRoutineSchedule}!croutine.h@{croutine.h}}
+\doxysubsubsection{vCoRoutineSchedule()}
+{\footnotesize\ttfamily void v\+Co\+Routine\+Schedule (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\label{croutine_8h_ae0e03637a3d2c134e9b52006f353d8c0}} 
+\index{croutine.h@{croutine.h}!xCoRoutineCreate@{xCoRoutineCreate}}
+\index{xCoRoutineCreate@{xCoRoutineCreate}!croutine.h@{croutine.h}}
+\doxysubsubsection{xCoRoutineCreate()}
+{\footnotesize\ttfamily \textbf{ Base\+Type\+\_\+t} x\+Co\+Routine\+Create (\begin{DoxyParamCaption}\item[{\textbf{ cr\+COROUTINE\+\_\+\+CODE}}]{px\+Co\+Routine\+Code,  }\item[{\textbf{ UBase\+Type\+\_\+t}}]{ux\+Priority,  }\item[{\textbf{ UBase\+Type\+\_\+t}}]{ux\+Index }\end{DoxyParamCaption})}
+
+\mbox{\label{croutine_8h_af2a96db518b18f5a7e1cd2fdf3c82873}} 
+\index{croutine.h@{croutine.h}!xCoRoutineRemoveFromEventList@{xCoRoutineRemoveFromEventList}}
+\index{xCoRoutineRemoveFromEventList@{xCoRoutineRemoveFromEventList}!croutine.h@{croutine.h}}
+\doxysubsubsection{xCoRoutineRemoveFromEventList()}
+{\footnotesize\ttfamily \textbf{ Base\+Type\+\_\+t} x\+Co\+Routine\+Remove\+From\+Event\+List (\begin{DoxyParamCaption}\item[{const \textbf{ List\+\_\+t} $\ast$}]{px\+Event\+List }\end{DoxyParamCaption})}
+
